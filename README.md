@@ -1,13 +1,10 @@
 ## Food flow
-
----
-
-2200692 Pang Zi Jian Adrian
-2200959 Peter Febrianto Afandy
-2201014 Tng Jian Rong
-2200936 Muhammad Nur Dinie Bin Aziz
-2201132 Lionel Sim Wei Xian
-2201159 Ryan Lai Wei Shao
+2200692 Pang Zi Jian Adrian <br>
+2200959 Peter Febrianto Afandy <br>
+2201014 Tng Jian Rong <br>
+2200936 Muhammad Nur Dinie Bin Aziz <br>
+2201132 Lionel Sim Wei Xian <br>
+2201159 Ryan Lai Wei Shao <br>
 
 ### UI setup
 
