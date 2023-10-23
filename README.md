@@ -1,4 +1,5 @@
 ## Food flow
+
 2200692 Pang Zi Jian Adrian <br>
 2200959 Peter Febrianto Afandy <br>
 2201014 Tng Jian Rong <br>
@@ -13,26 +14,45 @@
 #### Prerequisites
 
 - [npm/npx](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
-- [Expo go](https://apps.apple.com/us/app/expo-go/id982107779) on phone
 
-#### Setup
+#### React Setup
 
-1. Change your current directory to the `mobile/` folder:
-
-```
-cd mobile
-```
-
-2. Install dependencies, ignore old dependencies
+1. Change your current directory to the `react/` folder:
 
 ```
-npm install --legacy-peer-deps
+cd react
 ```
 
-3. Start Expo project
+2. Install dependencies
 
 ```
-npx expo start
+npm install --save-dev @babel/plugin-proposal-private-property-in-object
 ```
 
-4. A QR code will appear, scan the QR code with your phone camera and it should direct you to the Expo Go application.
+3. Start React App
+
+```
+npm start
+```
+
+---
+
+#### Auth microservice Setup
+
+1. Change your current directory to the `auth/` folder:
+
+```
+cd auth
+```
+
+2. Install dependencies
+
+```
+npm install
+```
+
+3. Start Auth microservice
+
+```
+npm run start:dev
+```

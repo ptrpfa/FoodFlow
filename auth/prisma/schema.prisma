@@ -1,0 +1,71 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Collection {
+  CollectionID  Int          @id @default(autoincrement())
+  ReservationID Reservation? @relation(fields: [ReservationIDField], references: [ReservationID])
+  UserID        User?        @relation(fields: [UserIDField], references: [UserID])
+  Status        Int
+
+  ReservationIDField Int?
+  UserIDField        Int?
+}
+
+model Listing {
+  ListingID           Int           @id @default(autoincrement())
+  Name                String        @db.VarChar(255)
+  Datetime            DateTime
+  ExpiryDate          DateTime      @db.Date
+  Category            String        @db.VarChar(255)
+  Quantity            Int
+  Description         String?       @db.Text
+  Image               Bytes?
+  PickUpAddressFirst  String?       @db.VarChar(255)
+  PickUpAddressSecond String?       @db.VarChar(255)
+  PickUpAddressThird  String?       @db.VarChar(255)
+  PickUpPostalCode    String?       @db.VarChar(20)
+  PickUpStartDate     DateTime      @db.Date
+  PickUpEndDate       DateTime      @db.Date
+  PickUpStartTime     DateTime      @db.Time
+  PickUpEndTime       DateTime      @db.Time
+  reservations        Reservation[]
+}
+
+model Reservation {
+  ReservationID Int         @id @default(autoincrement())
+  UserID        User?       @relation(fields: [UserIDField], references: [UserID])
+  ListingID     Listing?    @relation(fields: [ListingIDField], references: [ListingID])
+  Datetime      DateTime
+  Status        Int
+  Remarks       String?     @db.Text
+
+  UserIDField    Int?
+  ListingIDField Int?
+  collections    Collection[]
+}
+
+model User {
+  UserID        Int          @id @default(autoincrement())
+  Username      String       @unique @db.VarChar(255) 
+  FirstName     String       @db.VarChar(255)
+  LastName      String       @db.VarChar(255)
+  Role          String       @db.VarChar(255)
+  Email         String       @unique @db.VarChar(255)
+  Password      String       @db.VarChar(255)
+  DOB           DateTime     @db.Date
+  AddressFirst  String?      @db.VarChar(255)
+  AddressSecond String?      @db.VarChar(255)
+  AddressThird  String?      @db.VarChar(255)
+  PostalCode    String?      @db.VarChar(20)
+  reservations  Reservation[]
+  collections   Collection[]
+}
