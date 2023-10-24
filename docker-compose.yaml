@@ -1,9 +1,0 @@
-version: "3.8" 
-services:
-  argon-app:
-    build: ./react-dash
-    container_name: react-dash
-    ports:
-      - '3000:3000'
-    stdin_open: true
-    tty: true
