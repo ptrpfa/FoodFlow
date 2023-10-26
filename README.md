@@ -7,6 +7,21 @@
 2201132 Lionel Sim Wei Xian <br>
 2201159 Ryan Lai Wei Shao <br>
 
+# Usage
+
+1. Change your directory to the `docker-composer` folder:
+
+```
+cd docker-composer
+```
+
+2. Run the script `deploy.sh` to start *kubernetes*
+
+```
+./deploy.sh
+```
+
+## ARCHIVE
 ### UI setup
 
 ---
