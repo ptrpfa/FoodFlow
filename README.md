@@ -56,3 +56,45 @@ npm install
 ```
 npm run start:dev
 ```
+
+---
+
+#### Django Setup
+
+1. Change your current directory to the `django/` folder:
+
+```
+cd django
+```
+
+2. Setup virtual environment
+
+```
+virtualenv env
+```
+
+3. Activate virtual environment
+
+| For Mac                      | For Windows                 |
+| ---------------------------- | --------------------------- |
+| ```source env/bin/activate```| ```.\env\Scripts\activate```|
+
+4. Install dependencies
+
+```
+pip3 install -r requirements.txt
+```
+
+5. Setup database
+
+```
+python manage.py makemigrations
+python manage.py migrate
+```
+
+6. Start Django App
+
+```
+python manage.py runserver
+```
+
