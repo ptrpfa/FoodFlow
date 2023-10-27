@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package upload;
+
+service UploadService {
+    rpc UploadImage(Image) returns (UploadResponse);
+    rpc GetImage(ImageRequest) returns (Image);
+    rpc GetMultipleImages(MultipleImageRequest) returns (stream Image);
+    rpc DeleteImage(ImageRequest) returns (Response);
+}
+
+message Image {
+    bytes imageData = 1;
+}
+
+message ImageRequest {
+    string imageId = 1;
+}
+
+message MultipleImageRequest {
+    repeated ImageRequest imageIds = 1;
+}
+
+message UploadResponse {
+    int32 status = 1;
+    bool valid = 2;
+    string imageId = 3;
+}
+
+message Response {
+    int32 status = 1;
+}
