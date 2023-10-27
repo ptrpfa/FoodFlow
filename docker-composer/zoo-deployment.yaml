@@ -3,7 +3,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: zookeeper-1
+  name: zookeeper-deployment
   labels:
     app: zookeeper
 spec:
@@ -29,32 +29,32 @@ spec:
 
 ---
 
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: zookeeper-2
-  labels:
-    app: zookeeper
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: zookeeper
-  template:
-    metadata:
-      labels:
-        app: zookeeper
-    spec:
-      containers:
-        - name: zookeeper-container
-          image: confluentinc/cp-zookeeper:latest
-          ports:
-            - containerPort: 2181
-          env:
-            - name: ZOOKEEPER_CLIENT_PORT
-              value: "2181"
-            - name: ZOOKEEPER_TICK_TIME
-              value: "2000"
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: zookeeper-2
+#   labels:
+#     app: zookeeper
+# spec:
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       app: zookeeper
+#   template:
+#     metadata:
+#       labels:
+#         app: zookeeper
+#     spec:
+#       containers:
+#         - name: zookeeper-container
+#           image: confluentinc/cp-zookeeper:latest
+#           ports:
+#             - containerPort: 2181
+#           env:
+#             - name: ZOOKEEPER_CLIENT_PORT
+#               value: "2181"
+#             - name: ZOOKEEPER_TICK_TIME
+#               value: "2000"
 
 ---
 
@@ -68,20 +68,20 @@ spec:
   ports:
     - name: client
       protocol: TCP
-      port: 22181
+      port: 2181
       targetPort: 2181
 
 ---
 
-apiVersion: v1
-kind: Service
-metadata:
-  name: zookeeper-service-2
-spec:
-  selector:
-    app: zookeeper
-  ports:
-    - name: client
-      protocol: TCP
-      port: 32181
-      targetPort: 2181
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: zookeeper-service-2
+# spec:
+#   selector:
+#     app: zookeeper
+#   ports:
+#     - name: client
+#       protocol: TCP
+#       port: 32181
+#       targetPort: 2181
