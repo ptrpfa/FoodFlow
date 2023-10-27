@@ -37,12 +37,12 @@ function Login() {
   const [rememberMe, setRememberMe] = useState(false);
 
   const [inputs, setInputs] = useState({
-    email: "admin@jsonapi.com",
-    password: "secret",
+    username: "exampleUser",
+    password: "password123",
   });
 
   const [errors, setErrors] = useState({
-    emailError: false,
+    usernameError: false,
     passwordError: false,
   });
 
@@ -71,25 +71,20 @@ function Login() {
       return;
     }
 
-    const newUser = { email: inputs.email, password: inputs.password };
+    const newUser = { username: inputs.username, password: inputs.password };
     addUserHandler(newUser);
 
     const myData = {
-      data: {
-        type: "token",
-        attributes: { ...newUser },
-      },
+      Username: inputs.username,
+      Password: inputs.password,
     };
 
-    try {
-      const response = await AuthService.login(myData);
-      authContext.login(response.access_token, response.refresh_token);
-    } catch (res) {
-      if (res.hasOwnProperty("message")) {
-        setCredentialsError(res.message);
-      } else {
-        setCredentialsError(res.errors[0].detail);
-      }
+    const response = await AuthService.login(myData);
+    console.log(response);
+    if (response.validated) {
+      authContext.login(response.token);
+    } else {
+      setCredentialsError("Invalid login!");
     }
 
     return () => {
@@ -169,7 +164,7 @@ function Login() {
           >
             <MDBox mb={2}>
               <MDInput
-                type="username"
+                type="text"
                 label="Username"
                 fullWidth
                 value={inputs.username}
