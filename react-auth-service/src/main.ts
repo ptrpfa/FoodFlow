@@ -13,7 +13,7 @@ async function bootstrap() {
         package: 'auth',
         url: '0.0.0.0:5000',
       },
-    },
+    },  
   );
   await app.listen();
 }

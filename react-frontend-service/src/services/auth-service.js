@@ -7,7 +7,7 @@ import {
   FindOneUserDto,
 } from "./grpc/auth/auth_pb";
 
-const auth_client = new UsersServiceClient("http://localhost:9900", null, null);
+const auth_client = new UsersServiceClient("react-envoy-service.food-flow.svc.cluster.local:9900", null, null);
 
 class AuthService {
   login = async (payload) => {

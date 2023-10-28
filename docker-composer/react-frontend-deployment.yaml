@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: react-js-deployment
+  name: react-frontend-deployment
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: react-js
+      app: react-frontend
   template:
     metadata:
       labels:
-        app: react-js
+        app: react-frontend
     spec:
       containers:
-      - name: react-js
-        image: skyish/food-flow:react-js
+      - name: react-frontend
+        image: skyish/react-frontend:v4
         ports:
         - containerPort: 3000
 
@@ -23,11 +23,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: react-js-service
+  name: react-frontend-service
 spec:
   type: LoadBalancer
   selector:
-    app: react-js
+    app: react-frontend
   ports:
   - protocol: TCP
     port: 3000
