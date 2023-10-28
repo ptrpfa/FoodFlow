@@ -13,13 +13,12 @@ spec:
         app: react-frontend
     spec:
       containers:
-      - name: react-frontend
-        image: skyish/react-frontend:v4
-        ports:
-        - containerPort: 3000
+        - name: react-frontend
+          image: skyish/react-frontend:v4
+          ports:
+            - containerPort: 3000
 
 ---
-
 apiVersion: v1
 kind: Service
 metadata:
@@ -29,6 +28,6 @@ spec:
   selector:
     app: react-frontend
   ports:
-  - protocol: TCP
-    port: 3000
-    targetPort: 3000
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
