@@ -76,6 +76,7 @@ class AuthService {
           username: response.getUsername(),
           firstName: response.getFirstname(),
           LastName: response.getLastname(),
+          dob: response.getDob(),
           role: response.getRole(),
           addressFirst: response.getAddressfirst(),
           addressSecond: response.getAddresssecond(),

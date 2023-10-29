@@ -84,7 +84,7 @@ static_resources:
                   address:
                     socket_address:
                       address: aws-s3-listing-service
-                      port_value: 5000
+                      port_value: 5001
     - name: grpc-listing-service
       connect_timeout: 0.25s
       type: strict_dns
@@ -97,5 +97,5 @@ static_resources:
               - endpoint:
                   address:
                     socket_address:
-                      address: listing-service
-                      port_value: 5000
+                      address: react-listing-service
+                      port_value: 5002
