@@ -11,7 +11,7 @@ async function bootstrap() {
       options: {
         protoPath: join(__dirname, '../upload.proto'),
         package: 'upload',
-        url: '0.0.0.0:5000',
+        url: '0.0.0.0:5001',
       },
     },
   );
