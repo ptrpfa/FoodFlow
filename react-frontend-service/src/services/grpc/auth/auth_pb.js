@@ -2008,12 +2008,13 @@ proto.auth.ProtoUser.toObject = function(includeInstance, msg) {
     username: jspb.Message.getFieldWithDefault(msg, 2, ""),
     firstname: jspb.Message.getFieldWithDefault(msg, 3, ""),
     lastname: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    role: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    addressfirst: jspb.Message.getFieldWithDefault(msg, 6, ""),
-    addresssecond: jspb.Message.getFieldWithDefault(msg, 7, ""),
-    addressthird: jspb.Message.getFieldWithDefault(msg, 8, ""),
-    postalcode: jspb.Message.getFieldWithDefault(msg, 9, ""),
-    email: jspb.Message.getFieldWithDefault(msg, 10, "")
+    dob: jspb.Message.getFieldWithDefault(msg, 5, ""),
+    role: jspb.Message.getFieldWithDefault(msg, 6, ""),
+    addressfirst: jspb.Message.getFieldWithDefault(msg, 7, ""),
+    addresssecond: jspb.Message.getFieldWithDefault(msg, 8, ""),
+    addressthird: jspb.Message.getFieldWithDefault(msg, 9, ""),
+    postalcode: jspb.Message.getFieldWithDefault(msg, 10, ""),
+    email: jspb.Message.getFieldWithDefault(msg, 11, "")
   };
 
   if (includeInstance) {
@@ -2068,25 +2069,29 @@ proto.auth.ProtoUser.deserializeBinaryFromReader = function(msg, reader) {
       break;
     case 5:
       var value = /** @type {string} */ (reader.readString());
-      msg.setRole(value);
+      msg.setDob(value);
       break;
     case 6:
       var value = /** @type {string} */ (reader.readString());
-      msg.setAddressfirst(value);
+      msg.setRole(value);
       break;
     case 7:
       var value = /** @type {string} */ (reader.readString());
-      msg.setAddresssecond(value);
+      msg.setAddressfirst(value);
       break;
     case 8:
       var value = /** @type {string} */ (reader.readString());
-      msg.setAddressthird(value);
+      msg.setAddresssecond(value);
       break;
     case 9:
       var value = /** @type {string} */ (reader.readString());
-      msg.setPostalcode(value);
+      msg.setAddressthird(value);
       break;
     case 10:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setPostalcode(value);
+      break;
+    case 11:
       var value = /** @type {string} */ (reader.readString());
       msg.setEmail(value);
       break;
@@ -2147,45 +2152,52 @@ proto.auth.ProtoUser.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getRole();
+  f = message.getDob();
   if (f.length > 0) {
     writer.writeString(
       5,
       f
     );
   }
-  f = message.getAddressfirst();
+  f = message.getRole();
   if (f.length > 0) {
     writer.writeString(
       6,
       f
     );
   }
-  f = message.getAddresssecond();
+  f = message.getAddressfirst();
   if (f.length > 0) {
     writer.writeString(
       7,
       f
     );
   }
-  f = message.getAddressthird();
+  f = message.getAddresssecond();
   if (f.length > 0) {
     writer.writeString(
       8,
       f
     );
   }
-  f = message.getPostalcode();
+  f = message.getAddressthird();
   if (f.length > 0) {
     writer.writeString(
       9,
       f
     );
   }
-  f = message.getEmail();
+  f = message.getPostalcode();
   if (f.length > 0) {
     writer.writeString(
       10,
+      f
+    );
+  }
+  f = message.getEmail();
+  if (f.length > 0) {
+    writer.writeString(
+      11,
       f
     );
   }
@@ -2265,10 +2277,10 @@ proto.auth.ProtoUser.prototype.setLastname = function(value) {
 
 
 /**
- * optional string Role = 5;
+ * optional string DOB = 5;
  * @return {string}
  */
-proto.auth.ProtoUser.prototype.getRole = function() {
+proto.auth.ProtoUser.prototype.getDob = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
 };
 
@@ -2277,16 +2289,16 @@ proto.auth.ProtoUser.prototype.getRole = function() {
  * @param {string} value
  * @return {!proto.auth.ProtoUser} returns this
  */
-proto.auth.ProtoUser.prototype.setRole = function(value) {
+proto.auth.ProtoUser.prototype.setDob = function(value) {
   return jspb.Message.setProto3StringField(this, 5, value);
 };
 
 
 /**
- * optional string AddressFirst = 6;
+ * optional string Role = 6;
  * @return {string}
  */
-proto.auth.ProtoUser.prototype.getAddressfirst = function() {
+proto.auth.ProtoUser.prototype.getRole = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 6, ""));
 };
 
@@ -2295,16 +2307,16 @@ proto.auth.ProtoUser.prototype.getAddressfirst = function() {
  * @param {string} value
  * @return {!proto.auth.ProtoUser} returns this
  */
-proto.auth.ProtoUser.prototype.setAddressfirst = function(value) {
+proto.auth.ProtoUser.prototype.setRole = function(value) {
   return jspb.Message.setProto3StringField(this, 6, value);
 };
 
 
 /**
- * optional string AddressSecond = 7;
+ * optional string AddressFirst = 7;
  * @return {string}
  */
-proto.auth.ProtoUser.prototype.getAddresssecond = function() {
+proto.auth.ProtoUser.prototype.getAddressfirst = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 7, ""));
 };
 
@@ -2313,16 +2325,16 @@ proto.auth.ProtoUser.prototype.getAddresssecond = function() {
  * @param {string} value
  * @return {!proto.auth.ProtoUser} returns this
  */
-proto.auth.ProtoUser.prototype.setAddresssecond = function(value) {
+proto.auth.ProtoUser.prototype.setAddressfirst = function(value) {
   return jspb.Message.setProto3StringField(this, 7, value);
 };
 
 
 /**
- * optional string AddressThird = 8;
+ * optional string AddressSecond = 8;
  * @return {string}
  */
-proto.auth.ProtoUser.prototype.getAddressthird = function() {
+proto.auth.ProtoUser.prototype.getAddresssecond = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 8, ""));
 };
 
@@ -2331,16 +2343,16 @@ proto.auth.ProtoUser.prototype.getAddressthird = function() {
  * @param {string} value
  * @return {!proto.auth.ProtoUser} returns this
  */
-proto.auth.ProtoUser.prototype.setAddressthird = function(value) {
+proto.auth.ProtoUser.prototype.setAddresssecond = function(value) {
   return jspb.Message.setProto3StringField(this, 8, value);
 };
 
 
 /**
- * optional string PostalCode = 9;
+ * optional string AddressThird = 9;
  * @return {string}
  */
-proto.auth.ProtoUser.prototype.getPostalcode = function() {
+proto.auth.ProtoUser.prototype.getAddressthird = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 9, ""));
 };
 
@@ -2349,16 +2361,16 @@ proto.auth.ProtoUser.prototype.getPostalcode = function() {
  * @param {string} value
  * @return {!proto.auth.ProtoUser} returns this
  */
-proto.auth.ProtoUser.prototype.setPostalcode = function(value) {
+proto.auth.ProtoUser.prototype.setAddressthird = function(value) {
   return jspb.Message.setProto3StringField(this, 9, value);
 };
 
 
 /**
- * optional string Email = 10;
+ * optional string PostalCode = 10;
  * @return {string}
  */
-proto.auth.ProtoUser.prototype.getEmail = function() {
+proto.auth.ProtoUser.prototype.getPostalcode = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 10, ""));
 };
 
@@ -2367,8 +2379,26 @@ proto.auth.ProtoUser.prototype.getEmail = function() {
  * @param {string} value
  * @return {!proto.auth.ProtoUser} returns this
  */
-proto.auth.ProtoUser.prototype.setEmail = function(value) {
+proto.auth.ProtoUser.prototype.setPostalcode = function(value) {
   return jspb.Message.setProto3StringField(this, 10, value);
+};
+
+
+/**
+ * optional string Email = 11;
+ * @return {string}
+ */
+proto.auth.ProtoUser.prototype.getEmail = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 11, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.auth.ProtoUser} returns this
+ */
+proto.auth.ProtoUser.prototype.setEmail = function(value) {
+  return jspb.Message.setProto3StringField(this, 11, value);
 };
 
 

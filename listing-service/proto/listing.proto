@@ -1,0 +1,80 @@
+syntax = "proto3";
+
+package listing;
+
+service ListingService {
+    rpc CreateListing (CreateListingDto) returns (ProtoListing) {}
+    rpc FindAllListings (Empty) returns (Listings) {}
+    rpc FindOneListing (FindOneListingDto) returns (ProtoListing) {}
+    rpc UpdateListing (UpdateListingDto) returns (ProtoListing) {}
+    rpc RemoveListing (FindOneListingDto) returns (ProtoListing) {}
+}
+
+message UpdateListingDto {
+    int32 ListingID = 1;
+    optional string Name = 2;
+    optional string Datetime = 3;
+    optional string ExpiryDate = 4;
+    optional string Category = 5;
+    optional int32 Quantity = 6;
+    optional string Description = 7;
+    optional string Image = 8;
+    optional string PickUpAddressFirst = 9;
+    optional string PickUpAddressSecond = 10;
+    optional string PickUpAddressThird = 11;
+    optional string PickUpPostalCode = 12;
+    optional string PickUpStartDate = 13;
+    optional string PickUpEndDate = 14;
+    optional string PickUpStartTime = 15;
+    optional string PickUpEndTime = 16;
+}      
+
+message FindOneListingDto {
+    int32 ListingID = 1;
+}
+
+message Empty {
+
+};
+
+message Listings {
+    repeated ProtoListing listings = 1;
+}
+
+message CreateListingDto {
+    int32 ListingID = 1;
+    string Name = 2;
+    string Datetime = 3;
+    string ExpiryDate = 4;
+    string Category = 5;
+    int32 Quantity = 6;
+    string Description = 7;
+    string Image = 8;
+    string PickUpAddressFirst = 9;
+    string PickUpAddressSecond = 10;
+    string PickUpAddressThird = 11;
+    string PickUpPostalCode = 12;
+    string PickUpStartDate = 13;
+    string PickUpEndDate = 14;
+    string PickUpStartTime = 15;
+    string PickUpEndTime = 16;
+}
+
+message ProtoListing {
+    int32 ListingID = 1;
+    string Name = 2;
+    string Datetime = 3;
+    string ExpiryDate = 4;
+    string Category = 5;
+    int32 Quantity = 6;
+    string Description = 7;
+    string Image = 8;
+    string PickUpAddressFirst = 9;
+    string PickUpAddressSecond = 10;
+    string PickUpAddressThird = 11;
+    string PickUpPostalCode = 12;
+    string PickUpStartDate = 13;
+    string PickUpEndDate = 14;
+    string PickUpStartTime = 15;
+    string PickUpEndTime = 16;
+}
