@@ -24,7 +24,7 @@ kind: Service
 metadata:
   name: react-envoy-service
 spec:
-  type: LoadBalancer
+  type: NodePort
   selector:
     app: react-envoy
   ports:

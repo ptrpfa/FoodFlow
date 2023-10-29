@@ -24,7 +24,7 @@ kind: Service
 metadata:
   name: react-frontend-service
 spec:
-  type: LoadBalancer
+  type: NodePort
   selector:
     app: react-frontend
   ports:
