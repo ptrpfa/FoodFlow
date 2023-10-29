@@ -20,7 +20,20 @@ service_name="${service_name%-service}"
 echo "Building Docker image for skyish/$service_name..."
 docker build -t skyish/$service_name:latest "$service_dir"
 
-# Load Docker images into Minikube
-minikube image load skyish/$service_name:latest
+# Push back to Docker hub
+docker push skyish/$service_name:latest 
+echo
 
-echo "Docker image build and load completed."
+# Delete old deployment
+deployment_name="${service_name}-deployment"
+echo "Removing old deployment $deployment_name"
+kubectl delete deployment $deployment_name
+echo 
+
+# Apply back the deployment 
+deployment_file="${deployment_name}.yaml"
+echo "Restarting deployment $deployment_file"
+kubectl apply -f $deployment_file
+echo 
+
+echo "Docker image build and deployment load completed."

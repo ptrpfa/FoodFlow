@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: react-envoy
-          image: skyish/react-envoy:v1
+          image: skyish/react-envoy:latest
           ports:
             - containerPort: 9900
             - containerPort: 9901
@@ -24,7 +24,7 @@ kind: Service
 metadata:
   name: react-envoy-service
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector:
     app: react-envoy
   ports:

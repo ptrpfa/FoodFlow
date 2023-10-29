@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: react-auth
-          image: skyish/react-auth:v3
+          image: skyish/react-auth:latest
           ports:
             - containerPort: 5000
 
