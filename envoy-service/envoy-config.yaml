@@ -46,7 +46,7 @@ static_resources:
   clusters:
     - name: grpc-auth-service
       connect_timeout: 0.25s
-      type: logical_dns
+      type: strict_dns
       http2_protocol_options: {}
       lb_policy: round_robin
       load_assignment:
@@ -56,5 +56,5 @@ static_resources:
               - endpoint:
                   address:
                     socket_address:
-                      address: host.docker.internal
+                      address: react-auth-service
                       port_value: 5000

@@ -12,28 +12,27 @@ spec:
         app: react-envoy
     spec:
       containers:
-      - name: react-envoy
-        image: skyish/react-envoy:v1
-        ports:
-        - containerPort: 9900
-        - containerPort: 9901
+        - name: react-envoy
+          image: skyish/react-envoy:v1
+          ports:
+            - containerPort: 9900
+            - containerPort: 9901
 
 ---
-
 apiVersion: v1
 kind: Service
 metadata:
   name: react-envoy-service
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   selector:
     app: react-envoy
   ports:
-  - name: port-ingress 
-    port: 9900
-    targetPort: 9900
-    protocol: TCP
-  - name: port-egress
-    port: 9901
-    targetPort: 9901
-    protocol: TCP
+    - name: port-ingress
+      port: 9900
+      targetPort: 9900
+      protocol: TCP
+    - name: port-egress
+      port: 9901
+      targetPort: 9901
+      protocol: TCP
