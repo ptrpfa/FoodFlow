@@ -26,9 +26,11 @@ echo
 
 # Delete old deployment
 deployment_name="${service_name}-deployment"
-echo "Removing old deployment $deployment_name"
-kubectl delete deployment $deployment_name
-echo 
+if kubectl delete deployment $deployment_name &>/dev/null; then
+  echo "Removing old deployment $deployment_name"
+  kubectl delete deployment $deployment_name
+  echo 
+fi
 
 # Apply back the deployment 
 deployment_file="${deployment_name}.yaml"
