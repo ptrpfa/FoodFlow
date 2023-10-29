@@ -169,6 +169,14 @@ const routes = [
     route: "/auth/reset-password",
     component: <ResetPassword />,
   },
+  {
+    type: 'collapse', // Or you can use 'route' if it's not a sub-menu
+    name: 'Reservation', // Display name in the menu
+    key: 'reservation', // A unique key for the route
+    icon: <Icon fontSize="small">insert_drive_file</Icon>, 
+    route: '/reservation', // URL path
+    component: <Reservation />, // The component to render
+  }
 ];
 
 export default routes;
