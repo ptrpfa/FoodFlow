@@ -1,12 +1,10 @@
 
 const { Sequelize } = require('sequelize');
 
-const sequelize = new Sequelize({
+const sequelize = new Sequelize('foodflow', 'root', 'sikeloong', {
+  host: '34.124.232.171',
+  port: 3306,
   dialect: 'mysql',
-  host: 'your-database-host',
-  username: 'your-database-username',
-  password: 'your-database-password',
-  database: 'your-database-name',
 });
 
 module.exports = sequelize;

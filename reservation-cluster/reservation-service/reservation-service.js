@@ -1,47 +1,69 @@
-// reservation-microservice.js
 const express = require('express');
-const { Kafka, logLevel } = require('kafka-node');
+const { kafka, logLevel, KafkaClient, Producer } = require('kafka-node');
 const app = express();
 const port = 3000;
 
-const kafkaClient = new Kafka.Client('your-kafka-broker-host', 'reservation-service');
-const producer = new Kafka.Producer(kafkaClient);
+const kafkaClient = new KafkaClient({ kafkaHost: 'localhost:29092' }); // Use KafkaClient
+const producer = new Producer(kafkaClient);
 
-// API endpoint for making a reservation
-app.post('/reservation', (req, res) => {
+// Create a Kafka Producer
+producer.on('ready', () => {
+  console.log('Kafka producer is ready');
+});
+
+// Handle producer errors
+producer.on('error', (error) => {
+  console.error('Kafka producer error:', error);
+});
+
+app.use(express.json());
+
+app.post('/reservation/create', (req, res) => {
   const userId = req.body.userId;
   const itemId = req.body.itemId;
 
-  // Validate the reservation request and enforce business rules, such as max 20 reservations per user.
+  // Generate a unique reservation ID by combining UserID and Datetime
+  const reservationId = generateReservationId(userId);
+  const datetime = new Date();
+  const status = 'pending'; // Set the initial status to 'pending'
+  const remarks = req.body.remarks || '';
 
-  // Produce a reservation event to Kafka
+  // Produce a reservation event to Kafka with all the necessary data
+  const reservationData = {
+    action: 'create', // Use "action" instead of "type"
+    reservationId,
+    userId,
+    itemId,
+    datetime,
+    status,
+    remarks,
+  };
+
+  // Produce to the "reservation" topic
   const payloads = [
     {
-      topic: 'reservation-topic',
-      messages: JSON.stringify({ type: 'reservation', userId, itemId }),
+      topic: 'reservation',
+      messages: JSON.stringify(reservationData),
     },
   ];
 
   producer.send(payloads, (error, data) => {
     if (error) {
-      console.error(error);
+      console.error('Error sending message to Kafka:', error);
       res.status(500).json({ message: 'Reservation failed' });
     } else {
-      console.log('Reservation successful');
-      res.status(200).json({ message: 'Reservation successful' });
+      console.log('Reservation request sent to the database service');
+      res.status(200).json({ message: 'Reservation request sent', reservation: reservationData });
     }
   });
 });
 
-// API endpoint for canceling a reservation
-app.delete('/reservation/:reservationId', (req, res) => {
-  const reservationId = req.params.reservationId;
-
-  // Implement the logic to cancel the reservation in your database or reservation data store.
-  res.status(204).end();
-});
+// Function to generate a unique ReservationID
+function generateReservationId(userId) {
+  const timestamp = Date.now();
+  return `${userId}-${timestamp}`;
+}
 
 app.listen(port, () => {
   console.log(`Reservation Microservice listening at http://localhost:${port}`);
 });
-

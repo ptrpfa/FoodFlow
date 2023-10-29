@@ -1,29 +1,35 @@
-const Kafka = require('node-rdkafka');
-const sequelize = require('./db'); // Import your database connection
+const { Consumer, KafkaClient } = require('kafka-node');
+const sequelize = require('./db');
+const client = new KafkaClient({ kafkaHost: 'localhost:29092' });
 
-const consumer = new Kafka.KafkaConsumer({
-  'metadata.broker.list': 'your-kafka-broker-host',
-  'group.id': 'reservation-group',
-});
+// test for connection
+console.log('Reservation Service is starting...');
 
-consumer.connect();
+const consumer = new Consumer(client, [{ topic: 'reservation' }], { groupId: 'reservation-group' });
 
-consumer.on('ready', () => {
-  consumer.subscribe(['reservation-topic']);
-  consumer.consume();
-});
-
-consumer.on('data', (message) => {
-  const payload = JSON.parse(message.value.toString());
+consumer.on('message', (message) => {
+  const payload = JSON.parse(message.value);
 
   // Process the Kafka message and update the database
-  // Example: Insert reservation data into the database
-
   sequelize.sync().then(() => {
-    sequelize.models.Reservation.create({
-      userId: payload.userId,
-      itemId: payload.itemId,
-      // Add more fields as needed
-    });
+    if (payload.type === 'create') {
+      // Insert a new reservation into the database
+      sequelize.models.Reservation.create({
+        userId: payload.userId,
+        itemId: payload.itemId,
+        reservationId: payload.reservationId,
+        datetime: payload.datetime,
+        status: payload.status,
+      });
+    } else if (payload.type === 'update') {
+      // Update an existing reservation in the database
+      sequelize.models.Reservation.update(
+        { status: payload.status }, // Update the status or other fields as needed
+        { where: { reservationId: payload.reservationId } }
+      );
+    } else if (payload.type === 'cancel') {
+      // Delete a reservation from the database
+      sequelize.models.Reservation.destroy({ where: { reservationId: payload.reservationId } });
+    }
   });
 });
