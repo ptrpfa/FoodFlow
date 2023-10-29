@@ -68,11 +68,13 @@ export class UsersService {
       return {
         Validated: true,
         AccessToken: await this.jwtService.signAsync(payload),
+        UserID: user.UserID,
       };
     }
     return {
       Validated: false,
       AccessToken: '-1',
+      UserID: -1,
     };
   }
 }

@@ -18,7 +18,14 @@ Coded by www.creative-tim.com
   you can customize the states for the different components here.
 */
 
-import { createContext, useContext, useReducer, useMemo, useState, useEffect } from "react";
+import {
+  createContext,
+  useContext,
+  useReducer,
+  useMemo,
+  useState,
+  useEffect,
+} from "react";
 
 // prop-types is a library for typechecking of props
 import PropTypes from "prop-types";
@@ -57,8 +64,9 @@ const AuthContextProvider = ({ children }) => {
     navigate(location.pathname);
   }, [isAuthenticated]);
 
-  const login = (token) => {
+  const login = (token, userid) => {
     localStorage.setItem("token", token);
+    localStorage.setItem("userid", userid);
     setIsAuthenticated(true);
     navigate("/dashboard");
   };
@@ -159,14 +167,22 @@ MaterialUIControllerProvider.propTypes = {
 };
 
 // Context module functions
-const setMiniSidenav = (dispatch, value) => dispatch({ type: "MINI_SIDENAV", value });
-const setTransparentSidenav = (dispatch, value) => dispatch({ type: "TRANSPARENT_SIDENAV", value });
-const setWhiteSidenav = (dispatch, value) => dispatch({ type: "WHITE_SIDENAV", value });
-const setSidenavColor = (dispatch, value) => dispatch({ type: "SIDENAV_COLOR", value });
-const setTransparentNavbar = (dispatch, value) => dispatch({ type: "TRANSPARENT_NAVBAR", value });
-const setFixedNavbar = (dispatch, value) => dispatch({ type: "FIXED_NAVBAR", value });
-const setOpenConfigurator = (dispatch, value) => dispatch({ type: "OPEN_CONFIGURATOR", value });
-const setDirection = (dispatch, value) => dispatch({ type: "DIRECTION", value });
+const setMiniSidenav = (dispatch, value) =>
+  dispatch({ type: "MINI_SIDENAV", value });
+const setTransparentSidenav = (dispatch, value) =>
+  dispatch({ type: "TRANSPARENT_SIDENAV", value });
+const setWhiteSidenav = (dispatch, value) =>
+  dispatch({ type: "WHITE_SIDENAV", value });
+const setSidenavColor = (dispatch, value) =>
+  dispatch({ type: "SIDENAV_COLOR", value });
+const setTransparentNavbar = (dispatch, value) =>
+  dispatch({ type: "TRANSPARENT_NAVBAR", value });
+const setFixedNavbar = (dispatch, value) =>
+  dispatch({ type: "FIXED_NAVBAR", value });
+const setOpenConfigurator = (dispatch, value) =>
+  dispatch({ type: "OPEN_CONFIGURATOR", value });
+const setDirection = (dispatch, value) =>
+  dispatch({ type: "DIRECTION", value });
 const setLayout = (dispatch, value) => dispatch({ type: "LAYOUT", value });
 const setDarkMode = (dispatch, value) => dispatch({ type: "DARKMODE", value });
 

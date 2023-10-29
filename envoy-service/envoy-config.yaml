@@ -21,9 +21,22 @@ static_resources:
                     - name: local_service
                       domains: ["*"]
                       routes:
-                        - match: { prefix: "/" }
+                        - match: { prefix: "/grpc-auth/" }
                           route:
+                            prefix_rewrite: "/"
                             cluster: grpc-auth-service
+                            max_stream_duration:
+                              grpc_timeout_header_max: 0s
+                        - match: { prefix: "/grpc-s3/" }
+                          route:
+                            prefix_rewrite: "/"
+                            cluster: grpc-s3-service
+                            max_stream_duration:
+                              grpc_timeout_header_max: 0s
+                        - match: { prefix: "/grpc-listing/" }
+                          route:
+                            prefix_rewrite: "/"
+                            cluster: grpc-listing-service
                             max_stream_duration:
                               grpc_timeout_header_max: 0s
                       cors:
@@ -50,11 +63,39 @@ static_resources:
       http2_protocol_options: {}
       lb_policy: round_robin
       load_assignment:
-        cluster_name: cluster_0
+        cluster_name: grpc-auth-service
         endpoints:
           - lb_endpoints:
               - endpoint:
                   address:
                     socket_address:
                       address: react-auth-service
+                      port_value: 5000
+    - name: grpc-s3-service
+      connect_timeout: 0.25s
+      type: strict_dns
+      http2_protocol_options: {}
+      lb_policy: round_robin
+      load_assignment:
+        cluster_name: grpc-s3-service
+        endpoints:
+          - lb_endpoints:
+              - endpoint:
+                  address:
+                    socket_address:
+                      address: aws-s3-listing-service
+                      port_value: 5000
+    - name: grpc-listing-service
+      connect_timeout: 0.25s
+      type: strict_dns
+      http2_protocol_options: {}
+      lb_policy: round_robin
+      load_assignment:
+        cluster_name: grpc-listing-service
+        endpoints:
+          - lb_endpoints:
+              - endpoint:
+                  address:
+                    socket_address:
+                      address: listing-service
                       port_value: 5000

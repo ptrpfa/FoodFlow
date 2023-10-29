@@ -6,7 +6,11 @@ import {
   FindOneUserDto,
 } from "./grpc/auth/auth_pb";
 
-const auth_client = new UsersServiceClient("http://localhost:9900", null, null);
+const auth_client = new UsersServiceClient(
+  "http://localhost:9900/grpc-auth",
+  null,
+  null
+);
 
 class AuthService {
   login = async (payload) => {
@@ -20,6 +24,7 @@ class AuthService {
         resolve({
           validated: response.getValidated(),
           token: response.getAccesstoken(),
+          userid: response.getUserid(),
         });
       });
     });

@@ -82,7 +82,7 @@ function Login() {
     const response = await AuthService.login(myData);
     console.log(response);
     if (response.validated) {
-      authContext.login(response.token);
+      authContext.login(response.token, response.userid);
     } else {
       setCredentialsError("Invalid login!");
     }
