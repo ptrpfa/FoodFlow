@@ -115,7 +115,7 @@ function Login() {
           textAlign="center"
         >
           <MDTypography variant="h4" fontWeight="medium" color="white" mt={1}>
-            Sign in
+            Sign in Homie
           </MDTypography>
           <Grid
             container
@@ -193,7 +193,7 @@ function Login() {
                 onClick={handleSetRememberMe}
                 sx={{ cursor: "pointer", userSelect: "none", ml: -1 }}
               >
-                &nbsp;&nbsp;Remember me
+                &nbsp;&nbsp;Remember me bitches
               </MDTypography>
             </MDBox>
             <MDBox mt={4} mb={1}>

@@ -13,8 +13,12 @@ RUN npm install
 # Step 5: Copy the rest of the code
 COPY . .
 
-# Step 6: Expose the port
-EXPOSE 5001
+# Step 6: Generate the prisma folder inside node_modules folder
+RUN apt-get update -y && apt-get install -y openssl
+RUN npx prisma generate
 
-# Step 7: Set the command to run your app
+# Step 7: Expose the port
+EXPOSE 5002
+
+# Step 8: Set the command to run your app
 CMD ["npm", "run", "start:dev"]
