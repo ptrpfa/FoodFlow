@@ -40,7 +40,8 @@ message LoginRequest {
 
 message LoginResponse {
     bool Validated =  1;
-    string AccessToken = 2;    
+    string AccessToken = 2;
+    int32 UserID = 3;    
 }
 
 message Users {

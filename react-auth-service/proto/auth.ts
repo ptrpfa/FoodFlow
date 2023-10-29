@@ -33,6 +33,7 @@ export interface LoginRequest {
 export interface LoginResponse {
   Validated: boolean;
   AccessToken: string;
+  UserID: number;
 }
 
 export interface Users {

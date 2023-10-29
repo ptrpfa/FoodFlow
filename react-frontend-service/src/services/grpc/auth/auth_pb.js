@@ -1225,7 +1225,8 @@ proto.auth.LoginResponse.prototype.toObject = function(opt_includeInstance) {
 proto.auth.LoginResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     validated: jspb.Message.getBooleanFieldWithDefault(msg, 1, false),
-    accesstoken: jspb.Message.getFieldWithDefault(msg, 2, "")
+    accesstoken: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    userid: jspb.Message.getFieldWithDefault(msg, 3, 0)
   };
 
   if (includeInstance) {
@@ -1270,6 +1271,10 @@ proto.auth.LoginResponse.deserializeBinaryFromReader = function(msg, reader) {
       var value = /** @type {string} */ (reader.readString());
       msg.setAccesstoken(value);
       break;
+    case 3:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setUserid(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -1313,6 +1318,13 @@ proto.auth.LoginResponse.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
+  f = message.getUserid();
+  if (f !== 0) {
+    writer.writeInt32(
+      3,
+      f
+    );
+  }
 };
 
 
@@ -1349,6 +1361,24 @@ proto.auth.LoginResponse.prototype.getAccesstoken = function() {
  */
 proto.auth.LoginResponse.prototype.setAccesstoken = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
+};
+
+
+/**
+ * optional int32 UserID = 3;
+ * @return {number}
+ */
+proto.auth.LoginResponse.prototype.getUserid = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.auth.LoginResponse} returns this
+ */
+proto.auth.LoginResponse.prototype.setUserid = function(value) {
+  return jspb.Message.setProto3IntField(this, 3, value);
 };
 
 
