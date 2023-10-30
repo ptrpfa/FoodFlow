@@ -37,9 +37,8 @@ Coded by www.creative-tim.com
 
 // Material Dashboard 2 React layouts
 import Dashboard from "layouts/dashboard";
-import Tables from "layouts/tables";
-import Billing from "layouts/billing";
-import RTL from "layouts/rtl";
+// import Tables from "layouts/tables";
+import Listings from "layouts/listings";
 import Notifications from "layouts/notifications";
 import Profile from "layouts/profile";
 import SignIn from "layouts/authentication/sign-in";
@@ -53,6 +52,8 @@ import Register from "auth/register";
 import ForgotPassword from "auth/forgot-password";
 import ResetPassword from "auth/reset-password";
 
+import Reservation from "reservation/reservation-service";
+
 // @mui icons
 import Icon from "@mui/material/Icon";
 
@@ -65,29 +66,21 @@ const routes = [
     route: "/dashboard",
     component: <Dashboard />,
   },
+  // {
+  //   type: "collapse",
+  //   name: "Tables",
+  //   key: "tables",
+  //   icon: <Icon fontSize="small">table_view</Icon>,
+  //   route: "/tables",
+  //   component: <Tables />,
+  // },
   {
     type: "collapse",
-    name: "Tables",
-    key: "tables",
-    icon: <Icon fontSize="small">table_view</Icon>,
-    route: "/tables",
-    component: <Tables />,
-  },
-  {
-    type: "collapse",
-    name: "Billing",
-    key: "billing",
+    name: "Listings",
+    key: "listings",
     icon: <Icon fontSize="small">receipt_long</Icon>,
-    route: "/billing",
-    component: <Billing />,
-  },
-  {
-    type: "collapse",
-    name: "RTL",
-    key: "rtl",
-    icon: <Icon fontSize="small">format_textdirection_r_to_l</Icon>,
-    route: "/rtl",
-    component: <RTL />,
+    route: "/listings",
+    component: <Listings />,
   },
   {
     type: "collapse",
@@ -149,7 +142,7 @@ const routes = [
     type: "auth",
     name: "Register",
     key: "register",
-    icon: <Icon fontSize="small">reigster</Icon>,
+    icon: <Icon fontSize="small">register</Icon>,
     route: "/auth/register",
     component: <Register />,
   },
@@ -169,6 +162,14 @@ const routes = [
     route: "/auth/reset-password",
     component: <ResetPassword />,
   },
+  // {
+  //   type: 'collapse', // Or you can use 'route' if it's not a sub-menu
+  //   name: 'Reservation', // Display name in the menu
+  //   key: 'reservation', // A unique key for the route
+  //   icon: <Icon fontSize="small">insert_drive_file</Icon>, 
+  //   route: '/reservation', // URL path
+  //   component: <Reservation />, // The component to render
+  // }
 ];
 
 export default routes;

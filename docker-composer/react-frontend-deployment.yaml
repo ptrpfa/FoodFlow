@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: react-frontend
-          image: skyish/react-frontend:v4
+          image: skyish/react-frontend:latest
           ports:
             - containerPort: 3000
 
@@ -24,7 +24,7 @@ kind: Service
 metadata:
   name: react-frontend-service
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector:
     app: react-frontend
   ports:

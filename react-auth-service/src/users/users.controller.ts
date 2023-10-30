@@ -25,6 +25,7 @@ export class UsersController implements UsersServiceController {
       FirstName: user.FirstName,
       LastName: user.LastName,
       Role: user.Role,
+      DOB: user.DOB.toDateString(),
       AddressFirst: user.AddressFirst,
       AddressSecond: user.AddressSecond,
       AddressThird: user.AddressThird,
@@ -45,6 +46,7 @@ export class UsersController implements UsersServiceController {
       FirstName: user.FirstName,
       LastName: user.LastName,
       Role: user.Role,
+      DOB: user.DOB.toDateString(),
       AddressFirst: user.AddressFirst,
       AddressSecond: user.AddressSecond,
       AddressThird: user.AddressThird,
@@ -59,19 +61,71 @@ export class UsersController implements UsersServiceController {
     return usersResponse;
   }
 
-  findOneUser(FindOneUserDto: FindOneUserDto) {
-    return this.usersService.findOne({ UserID: FindOneUserDto.UserID });
+  async findOneUser(FindOneUserDto: FindOneUserDto) {
+    const user = await this.usersService.findOne({
+      UserID: FindOneUserDto.UserID,
+    });
+
+    const protoUser: ProtoUser = {
+      UserID: user.UserID,
+      Username: user.Username,
+      FirstName: user.FirstName,
+      LastName: user.LastName,
+      Role: user.Role,
+      DOB: user.DOB.toDateString(),
+      AddressFirst: user.AddressFirst,
+      AddressSecond: user.AddressSecond,
+      AddressThird: user.AddressThird,
+      PostalCode: user.PostalCode,
+      Email: user.Email,
+    };
+
+    return protoUser;
   }
 
-  updateUser(UpdateUserDto: UpdateUserDto) {
-    return this.usersService.update(
+  async updateUser(UpdateUserDto: UpdateUserDto) {
+    const user = await this.usersService.update(
       { UserID: UpdateUserDto.UserID },
       UpdateUserDto,
     );
+
+    const protoUser: ProtoUser = {
+      UserID: user.UserID,
+      Username: user.Username,
+      FirstName: user.FirstName,
+      LastName: user.LastName,
+      Role: user.Role,
+      DOB: user.DOB.toDateString(),
+      AddressFirst: user.AddressFirst,
+      AddressSecond: user.AddressSecond,
+      AddressThird: user.AddressThird,
+      PostalCode: user.PostalCode,
+      Email: user.Email,
+    };
+
+    return protoUser;
   }
 
-  removeUser(FindOneUserDto: FindOneUserDto) {
-    return this.usersService.remove({ UserID: FindOneUserDto.UserID });
+  async removeUser(FindOneUserDto: FindOneUserDto) {
+    const user = await this.usersService.remove({
+      UserID: FindOneUserDto.UserID,
+    });
+
+    const protoUser: ProtoUser = {
+      UserID: user.UserID,
+      Username: user.Username,
+      FirstName: user.FirstName,
+      LastName: user.LastName,
+      Role: user.Role,
+      DOB: user.DOB.toDateString(),
+      AddressFirst: user.AddressFirst,
+      AddressSecond: user.AddressSecond,
+      AddressThird: user.AddressThird,
+      PostalCode: user.PostalCode,
+      Email: user.Email,
+    };
+
+    return protoUser;
   }
 
   async login(LoginRequest: LoginRequest): Promise<LoginResponse> {

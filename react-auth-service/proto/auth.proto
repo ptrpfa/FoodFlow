@@ -67,10 +67,11 @@ message ProtoUser {
     string Username = 2;
     string FirstName = 3;
     string LastName = 4;
-    string Role = 5;
-    string AddressFirst = 6;
-    string AddressSecond = 7;
-    string AddressThird = 8;
-    string PostalCode = 9;
-    string Email = 10;
+    string DOB = 5;
+    string Role = 6;
+    string AddressFirst = 7;
+    string AddressSecond = 8;
+    string AddressThird = 9;
+    string PostalCode = 10;
+    string Email = 11;
 }

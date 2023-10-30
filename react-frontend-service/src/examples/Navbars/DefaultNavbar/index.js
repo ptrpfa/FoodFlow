@@ -112,7 +112,7 @@ function DefaultNavbar({ transparent, light, action }) {
           pl={{ xs: 0, lg: 1 }}
         >
           <MDTypography variant="button" fontWeight="bold" color={light ? "white" : "dark"}>
-            Material Dashboard 2
+            Food-Flow
           </MDTypography>
         </MDBox>
         {authContext.isAuthenticated && (

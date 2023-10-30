@@ -2,6 +2,7 @@
 
 # Get the parent directory of the script
 parent_dir="$(dirname "$(pwd)")"
+echo $parent_dir
 
 # Find all folders ending with "-service" in the parent directory
 service_folders=$(find "$parent_dir" -maxdepth 1 -type d -name '*-service')

@@ -40,7 +40,7 @@ class AuthService {
     message.setPassword(credentials.Password);
     message.setAddressfirst(credentials.AddressFirst);
     message.setAddresssecond(credentials.AddressSecond);
-    message.setAddressThird(credentials.AddressThird);
+    message.setAddressthird(credentials.AddressThird);
     message.setPostalcode(credentials.PostalCode);
     message.setEmail(credentials.Email);
 
@@ -65,13 +65,36 @@ class AuthService {
   //   return await HttpService.post(resetPassword, credentials);
   // };
 
-  getProfile = async () => {
+  getProfile = async (payload) => {
     let message = new FindOneUserDto();
     message.setUserid(payload.UserID);
 
     return new Promise((resolve, reject) => {
       // gRPC
       auth_client.findOneUser(message, null, (err, response) => {
+        resolve({
+          username: response.getUsername(),
+          firstName: response.getFirstname(),
+          LastName: response.getLastname(),
+          dob: response.getDob(),
+          role: response.getRole(),
+          addressFirst: response.getAddressfirst(),
+          addressSecond: response.getAddresssecond(),
+          addressThird: response.getAddressthird(),
+          postalCode: response.getPostalcode(),
+          email: response.getEmail(),
+        });
+      });
+    });
+  };
+
+  deleteProfile = async (payload) => {
+    let message = new FindOneUserDto();
+    message.setUserid(payload.UserID);
+
+    return new Promise((resolve, reject) => {
+      // gRPC
+      auth_client.removeUser(message, null, (err, response) => {
         resolve({
           username: response.getUsername(),
           firstName: response.getFirstname(),
@@ -86,19 +109,32 @@ class AuthService {
       });
     });
   };
-
   // TODO: Implement
   updateProfile = async (newInfo) => {
     let message = new UpdateUserDto();
-    message.setUsername(newInfo.Username);
-    message.setPassword(newInfo.Password);
+    message.setUsername(newInfo.username);
+    message.setFirstname(newInfo.firstname);
+    message.setLastname(newInfo.lastname);
+    message.setRole(newInfo.role);
+    message.setAddressfirst(newInfo.addressfirst);
+    message.setAddresssecond(newInfo.addresssecond);
+    message.setAddressthird(newInfo.addressthird);
+    message.setPostalcode(newInfo.postalcode);
+    message.setEmail(newInfo.email);
 
     return new Promise((resolve, reject) => {
       // gRPC
       auth_client.updateUser(message, null, (err, response) => {
         resolve({
-          validated: response.getValidated(),
-          token: response.getAccesstoken(),
+          username: response.getUsername(),
+          firstName: response.getFirstname(),
+          LastName: response.getLastname(),
+          role: response.getRole(),
+          addressFirst: response.getAddressfirst(),
+          addressSecond: response.getAddresssecond(),
+          addressThird: response.getAddressthird(),
+          postalCode: response.getPostalcode(),
+          email: response.getEmail(),
         });
       });
     });

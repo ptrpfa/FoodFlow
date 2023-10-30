@@ -59,6 +59,7 @@ export interface ProtoUser {
   Username: string;
   FirstName: string;
   LastName: string;
+  DOB: string;
   Role: string;
   AddressFirst: string;
   AddressSecond: string;

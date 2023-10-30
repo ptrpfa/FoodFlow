@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aws-s3-listing-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: aws-s3-listing
+  template:
+    metadata:
+      labels:
+        app: aws-s3-listing
+    spec:
+      containers:
+        - name: aws-s3-listing
+          image: skyish/aws-s3-listing:latest
+          ports:
+            - containerPort: 5001
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: aws-s3-listing-service
+spec:
+  selector:
+    app: aws-s3-listing
+  ports:
+    - protocol: TCP
+      port: 5001
+      targetPort: 5001

@@ -17,11 +17,11 @@ import Header from "layouts/user-profile/Header";
 import AuthService from "../../services/auth-service";
 
 const UserProfile = () => {
-  const [isDemo, setIsDemo] = useState(false);
   const [notification, setNotification] = useState(false);
   const [user, setUser] = useState({
     name: "",
     email: "",
+    role: "",
     newPassword: "",
     confirmPassword: "",
   });
@@ -33,22 +33,37 @@ const UserProfile = () => {
     confirmPassError: false,
   });
 
-  const getUserData = async () => {
-    const response = await AuthService.getProfile();
-    if (response.data.id == 1) {
-      setIsDemo(process.env.REACT_APP_IS_DEMO === "true");
+  const getUserData = async (UserID) => {
+    try {
+      const response = await AuthService.getProfile({ UserID: UserID });
+      console.log("Response:", response); // Print the entire response object for debugging
+
+      if (response) {
+        const firstName = response.firstName;
+        const lastName = response.LastName;
+        const email = response.email;
+        const role = response.role;
+        const name = `${firstName} ${lastName}`;
+        
+        setUser((prevUser) => ({
+          ...prevUser,
+          name,
+          email,
+          role,
+          currentPassword: "",
+          newPassword: "",
+          confirmPassword: "",
+        }));
+      } else {
+        console.error("User data not found or has an unexpected structure.");
+      }
+    } catch (error) {
+      console.error("An error occurred while fetching user data:", error);
     }
-    setUser((prevUser) => ({
-      ...prevUser,
-      ...response.data.attributes,
-      currentPassword: "",
-      newPassword: "",
-      confirmPassword: "",
-    }));
   };
 
   useEffect(() => {
-    getUserData();
+    getUserData(123);
   }, []);
 
   useEffect(() => {
@@ -100,6 +115,7 @@ const UserProfile = () => {
         attributes: {
           name: user.name,
           email: user.email,
+          role: user.role,
           profile_image: null,
         },
       },
@@ -139,7 +155,7 @@ const UserProfile = () => {
     <DashboardLayout>
       <DashboardNavbar />
       <MDBox mb={2} />
-      <Header name={user.name}>
+      <Header name={user.name} role={user.role}>
         {notification && (
           <MDAlert color="info" mt="20px">
             <MDTypography variant="body2" color="white">
@@ -199,7 +215,6 @@ const UserProfile = () => {
                   value={user.email}
                   onChange={changeHandler}
                   error={errors.emailError}
-                  disabled={isDemo}
                 />
                 {errors.emailError && (
                   <MDTypography variant="caption" color="error" fontWeight="light">
@@ -207,11 +222,6 @@ const UserProfile = () => {
                   </MDTypography>
                 )}
               </MDBox>
-              {isDemo && (
-                <MDTypography variant="caption" color="text" fontWeight="light">
-                  In the demo version the email can not be updated
-                </MDTypography>
-              )}
             </MDBox>
           </MDBox>
 
@@ -236,7 +246,6 @@ const UserProfile = () => {
                     value={user.newPassword}
                     onChange={changeHandler}
                     error={errors.newPassError}
-                    disabled={isDemo}
                     inputProps={{
                       autoComplete: "new-password",
                       form: {
@@ -270,7 +279,6 @@ const UserProfile = () => {
                     value={user.confirmPassword}
                     onChange={changeHandler}
                     error={errors.confirmPassError}
-                    disabled={isDemo}
                     inputProps={{
                       autoComplete: "confirmPassword",
                       form: {
@@ -284,11 +292,6 @@ const UserProfile = () => {
                     </MDTypography>
                   )}
                 </MDBox>
-                {isDemo && (
-                  <MDTypography variant="caption" color="text" ml={1} fontWeight="light">
-                    In the demo version the password can not be updated
-                  </MDTypography>
-                )}
               </MDBox>
             </MDBox>
             <MDBox mt={4} display="flex" justifyContent="end">
