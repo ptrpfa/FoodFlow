@@ -14,4 +14,4 @@ spec:
     spec:
       containers:
         - name: reservation-database
-          image: skyish/food-flow:reservation-database
+          image: skyish/reservation-database:latest
