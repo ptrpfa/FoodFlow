@@ -13,6 +13,7 @@ import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Footer from "examples/Footer";
 
 import ListingService from "services/listing-service"; 
+import AWSS3Service from "services/aws-s3-service";
 
 function FoodListingsTable() {
   const [infoSB, setInfoSB] = useState(false);
@@ -31,16 +32,31 @@ function FoodListingsTable() {
       onClose={closeInfoSB}
       close={closeInfoSB}
     />
-  );
+    );
 
   useEffect(() => {
-    ListingService.getAllListing().then((allListings) => {
-      setListings(allListings);
-    })
-    .catch((error) => {
-      console.error("Error fetching listings:", error);
-    });
+    const fetchImageForListing = async (listing) => {
+      const imageData = await AWSS3Service.getImage({ imageId: listing.image });
+      const imageBlob = convertUint8ArrayToBlob(imageData.imageData);
+      const imageUrl = URL.createObjectURL(imageBlob);
+      return { ...listing, image: imageUrl };
+    };
+  
+    ListingService.getAllListing()
+      .then(async (allListings) => {
+        const listingsWithImages = await Promise.all(
+          allListings.map(fetchImageForListing)
+        );
+        setListings(listingsWithImages);
+      })
+      .catch((error) => {
+        console.error("Error fetching listings:", error);
+      });
   }, []);
+
+  const convertUint8ArrayToBlob = (uint8Array) => {
+    return new Blob([uint8Array], { type: 'image/jpeg' }); // Change the type to match the image type
+  };
 
   const groupedListings = [];
   for (let i = 0; i < listings.length; i += 3) {
@@ -72,12 +88,16 @@ function FoodListingsTable() {
                   <Card style={{ margin: "8px" }}>
                     <MDBox p={2}>
                       <MDTypography variant="h6">{listing.name}</MDTypography>
-                      <img src={listing.image}/>
+                      <img 
+                        src={listing.image}
+                        style={{ maxWidth: "50%", maxHeight: "50%" }}
+                        alt={listing.name}
+                      /> {}
                       <MDTypography>{listing.description}</MDTypography>
                       <MDButton
                         variant="gradient"
                         color="info"
-                        onClick={openInfoSB}
+                        onClick={openInfoSB} // Link to Ryan's detailed listing page
                         fullWidth
                       >
                         View Details
