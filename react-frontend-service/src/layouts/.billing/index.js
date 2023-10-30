@@ -26,13 +26,13 @@ import Footer from "examples/Footer";
 import MasterCard from "examples/Cards/MasterCard";
 import DefaultInfoCard from "examples/Cards/InfoCards/DefaultInfoCard";
 
-// Billing page components
-import PaymentMethod from "layouts/billing/components/PaymentMethod";
-import Invoices from "layouts/billing/components/Invoices";
-import BillingInformation from "layouts/billing/components/BillingInformation";
-import Transactions from "layouts/billing/components/Transactions";
+// Listing page components
+import PaymentMethod from "layouts/listings/components/PaymentMethod";
+import Invoices from "layouts/listings/components/Invoices";
+import listingsInformation from "layouts/listings/components/listingsInformation";
+import Transactions from "layouts/listings/components/Transactions";
 
-function Billing() {
+function Listings() {
   return (
     <DashboardLayout>
       <DashboardNavbar absolute isMini />
