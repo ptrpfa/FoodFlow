@@ -39,12 +39,9 @@ static_resources:
                             cluster: grpc-listing-service
                             max_stream_duration:
                               grpc_timeout_header_max: 0s
-                        - match: { prefix: "/reservation/" }
+                        - match: { prefix: "/reservation" }
                           route:
-                            prefix_rewrite: "/"
                             cluster: react-reservation
-                            max_stream_duration:
-                              grpc_timeout_header_max: 0s
                       cors:
                         allow_origin_string_match:
                           - prefix: "*"
@@ -108,8 +105,6 @@ static_resources:
     - name: react-reservation
       connect_timeout: 0.25s
       type: strict_dns
-      http2_protocol_options: {}
-      lb_policy: round_robin
       load_assignment:
         cluster_name: react-reservation
         endpoints:

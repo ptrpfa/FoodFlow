@@ -1,22 +1,23 @@
-const { Consumer, KafkaClient } = require('kafka-node');
+// const { Consumer, KafkaClient } = require('kafka-node');
+const kafka = require('kafka-node')
 const sequelize = require('./db');
-const client = new KafkaClient({ kafkaHost: 'localhost:29092' });
+const client = new kafka.KafkaClient({kafkaHost: 'localhost:29092'})
 
 // test for connection
 console.log('Reservation Service is starting...');
 
-const consumer = new Consumer(client, [{ topic: 'reservation' }], { groupId: 'reservation-group' });
+const consumer = new kafka.Consumer(client, [{ topic: 'reservation-topic' }], { groupId: 'reservation-group' });
 
 consumer.on('message', (message) => {
   const payload = JSON.parse(message.value);
 
   // Process the Kafka message and update the database
   sequelize.sync().then(() => {
-    if (payload.type === 'create') {
+    if (payload.action === 'create') {
       // Insert a new reservation into the database
       sequelize.models.Reservation.create({
         userId: payload.userId,
-        itemId: payload.itemId,
+        itemId: payload.itemId, 
         reservationId: payload.reservationId,
         datetime: payload.datetime,
         status: payload.status,
