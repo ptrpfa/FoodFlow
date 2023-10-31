@@ -5,8 +5,8 @@ app.timeout = 90000;
 app.use(express.json());
 const port = 5003;
 
-const client = new kafka.KafkaClient({ kafkaHost: 'kafka-service-1:29092' });
 // const client = new kafka.KafkaClient({ kafkaHost: 'localhost:29092' });
+const client = new kafka.KafkaClient({ kafkaHost: 'kafka-service-1:29092' });
 const producer = new kafka.Producer(client);
 
 // Create a Kafka Producer
