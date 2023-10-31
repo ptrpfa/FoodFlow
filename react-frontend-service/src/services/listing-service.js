@@ -4,6 +4,7 @@ import {
   FindOneListingDto,
   Empty,
   UpdateListingDto,
+  UserDto,
 } from "./grpc/listing/listing_pb";
 
 const listing_client = new ListingServiceClient(
@@ -19,7 +20,6 @@ class ListingService {
     message.setDatetime(data.Datetime);
     message.setExpiryDate(data.ExpiryDate);
     message.setCategory(data.Category);
-    message.setQuantity(data.Quantity);
     message.setDescription(data.Description);
     message.setImage(data.Image);
     message.setPickupaddressfirst(data.PickUpAddressFirst);
@@ -30,6 +30,8 @@ class ListingService {
     message.setPickupenddate(data.PickUpEndDate);
     message.setPickupstarttime(data.PickUpStartTime);
     message.setPickupendtime(data.PickUpEndTime);
+    message.setContactphone(data.ContactPhone);
+    message.setContactemail(data.ContactEmail);
 
     return new Promise((resolve, reject) => {
       // gRPC
@@ -53,7 +55,7 @@ class ListingService {
           datetime: response.getDatetime(),
           expiryDate: response.getExpirydate(),
           category: response.getCategory(),
-          quantity: response.getQuantity(),
+          status: response.getStatus(),
           description: response.getDescription(),
           image: response.getImage(),
           pickUpAddressFirst: response.getPickupaddressfirst(),
@@ -64,7 +66,153 @@ class ListingService {
           pickUpEndDate: response.getPickupenddate(),
           pickUpStartTime: response.getPickupstarttime(),
           pickUpEndTime: response.getPickupendtime(),
+          contactPhone: response.getContactphone(),
+          contactEmail: response.getContactemail(),
         });
+      });
+    });
+  };
+
+  FindAvailableListingsExcludeUser = async (payload) => {
+    let message = new UserDto();
+    message.setUserid(payload.Userid);
+
+    return new Promise((resolve, reject) => {
+      // gRPC
+      listing_client.findAvailableListingsExcludeUser(
+        message,
+        null,
+        (err, response) => {
+          const listings = response.getListingsList();
+
+          const processedListings = listings.map((listing) => {
+            return {
+              name: listing.getName(),
+              datetime: listing.getDatetime(),
+              expiryDate: listing.getExpirydate(),
+              category: listing.getCategory(),
+              status: listing.getStatus(),
+              description: listing.getDescription(),
+              image: listing.getImage(),
+              pickUpAddressFirst: listing.getPickupaddressfirst(),
+              pickUpAddressSecond: listing.getPickupaddresssecond(),
+              pickUpAddressThird: listing.getPickupaddressthird(),
+              pickUpPostalCode: listing.getPickuppostalcode(),
+              pickUpStartDate: listing.getPickupstartdate(),
+              pickUpEndDate: listing.getPickupenddate(),
+              pickUpStartTime: listing.getPickupstarttime(),
+              pickUpEndTime: listing.getPickupendtime(),
+              contactPhone: listing.getContactphone(),
+              contactEmail: listing.getContactemail(),
+            };
+          });
+          resolve(processedListings);
+        }
+      );
+    });
+  };
+
+  FindReservedListings = async (payload) => {
+    let message = new UserDto();
+    message.setUserid(payload.Userid);
+
+    return new Promise((resolve, reject) => {
+      // gRPC
+      listing_client.findReservedListings(message, null, (err, response) => {
+        const listings = response.getListingsList();
+
+        const processedListings = listings.map((listing) => {
+          return {
+            name: listing.getName(),
+            datetime: listing.getDatetime(),
+            expiryDate: listing.getExpirydate(),
+            category: listing.getCategory(),
+            status: listing.getStatus(),
+            description: listing.getDescription(),
+            image: listing.getImage(),
+            pickUpAddressFirst: listing.getPickupaddressfirst(),
+            pickUpAddressSecond: listing.getPickupaddresssecond(),
+            pickUpAddressThird: listing.getPickupaddressthird(),
+            pickUpPostalCode: listing.getPickuppostalcode(),
+            pickUpStartDate: listing.getPickupstartdate(),
+            pickUpEndDate: listing.getPickupenddate(),
+            pickUpStartTime: listing.getPickupstarttime(),
+            pickUpEndTime: listing.getPickupendtime(),
+            contactPhone: listing.getContactphone(),
+            contactEmail: listing.getContactemail(),
+          };
+        });
+        resolve(processedListings);
+      });
+    });
+  };
+
+  FindCollectedListings = async (payload) => {
+    let message = new UserDto();
+    message.setUserid(payload.Userid);
+
+    return new Promise((resolve, reject) => {
+      // gRPC
+      listing_client.findCollectedListings(message, null, (err, response) => {
+        const listings = response.getListingsList();
+
+        const processedListings = listings.map((listing) => {
+          return {
+            name: listing.getName(),
+            datetime: listing.getDatetime(),
+            expiryDate: listing.getExpirydate(),
+            category: listing.getCategory(),
+            status: listing.getStatus(),
+            description: listing.getDescription(),
+            image: listing.getImage(),
+            pickUpAddressFirst: listing.getPickupaddressfirst(),
+            pickUpAddressSecond: listing.getPickupaddresssecond(),
+            pickUpAddressThird: listing.getPickupaddressthird(),
+            pickUpPostalCode: listing.getPickuppostalcode(),
+            pickUpStartDate: listing.getPickupstartdate(),
+            pickUpEndDate: listing.getPickupenddate(),
+            pickUpStartTime: listing.getPickupstarttime(),
+            pickUpEndTime: listing.getPickupendtime(),
+            contactPhone: listing.getContactphone(),
+            contactEmail: listing.getContactemail(),
+          };
+        });
+        resolve(processedListings);
+      });
+    });
+  };
+
+  FindAvailableListings = async (payload) => {
+    let message = new UserDto();
+    message.setUserid(payload.Userid);
+
+    return new Promise((resolve, reject) => {
+      // gRPC
+      listing_client.findAvailableListings(message, null, (err, response) => {
+        const listings = response.getListingsList();
+
+        const processedListings = listings.map((listing) => {
+          return {
+            name: listing.getName(),
+            datetime: listing.getDatetime(),
+            expiryDate: listing.getExpirydate(),
+            category: listing.getCategory(),
+            status: listing.getStatus(),
+            description: listing.getDescription(),
+            image: listing.getImage(),
+            pickUpAddressFirst: listing.getPickupaddressfirst(),
+            pickUpAddressSecond: listing.getPickupaddresssecond(),
+            pickUpAddressThird: listing.getPickupaddressthird(),
+            pickUpPostalCode: listing.getPickuppostalcode(),
+            pickUpStartDate: listing.getPickupstartdate(),
+            pickUpEndDate: listing.getPickupenddate(),
+            pickUpStartTime: listing.getPickupstarttime(),
+            pickUpEndTime: listing.getPickupendtime(),
+            contactPhone: listing.getContactphone(),
+            contactEmail: listing.getContactemail(),
+          };
+        });
+        resolve(processedListings);
       });
     });
   };
@@ -83,7 +231,7 @@ class ListingService {
             datetime: listing.getDatetime(),
             expiryDate: listing.getExpirydate(),
             category: listing.getCategory(),
-            quantity: listing.getQuantity(),
+            status: listing.getStatus(),
             description: listing.getDescription(),
             image: listing.getImage(),
             pickUpAddressFirst: listing.getPickupaddressfirst(),
@@ -94,6 +242,8 @@ class ListingService {
             pickUpEndDate: listing.getPickupenddate(),
             pickUpStartTime: listing.getPickupstarttime(),
             pickUpEndTime: listing.getPickupendtime(),
+            contactPhone: listing.getContactphone(),
+            contactEmail: listing.getContactemail(),
           };
         });
         resolve(processedListings);
@@ -113,7 +263,7 @@ class ListingService {
           datetime: response.getDatetime(),
           expiryDate: response.getExpirydate(),
           category: response.getCategory(),
-          quantity: response.getQuantity(),
+          status: response.getStatus(),
           description: response.getDescription(),
           image: response.getImage(),
           pickUpAddressFirst: response.getPickupaddressfirst(),
@@ -124,6 +274,8 @@ class ListingService {
           pickUpEndDate: response.getPickupenddate(),
           pickUpStartTime: response.getPickupstarttime(),
           pickUpEndTime: response.getPickupendtime(),
+          contactPhone: response.getContactphone(),
+          contactEmail: response.getContactemail(),
         });
       });
     });
@@ -137,7 +289,7 @@ class ListingService {
     message.setDatetime(payload.datetime);
     message.setExpirydate(payload.expirydate);
     message.setCategory(payload.category);
-    message.setQuantity(payload.quantity);
+    message.setStatus(payload.status);
     message.setDescription(payload.description);
     message.setImage(payload.image);
     message.setPickupaddressfirst(payload.pickupaddressfirst);
@@ -148,6 +300,8 @@ class ListingService {
     message.setPickupenddate(payload.pickupenddate);
     message.setPickupstarttime(payload.pickupstarttime);
     message.setPickupendtime(payload.pickupendtime);
+    message.setContactphone(data.ContactPhone);
+    message.setContactemail(data.ContactEmail);
 
     return new Promise((resolve, reject) => {
       // gRPC
@@ -157,7 +311,7 @@ class ListingService {
           datetime: response.getDatetime(),
           expiryDate: response.getExpirydate(),
           category: response.getCategory(),
-          quantity: response.getQuantity(),
+          status: response.getStatus(),
           description: response.getDescription(),
           image: response.getImage(),
           pickUpAddressFirst: response.getPickupaddressfirst(),
@@ -168,6 +322,8 @@ class ListingService {
           pickUpEndDate: response.getPickupenddate(),
           pickUpStartTime: response.getPickupstarttime(),
           pickUpEndTime: response.getPickupendtime(),
+          contactPhone: response.getContactphone(),
+          contactEmail: response.getContactemail(),
         });
       });
     });

@@ -7,25 +7,14 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Collection {
-  CollectionID       Int          @id @default(autoincrement())
-  Status             Int
-  ReservationIDField Int?
-  UserIDField        Int?
-  ReservationID      Reservation? @relation(fields: [ReservationIDField], references: [ReservationID])
-  UserID             User?        @relation(fields: [UserIDField], references: [UserID])
-
-  @@index([ReservationIDField], map: "Collection_ReservationIDField_fkey")
-  @@index([UserIDField], map: "Collection_UserIDField_fkey")
-}
-
 model Listing {
   ListingID           Int           @id @default(autoincrement())
+  UserID              Int?
   Name                String        @db.VarChar(255)
   Datetime            DateTime
   ExpiryDate          DateTime      @db.Date
   Category            String        @db.VarChar(255)
-  Quantity            Int
+  Status              Int?
   Description         String?       @db.Text
   Image               String?       @db.VarChar(128)
   PickUpAddressFirst  String?       @db.VarChar(255)
@@ -36,22 +25,25 @@ model Listing {
   PickUpEndDate       DateTime      @db.Date
   PickUpStartTime     DateTime      @db.Time(0)
   PickUpEndTime       DateTime      @db.Time(0)
-  reservations        Reservation[]
+  ContactPhone        String?       @db.VarChar(20)
+  ContactEmail        String?       @db.VarChar(255)
+  User                User?         @relation(fields: [UserID], references: [UserID])
+  Reservation         Reservation[]
+
+  @@index([UserID], map: "Listing_UserID_fkey")
 }
 
 model Reservation {
-  ReservationID  Int          @id @default(autoincrement())
-  Datetime       DateTime
-  Status         Int
-  Remarks        String?      @db.Text
-  UserIDField    Int?
-  ListingIDField Int?
-  collections    Collection[]
-  ListingID      Listing?     @relation(fields: [ListingIDField], references: [ListingID])
-  UserID         User?        @relation(fields: [UserIDField], references: [UserID])
+  ReservationID Int      @id @default(autoincrement())
+  Datetime      DateTime
+  Remarks       String?  @db.Text
+  UserID        Int?
+  ListingID     Int?
+  Listing       Listing? @relation(fields: [ListingID], references: [ListingID])
+  User          User?    @relation(fields: [UserID], references: [UserID])
 
-  @@index([ListingIDField], map: "Reservation_ListingIDField_fkey")
-  @@index([UserIDField], map: "Reservation_UserIDField_fkey")
+  @@index([ListingID], map: "Reservation_ListingID_fkey")
+  @@index([UserID], map: "Reservation_UserID_fkey")
 }
 
 model User {
@@ -67,6 +59,6 @@ model User {
   AddressSecond String?       @db.VarChar(255)
   AddressThird  String?       @db.VarChar(255)
   PostalCode    String?       @db.VarChar(20)
-  collections   Collection[]
-  reservations  Reservation[]
+  Listing       Listing[]
+  Reservation   Reservation[]
 }
