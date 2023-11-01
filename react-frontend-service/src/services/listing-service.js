@@ -51,6 +51,8 @@ class ListingService {
       // gRPC
       listing_client.findOneListing(message, null, (err, response) => {
         resolve({
+          listingID: response.getListingid(),
+          userID: response.getUserid(),
           name: response.getName(),
           datetime: response.getDatetime(),
           expiryDate: response.getExpirydate(),
@@ -73,7 +75,7 @@ class ListingService {
     });
   };
 
-  FindAvailableListingsExcludeUser = async (payload) => {
+  getAvailableListingsExcludeUser = async (payload) => {
     let message = new UserDto();
     message.setUserid(payload.Userid);
 
@@ -87,6 +89,8 @@ class ListingService {
 
           const processedListings = listings.map((listing) => {
             return {
+              listingID: listing.getListingid(),
+              userID: listing.getUserid(),
               name: listing.getName(),
               datetime: listing.getDatetime(),
               expiryDate: listing.getExpirydate(),
@@ -112,7 +116,7 @@ class ListingService {
     });
   };
 
-  FindReservedListings = async (payload) => {
+  getReservedListings = async (payload) => {
     let message = new UserDto();
     message.setUserid(payload.Userid);
 
@@ -123,6 +127,8 @@ class ListingService {
 
         const processedListings = listings.map((listing) => {
           return {
+            listingID: listing.getListingid(),
+            userID: listing.getUserid(),
             name: listing.getName(),
             datetime: listing.getDatetime(),
             expiryDate: listing.getExpirydate(),
@@ -147,7 +153,7 @@ class ListingService {
     });
   };
 
-  FindCollectedListings = async (payload) => {
+  getCollectedListings = async (payload) => {
     let message = new UserDto();
     message.setUserid(payload.Userid);
 
@@ -158,6 +164,8 @@ class ListingService {
 
         const processedListings = listings.map((listing) => {
           return {
+            listingID: listing.getListingid(),
+            userID: listing.getUserid(),
             name: listing.getName(),
             datetime: listing.getDatetime(),
             expiryDate: listing.getExpirydate(),
@@ -182,7 +190,7 @@ class ListingService {
     });
   };
 
-  FindAvailableListings = async (payload) => {
+  getAvailableListings = async (payload) => {
     let message = new UserDto();
     message.setUserid(payload.Userid);
 
@@ -193,6 +201,8 @@ class ListingService {
 
         const processedListings = listings.map((listing) => {
           return {
+            listingID: listing.getListingid(),
+            userID: listing.getUserid(),
             name: listing.getName(),
             datetime: listing.getDatetime(),
             expiryDate: listing.getExpirydate(),
@@ -227,6 +237,8 @@ class ListingService {
 
         const processedListings = listings.map((listing) => {
           return {
+            listingID: listing.getListingid(),
+            userID: listing.getUserid(),
             name: listing.getName(),
             datetime: listing.getDatetime(),
             expiryDate: listing.getExpirydate(),
