@@ -55,6 +55,8 @@ import Register from "auth/register";
 import ForgotPassword from "auth/forgot-password";
 import ResetPassword from "auth/reset-password";
 
+import Donor from "layouts/donor";
+
 import Reservation from "reservation/reservation-service";
 
 // @mui icons
@@ -69,14 +71,6 @@ const routes = [
     route: "/dashboard",
     component: <Dashboard />,
   },
-  // {
-  //   type: "collapse",
-  //   name: "Tables",
-  //   key: "tables",
-  //   icon: <Icon fontSize="small">table_view</Icon>,
-  //   route: "/tables",
-  //   component: <Tables />,
-  // },
   {
     type: "collapse",
     name: "Listings",
@@ -103,6 +97,14 @@ const routes = [
     icon: <Icon fontSize="small">receipt_long</Icon>,
     route: "/listings/:listingId",
     component: <DetailedListing />,
+  },
+  {
+    type: "collapse",
+    name: "Donate",
+    key: "donor",
+    icon: <Icon fontSize="small">assignment</Icon>,
+    route: "/donor",
+    component: <Donor />,
   },
   {
     type: "collapse",

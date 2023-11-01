@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
@@ -24,15 +25,15 @@ function FoodListingsTable() {
 
   const renderInfoSB = (
     <MDSnackbar
-      icon="notifications"
-      title="Material Dashboard"
-      content="Hello, world! This is a notification message"
-      dateTime="11 mins ago"
+      icon="info"
+      title="Ni mama hen mei"
+      content="This will be linked to Ryan's view listing details"
+      dateTime="5 seconds ago"
       open={infoSB}
       onClose={closeInfoSB}
       close={closeInfoSB}
     />
-    );
+  );
 
   useEffect(() => {
     const fetchImageForListing = async (listing) => {
@@ -55,7 +56,7 @@ function FoodListingsTable() {
   }, []);
 
   const convertUint8ArrayToBlob = (uint8Array) => {
-    return new Blob([uint8Array], { type: 'image/jpeg' }); // Change the type to match the image type
+    return new Blob([uint8Array], { type: 'image/jpeg' });
   };
 
   const groupedListings = [];
@@ -77,7 +78,7 @@ function FoodListingsTable() {
           coloredShadow="info"
         >
           <MDTypography variant="h6" color="white">
-            Food-Flowings
+            Available Donated Food
           </MDTypography>
         </MDBox>
         <MDBox pt={3}>
@@ -92,12 +93,12 @@ function FoodListingsTable() {
                         src={listing.image}
                         style={{ maxWidth: "50%", maxHeight: "50%" }}
                         alt={listing.name}
-                      /> {}
+                      />
                       <MDTypography>{listing.description}</MDTypography>
                       <MDButton
                         variant="gradient"
                         color="info"
-                        onClick={openInfoSB} // Link to Ryan's detailed listing page
+                        onClick={openInfoSB}
                         fullWidth
                       >
                         View Details
@@ -122,7 +123,14 @@ function Listings() {
       <MDBox pt={6} pb={3}>
         <Grid container spacing={6}>
           <Grid item xs={12}>
-            <MDTypography variant="h3">Food Listings Page</MDTypography>
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <MDTypography variant="h3">Donor's Listings</MDTypography>
+              <Link to="/donor">
+                <MDButton variant="gradient" color="info">
+                  Donate Food
+                </MDButton>
+              </Link>
+            </div>
           </Grid>
           <Grid item xs={12}>
             <FoodListingsTable />
