@@ -39,6 +39,9 @@ Coded by www.creative-tim.com
 import Dashboard from "layouts/dashboard";
 // import Tables from "layouts/tables";
 import Listings from "layouts/listings";
+import DetailedListing from "layouts/detailed-listing";
+
+
 import Notifications from "layouts/notifications";
 import Profile from "layouts/profile";
 import SignIn from "layouts/authentication/sign-in";
@@ -81,6 +84,25 @@ const routes = [
     icon: <Icon fontSize="small">receipt_long</Icon>,
     route: "/listings",
     component: <Listings />,
+    // children: [
+    //   {
+    //     type: "item",
+    //     name: "Detailed Listing",
+    //     key: "detailed-listing",
+    //     icon: <Icon fontSize="small">receipt_long</Icon>,
+    //     route: "/listings/:listingId", // Use a dynamic route parameter
+    //     component: <DetailedListing />,
+    //     hidden: true, // Optionally hide it from the menu
+    //   },
+    // ],
+  },
+  {
+    type: "item",
+    name: "Detailed Listing",
+    key: "detailed-listing",
+    icon: <Icon fontSize="small">receipt_long</Icon>,
+    route: "/listings/:listingId",
+    component: <DetailedListing />,
   },
   {
     type: "collapse",
