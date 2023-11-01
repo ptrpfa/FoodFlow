@@ -10,7 +10,7 @@ export interface UpdateListingDto {
   Datetime?: string | undefined;
   ExpiryDate?: string | undefined;
   Category?: string | undefined;
-  Quantity?: number | undefined;
+  Status?: number | undefined;
   Description?: string | undefined;
   Image?: string | undefined;
   PickUpAddressFirst?: string | undefined;
@@ -21,10 +21,16 @@ export interface UpdateListingDto {
   PickUpEndDate?: string | undefined;
   PickUpStartTime?: string | undefined;
   PickUpEndTime?: string | undefined;
+  ContactPhone?: string | undefined;
+  ContactEmail?: string | undefined;
 }
 
 export interface FindOneListingDto {
   ListingID: number;
+}
+
+export interface UserDto {
+  UserID: number;
 }
 
 export interface Empty {
@@ -36,11 +42,11 @@ export interface Listings {
 
 export interface CreateListingDto {
   ListingID: number;
+  UserID: number;
   Name: string;
   Datetime: string;
   ExpiryDate: string;
   Category: string;
-  Quantity: number;
   Description: string;
   Image: string;
   PickUpAddressFirst: string;
@@ -51,15 +57,18 @@ export interface CreateListingDto {
   PickUpEndDate: string;
   PickUpStartTime: string;
   PickUpEndTime: string;
+  ContactPhone: string;
+  ContactEmail: string;
 }
 
 export interface ProtoListing {
   ListingID: number;
+  UserID: number;
   Name: string;
   Datetime: string;
   ExpiryDate: string;
   Category: string;
-  Quantity: number;
+  Status: number;
   Description: string;
   Image: string;
   PickUpAddressFirst: string;
@@ -70,6 +79,8 @@ export interface ProtoListing {
   PickUpEndDate: string;
   PickUpStartTime: string;
   PickUpEndTime: string;
+  ContactPhone: string;
+  ContactEmail: string;
 }
 
 export const LISTING_PACKAGE_NAME = "listing";
@@ -78,6 +89,14 @@ export interface ListingServiceClient {
   createListing(request: CreateListingDto): Observable<ProtoListing>;
 
   findAllListings(request: Empty): Observable<Listings>;
+
+  findAvailableListingsExcludeUser(request: UserDto): Observable<Listings>;
+
+  findReservedListings(request: UserDto): Observable<Listings>;
+
+  findCollectedListings(request: UserDto): Observable<Listings>;
+
+  findAvailableListings(request: UserDto): Observable<Listings>;
 
   findOneListing(request: FindOneListingDto): Observable<ProtoListing>;
 
@@ -91,6 +110,14 @@ export interface ListingServiceController {
 
   findAllListings(request: Empty): Promise<Listings> | Observable<Listings> | Listings;
 
+  findAvailableListingsExcludeUser(request: UserDto): Promise<Listings> | Observable<Listings> | Listings;
+
+  findReservedListings(request: UserDto): Promise<Listings> | Observable<Listings> | Listings;
+
+  findCollectedListings(request: UserDto): Promise<Listings> | Observable<Listings> | Listings;
+
+  findAvailableListings(request: UserDto): Promise<Listings> | Observable<Listings> | Listings;
+
   findOneListing(request: FindOneListingDto): Promise<ProtoListing> | Observable<ProtoListing> | ProtoListing;
 
   updateListing(request: UpdateListingDto): Promise<ProtoListing> | Observable<ProtoListing> | ProtoListing;
@@ -103,6 +130,10 @@ export function ListingServiceControllerMethods() {
     const grpcMethods: string[] = [
       "createListing",
       "findAllListings",
+      "findAvailableListingsExcludeUser",
+      "findReservedListings",
+      "findCollectedListings",
+      "findAvailableListings",
       "findOneListing",
       "updateListing",
       "removeListing",

@@ -6,8 +6,6 @@ import {
   CreateUserDto,
   FindOneUserDto,
   UpdateUserDto,
-  ProtoUser,
-  Users,
   LoginRequest,
   LoginResponse,
 } from 'proto/auth';
@@ -18,114 +16,30 @@ export class UsersController implements UsersServiceController {
   constructor(private readonly usersService: UsersService) {}
 
   async createUser(CreateUserDto: CreateUserDto) {
-    const user = await this.usersService.create(CreateUserDto);
-    const protoUser: ProtoUser = {
-      UserID: user.UserID,
-      Username: user.Username,
-      FirstName: user.FirstName,
-      LastName: user.LastName,
-      Role: user.Role,
-      DOB: user.DOB.toDateString(),
-      AddressFirst: user.AddressFirst,
-      AddressSecond: user.AddressSecond,
-      AddressThird: user.AddressThird,
-      PostalCode: user.PostalCode,
-      Email: user.Email,
-    };
-
-    return protoUser;
+    return this.usersService.create(CreateUserDto);
   }
 
   async findAllUsers() {
-    const users = await this.usersService.findAll();
-
-    // Transform users to match ProtoUser structure
-    const protoUsers: ProtoUser[] = users.map((user) => ({
-      UserID: user.UserID,
-      Username: user.Username,
-      FirstName: user.FirstName,
-      LastName: user.LastName,
-      Role: user.Role,
-      DOB: user.DOB.toDateString(),
-      AddressFirst: user.AddressFirst,
-      AddressSecond: user.AddressSecond,
-      AddressThird: user.AddressThird,
-      PostalCode: user.PostalCode,
-      Email: user.Email,
-    }));
-
-    const usersResponse: Users = {
-      users: protoUsers,
-    };
-
-    return usersResponse;
+    return this.usersService.findAll();
   }
 
   async findOneUser(FindOneUserDto: FindOneUserDto) {
-    const user = await this.usersService.findOne({
+    return this.usersService.findOne({
       UserID: FindOneUserDto.UserID,
     });
-
-    const protoUser: ProtoUser = {
-      UserID: user.UserID,
-      Username: user.Username,
-      FirstName: user.FirstName,
-      LastName: user.LastName,
-      Role: user.Role,
-      DOB: user.DOB.toDateString(),
-      AddressFirst: user.AddressFirst,
-      AddressSecond: user.AddressSecond,
-      AddressThird: user.AddressThird,
-      PostalCode: user.PostalCode,
-      Email: user.Email,
-    };
-
-    return protoUser;
   }
 
   async updateUser(UpdateUserDto: UpdateUserDto) {
-    const user = await this.usersService.update(
+    return this.usersService.update(
       { UserID: UpdateUserDto.UserID },
       UpdateUserDto,
     );
-
-    const protoUser: ProtoUser = {
-      UserID: user.UserID,
-      Username: user.Username,
-      FirstName: user.FirstName,
-      LastName: user.LastName,
-      Role: user.Role,
-      DOB: user.DOB.toDateString(),
-      AddressFirst: user.AddressFirst,
-      AddressSecond: user.AddressSecond,
-      AddressThird: user.AddressThird,
-      PostalCode: user.PostalCode,
-      Email: user.Email,
-    };
-
-    return protoUser;
   }
 
   async removeUser(FindOneUserDto: FindOneUserDto) {
-    const user = await this.usersService.remove({
+    return this.usersService.remove({
       UserID: FindOneUserDto.UserID,
     });
-
-    const protoUser: ProtoUser = {
-      UserID: user.UserID,
-      Username: user.Username,
-      FirstName: user.FirstName,
-      LastName: user.LastName,
-      Role: user.Role,
-      DOB: user.DOB.toDateString(),
-      AddressFirst: user.AddressFirst,
-      AddressSecond: user.AddressSecond,
-      AddressThird: user.AddressThird,
-      PostalCode: user.PostalCode,
-      Email: user.Email,
-    };
-
-    return protoUser;
   }
 
   async login(LoginRequest: LoginRequest): Promise<LoginResponse> {
