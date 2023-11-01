@@ -44,18 +44,21 @@ export const AuthContext = createContext({
 
 const AuthContextProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [userID, setUserID] = useState(null);
 
   const navigate = useNavigate();
   const location = useLocation();
 
   const token = localStorage.getItem("token");
+  const storedUserID = localStorage.getItem("userid");
 
   useEffect(() => {
     if (!token) return;
 
     setIsAuthenticated(true);
+    setUserID(storedUserID);
     navigate(location.pathname);
-  }, []);
+  }, [token]);
 
   useEffect(() => {
     if (!token) return;
@@ -68,17 +71,20 @@ const AuthContextProvider = ({ children }) => {
     localStorage.setItem("token", token);
     localStorage.setItem("userid", userid);
     setIsAuthenticated(true);
+    setUserID(userid);
     navigate("/dashboard");
   };
 
   const logout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("userid");
     setIsAuthenticated(false);
+    setUserID(null);
     navigate("/auth/login");
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
+    <AuthContext.Provider value={{ isAuthenticated, userID, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

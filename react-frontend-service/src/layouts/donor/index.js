@@ -47,8 +47,6 @@ function DonorForm() {
       } catch (error) {
         console.error("Error converting image to Uint8Array:", error);
       }
-    } else {
-      console.error("No image selected.");
     }
   };
 
@@ -113,7 +111,7 @@ function DonorForm() {
               />
             </div>
           ) : (
-            <p>No image selected.</p>
+            <p style={{ color: "red" }}>No image selected.</p>
           )}
           <Grid item xs={12} style={{ display: "flex", justifyContent: "flex-end", margin: "20px 20px 20px 0" }}>
             <MDButton

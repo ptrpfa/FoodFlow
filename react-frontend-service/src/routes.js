@@ -37,18 +37,13 @@ Coded by www.creative-tim.com
 
 // Material Dashboard 2 React layouts
 import Dashboard from "layouts/dashboard";
-// import Tables from "layouts/tables";
 import Listings from "layouts/listings";
 import DetailedListing from "layouts/detailed-listing";
 
-
 import Notifications from "layouts/notifications";
-import Profile from "layouts/profile";
 import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up";
-
 import UserProfile from "layouts/user-profile";
-import UserManagement from "layouts/user-management";
 
 import Login from "auth/login";
 import Register from "auth/register";
@@ -116,14 +111,6 @@ const routes = [
   },
   {
     type: "collapse",
-    name: "Profile",
-    key: "profile",
-    icon: <Icon fontSize="small">person</Icon>,
-    route: "/profile",
-    component: <Profile />,
-  },
-  {
-    type: "collapse",
     name: "Sign In",
     key: "sign-in",
     icon: <Icon fontSize="small">login</Icon>,
@@ -137,14 +124,6 @@ const routes = [
     icon: <Icon fontSize="small">person</Icon>,
     route: "/user-profile",
     component: <UserProfile />,
-  },
-  {
-    type: "examples",
-    name: "User Management",
-    key: "user-management",
-    icon: <Icon fontSize="small">list</Icon>,
-    route: "/user-management",
-    component: <UserManagement />,
   },
   {
     type: "collapse",
