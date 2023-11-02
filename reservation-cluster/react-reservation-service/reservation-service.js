@@ -19,26 +19,21 @@ producer.on("error", (error) => {
   console.error("Kafka producer error:", error);
 });
 //create Reservation Request
-app.post("/reservation", (req, res) => {
-  console.log("hello world lionel");
-  const userId = 123;
-  const itemId = 123;
+app.post("/reservation/create", (req, res) => {
+  console.log("hello Delete Function");
+  const UserID = 123;
+  const ListingID = 6;
 
-  // Create unique reservation ID by combining UserID and Datetime
-  const reservationId = generateReservationId(userId);
-  const datetime = new Date();
-  const status = "pending"; // Set the initial status to 'pending'
-  const remarks = req.body.remarks || "";
+  const Datetime = new Date();
+  const Remarks = req.body.remarks || "";
 
   // Produce a reservation event to Kafka with all the necessary data
   const reservationData = {
     action: "create",
-    reservationId,
-    userId,
-    itemId,
-    datetime,
-    remarks,
-    status,
+    UserID,
+    ListingID,
+    Datetime,
+    Remarks,
   };
 
   // Produce to the reservation-topic
@@ -102,11 +97,9 @@ app.post("/reservation", (req, res) => {
   }
 });
 
-// Function to generate a unique ReservationID
-function generateReservationId(userId) {
-  const timestamp = Date.now();
-  return `${userId}-${timestamp}`;
-}
+app.delete("/reservation/delete", (req,res) =>{
+
+});
 
 app.listen(port, () => {
   console.log(`Reservation Microservice listening at http://localhost:${port}`);
