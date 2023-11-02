@@ -6,7 +6,6 @@ import Card from "@mui/material/Card";
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
 import MDButton from "components/MDButton";
-import MDSnackbar from "components/MDSnackbar";
 
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
@@ -61,39 +60,28 @@ function DonorForm() {
   return (
     <div>
       <Card>
-        <MDBox
-          mx={2}
-          mt={-3}
-          py={3}
-          px={2}
-          variant="gradient"
-          bgColor="info"
-          borderRadius="lg"
-          coloredShadow="info"
-        >
+        <MDBox mx={2} mt={-3} py={3} px={2} variant="gradient" bgColor="info" borderRadius="lg" coloredShadow="info">
           <MDTypography variant="h6" color="white">
             Photo of Food item
           </MDTypography>
         </MDBox>
         <MDBox pt={3} ml={2}>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={handleImageChange}
-            style={{ display: "none" }}
-            ref={inputRef}
-          />
-          <MDButton
-            variant="gradient"
-            color="info"
-            style={{ marginRight: "10px" }}
-            onClick={() => inputRef.current.click()}
-          >
-            Choose Image
-          </MDButton>          
-          <MDButton variant="gradient" color="info" onClick={handleImageUpload}>
-            Upload Image
-          </MDButton>
+          <input type="file" accept="image/*" onChange={handleImageChange} style={{ display: "none" }} ref={inputRef} />
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <MDButton
+              variant="gradient"
+              color="info"
+              style={{ marginRight: "10px" }}
+              onClick={() => inputRef.current.click()}
+            >
+              Choose Image
+            </MDButton>
+            <MDButton variant="gradient" color="info" onClick={handleImageUpload}>
+              Upload Image
+            </MDButton>
+          </div>
+        </MDBox>
+        <MDBox pt={3} ml={2} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           {uploadResponse && (
             <div>
               <p style={{ color: uploadResponse.valid ? "green" : "red" }}>
@@ -104,26 +92,22 @@ function DonorForm() {
           {selectedImage ? (
             <div>
               <p>Selected Image:</p>
-              <img
-                src={URL.createObjectURL(selectedImage)}
-                alt="Selected Image"
-                style={{ maxWidth: "100%", maxHeight: "200px" }}
-              />
+              <img src={URL.createObjectURL(selectedImage)} alt="Selected Image" style={{ maxWidth: "100%", maxHeight: "200px" }} />
             </div>
           ) : (
             <p style={{ color: "red" }}>No image selected.</p>
           )}
-          <Grid item xs={12} style={{ display: "flex", justifyContent: "flex-end", margin: "20px 20px 20px 0" }}>
-            <MDButton
-              variant="gradient"
-              color="info"
-              disabled={!uploadResponse || !uploadResponse.valid}
-              route="/next-page" // TO ROUTE TO PETER'S FEDERATED LEARNING
-            >
-              Next
-            </MDButton>
-          </Grid>
         </MDBox>
+        <Grid item xs={12} style={{ display: "flex", justifyContent: "flex-end", margin: "20px 20px 20px 0" }}>
+          <MDButton
+            variant="gradient"
+            color="info"
+            disabled={!uploadResponse || !uploadResponse.valid}
+            route="/next-page" // TO ROUTE TO PETER'S FEDERATED LEARNING
+          >
+            Next
+          </MDButton>
+        </Grid>
       </Card>
     </div>
   );

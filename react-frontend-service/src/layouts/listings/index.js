@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 
 import Grid from "@mui/material/Grid";
@@ -13,28 +13,42 @@ import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Footer from "examples/Footer";
 
+import { AuthContext } from "context";
+import AuthService from "../../services/auth-service";
 import ListingService from "services/listing-service"; 
 import AWSS3Service from "services/aws-s3-service";
-import reservationService from "services/reservation-service";
+// import reservationService from "services/reservation-service";
 
 function FoodListingsTable() {
-  const [infoSB, setInfoSB] = useState(false);
+  const authContext = useContext(AuthContext);
   const [listings, setListings] = useState([]);
+  const [message, setMessage] = useState("");
+  const [user, setUser] = useState({
+    role: "",
+  });
 
-  const openInfoSB = () => setInfoSB(true);
-  const closeInfoSB = () => setInfoSB(false);
+  const getUserData = async (UserID) => {
+    try {
+      const response = await AuthService.getProfile({ UserID: UserID });
 
-  const renderInfoSB = (
-    <MDSnackbar
-      icon="info"
-      title="Ni mama hen mei"
-      content="This will be linked to Ryan's view listing details"
-      dateTime="5 seconds ago"
-      open={infoSB}
-      onClose={closeInfoSB}
-      close={closeInfoSB}
-    />
-  );
+      if (response) {;
+        const role = response.role;
+        
+        setUser((prevUser) => ({
+          ...prevUser,
+          role,
+        }));
+      } else {
+        console.error("User data not found.");
+      }
+    } catch (error) {
+      console.error("An error occurred while fetching user data:", error);
+    }
+  };
+
+  useEffect(() => {
+    getUserData(authContext.userID);
+  }, []);
 
   useEffect(() => {
     const fetchImageForListing = async (listing) => {
@@ -43,20 +57,32 @@ function FoodListingsTable() {
       const imageUrl = URL.createObjectURL(imageBlob);
       return { ...listing, image: imageUrl };
     };
-  
-    ListingService.getAllListing()
-      .then(async (allListings) => {
-        const listingsWithImages = await Promise.all(
-          allListings.map(fetchImageForListing)
-        );
-        setListings(listingsWithImages);
-      })
-      .catch((error) => {
-        console.error("Error fetching listings:", error);
-      });
 
-
-  }, []);
+    if (user.role === "patron") {
+      ListingService.getAvailableListings(authContext.userID)
+        .then(async (allListings) => {
+          const listingsWithImages = await Promise.all(
+            allListings.map(fetchImageForListing)
+          );
+          setListings(listingsWithImages);
+        })
+        .catch((error) => {
+          console.error("Error fetching listings:", error);
+        });
+    } 
+    else if (user.role === "donor") {
+      ListingService.getAvailableListingsExcludeUser(authContext.userID)
+        .then(async (allListings) => {
+          const listingsWithImages = await Promise.all(
+            allListings.map(fetchImageForListing)
+          );
+          setListings(listingsWithImages);
+        })
+        .catch((error) => {
+          console.error("Error fetching listings for donors:", error);
+        });
+    }
+  }, [user.role, authContext.userID]);
 
   const convertUint8ArrayToBlob = (uint8Array) => {
     return new Blob([uint8Array], { type: 'image/jpeg' });
@@ -67,18 +93,16 @@ function FoodListingsTable() {
     groupedListings.push(listings.slice(i, i + 3));
   }
 
-  const [message, setMessage] = useState("");
   const handleReservation = () => {
-    reservationService.makeReservation("This is a test reservation.")
-      .then(data => {
-        setMessage(data.message);
-      })
-      .catch(error => {
-        console.error("Reservation failed:", error);
-        setMessage("Reservation failed");
-      });
+    // reservationService.makeReservation("This is a test reservation.")
+    //   .then(data => {
+    //     setMessage(data.message);
+    //   })
+    //   .catch(error => {
+    //     console.error("Reservation failed:", error);
+    //     setMessage("Reservation failed");
+    //   });
   }
-
 
   return (
     <div>
@@ -105,26 +129,25 @@ function FoodListingsTable() {
                   <Card style={{ margin: "8px" }}>
                     <MDBox p={2}>
                       <MDTypography variant="h6">{listing.name}</MDTypography>
+                      <div style={{ display: 'flex', justifyContent: 'center' }}>
                       <img 
                         src={listing.image}
-                        style={{ maxWidth: "50%", maxHeight: "50%" }}
+                        style={{ maxWidth: "50%", maxHeight: "50%", }}
                         alt={listing.name}
                       />
+                      </div>
                       <MDTypography>{listing.description}</MDTypography>
                       <MDButton
                         variant="gradient"
                         color="info"
-                        onClick={openInfoSB}
                         fullWidth
                       >
                         View Details
                       </MDButton>
-                      {renderInfoSB}
-
-                      <!--Reservation Details-->
+                      {}
                       <MDButton
                         variant="gradient"
-                        color="info"
+                        color="warning"
                         onClick={handleReservation}
                         fullWidth
                       >
