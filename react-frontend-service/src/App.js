@@ -235,7 +235,7 @@ export default function App() {
                 <Sidenav
                   color={sidenavColor}
                   brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
-                  brandName="Material Dashboard 2"
+                  brandName="Food Flow"
                   routes={routes}
                   onMouseEnter={handleOnMouseEnter}
                   onMouseLeave={handleOnMouseLeave}
@@ -250,7 +250,7 @@ export default function App() {
               <Route path="register" element={<Navigate to="/auth/register" />} />
               <Route path="forgot-password" element={<Navigate to="/auth/forgot-password" />} />
               {getRoutes(routes)}
-              <Route path="*" element={<Navigate to="/dashboard" />} />
+              <Route path="*" element={<Navigate to="/listings" />} />
             </Routes>
           </ThemeProvider>
         </CacheProvider>
@@ -262,7 +262,7 @@ export default function App() {
               <Sidenav
                 color={sidenavColor}
                 brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
-                brandName="Material Dashboard 2"
+                brandName="Food Flow"
                 routes={routes}
                 onMouseEnter={handleOnMouseEnter}
                 onMouseLeave={handleOnMouseLeave}
@@ -289,7 +289,7 @@ export default function App() {
               key="user-profile"
             />
             {getRoutes(routes)}
-            <Route path="*" element={<Navigate to="/dashboard" />} />
+            <Route path="*" element={<Navigate to="/user-profile" />} />
           </Routes>
         </ThemeProvider>
       )}

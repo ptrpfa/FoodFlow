@@ -112,7 +112,7 @@ function DefaultNavbar({ transparent, light, action }) {
           pl={{ xs: 0, lg: 1 }}
         >
           <MDTypography variant="button" fontWeight="bold" color={light ? "white" : "dark"}>
-            Food-Flow
+            Food Flow
           </MDTypography>
         </MDBox>
         {authContext.isAuthenticated && (
@@ -154,46 +154,6 @@ function DefaultNavbar({ transparent, light, action }) {
             />
           </MDBox>
         )}
-        {action &&
-          (action.type === "internal" ? (
-            <MDBox display={{ xs: "none", lg: "inline-block" }}>
-              <MDButton
-                component={Link}
-                to={action.route}
-                variant="gradient"
-                color={action.color ? action.color : "info"}
-                size="small"
-              >
-                {action.label}
-              </MDButton>
-            </MDBox>
-          ) : (
-            <MDBox display={{ xs: "none", lg: "inline-block" }}>
-              <MDButton
-                component="a"
-                href={action.route}
-                target="_blank"
-                rel="noreferrer"
-                variant="gradient"
-                color={action.color ? action.color : "info"}
-                size="small"
-                sx={{ mt: -0.3 }}
-              >
-                {action.label}
-              </MDButton>
-            </MDBox>
-          ))}
-        <MDBox
-          display={{ xs: "inline-block", lg: "none" }}
-          lineHeight={0}
-          py={1.5}
-          pl={1.5}
-          color="inherit"
-          sx={{ cursor: "pointer" }}
-          onClick={openMobileNavbar}
-        >
-          <Icon fontSize="default">{mobileNavbar ? "close" : "menu"}</Icon>
-        </MDBox>
       </MDBox>
       {mobileView && <DefaultNavbarMobile open={mobileNavbar} close={closeMobileNavbar} />}
     </Container>

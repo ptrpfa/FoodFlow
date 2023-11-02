@@ -42,7 +42,7 @@ function FoodListingsTable({ onUserUpdate }) {
           lastName,
           role,
         }));
-        
+
         onUserUpdate({ firstName, lastName });
       } else {
         console.error("User data not found.");
@@ -64,30 +64,16 @@ function FoodListingsTable({ onUserUpdate }) {
       return { ...listing, image: imageUrl };
     };
 
-    if (user.role === "patron") {
-      ListingService.getAvailableListings(authContext.userID)
-        .then(async (allListings) => {
-          const listingsWithImages = await Promise.all(
-            allListings.map(fetchImageForListing)
-          );
-          setListings(listingsWithImages);
-        })
-        .catch((error) => {
-          console.error("Error fetching listings:", error);
-        });
-    } 
-    else if (user.role === "donor") {
-      ListingService.getAvailableListingsExcludeUser(authContext.userID)
-        .then(async (allListings) => {
-          const listingsWithImages = await Promise.all(
-            allListings.map(fetchImageForListing)
-          );
-          setListings(listingsWithImages);
-        })
-        .catch((error) => {
-          console.error("Error fetching listings for donors:", error);
-        });
-    }
+    ListingService.getReservedListings({ Userid: authContext.userID })
+      .then(async (allListings) => {
+        const listingsWithImages = await Promise.all(
+          allListings.map(fetchImageForListing)
+        );
+        setListings(listingsWithImages);
+      })
+      .catch((error) => {
+        console.error("Error fetching listings:", error);
+      });
   }, [user.role, authContext.userID]);
 
   const convertUint8ArrayToBlob = (uint8Array) => {
@@ -124,7 +110,7 @@ function FoodListingsTable({ onUserUpdate }) {
           coloredShadow="info"
         >
           <MDTypography variant="h6" color="white">
-            Available Donated Food
+            Reserved Donated Food
           </MDTypography>
         </MDBox>
         <MDBox pt={3}>
@@ -132,20 +118,20 @@ function FoodListingsTable({ onUserUpdate }) {
             <Grid container spacing={2} key={rowIndex}>
               {rowListings.map((listing, index) => (
                 <Grid item xs={4} key={index}>
-                    <Card style={{ margin: "8px"}}>
-                      <MDBox p={2}>
-                        <MDTypography variant="h6">{listing.name}</MDTypography>
-                        <div style={{ display: 'flex', justifyContent: 'center', margin: "0.5rem", height:"12rem"}}>
-                          <img 
-                            src={listing.image}
-                            style={{ maxWidth: "70%", maxHeight: "70%", margin:"auto"}}
-                            alt={listing.name}
-                          />
-                        </div>
-                        <div style={{height:"3rem", }}>
+                  <Card style={{ margin: "8px" }}>
+                    <MDBox p={2}>
+                      <MDTypography variant="h6">{listing.name}</MDTypography>
+                      <div style={{ display: 'flex', justifyContent: 'center', margin: "0.5rem", height:"12rem"}}>
+                      <img 
+                        src={listing.image}
+                        style={{ maxWidth: "70%", maxHeight: "70%", margin:"auto"}}
+                        alt={listing.name}
+                      />
+                      </div>
+                      <div style={{height:"3rem", }}>
                           <MDTypography style={{ fontStyle: 'italic', fontSize:"1rem" }}>{listing.description}</MDTypography>
-                        </div>
-                        <MDButton
+                      </div>
+                      <MDButton
                           variant="gradient"
                           color="info"
                           component={Link}
@@ -155,17 +141,17 @@ function FoodListingsTable({ onUserUpdate }) {
                         >
                           View Details
                         </MDButton>
-                        {}
-                        <MDButton
-                          variant="gradient"
-                          color="warning"
-                          onClick={handleReservation}
-                          fullWidth
-                        >
-                          Reserve
-                        </MDButton>
-                      </MDBox>
-                    </Card>
+                      {}
+                      <MDButton
+                        variant="gradient"
+                        color="error"
+                        onClick={handleReservation}
+                        fullWidth
+                      >
+                        Cancel
+                      </MDButton>
+                    </MDBox>
+                  </Card>
                 </Grid>
               ))}
             </Grid>

@@ -43,12 +43,16 @@ function BasicLayout({ image, children }) {
           color: "dark",
         }}
       />
-      <MDBox sx={{ height: "auto", minHeight: "100vh" }} display="flex" flexDirection="column">
+      <MDBox
+        sx={{ height: "auto", minHeight: "100vh" }}
+        display="flex"
+        flexDirection="column"
+        minHeight="100vh"
+      >
         <MDBox
           position="absolute"
           width="100%"
           minHeight="100vh"
-          paddingTop="3em"
           sx={{
             backgroundImage: ({ functions: { linearGradient, rgba }, palette: { gradients } }) =>
               image &&
@@ -59,9 +63,6 @@ function BasicLayout({ image, children }) {
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
           }}
         >
           <MDBox
@@ -71,8 +72,7 @@ function BasicLayout({ image, children }) {
             flexDirection="column"
             width="100%"
             justifyContent="center"
-            paddingTop="7em"
-            paddingBottom="5em"
+            paddingTop="4em"
           >
             <MDBox paddingBottom="3rem" sx={{ textAlign: "center" }}>
               {pathname === "/auth/login" && (
@@ -82,25 +82,14 @@ function BasicLayout({ image, children }) {
                     flexDirection="column"
                     justifyContent="center"
                     alignItems="center"
-                    padding="1.5rem"
+                    padding="5rem"
                     width="80%"
                   >
                     <Typography variant="h3" style={{ color: "white" }}>
-                      Log in to Material Dashboard Laravel Live Preview
+                      Welcome to Food Flow
                     </Typography>
-                    <Typography variant="body2" style={{ color: "white" }} margin="0.5rem 0">
-                      Log in to see how you can go from frontend to fullstack in an instant with an
-                      API-based Laravel backend
-                    </Typography>
-                    <MDBox
-                      display="flex"
-                      flexDirection="column"
-                      justifyContent="center"
-                      alignItems="center"
-                      marginBottom="0.5rem"
-                    >
-                      <Typography variant="body2" fontWeight="700" style={{ color: "white" }}>
-                        You can log in with
+                    <Typography variant="body2" fontWeight="700" style={{ color: "white" }}>
+                        You can log in with:
                       </Typography>
                       <List dense={true}>
                         <ListItem>
@@ -112,20 +101,14 @@ function BasicLayout({ image, children }) {
                                 fontWeight="400"
                                 style={{ color: "white" }}
                               >
-                                Username{" "}
                                 <Typography variant="span" fontWeight="700">
-                                  admin@jsonapi.com
-                                </Typography>{" "}
-                                with password{" "}
-                                <Typography variant="span" fontWeight="700">
-                                  secret
+                                  exampleUser, password123
                                 </Typography>
                               </Typography>
                             }
                           />
                         </ListItem>
                       </List>
-                    </MDBox>
                   </MDBox>
                 </MDBox>
               )}
