@@ -1,36 +1,30 @@
-// const { Consumer, KafkaClient } = require('kafka-node');
-const kafka = require('kafka-node')
-const sequelize = require('./db');
-const client = new kafka.KafkaClient({kafkaHost: 'localhost:29092'})
-
-// test for connection
-console.log('Reservation Service is starting...');
-
+const { Reservation } = require('./db'); // No changes required here if db.js is in the same directory
+const kafka = require('kafka-node');
+const client = new kafka.KafkaClient({ kafkaHost: "kafka-service-1:29092" });
 const consumer = new kafka.Consumer(client, [{ topic: 'reservation-topic' }], { groupId: 'reservation-group' });
 
 consumer.on('message', (message) => {
+  console.log("Kafka Consumer is ready");
   const payload = JSON.parse(message.value);
 
   // Process the Kafka message and update the database
   sequelize.sync().then(() => {
     if (payload.action === 'create') {
       // Insert a new reservation into the database
-      sequelize.models.Reservation.create({
+      Reservation.create({
         userId: payload.userId,
         itemId: payload.itemId, 
         reservationId: payload.reservationId,
         datetime: payload.datetime,
         status: payload.status,
       });
-    } else if (payload.type === 'update') {
-      // Update an existing reservation in the database
-      sequelize.models.Reservation.update(
+    } else if (payload.action === 'update') {
+      Reservation.update(
         { status: payload.status }, // Update the status or other fields as needed
         { where: { reservationId: payload.reservationId } }
       );
-    } else if (payload.type === 'cancel') {
-      // Delete a reservation from the database
-      sequelize.models.Reservation.destroy({ where: { reservationId: payload.reservationId } });
+    } else if (payload.action === 'cancel') {
+      Reservation.destroy({ where: { reservationId: payload.reservationId } });
     }
   });
 });

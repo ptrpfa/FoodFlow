@@ -18,7 +18,7 @@ producer.on("ready", () => {
 producer.on("error", (error) => {
   console.error("Kafka producer error:", error);
 });
-
+//create Reservation Request
 app.post("/reservation", (req, res) => {
   console.log("hello world lionel");
   const userId = 123;
@@ -101,11 +101,13 @@ app.post("/reservation", (req, res) => {
     });
   }
 });
+
 // Function to generate a unique ReservationID
 function generateReservationId(userId) {
   const timestamp = Date.now();
-  return '${userId}-${timestamp}';
+  return `${userId}-${timestamp}`;
 }
+
 app.listen(port, () => {
   console.log(`Reservation Microservice listening at http://localhost:${port}`);
 });
