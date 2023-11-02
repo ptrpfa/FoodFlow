@@ -15,6 +15,7 @@ import Footer from "examples/Footer";
 
 import ListingService from "services/listing-service"; 
 import AWSS3Service from "services/aws-s3-service";
+import reservationService from "services/reservation-service";
 
 function FoodListingsTable() {
   const [infoSB, setInfoSB] = useState(false);
@@ -53,6 +54,8 @@ function FoodListingsTable() {
       .catch((error) => {
         console.error("Error fetching listings:", error);
       });
+
+
   }, []);
 
   const convertUint8ArrayToBlob = (uint8Array) => {
@@ -63,6 +66,19 @@ function FoodListingsTable() {
   for (let i = 0; i < listings.length; i += 3) {
     groupedListings.push(listings.slice(i, i + 3));
   }
+
+  const [message, setMessage] = useState("");
+  const handleReservation = () => {
+    reservationService.makeReservation("This is a test reservation.")
+      .then(data => {
+        setMessage(data.message);
+      })
+      .catch(error => {
+        console.error("Reservation failed:", error);
+        setMessage("Reservation failed");
+      });
+  }
+
 
   return (
     <div>
@@ -104,6 +120,16 @@ function FoodListingsTable() {
                         View Details
                       </MDButton>
                       {renderInfoSB}
+
+                      <!--Reservation Details-->
+                      <MDButton
+                        variant="gradient"
+                        color="info"
+                        onClick={handleReservation}
+                        fullWidth
+                      >
+                        Reserve
+                      </MDButton>
                     </MDBox>
                   </Card>
                 </Grid>
