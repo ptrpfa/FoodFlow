@@ -1,5 +1,5 @@
-const { Sequelize } = require('sequelize');
-const ReservationModel = require('./reservation'); // Update the relative path to your reservation model
+const { Sequelize, DataTypes } = require('sequelize');
+const ReservationModel = require('./reservation'); 
 
 const sequelize = new Sequelize('foodflow', 'root', 'sikeloong', {
   host: '34.124.232.171',
@@ -7,13 +7,20 @@ const sequelize = new Sequelize('foodflow', 'root', 'sikeloong', {
   dialect: 'mysql',
 });
 
-// Initialize the model
-const Reservation = ReservationModel(sequelize, Sequelize);
-
+const Reservation = ReservationModel(sequelize, DataTypes);
+//Validate Connection
+sequelize
+  .authenticate()
+  .then(() => {
+    console.log('Database connection has been established successfully.');
+  })
+  .catch((err) => {
+    console.error('Unable to connect to the database:', err);
+  });
 
 sequelize.sync();
 
 module.exports = {
-  sequelize, // the sequelize instance
-  Reservation // the model
+  sequelize,
+  Reservation
 };
