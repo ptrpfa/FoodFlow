@@ -41,7 +41,6 @@ export interface Listings {
 }
 
 export interface CreateListingDto {
-  ListingID: number;
   UserID: number;
   Name: string;
   Datetime: string;

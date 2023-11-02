@@ -16,6 +16,7 @@ const listing_client = new ListingServiceClient(
 class ListingService {
   createListing = async (data) => {
     let message = new CreateListingDto();
+    message.setUserid(data.UserID);
     message.setName(data.Name);
     message.setDatetime(data.Datetime);
     message.setExpiryDate(data.ExpiryDate);
@@ -271,6 +272,8 @@ class ListingService {
       // gRPC
       listing_client.removeListing(message, null, (err, response) => {
         resolve({
+          listingID: response.getListingid(),
+          userID: response.getUserid(),
           name: response.getName(),
           datetime: response.getDatetime(),
           expiryDate: response.getExpirydate(),
@@ -319,6 +322,8 @@ class ListingService {
       // gRPC
       listing_client.updateListing(message, null, (err, response) => {
         resolve({
+          listingID: response.getListingid(),
+          userID: response.getUserid(),
           name: response.getName(),
           datetime: response.getDatetime(),
           expiryDate: response.getExpirydate(),

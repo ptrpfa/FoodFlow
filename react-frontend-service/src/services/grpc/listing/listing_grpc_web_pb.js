@@ -10,14 +10,17 @@
 // 	protoc              v3.15.8
 // source: listing.proto
 
+
 /* eslint-disable */
 // @ts-nocheck
 
+
+
 const grpc = {};
-grpc.web = require("grpc-web");
+grpc.web = require('grpc-web');
 
 const proto = {};
-proto.listing = require("./listing_pb.js");
+proto.listing = require('./listing_pb.js');
 
 /**
  * @param {string} hostname
@@ -27,9 +30,10 @@ proto.listing = require("./listing_pb.js");
  * @struct
  * @final
  */
-proto.listing.ListingServiceClient = function (hostname, credentials, options) {
+proto.listing.ListingServiceClient =
+    function(hostname, credentials, options) {
   if (!options) options = {};
-  options.format = "text";
+  options.format = 'text';
 
   /**
    * @private @const {!grpc.web.GrpcWebClientBase} The client
@@ -39,8 +43,10 @@ proto.listing.ListingServiceClient = function (hostname, credentials, options) {
   /**
    * @private @const {string} The hostname
    */
-  this.hostname_ = hostname.replace(/\/+$/, "");
+  this.hostname_ = hostname.replace(/\/+$/, '');
+
 };
+
 
 /**
  * @param {string} hostname
@@ -50,13 +56,10 @@ proto.listing.ListingServiceClient = function (hostname, credentials, options) {
  * @struct
  * @final
  */
-proto.listing.ListingServicePromiseClient = function (
-  hostname,
-  credentials,
-  options
-) {
+proto.listing.ListingServicePromiseClient =
+    function(hostname, credentials, options) {
   if (!options) options = {};
-  options.format = "text";
+  options.format = 'text';
 
   /**
    * @private @const {!grpc.web.GrpcWebClientBase} The client
@@ -66,8 +69,10 @@ proto.listing.ListingServicePromiseClient = function (
   /**
    * @private @const {string} The hostname
    */
-  this.hostname_ = hostname.replace(/\/+$/, "");
+  this.hostname_ = hostname.replace(/\/+$/, '');
+
 };
+
 
 /**
  * @const
@@ -75,21 +80,21 @@ proto.listing.ListingServicePromiseClient = function (
  *   !proto.listing.CreateListingDto,
  *   !proto.listing.ProtoListing>}
  */
-const methodDescriptor_ListingService_CreateListing =
-  new grpc.web.MethodDescriptor(
-    "/listing.ListingService/CreateListing",
-    grpc.web.MethodType.UNARY,
-    proto.listing.CreateListingDto,
-    proto.listing.ProtoListing,
-    /**
-     * @param {!proto.listing.CreateListingDto} request
-     * @return {!Uint8Array}
-     */
-    function (request) {
-      return request.serializeBinary();
-    },
-    proto.listing.ProtoListing.deserializeBinary
-  );
+const methodDescriptor_ListingService_CreateListing = new grpc.web.MethodDescriptor(
+  '/listing.ListingService/CreateListing',
+  grpc.web.MethodType.UNARY,
+  proto.listing.CreateListingDto,
+  proto.listing.ProtoListing,
+  /**
+   * @param {!proto.listing.CreateListingDto} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.listing.ProtoListing.deserializeBinary
+);
+
 
 /**
  * @param {!proto.listing.CreateListingDto} request The
@@ -101,19 +106,16 @@ const methodDescriptor_ListingService_CreateListing =
  * @return {!grpc.web.ClientReadableStream<!proto.listing.ProtoListing>|undefined}
  *     The XHR Node Readable Stream
  */
-proto.listing.ListingServiceClient.prototype.createListing = function (
-  request,
-  metadata,
-  callback
-) {
-  return this.client_.rpcCall(
-    this.hostname_ + "/listing.ListingService/CreateListing",
-    request,
-    metadata || {},
-    methodDescriptor_ListingService_CreateListing,
-    callback
-  );
+proto.listing.ListingServiceClient.prototype.createListing =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/listing.ListingService/CreateListing',
+      request,
+      metadata || {},
+      methodDescriptor_ListingService_CreateListing,
+      callback);
 };
+
 
 /**
  * @param {!proto.listing.CreateListingDto} request The
@@ -123,17 +125,15 @@ proto.listing.ListingServiceClient.prototype.createListing = function (
  * @return {!Promise<!proto.listing.ProtoListing>}
  *     Promise that resolves to the response
  */
-proto.listing.ListingServicePromiseClient.prototype.createListing = function (
-  request,
-  metadata
-) {
-  return this.client_.unaryCall(
-    this.hostname_ + "/listing.ListingService/CreateListing",
-    request,
-    metadata || {},
-    methodDescriptor_ListingService_CreateListing
-  );
+proto.listing.ListingServicePromiseClient.prototype.createListing =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/listing.ListingService/CreateListing',
+      request,
+      metadata || {},
+      methodDescriptor_ListingService_CreateListing);
 };
+
 
 /**
  * @const
@@ -141,21 +141,21 @@ proto.listing.ListingServicePromiseClient.prototype.createListing = function (
  *   !proto.listing.Empty,
  *   !proto.listing.Listings>}
  */
-const methodDescriptor_ListingService_FindAllListings =
-  new grpc.web.MethodDescriptor(
-    "/listing.ListingService/FindAllListings",
-    grpc.web.MethodType.UNARY,
-    proto.listing.Empty,
-    proto.listing.Listings,
-    /**
-     * @param {!proto.listing.Empty} request
-     * @return {!Uint8Array}
-     */
-    function (request) {
-      return request.serializeBinary();
-    },
-    proto.listing.Listings.deserializeBinary
-  );
+const methodDescriptor_ListingService_FindAllListings = new grpc.web.MethodDescriptor(
+  '/listing.ListingService/FindAllListings',
+  grpc.web.MethodType.UNARY,
+  proto.listing.Empty,
+  proto.listing.Listings,
+  /**
+   * @param {!proto.listing.Empty} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.listing.Listings.deserializeBinary
+);
+
 
 /**
  * @param {!proto.listing.Empty} request The
@@ -167,19 +167,16 @@ const methodDescriptor_ListingService_FindAllListings =
  * @return {!grpc.web.ClientReadableStream<!proto.listing.Listings>|undefined}
  *     The XHR Node Readable Stream
  */
-proto.listing.ListingServiceClient.prototype.findAllListings = function (
-  request,
-  metadata,
-  callback
-) {
-  return this.client_.rpcCall(
-    this.hostname_ + "/listing.ListingService/FindAllListings",
-    request,
-    metadata || {},
-    methodDescriptor_ListingService_FindAllListings,
-    callback
-  );
+proto.listing.ListingServiceClient.prototype.findAllListings =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/listing.ListingService/FindAllListings',
+      request,
+      metadata || {},
+      methodDescriptor_ListingService_FindAllListings,
+      callback);
 };
+
 
 /**
  * @param {!proto.listing.Empty} request The
@@ -189,17 +186,15 @@ proto.listing.ListingServiceClient.prototype.findAllListings = function (
  * @return {!Promise<!proto.listing.Listings>}
  *     Promise that resolves to the response
  */
-proto.listing.ListingServicePromiseClient.prototype.findAllListings = function (
-  request,
-  metadata
-) {
-  return this.client_.unaryCall(
-    this.hostname_ + "/listing.ListingService/FindAllListings",
-    request,
-    metadata || {},
-    methodDescriptor_ListingService_FindAllListings
-  );
+proto.listing.ListingServicePromiseClient.prototype.findAllListings =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/listing.ListingService/FindAllListings',
+      request,
+      metadata || {},
+      methodDescriptor_ListingService_FindAllListings);
 };
+
 
 /**
  * @const
@@ -207,21 +202,21 @@ proto.listing.ListingServicePromiseClient.prototype.findAllListings = function (
  *   !proto.listing.UserDto,
  *   !proto.listing.Listings>}
  */
-const methodDescriptor_ListingService_FindAvailableListingsExcludeUser =
-  new grpc.web.MethodDescriptor(
-    "/listing.ListingService/FindAvailableListingsExcludeUser",
-    grpc.web.MethodType.UNARY,
-    proto.listing.UserDto,
-    proto.listing.Listings,
-    /**
-     * @param {!proto.listing.UserDto} request
-     * @return {!Uint8Array}
-     */
-    function (request) {
-      return request.serializeBinary();
-    },
-    proto.listing.Listings.deserializeBinary
-  );
+const methodDescriptor_ListingService_FindAvailableListingsExcludeUser = new grpc.web.MethodDescriptor(
+  '/listing.ListingService/FindAvailableListingsExcludeUser',
+  grpc.web.MethodType.UNARY,
+  proto.listing.UserDto,
+  proto.listing.Listings,
+  /**
+   * @param {!proto.listing.UserDto} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.listing.Listings.deserializeBinary
+);
+
 
 /**
  * @param {!proto.listing.UserDto} request The
@@ -234,16 +229,15 @@ const methodDescriptor_ListingService_FindAvailableListingsExcludeUser =
  *     The XHR Node Readable Stream
  */
 proto.listing.ListingServiceClient.prototype.findAvailableListingsExcludeUser =
-  function (request, metadata, callback) {
-    return this.client_.rpcCall(
-      this.hostname_ +
-        "/listing.ListingService/FindAvailableListingsExcludeUser",
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/listing.ListingService/FindAvailableListingsExcludeUser',
       request,
       metadata || {},
       methodDescriptor_ListingService_FindAvailableListingsExcludeUser,
-      callback
-    );
-  };
+      callback);
+};
+
 
 /**
  * @param {!proto.listing.UserDto} request The
@@ -254,15 +248,14 @@ proto.listing.ListingServiceClient.prototype.findAvailableListingsExcludeUser =
  *     Promise that resolves to the response
  */
 proto.listing.ListingServicePromiseClient.prototype.findAvailableListingsExcludeUser =
-  function (request, metadata) {
-    return this.client_.unaryCall(
-      this.hostname_ +
-        "/listing.ListingService/FindAvailableListingsExcludeUser",
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/listing.ListingService/FindAvailableListingsExcludeUser',
       request,
       metadata || {},
-      methodDescriptor_ListingService_FindAvailableListingsExcludeUser
-    );
-  };
+      methodDescriptor_ListingService_FindAvailableListingsExcludeUser);
+};
+
 
 /**
  * @const
@@ -270,21 +263,21 @@ proto.listing.ListingServicePromiseClient.prototype.findAvailableListingsExclude
  *   !proto.listing.UserDto,
  *   !proto.listing.Listings>}
  */
-const methodDescriptor_ListingService_FindReservedListings =
-  new grpc.web.MethodDescriptor(
-    "/listing.ListingService/FindReservedListings",
-    grpc.web.MethodType.UNARY,
-    proto.listing.UserDto,
-    proto.listing.Listings,
-    /**
-     * @param {!proto.listing.UserDto} request
-     * @return {!Uint8Array}
-     */
-    function (request) {
-      return request.serializeBinary();
-    },
-    proto.listing.Listings.deserializeBinary
-  );
+const methodDescriptor_ListingService_FindReservedListings = new grpc.web.MethodDescriptor(
+  '/listing.ListingService/FindReservedListings',
+  grpc.web.MethodType.UNARY,
+  proto.listing.UserDto,
+  proto.listing.Listings,
+  /**
+   * @param {!proto.listing.UserDto} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.listing.Listings.deserializeBinary
+);
+
 
 /**
  * @param {!proto.listing.UserDto} request The
@@ -296,19 +289,16 @@ const methodDescriptor_ListingService_FindReservedListings =
  * @return {!grpc.web.ClientReadableStream<!proto.listing.Listings>|undefined}
  *     The XHR Node Readable Stream
  */
-proto.listing.ListingServiceClient.prototype.findReservedListings = function (
-  request,
-  metadata,
-  callback
-) {
-  return this.client_.rpcCall(
-    this.hostname_ + "/listing.ListingService/FindReservedListings",
-    request,
-    metadata || {},
-    methodDescriptor_ListingService_FindReservedListings,
-    callback
-  );
+proto.listing.ListingServiceClient.prototype.findReservedListings =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/listing.ListingService/FindReservedListings',
+      request,
+      metadata || {},
+      methodDescriptor_ListingService_FindReservedListings,
+      callback);
 };
+
 
 /**
  * @param {!proto.listing.UserDto} request The
@@ -319,14 +309,14 @@ proto.listing.ListingServiceClient.prototype.findReservedListings = function (
  *     Promise that resolves to the response
  */
 proto.listing.ListingServicePromiseClient.prototype.findReservedListings =
-  function (request, metadata) {
-    return this.client_.unaryCall(
-      this.hostname_ + "/listing.ListingService/FindReservedListings",
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/listing.ListingService/FindReservedListings',
       request,
       metadata || {},
-      methodDescriptor_ListingService_FindReservedListings
-    );
-  };
+      methodDescriptor_ListingService_FindReservedListings);
+};
+
 
 /**
  * @const
@@ -334,21 +324,21 @@ proto.listing.ListingServicePromiseClient.prototype.findReservedListings =
  *   !proto.listing.UserDto,
  *   !proto.listing.Listings>}
  */
-const methodDescriptor_ListingService_FindCollectedListings =
-  new grpc.web.MethodDescriptor(
-    "/listing.ListingService/FindCollectedListings",
-    grpc.web.MethodType.UNARY,
-    proto.listing.UserDto,
-    proto.listing.Listings,
-    /**
-     * @param {!proto.listing.UserDto} request
-     * @return {!Uint8Array}
-     */
-    function (request) {
-      return request.serializeBinary();
-    },
-    proto.listing.Listings.deserializeBinary
-  );
+const methodDescriptor_ListingService_FindCollectedListings = new grpc.web.MethodDescriptor(
+  '/listing.ListingService/FindCollectedListings',
+  grpc.web.MethodType.UNARY,
+  proto.listing.UserDto,
+  proto.listing.Listings,
+  /**
+   * @param {!proto.listing.UserDto} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.listing.Listings.deserializeBinary
+);
+
 
 /**
  * @param {!proto.listing.UserDto} request The
@@ -360,19 +350,16 @@ const methodDescriptor_ListingService_FindCollectedListings =
  * @return {!grpc.web.ClientReadableStream<!proto.listing.Listings>|undefined}
  *     The XHR Node Readable Stream
  */
-proto.listing.ListingServiceClient.prototype.findCollectedListings = function (
-  request,
-  metadata,
-  callback
-) {
-  return this.client_.rpcCall(
-    this.hostname_ + "/listing.ListingService/FindCollectedListings",
-    request,
-    metadata || {},
-    methodDescriptor_ListingService_FindCollectedListings,
-    callback
-  );
+proto.listing.ListingServiceClient.prototype.findCollectedListings =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/listing.ListingService/FindCollectedListings',
+      request,
+      metadata || {},
+      methodDescriptor_ListingService_FindCollectedListings,
+      callback);
 };
+
 
 /**
  * @param {!proto.listing.UserDto} request The
@@ -383,14 +370,14 @@ proto.listing.ListingServiceClient.prototype.findCollectedListings = function (
  *     Promise that resolves to the response
  */
 proto.listing.ListingServicePromiseClient.prototype.findCollectedListings =
-  function (request, metadata) {
-    return this.client_.unaryCall(
-      this.hostname_ + "/listing.ListingService/FindCollectedListings",
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/listing.ListingService/FindCollectedListings',
       request,
       metadata || {},
-      methodDescriptor_ListingService_FindCollectedListings
-    );
-  };
+      methodDescriptor_ListingService_FindCollectedListings);
+};
+
 
 /**
  * @const
@@ -398,21 +385,21 @@ proto.listing.ListingServicePromiseClient.prototype.findCollectedListings =
  *   !proto.listing.UserDto,
  *   !proto.listing.Listings>}
  */
-const methodDescriptor_ListingService_FindAvailableListings =
-  new grpc.web.MethodDescriptor(
-    "/listing.ListingService/FindAvailableListings",
-    grpc.web.MethodType.UNARY,
-    proto.listing.UserDto,
-    proto.listing.Listings,
-    /**
-     * @param {!proto.listing.UserDto} request
-     * @return {!Uint8Array}
-     */
-    function (request) {
-      return request.serializeBinary();
-    },
-    proto.listing.Listings.deserializeBinary
-  );
+const methodDescriptor_ListingService_FindAvailableListings = new grpc.web.MethodDescriptor(
+  '/listing.ListingService/FindAvailableListings',
+  grpc.web.MethodType.UNARY,
+  proto.listing.UserDto,
+  proto.listing.Listings,
+  /**
+   * @param {!proto.listing.UserDto} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.listing.Listings.deserializeBinary
+);
+
 
 /**
  * @param {!proto.listing.UserDto} request The
@@ -424,19 +411,16 @@ const methodDescriptor_ListingService_FindAvailableListings =
  * @return {!grpc.web.ClientReadableStream<!proto.listing.Listings>|undefined}
  *     The XHR Node Readable Stream
  */
-proto.listing.ListingServiceClient.prototype.findAvailableListings = function (
-  request,
-  metadata,
-  callback
-) {
-  return this.client_.rpcCall(
-    this.hostname_ + "/listing.ListingService/FindAvailableListings",
-    request,
-    metadata || {},
-    methodDescriptor_ListingService_FindAvailableListings,
-    callback
-  );
+proto.listing.ListingServiceClient.prototype.findAvailableListings =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/listing.ListingService/FindAvailableListings',
+      request,
+      metadata || {},
+      methodDescriptor_ListingService_FindAvailableListings,
+      callback);
 };
+
 
 /**
  * @param {!proto.listing.UserDto} request The
@@ -447,14 +431,14 @@ proto.listing.ListingServiceClient.prototype.findAvailableListings = function (
  *     Promise that resolves to the response
  */
 proto.listing.ListingServicePromiseClient.prototype.findAvailableListings =
-  function (request, metadata) {
-    return this.client_.unaryCall(
-      this.hostname_ + "/listing.ListingService/FindAvailableListings",
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/listing.ListingService/FindAvailableListings',
       request,
       metadata || {},
-      methodDescriptor_ListingService_FindAvailableListings
-    );
-  };
+      methodDescriptor_ListingService_FindAvailableListings);
+};
+
 
 /**
  * @const
@@ -462,21 +446,21 @@ proto.listing.ListingServicePromiseClient.prototype.findAvailableListings =
  *   !proto.listing.FindOneListingDto,
  *   !proto.listing.ProtoListing>}
  */
-const methodDescriptor_ListingService_FindOneListing =
-  new grpc.web.MethodDescriptor(
-    "/listing.ListingService/FindOneListing",
-    grpc.web.MethodType.UNARY,
-    proto.listing.FindOneListingDto,
-    proto.listing.ProtoListing,
-    /**
-     * @param {!proto.listing.FindOneListingDto} request
-     * @return {!Uint8Array}
-     */
-    function (request) {
-      return request.serializeBinary();
-    },
-    proto.listing.ProtoListing.deserializeBinary
-  );
+const methodDescriptor_ListingService_FindOneListing = new grpc.web.MethodDescriptor(
+  '/listing.ListingService/FindOneListing',
+  grpc.web.MethodType.UNARY,
+  proto.listing.FindOneListingDto,
+  proto.listing.ProtoListing,
+  /**
+   * @param {!proto.listing.FindOneListingDto} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.listing.ProtoListing.deserializeBinary
+);
+
 
 /**
  * @param {!proto.listing.FindOneListingDto} request The
@@ -488,19 +472,16 @@ const methodDescriptor_ListingService_FindOneListing =
  * @return {!grpc.web.ClientReadableStream<!proto.listing.ProtoListing>|undefined}
  *     The XHR Node Readable Stream
  */
-proto.listing.ListingServiceClient.prototype.findOneListing = function (
-  request,
-  metadata,
-  callback
-) {
-  return this.client_.rpcCall(
-    this.hostname_ + "/listing.ListingService/FindOneListing",
-    request,
-    metadata || {},
-    methodDescriptor_ListingService_FindOneListing,
-    callback
-  );
+proto.listing.ListingServiceClient.prototype.findOneListing =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/listing.ListingService/FindOneListing',
+      request,
+      metadata || {},
+      methodDescriptor_ListingService_FindOneListing,
+      callback);
 };
+
 
 /**
  * @param {!proto.listing.FindOneListingDto} request The
@@ -510,17 +491,15 @@ proto.listing.ListingServiceClient.prototype.findOneListing = function (
  * @return {!Promise<!proto.listing.ProtoListing>}
  *     Promise that resolves to the response
  */
-proto.listing.ListingServicePromiseClient.prototype.findOneListing = function (
-  request,
-  metadata
-) {
-  return this.client_.unaryCall(
-    this.hostname_ + "/listing.ListingService/FindOneListing",
-    request,
-    metadata || {},
-    methodDescriptor_ListingService_FindOneListing
-  );
+proto.listing.ListingServicePromiseClient.prototype.findOneListing =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/listing.ListingService/FindOneListing',
+      request,
+      metadata || {},
+      methodDescriptor_ListingService_FindOneListing);
 };
+
 
 /**
  * @const
@@ -528,21 +507,21 @@ proto.listing.ListingServicePromiseClient.prototype.findOneListing = function (
  *   !proto.listing.UpdateListingDto,
  *   !proto.listing.ProtoListing>}
  */
-const methodDescriptor_ListingService_UpdateListing =
-  new grpc.web.MethodDescriptor(
-    "/listing.ListingService/UpdateListing",
-    grpc.web.MethodType.UNARY,
-    proto.listing.UpdateListingDto,
-    proto.listing.ProtoListing,
-    /**
-     * @param {!proto.listing.UpdateListingDto} request
-     * @return {!Uint8Array}
-     */
-    function (request) {
-      return request.serializeBinary();
-    },
-    proto.listing.ProtoListing.deserializeBinary
-  );
+const methodDescriptor_ListingService_UpdateListing = new grpc.web.MethodDescriptor(
+  '/listing.ListingService/UpdateListing',
+  grpc.web.MethodType.UNARY,
+  proto.listing.UpdateListingDto,
+  proto.listing.ProtoListing,
+  /**
+   * @param {!proto.listing.UpdateListingDto} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.listing.ProtoListing.deserializeBinary
+);
+
 
 /**
  * @param {!proto.listing.UpdateListingDto} request The
@@ -554,19 +533,16 @@ const methodDescriptor_ListingService_UpdateListing =
  * @return {!grpc.web.ClientReadableStream<!proto.listing.ProtoListing>|undefined}
  *     The XHR Node Readable Stream
  */
-proto.listing.ListingServiceClient.prototype.updateListing = function (
-  request,
-  metadata,
-  callback
-) {
-  return this.client_.rpcCall(
-    this.hostname_ + "/listing.ListingService/UpdateListing",
-    request,
-    metadata || {},
-    methodDescriptor_ListingService_UpdateListing,
-    callback
-  );
+proto.listing.ListingServiceClient.prototype.updateListing =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/listing.ListingService/UpdateListing',
+      request,
+      metadata || {},
+      methodDescriptor_ListingService_UpdateListing,
+      callback);
 };
+
 
 /**
  * @param {!proto.listing.UpdateListingDto} request The
@@ -576,17 +552,15 @@ proto.listing.ListingServiceClient.prototype.updateListing = function (
  * @return {!Promise<!proto.listing.ProtoListing>}
  *     Promise that resolves to the response
  */
-proto.listing.ListingServicePromiseClient.prototype.updateListing = function (
-  request,
-  metadata
-) {
-  return this.client_.unaryCall(
-    this.hostname_ + "/listing.ListingService/UpdateListing",
-    request,
-    metadata || {},
-    methodDescriptor_ListingService_UpdateListing
-  );
+proto.listing.ListingServicePromiseClient.prototype.updateListing =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/listing.ListingService/UpdateListing',
+      request,
+      metadata || {},
+      methodDescriptor_ListingService_UpdateListing);
 };
+
 
 /**
  * @const
@@ -594,21 +568,21 @@ proto.listing.ListingServicePromiseClient.prototype.updateListing = function (
  *   !proto.listing.FindOneListingDto,
  *   !proto.listing.ProtoListing>}
  */
-const methodDescriptor_ListingService_RemoveListing =
-  new grpc.web.MethodDescriptor(
-    "/listing.ListingService/RemoveListing",
-    grpc.web.MethodType.UNARY,
-    proto.listing.FindOneListingDto,
-    proto.listing.ProtoListing,
-    /**
-     * @param {!proto.listing.FindOneListingDto} request
-     * @return {!Uint8Array}
-     */
-    function (request) {
-      return request.serializeBinary();
-    },
-    proto.listing.ProtoListing.deserializeBinary
-  );
+const methodDescriptor_ListingService_RemoveListing = new grpc.web.MethodDescriptor(
+  '/listing.ListingService/RemoveListing',
+  grpc.web.MethodType.UNARY,
+  proto.listing.FindOneListingDto,
+  proto.listing.ProtoListing,
+  /**
+   * @param {!proto.listing.FindOneListingDto} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.listing.ProtoListing.deserializeBinary
+);
+
 
 /**
  * @param {!proto.listing.FindOneListingDto} request The
@@ -620,19 +594,16 @@ const methodDescriptor_ListingService_RemoveListing =
  * @return {!grpc.web.ClientReadableStream<!proto.listing.ProtoListing>|undefined}
  *     The XHR Node Readable Stream
  */
-proto.listing.ListingServiceClient.prototype.removeListing = function (
-  request,
-  metadata,
-  callback
-) {
-  return this.client_.rpcCall(
-    this.hostname_ + "/listing.ListingService/RemoveListing",
-    request,
-    metadata || {},
-    methodDescriptor_ListingService_RemoveListing,
-    callback
-  );
+proto.listing.ListingServiceClient.prototype.removeListing =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/listing.ListingService/RemoveListing',
+      request,
+      metadata || {},
+      methodDescriptor_ListingService_RemoveListing,
+      callback);
 };
+
 
 /**
  * @param {!proto.listing.FindOneListingDto} request The
@@ -642,16 +613,15 @@ proto.listing.ListingServiceClient.prototype.removeListing = function (
  * @return {!Promise<!proto.listing.ProtoListing>}
  *     Promise that resolves to the response
  */
-proto.listing.ListingServicePromiseClient.prototype.removeListing = function (
-  request,
-  metadata
-) {
-  return this.client_.unaryCall(
-    this.hostname_ + "/listing.ListingService/RemoveListing",
-    request,
-    metadata || {},
-    methodDescriptor_ListingService_RemoveListing
-  );
+proto.listing.ListingServicePromiseClient.prototype.removeListing =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/listing.ListingService/RemoveListing',
+      request,
+      metadata || {},
+      methodDescriptor_ListingService_RemoveListing);
 };
 
+
 module.exports = proto.listing;
+

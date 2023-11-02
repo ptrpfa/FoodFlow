@@ -52,24 +52,23 @@ message Listings {
 }
 
 message CreateListingDto {
-    int32 ListingID = 1;
-    int32 UserID = 2;
-    string Name = 3;
-    string Datetime = 4;
-    string ExpiryDate = 5;
-    string Category = 6;
-    string Description = 7;
-    string Image = 8;
-    string PickUpAddressFirst = 9;
-    string PickUpAddressSecond = 10;
-    string PickUpAddressThird = 11;
-    string PickUpPostalCode = 12;
-    string PickUpStartDate = 13;
-    string PickUpEndDate = 14;
-    string PickUpStartTime = 15;
-    string PickUpEndTime = 16;
-    string ContactPhone = 17;
-    string ContactEmail = 18;
+    int32 UserID = 1;
+    string Name = 2;
+    string Datetime = 3;
+    string ExpiryDate = 4;
+    string Category = 5;
+    string Description = 6;
+    string Image = 7;
+    string PickUpAddressFirst = 8;
+    string PickUpAddressSecond = 9;
+    string PickUpAddressThird = 10;
+    string PickUpPostalCode = 11;
+    string PickUpStartDate = 12;
+    string PickUpEndDate = 13;
+    string PickUpStartTime = 14;
+    string PickUpEndTime = 15;
+    string ContactPhone = 16;
+    string ContactEmail = 17;
 }
 
 message ProtoListing {
