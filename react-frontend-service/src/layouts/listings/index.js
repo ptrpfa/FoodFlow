@@ -126,35 +126,40 @@ function FoodListingsTable() {
             <Grid container spacing={2} key={rowIndex}>
               {rowListings.map((listing, index) => (
                 <Grid item xs={4} key={index}>
-                  <Card style={{ margin: "8px" }}>
-                    <MDBox p={2}>
-                      <MDTypography variant="h6">{listing.name}</MDTypography>
-                      <div style={{ display: 'flex', justifyContent: 'center' }}>
-                      <img 
-                        src={listing.image}
-                        style={{ maxWidth: "50%", maxHeight: "50%", }}
-                        alt={listing.name}
-                      />
-                      </div>
-                      <MDTypography>{listing.description}</MDTypography>
-                      <MDButton
-                        variant="gradient"
-                        color="info"
-                        fullWidth
-                      >
-                        View Details
-                      </MDButton>
-                      {}
-                      <MDButton
-                        variant="gradient"
-                        color="warning"
-                        onClick={handleReservation}
-                        fullWidth
-                      >
-                        Reserve
-                      </MDButton>
-                    </MDBox>
-                  </Card>
+                    <Card style={{ margin: "8px"}}>
+                      <MDBox p={2}>
+                        <MDTypography variant="h6">{listing.name}</MDTypography>
+                        <div style={{ display: 'flex', justifyContent: 'center', margin: "0.5rem", height:"12rem"}}>
+                          <img 
+                            src={listing.image}
+                            style={{ maxWidth: "70%", maxHeight: "70%", margin:"auto"}}
+                            alt={listing.name}
+                          />
+                        </div>
+                        <div style={{height:"3rem", }}>
+                          <MDTypography style={{ fontStyle: 'italic', fontSize:"1rem" }}>{listing.description}</MDTypography>
+                        </div>
+                        <MDButton
+                          variant="gradient"
+                          color="info"
+                          component={Link}
+                          to={`/listings/${listing.listingID}`}
+                          style={{ marginBottom: "1rem", marginTop: "1rem"}}
+                          fullWidth
+                        >
+                          View Details
+                        </MDButton>
+                        {}
+                        <MDButton
+                          variant="gradient"
+                          color="warning"
+                          onClick={handleReservation}
+                          fullWidth
+                        >
+                          Reserve
+                        </MDButton>
+                      </MDBox>
+                    </Card>
                 </Grid>
               ))}
             </Grid>
