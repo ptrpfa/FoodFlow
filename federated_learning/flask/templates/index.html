@@ -64,7 +64,7 @@
                     // Get mobilenet's predicted outcome for the expanded rank tensor, and remove dimensions of 1 afterwards
                     return mobilenet.predict(test_tensor.expandDims()).squeeze();
                 });
-    
+                console.log("feature:", image_features);
                 // Append image feature into array of training data
                 training_data.push(image_features);
             }
