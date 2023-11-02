@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
@@ -14,14 +14,21 @@ import Footer from "examples/Footer";
 // Overview page components
 import Header from "layouts/user-profile/Header";
 
+import { AuthContext } from "context";
 import AuthService from "../../services/auth-service";
 
 const UserProfile = () => {
+  const authContext = useContext(AuthContext);
   const [notification, setNotification] = useState(false);
   const [user, setUser] = useState({
-    name: "",
+    firstName: "",
+    lastName: "",
     email: "",
     role: "",
+    addressFirst: "",
+    addressSecond: "",
+    addressThird: "",
+    postalCode: "",
     newPassword: "",
     confirmPassword: "",
   });
@@ -31,31 +38,40 @@ const UserProfile = () => {
     emailError: false,
     newPassError: false,
     confirmPassError: false,
+    postalError: false,
   });
 
   const getUserData = async (UserID) => {
     try {
       const response = await AuthService.getProfile({ UserID: UserID });
-      console.log("Response:", response); // Print the entire response object for debugging
+      console.log("Response:", response);
 
       if (response) {
         const firstName = response.firstName;
         const lastName = response.LastName;
         const email = response.email;
         const role = response.role;
-        const name = `${firstName} ${lastName}`;
+        const addressFirst = response.addressFirst;
+        const addressSecond = response.addressSecond;
+        const addressThird = response.addressThird;
+        const postalCode = response.postalCode;
         
         setUser((prevUser) => ({
           ...prevUser,
-          name,
+          firstName,
+          lastName,
           email,
           role,
+          addressFirst,
+          addressSecond,
+          addressThird,
+          postalCode,
           currentPassword: "",
           newPassword: "",
           confirmPassword: "",
         }));
       } else {
-        console.error("User data not found or has an unexpected structure.");
+        console.error("User data not found.");
       }
     } catch (error) {
       console.error("An error occurred while fetching user data:", error);
@@ -63,7 +79,7 @@ const UserProfile = () => {
   };
 
   useEffect(() => {
-    getUserData(123);
+    getUserData(authContext.userID);
   }, []);
 
   useEffect(() => {
@@ -87,8 +103,19 @@ const UserProfile = () => {
     // validation
     const mailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
-    if (user.name.trim().length === 0) {
+    if (
+      !user.firstName?.trim() ||
+      !user.lastName?.trim() ||
+      !user.addressFirst?.trim() ||
+      !user.addressSecond?.trim() ||
+      !user.addressThird?.trim()
+    ) {
       setErrors({ ...errors, nameError: true });
+      return;
+    }
+
+    if (user.postalCode.length === 0) {
+      setErrors({ ...errors, postalError: true });
       return;
     }
 
@@ -113,31 +140,54 @@ const UserProfile = () => {
       data: {
         type: "profile",
         attributes: {
-          name: user.name,
+          firstName: user.firstName,
+          lastName: user.lastName,
           email: user.email,
           role: user.role,
+          addressFirst: user.addressFirst,
+          addressSecond: user.addressSecond,
+          addressThird: user.addressThird,
+          postalCode: user.postalCode,
           profile_image: null,
         },
       },
     };
-    // set new user data for call
-    if (user.newPassword.length > 0) {
-      userData = {
-        data: {
-          type: "profile",
-          attributes: {
-            ...user,
-            profile_image: null,
-            password: user.newPassword,
-            password_new: user.newPassword,
-            password_confirmation: user.confirmPassword,
-          },
-        },
-      };
+
+    // Set new user data for call
+    if (user.firstName.trim().length > 0) {
+      userData.data.attributes.firstName = user.firstName;
     }
+    if (user.lastName.trim().length > 0) {
+      userData.data.attributes.lastName = user.lastName;
+    }
+    if (user.email.trim().length > 0) {
+      userData.data.attributes.email = user.email;
+    }
+    if (user.role.trim().length > 0) {
+      userData.data.attributes.role = user.role;
+    }
+    if (user.addressFirst.trim().length > 0) {
+      userData.data.attributes.addressFirst = user.addressFirst;
+    }
+    if (user.addressSecond.trim().length > 0) {
+      userData.data.attributes.addressSecond = user.addressSecond;
+    }
+    if (user.addressThird.trim().length > 0) {
+      userData.data.attributes.addressThird = user.addressThird;
+    }
+    if (user.postalCode.trim().length > 0) {
+      userData.data.attributes.postalCode = user.postalCode;
+    }
+    if (user.newPassword.length > 0) {
+      userData.data.attributes.password = user.newPassword;
+      userData.data.attributes.password_new = user.newPassword;
+      userData.data.attributes.password_confirmation = user.confirmPassword;
+    }
+    userData.data.attributes.profile_image = null;
 
     // call api for update
     const response = await AuthService.updateProfile(JSON.stringify(userData));
+    console.log("RESPONSE: ", response)
 
     // reset errors
     setErrors({
@@ -146,6 +196,7 @@ const UserProfile = () => {
       passwordError: false,
       newPassError: false,
       confirmPassError: false,
+      postalError: false,
     });
 
     setNotification(true);
@@ -155,7 +206,7 @@ const UserProfile = () => {
     <DashboardLayout>
       <DashboardNavbar />
       <MDBox mb={2} />
-      <Header name={user.name} role={user.role}>
+      <Header name={user.firstName + " " + user.lastName} role={user.role}>
         {notification && (
           <MDAlert color="info" mt="20px">
             <MDTypography variant="body2" color="white">
@@ -170,29 +221,28 @@ const UserProfile = () => {
           display="flex"
           flexDirection="column"
         >
-          <MDBox display="flex" flexDirection="row" mt={5} mb={3}>
+          <MDBox display="flex" flexDirection="row" mt={5}>
             <MDBox
               display="flex"
               flexDirection="column"
               alignItems="flex-start"
               width="100%"
-              mr={2}
             >
-              <MDTypography variant="body2" color="text" ml={1} fontWeight="regular">
-                Name
+              <MDTypography variant="body2" color="text" fontWeight="regular">
+                First name
               </MDTypography>
               <MDBox mb={2} width="100%">
                 <MDInput
                   type="name"
                   fullWidth
-                  name="name"
-                  value={user.name}
+                  name="firstName"
+                  value={user.firstName}
                   onChange={changeHandler}
                   error={errors.nameError}
                 />
                 {errors.nameError && (
                   <MDTypography variant="caption" color="error" fontWeight="light">
-                    The name can not be null
+                    The first name cannot be null
                   </MDTypography>
                 )}
               </MDBox>
@@ -204,10 +254,38 @@ const UserProfile = () => {
               width="100%"
               ml={2}
             >
-              <MDTypography variant="body2" color="text" ml={1} fontWeight="regular">
-                Email
+              <MDTypography variant="body2" color="text" fontWeight="regular">
+                Last name
               </MDTypography>
               <MDBox mb={1} width="100%">
+                <MDInput
+                  type="name"
+                  fullWidth
+                  name="lastName"
+                  value={user.lastName}
+                  onChange={changeHandler}
+                  error={errors.nameError}
+                />
+                {errors.nameError && (
+                  <MDTypography variant="caption" color="error" fontWeight="light">
+                    The last name cannot be null
+                  </MDTypography>
+                )}
+              </MDBox>
+            </MDBox>
+          </MDBox>
+
+          <MDBox display="flex" flexDirection="row">
+            <MDBox
+              display="flex"
+              flexDirection="column"
+              alignItems="flex-start"
+              width="100%"
+            >
+              <MDTypography variant="body2" color="text" fontWeight="regular">
+                Email
+              </MDTypography>
+              <MDBox mb={2} width="100%">
                 <MDInput
                   type="email"
                   fullWidth
@@ -218,7 +296,116 @@ const UserProfile = () => {
                 />
                 {errors.emailError && (
                   <MDTypography variant="caption" color="error" fontWeight="light">
-                    The email must be valid
+                    The email cannot be null
+                  </MDTypography>
+                )}
+              </MDBox>
+            </MDBox>
+          </MDBox>
+
+          <MDBox display="flex" flexDirection="row">
+            <MDBox
+              display="flex"
+              flexDirection="column"
+              alignItems="flex-start"
+              width="100%"
+            >
+              <MDTypography variant="body2" color="text" fontWeight="regular">
+                Address first
+              </MDTypography>
+              <MDBox mb={2} width="100%">
+                <MDInput
+                  type="text"
+                  fullWidth
+                  name="addressFirst"
+                  value={user.addressFirst}
+                  onChange={changeHandler}
+                  error={errors.nameError}
+                />
+                {errors.nameError && (
+                  <MDTypography variant="caption" color="error" fontWeight="light">
+                    The address first cannot be null
+                  </MDTypography>
+                )}
+              </MDBox>
+            </MDBox>
+            <MDBox
+              display="flex"
+              flexDirection="column"
+              alignItems="flex-start"
+              width="100%"
+              ml={2}
+            >
+              <MDTypography variant="body2" color="text" fontWeight="regular">
+                Address second
+              </MDTypography>
+              <MDBox mb={1} width="100%">
+                <MDInput
+                  type="text"
+                  fullWidth
+                  name="addressSecond"
+                  value={user.addressSecond}
+                  onChange={changeHandler}
+                  error={errors.nameError}
+                />
+                {errors.nameError && (
+                  <MDTypography variant="caption" color="error" fontWeight="light">
+                    The address second cannot be null
+                  </MDTypography>
+                )}
+              </MDBox>
+            </MDBox>
+          </MDBox>
+
+          <MDBox display="flex" flexDirection="row">
+            <MDBox
+              display="flex"
+              flexDirection="column"
+              alignItems="flex-start"
+              width="100%"
+            >
+              <MDTypography variant="body2" color="text" fontWeight="regular">
+                Address third
+              </MDTypography>
+              <MDBox mb={2} width="100%">
+                <MDInput
+                  type="text"
+                  fullWidth
+                  name="addressThird"
+                  value={user.addressThird}
+                  onChange={changeHandler}
+                  error={errors.nameError}
+                />
+                {errors.nameError && (
+                  <MDTypography variant="caption" color="error" fontWeight="light">
+                    The address third cannot be null
+                  </MDTypography>
+                )}
+              </MDBox>
+            </MDBox>
+            <MDBox
+              display="flex"
+              flexDirection="column"
+              alignItems="flex-start"
+              width="100%"
+              ml={2}
+            >
+              <MDTypography variant="body2" color="text" fontWeight="regular">
+                Postal code
+              </MDTypography>
+              <MDBox mb={1} width="100%">
+                <MDInput
+                  type="number"
+                  step="1"
+                  fullWidth
+                  name="postalCode"
+                  value={user.postalCode}
+                  onChange={changeHandler}
+                  error={errors.postalError}
+                />
+                {errors.postalError && (
+                  <MDTypography variant="caption" color="error" fontWeight="light">
+                    The postal code cannot be null
                   </MDTypography>
                 )}
               </MDBox>
@@ -234,10 +421,10 @@ const UserProfile = () => {
                 width="100%"
                 mr={2}
               >
-                <MDTypography variant="body2" color="text" ml={1} fontWeight="regular">
+                <MDTypography variant="body2" color="text" fontWeight="regular">
                   New Password
                 </MDTypography>
-                <MDBox mb={2} width="100%">
+                <MDBox width="100%">
                   <MDInput
                     type="password"
                     fullWidth
@@ -265,9 +452,8 @@ const UserProfile = () => {
                 flexDirection="column"
                 alignItems="flex-start"
                 width="100%"
-                ml={2}
               >
-                <MDTypography variant="body2" color="text" ml={1} fontWeight="regular">
+                <MDTypography variant="body2" color="text" fontWeight="regular">
                   Password Confirmation
                 </MDTypography>
                 <MDBox mb={1} width="100%">

@@ -80,10 +80,11 @@ function Login() {
     };
 
     const response = await AuthService.login(myData);
-    console.log(response);
+    
     if (response.validated) {
       authContext.login(response.token, response.userid);
-    } else {
+    } 
+    else {
       setCredentialsError("Invalid login!");
     }
 
@@ -115,7 +116,7 @@ function Login() {
           textAlign="center"
         >
           <MDTypography variant="h4" fontWeight="medium" color="white" mt={1}>
-            Sign in Homie
+            Sign in
           </MDTypography>
           <Grid
             container
