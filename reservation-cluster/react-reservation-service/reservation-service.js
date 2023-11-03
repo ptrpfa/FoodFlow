@@ -20,12 +20,11 @@ producer.on("error", (error) => {
 });
 //create Reservation Request
 app.post("/reservation/create", (req, res) => {
-  console.log("hello Delete Function");
-  const UserID = 123;
-  const ListingID = 6;
-
+  console.log("hello Create Function");
+  const UserID = req.body.UserID;
+  const ListingID = req.body.ListingID;
   const Datetime = new Date();
-  const Remarks = req.body.remarks || "";
+  const Remarks = req.body.Remarks || "";
 
   // Produce a reservation event to Kafka with all the necessary data
   const reservationData = {
@@ -97,8 +96,58 @@ app.post("/reservation/create", (req, res) => {
   }
 });
 
-app.delete("/reservation/delete", (req,res) =>{
+// Delete Reservation Request
+app.delete("/reservation/delete", (req, res) => {
+  console.log("Processing Delete Function");
+  const ReservationID = req.body.ReservationID;
 
+  // Payload for Kafka message
+  const reservationData = {
+    action: "delete",
+    ReservationID,
+  };
+
+  const payloads = [
+    {
+      topic: "reservation-topic",
+      messages: JSON.stringify(reservationData),
+    },
+  ];
+
+  let isResponseSent = false;
+  const kafkaTimeout = setTimeout(() => {
+    if (!isResponseSent) {
+      console.error("Kafka producer readiness timeout");
+      res.status(500).json({ message: "Delete reservation failed due to server timeout" });
+      isResponseSent = true;
+    }
+  }, 90000); // Adjust timeout as necessary
+
+  function sendToKafka() {
+    producer.send(payloads, (error, data) => {
+      clearTimeout(kafkaTimeout); // Clear the timeout once we have a response
+      if (!isResponseSent) {
+        if (error) {
+          console.error("Error sending message to Kafka:", error);
+          res.status(500).json({ message: "Delete reservation failed" });
+        } else {
+          console.log("Delete reservation request sent successfully:", data);
+          res.status(200).json({
+            message: "Delete reservation request sent",
+            reservation: reservationData,
+          });
+        }
+        isResponseSent = true;
+      }
+    });
+  }
+
+  if (producer.ready) {
+    sendToKafka();
+  } else {
+    console.error("Kafka producer not ready, cannot send message");
+    res.status(500).json({ message: "Kafka producer not ready" });
+  }
 });
 
 app.listen(port, () => {

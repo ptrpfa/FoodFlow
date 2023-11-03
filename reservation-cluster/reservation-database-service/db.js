@@ -1,5 +1,6 @@
 const { Sequelize, DataTypes } = require('sequelize');
 const ReservationModel = require('./reservation'); 
+const ListingModel = require('./listing');
 
 const sequelize = new Sequelize('foodflow', 'root', 'sikeloong', {
   host: '34.124.232.171',
@@ -7,7 +8,10 @@ const sequelize = new Sequelize('foodflow', 'root', 'sikeloong', {
   dialect: 'mysql',
 });
 
+//init the Models
 const Reservation = ReservationModel(sequelize, DataTypes);
+const Listing = ListingModel(sequelize, DataTypes);
+
 //Validate Connection
 sequelize
   .authenticate()
@@ -22,5 +26,6 @@ sequelize.sync();
 
 module.exports = {
   sequelize,
-  Reservation
+  Reservation,
+  Listing
 };
