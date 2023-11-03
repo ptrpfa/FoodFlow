@@ -17,6 +17,9 @@ import ListingService from "services/listing-service";
 import AWSS3Service from "services/aws-s3-service";
 import reservationService from "services/reservation-service";
 
+import WebSocketService from "services/web-listener.js";
+
+
 function FoodListingsTable() {
   const [infoSB, setInfoSB] = useState(false);
   const [listings, setListings] = useState([]);
@@ -54,8 +57,6 @@ function FoodListingsTable() {
       .catch((error) => {
         console.error("Error fetching listings:", error);
       });
-
-
   }, []);
 
   const convertUint8ArrayToBlob = (uint8Array) => {
@@ -63,22 +64,48 @@ function FoodListingsTable() {
   };
 
   const groupedListings = [];
+  
   for (let i = 0; i < listings.length; i += 3) {
     groupedListings.push(listings.slice(i, i + 3));
   }
 
-  const [message, setMessage] = useState("");
+  // const [message, setMessage] = useState("");
   const handleReservation = () => {
-    reservationService.makeReservation("This is a test reservation.")
-      .then(data => {
-        setMessage(data.message);
-      })
+
+    reservationService.makeReservation(product_id, quantity)
+      // .then(data => {
+      //   setMessage(data.message);
+      // })
       .catch(error => {
         console.error("Reservation failed:", error);
         setMessage("Reservation failed");
       });
   }
 
+  const [messageSnackbar, setMessageSnackbar] = useState({ open: false, message: "" });
+  const closeMessageSnackbar = () => {
+    setMessageSnackbar({ open: false, message: "" });
+  }
+
+  const webSocketService = new WebSocketService();
+
+  webSocketService.onmessage = (message) => {
+
+    // Update the state to open the MDSnackbar with the received message
+    setMessageSnackbar({ open: true, message: message });
+
+    //Check if message is for the client 
+  };
+
+  const renderServerSB = (<MDSnackbar
+    icon="info"
+    title="Server Message:"
+    content={messageSnackbar.message}
+    dateTime="5 seconds ago"
+    open={messageSnackbar.open}
+    onClose={closeMessageSnackbar}
+    close={closeMessageSnackbar}
+  />);
 
   return (
     <div>
@@ -97,39 +124,51 @@ function FoodListingsTable() {
             Available Donated Food
           </MDTypography>
         </MDBox>
-        <MDBox pt={3}>
+        <MDBox pt={7}>
           {groupedListings.map((rowListings, rowIndex) => (
-            <Grid container spacing={2} key={rowIndex}>
+            <Grid container spacing={8} key={rowIndex}>
               {rowListings.map((listing, index) => (
                 <Grid item xs={4} key={index}>
-                  <Card style={{ margin: "8px" }}>
-                    <MDBox p={2}>
-                      <MDTypography variant="h6">{listing.name}</MDTypography>
-                      <img 
-                        src={listing.image}
-                        style={{ maxWidth: "50%", maxHeight: "50%" }}
-                        alt={listing.name}
-                      />
+                  <Card style={{ margin: "8px"}}>
+                      <MDBox p={9}>
+                        <MDBox
+                        mx={3}
+                        mt={-13}
+                        mb={3}
+                        ml={0}
+                        mr={0}
+                        py={1}
+                        px={4}
+                        variant="gradient"
+                        borderRadius="lg"
+                        coloredShadow="info"
+                        >
+                        <img 
+                          src={listing.image}
+                          style={{  width: "100%", height: "100%" }}
+                          alt={listing.name}
+                        />
+                      </MDBox>
+                      <MDTypography variant="h5">{listing.name}</MDTypography>
+                      
                       <MDTypography>{listing.description}</MDTypography>
                       <MDButton
                         variant="gradient"
                         color="info"
                         onClick={openInfoSB}
-                        fullWidth
+                        size="medium"
                       >
-                        View Details
+                        View Item
                       </MDButton>
-                      {renderInfoSB}
-
-                      <!--Reservation Details-->
                       <MDButton
                         variant="gradient"
                         color="info"
                         onClick={handleReservation}
-                        fullWidth
                       >
                         Reserve
                       </MDButton>
+                      {renderInfoSB}
+                      {renderServerSB}
                     </MDBox>
                   </Card>
                 </Grid>
@@ -143,6 +182,7 @@ function FoodListingsTable() {
 }
 
 function Listings() {
+
   return (
     <DashboardLayout>
       <DashboardNavbar />
