@@ -2,7 +2,7 @@
 const fs = require('fs').promises;
 const path = require('path');
 const { createCanvas, Image } = require('canvas');
-const tf = require('@tensorflow/tfjs');
+const tf = require('@tensorflow/tfjs-node');
 
 // Global variables
 let mobilenet = undefined;
@@ -13,18 +13,21 @@ const IMAGE_WIDTH = 224;
 const IMAGE_HEIGHT = 224;
 const MODEL_URL = 'https://tfhub.dev/google/tfjs-model/imagenet/mobilenet_v3_small_100_224/feature_vector/5/default/1';
 const CLASS_NAMES = ['Fresh', 'Rotten'];
+const MODEL_PATH = 'file://./models/tomato';
 
 // Training files
-var train_folder = path.join(__dirname, '../dataset/fruits/apples/train');        
+var train_folder = path.join(__dirname, 'dataset/vegetables/tomato/train');        
 var training_data_files = [];
 var training_data = [];   // Array to store image features of training data
 var training_output = []; // Array to store binary classification of training data
 
-
 // Test files
-var test_folder = path.join(__dirname, '../dataset/fruits/apples/test');        
+var test_folder = path.join(__dirname, 'dataset/vegetables/tomato/test');        
 var test_data_files = [];   
 var test_output = [];     // Array to store binary classification of test data
+
+// Metrics
+var confusion_matrix = [[0,0],[0,0]]; // 0:0 Fresh:True, 0:1 Fresh:False, 1:0 Rotten:False, 1:1 Rotten:True
 
 // Function to preload training and test arrays
 async function prepare_files(folder_name, data_files, output) {
@@ -65,24 +68,26 @@ async function loadImageAsync(filePath, canvas, ctx) {
         };
 
         img.src = imageBuffer;
-    });
+    }).catch((err) => { console.error('Promise rejection:', err); });
 }
 
-// Async function to initiate in-browser machine learning
-async function start_ml() {
-    // NOTE: Tidy function is used for automatic memory clean ups (clean up all intermediate tensors afterwards to avoid memory leaks)
-    // dispose() to release the WebGL memory allocated for the return value of predict
-
+// Function to prepare pre-trained mobilenet model
+async function prepare_mobilenet() {
     // Load pre-trained mobilenet model (image feature vectors) from TensorFlowHub
     mobilenet = await tf.loadGraphModel(MODEL_URL, { fromTFHub: true });
-
+    
+    // NOTE: Tidy function is used for automatic memory clean ups (clean up all intermediate tensors afterwards to avoid memory leaks)
+    // dispose() to release the WebGL memory allocated for the return value of predict
     tf.tidy(function() { 
         // Warm up the model by passing zeros through it once, to make first prediction faster
         mobilenet.predict(tf.zeros([1, IMAGE_HEIGHT, IMAGE_WIDTH, 3])).dispose();   // Tensor of 1 x 224px x 224px x 3 colour channels (RGB)
     });
+}
 
+// Function to train model (classification head)
+async function train_ml() {
     // Prepare training data
-    console.log("Preparing training data image features..");
+    console.log("\n\nPreparing training data image features..\n");
     for(let i = 0; i < training_data_files.length; i++) {
         // Create an HTML5 canvas and load the image data
         const canvas = createCanvas(IMAGE_WIDTH, IMAGE_HEIGHT);
@@ -90,7 +95,6 @@ async function start_ml() {
         const ctx = canvas.getContext('2d');
         // Ensure image is loaded before moving on
         await loadImageAsync(training_data_files[i], canvas, ctx);
-
         // Obtain image features
         let image_features = tf.tidy(function() {
             // Create tensor from image
@@ -106,7 +110,7 @@ async function start_ml() {
         // Append image feature into array of training data
         training_data.push(image_features);
     }
-    console.log("Training data image features loaded!");
+    console.log("Training data image features loaded!\n");
 
     // Create new model classification head (multilayer perceptron)
     model = tf.sequential();
@@ -129,7 +133,7 @@ async function start_ml() {
     });
     
     /* Model Training */
-    console.log("Training model..");
+    console.log("\nTraining model..\n");
     // Shuffle training data
     tf.util.shuffleCombo(training_data, training_output);
     // Convert tensor array into a 1D tensor array
@@ -146,10 +150,22 @@ async function start_ml() {
     output_tensor.dispose();
     onehot_output.dispose();
     input_tensor.dispose();
-    console.log("Model trained!");
+    console.log("\nModel trained!");
+
+    // Save model
+    await model.save(MODEL_PATH);
     
+    console.log("\nModel saved!");
+
+}
+
+// Function to load pre-saved model and test it (classification head)
+async function test_model() {
+    // Load model
+    model = await tf.loadLayersModel(MODEL_PATH + '/model.json');
+
     /* Model Testing */
-    console.log("Testing model..");
+    console.log("\nTesting model..\n");
     for(let i = 0; i < test_data_files.length; i++) {
 
         // Create an HTML5 canvas and load the image data
@@ -178,18 +194,36 @@ async function start_ml() {
             // Get prediction scores as an array
             let predictionArray = prediction.arraySync();
 
-            // Gwr prediction results
-            let prediction_txt = 'Prediction: ' + CLASS_NAMES[highestIndex] + ' with ' + predictionArray[highestIndex] * 100 + '% confidence' + '(Actual: ' + CLASS_NAMES[test_output[i]] + ')'
+            // Update confusion matrix
+            confusion_matrix[test_output[i]][highestIndex]++;
 
-            // Update results
-            console.log(prediction_txt);
+            // Check for mismatch
+            if(highestIndex != test_output[i]) {
+                // Get prediction results
+                let prediction_txt = 'False Prediction: ' + CLASS_NAMES[highestIndex] + ' with ' + predictionArray[highestIndex] * 100 + '% confidence' + ' (Actual: ' + CLASS_NAMES[test_output[i]] + ')'
+                prediction_txt += '\nFile: ' + test_data_files[i] + '\n';
+
+                // Update results
+                console.log(prediction_txt);
+            }
         });
     }
 
-    // Save model
-    await model.save('file://./foodflow');
-    
-    console.log("Model saved!");
+    // Print metrics
+    let true_fresh = ((confusion_matrix[0][0] / test_data_files.length) * 100).toFixed(2);
+    let false_fresh = ((confusion_matrix[0][1] / test_data_files.length) * 100).toFixed(2);
+    let true_rotten = ((confusion_matrix[1][1] / test_data_files.length) * 100).toFixed(2);
+    let false_rotten = ((confusion_matrix[1][0] / test_data_files.length) * 100).toFixed(2);
+    let accuracy = (parseFloat(true_fresh) + parseFloat(true_rotten)).toFixed(2);
+    let miss = (parseFloat(false_fresh) + parseFloat(false_rotten)).toFixed(2);
+    console.log("Confusion Matrix:");
+    console.log(`Test Size: ${test_data_files.length}`);
+    console.log(`Accuracy: ${accuracy}%`);
+    console.log(`Miss: ${miss}%`);    
+    console.log(`True Fresh: ${confusion_matrix[0][0]} (${true_fresh}%)`);
+    console.log(`False Fresh: ${confusion_matrix[0][1]} (${false_fresh}%)`);
+    console.log(`True Rotten: ${confusion_matrix[1][1]} (${true_rotten}%)`);
+    console.log(`False Rotten: ${confusion_matrix[1][0]} (${false_rotten}%)`);
 
 }
 
@@ -200,23 +234,19 @@ async function main() {
     await prepare_files(test_folder, test_data_files, test_output);
 
     // Temporary
-    training_data_files = training_data_files.slice(0, 7).concat(training_data_files.slice(-3));
-    training_output = training_output.slice(0, 7).concat(training_output.slice(-3));
-    test_data_files = test_data_files.slice(0, 7).concat(test_data_files.slice(-3));
-    test_output = test_output.slice(0, 7).concat(test_output.slice(-3));
-
     // training_data_files = training_data_files.slice(0, 70).concat(training_data_files.slice(-30));
     // training_output = training_output.slice(0, 70).concat(training_output.slice(-30));
     // test_data_files = test_data_files.slice(0, 70).concat(test_data_files.slice(-30));
     // test_output = test_output.slice(0, 70).concat(test_output.slice(-30));
 
-    // console.log(training_data_files);
-    // console.log(training_output);
-    // console.log(test_data_files);
-    // console.log(test_output);
+    // Prepare mobilenet pre-trained model
+    await prepare_mobilenet();
 
-    // Invoke in-browser machine learning function
-    start_ml();
+    // Function to train model (classification head)
+    await train_ml();
+
+    // Function to load and test model (classification head)
+    test_model();
     
 }
 
