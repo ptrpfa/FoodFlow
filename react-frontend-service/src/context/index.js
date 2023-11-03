@@ -42,6 +42,22 @@ export const AuthContext = createContext({
   logout: () => {},
 });
 
+const UploadImageContext = createContext();
+
+export function UploadImageContextProvider({ children }) {
+  const [uploadImageId, setUploadImageId] = useState(null);
+
+  return (
+    <UploadImageContext.Provider value={{ uploadImageId, setUploadImageId }}>
+      {children}
+    </UploadImageContext.Provider>
+  );
+}
+
+export function useUploadImageContext() {
+  return useContext(UploadImageContext);
+}
+
 const AuthContextProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userID, setUserID] = useState(null);

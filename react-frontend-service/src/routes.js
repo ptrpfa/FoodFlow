@@ -36,8 +36,8 @@ Coded by www.creative-tim.com
 */
 
 // Material Dashboard 2 React layouts
-import Listings from "layouts/listings";
-import Reserved from "layouts/reserved";
+import Listings from "layouts/listings/available";
+import Reserved from "layouts/listings/reserved";
 import DetailedListing from "layouts/detailed-listing";
 
 import Notifications from "layouts/notifications";
@@ -50,7 +50,8 @@ import Register from "auth/register";
 import ForgotPassword from "auth/forgot-password";
 import ResetPassword from "auth/reset-password";
 
-import Donor from "layouts/donor";
+import UploadFood from "layouts/donor/upload";
+import DonateFood from "layouts/donor/create";
 
 // @mui icons
 import Icon from "@mui/material/Icon";
@@ -79,16 +80,24 @@ const routes = [
     name: "Detailed Listing",
     key: "detailed-listing",
     icon: <Icon fontSize="small">receipt_long</Icon>,
-    route: "/listings/:listingID",
+    route: "/listings/:listingId",
     component: <DetailedListing />,
   },
   {
     type: "collapse",
     name: "Donate",
-    key: "donor",
+    key: "upload",
     icon: <Icon fontSize="small">assignment</Icon>,
-    route: "/donor",
-    component: <Donor />,
+    route: "/upload",
+    component: <UploadFood />,
+  },
+  {
+    type: "route",
+    name: "Donate",
+    key: "donate",
+    icon: <Icon fontSize="small">assignment</Icon>,
+    route: "/upload/donate",
+    component: <DonateFood />,
   },
   {
     type: "collapse",
