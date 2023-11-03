@@ -9,7 +9,7 @@ COPY package*.json ./
 RUN npm install
 
 # Bundle app source
-COPY . .
+COPY socket.js .
 
 # Define the command to run your app
-CMD ["node", "database-service.js"]
+CMD ["node", "socket.js"]

@@ -1,14 +1,16 @@
 const WebSocket = require('ws');
 
-const reservationNodeSocket = new WebSocket('ws://localhost:8181'); // Replace with the actual WebSocket server URL
+const reservationNodeSocket = new WebSocket('ws://localhost:8282'); // Replace with the actual WebSocket server URL
 
 reservationNodeSocket.on('open', () => {
   console.log('Connected to WebSocket server');
   
   // Simulate a new reservation being produced
   const newReservation = {
-    id: 123,
-    productName: 'Example Product',
+    msg_id: 123,
+    sender:  'database-controller',
+    product_id: 12,
+    payload: 'Example Product',
     // Add other reservation details here
   };
   

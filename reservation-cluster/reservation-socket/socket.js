@@ -10,17 +10,18 @@ const wss = new WebSocket.Server({ server });
 wss.on('connection', (ws) => {
   ws.on('message', (message) => {
     // Handle messages received from clients if needed
-    console.log(message);
-
+    const msg_relay = message.toString();
+    console.log(message.toString());
+   
     // Broadcast the received message to all connected clients
     wss.clients.forEach((client) => {
       if (client !== ws && client.readyState === WebSocket.OPEN) {
-        client.send(message);
+        client.send(msg_relay);
       }
     });
   });
 });
 
-server.listen(8181, () => {
-  console.log('WebSocket server is running on port 8181');
+server.listen(8282, () => {
+  console.log('WebSocket server is running on port 8282');
 });
