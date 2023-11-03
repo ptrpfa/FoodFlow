@@ -139,6 +139,19 @@ export default function App() {
           />
         );
       }
+
+      // If the route is of type "auth" (e.g., a login route), you can redirect if not authenticated
+      if (route.type === "auth" && !authContext.isAuthenticated) {
+        return (
+          <Route
+            exact
+            path={route.route}
+            element={<Navigate to="/auth/login" />} // Redirect to the login page
+            key={route.key}
+          />
+        );
+      }
+
       return null;
     });
 
@@ -277,7 +290,6 @@ export default function App() {
             <Route path="/auth/register" element={<Register />} />
             <Route path="/auth/forgot-password" element={<ForgotPassword />} />
             <Route path="/auth/reset-password" element={<ResetPassword />} />
-            {/* <Route path="/reservation/reservation-service" element={<Reservation />} />  */}
             <Route
               exact
               path="user-profile"

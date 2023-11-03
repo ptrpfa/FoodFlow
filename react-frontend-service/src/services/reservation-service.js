@@ -9,16 +9,20 @@ const reservationService = {
   makeReservation: (product_id, quantity) => {
     //Prep the payload with the uuid key 
     const newReservation = {
-      uuid: LOCAL_STORAGE_KEY,
+      msg_id: LOCAL_STORAGE_KEY,
       product_id: product_id,
       quantity: quantity,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
+      replies: []
     };
   
     //Store the payload into local storage
-    localStorage.setItem(LOCAL_STORAGE_KEY, newReservation);
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newReservation));
 
-    return axios.post(`${API_BASE_URL}/reservation/create`, {JSON.stringify(newReservation)})
+    return axios.post(`${API_BASE_URL}/reservation/create`, JSON.stringify(newReservation))
+      .then(data => {
+        conole.log(data.message); 
+      })
       .catch(error => {
         throw error;
       });

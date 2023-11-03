@@ -6,6 +6,7 @@ import Card from "@mui/material/Card";
 
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
+import MDSnackbar from "components/MDSnackbar";
 import MDButton from "components/MDButton";
 
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
@@ -106,15 +107,15 @@ function FoodListingsTable({ onUserUpdate }) {
     groupedListings.push(listings.slice(i, i + 3));
   }
 
-  // const [message, setMessage] = useState("");
-  const handleReservation = () => {
-
+  const [message, setMessage] = useState("");
+  const handleReservation = (product_id) => {
+    const quantity = 5;
     reservationService.makeReservation(product_id, quantity)
       // .then(data => {
       //   setMessage(data.message);
       // })
       .catch(error => {
-        console.error("Reservation failed:", error);
+        console.log("Reservation failed:", error);
         setMessage("Reservation failed");
       });
   }
@@ -131,7 +132,7 @@ function FoodListingsTable({ onUserUpdate }) {
     // Update the state to open the MDSnackbar with the received message
     setMessageSnackbar({ open: true, message: message });
 
-    //Check if message is for the client 
+    
   };
 
   const renderServerSB = (<MDSnackbar
@@ -202,11 +203,10 @@ function FoodListingsTable({ onUserUpdate }) {
                       <MDButton
                         variant="gradient"
                         color="info"
-                        onClick={handleReservation}
+                        onClick={() => handleReservation(listing.listingID)}
                       >
                         Reserve
                       </MDButton>
-                      {renderInfoSB}
                       {renderServerSB}
                     </MDBox>
                   </Card>
@@ -222,16 +222,16 @@ function FoodListingsTable({ onUserUpdate }) {
 
 function Listings() {
 
-  // const [user, setUser] = useState({
-  //   firstName: "",
-  //   lastName: "",
-  //   role: "",
-  // });
+  const [user, setUser] = useState({
+    firstName: "",
+    lastName: "",
+    role: "",
+  });
 
-  // // Callback function to update the user data in the parent component
-  // const handleUserUpdate = (userData) => {
-  //   setUser(userData);
-  // };
+  // Callback function to update the user data in the parent component
+  const handleUserUpdate = (userData) => {
+    setUser(userData);
+  };
 
   return (
     <DashboardLayout>

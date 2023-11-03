@@ -52,8 +52,6 @@ import ResetPassword from "auth/reset-password";
 
 import Donor from "layouts/donor";
 
-// import Reservation from "layouts/reservation";
-
 // @mui icons
 import Icon from "@mui/material/Icon";
 import FastfoodIcon from '@mui/icons-material/Fastfood';
@@ -100,13 +98,6 @@ const routes = [
     route: "/notifications",
     component: <Notifications />,
   },
-  // {
-  //   type: 'collapse', // Or you can use 'route' if it's not a sub-menu
-  //   name: 'Reservation', // Display name in the menu
-  //   key: 'reservation', // A unique key for the route
-  //   route: '/reservation', // URL path
-  //   component: <Reservation />, // The component to render
-  // },
   {
     type: "route",
     name: "Sign In",
