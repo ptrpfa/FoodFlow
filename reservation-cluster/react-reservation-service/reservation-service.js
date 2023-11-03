@@ -5,7 +5,6 @@ app.timeout = 90000;
 app.use(express.json());
 const port = 5003;
 
-// const client = new kafka.KafkaClient({ kafkaHost: 'localhost:29092' });
 const client = new kafka.KafkaClient({ kafkaHost: "kafka-service-1:29092" });
 const producer = new kafka.Producer(client);
 
@@ -53,7 +52,7 @@ app.post("/reservation/create", (req, res) => {
         .json({ message: "Reservation failed due to server timeout" });
       isResponseSent = true;
     }
-  }, 90000); // 10 seconds timeout for demonstration, adjust as necessary
+  }, 90000); 
 
   if (producer.ready) {
     console.log("Producer ready!");
@@ -121,11 +120,11 @@ app.delete("/reservation/delete", (req, res) => {
       res.status(500).json({ message: "Delete reservation failed due to server timeout" });
       isResponseSent = true;
     }
-  }, 90000); // Adjust timeout as necessary
+  }, 90000); 
 
   function sendToKafka() {
     producer.send(payloads, (error, data) => {
-      clearTimeout(kafkaTimeout); // Clear the timeout once we have a response
+      clearTimeout(kafkaTimeout); 
       if (!isResponseSent) {
         if (error) {
           console.error("Error sending message to Kafka:", error);
