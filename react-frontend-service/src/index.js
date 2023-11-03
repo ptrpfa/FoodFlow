@@ -17,7 +17,7 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import App from "App";
-import { AuthContextProvider } from "context";
+import { AuthContextProvider, UploadImageContextProvider } from "context";
 
 // Material Dashboard 2 React Context Provider
 import { MaterialUIControllerProvider } from "context";
@@ -29,7 +29,9 @@ root.render(
   <BrowserRouter>
     <AuthContextProvider>
       <MaterialUIControllerProvider>
-        <App />
+        <UploadImageContextProvider>
+          <App />
+        </UploadImageContextProvider>,
       </MaterialUIControllerProvider>
     </AuthContextProvider>
   </BrowserRouter>

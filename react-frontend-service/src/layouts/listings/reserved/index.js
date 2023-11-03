@@ -13,7 +13,7 @@ import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Footer from "examples/Footer";
 
 import { AuthContext } from "context";
-import AuthService from "../../services/auth-service";
+import AuthService from "../../../services/auth-service";
 import ListingService from "services/listing-service"; 
 import AWSS3Service from "services/aws-s3-service";
 // import reservationService from "services/reservation-service";
@@ -182,7 +182,7 @@ function Listings() {
           <Grid item xs={12}>
             <div style={{ display: "flex", justifyContent: "space-between" }}>
               <MDTypography variant="h3">{user.firstName} {user.lastName}'s Listings</MDTypography>
-              <Link to="/donor">
+              <Link to="/upload">
                 <MDButton variant="gradient" color="info">
                   Donate Food
                 </MDButton>
