@@ -16,7 +16,6 @@ import { AuthContext } from "context";
 import AuthService from "../../services/auth-service";
 import ListingService from "services/listing-service";
 import AWSS3Service from "services/aws-s3-service";
-import listingService from "services/listing-service";
 
 function DetailedListing(onUserUpdate) {
   const { listingID } = useParams();
@@ -43,83 +42,55 @@ function DetailedListing(onUserUpdate) {
     //   });
   }
 
-  const getUserData = async (UserID) => {
-    try {
-      const response = await AuthService.getProfile({ UserID: UserID });
-  
-      if (response) {
-        const role = response.role;
-        const firstName = response.firstName;
-        const lastName = response.LastName;
-  
-        setUser((prevUser) => ({
-          ...prevUser,
-          firstName,
-          lastName,
-          role,
-        }));
-  
-        onUserUpdate({ firstName, lastName });
-      } else {
-        console.error("User data not found.");
-      }
-    } catch (error) {
-      console.error("An error occurred while fetching user data:", error);
-    }
-  };
-  
   useEffect(() => {
+    // Fetch user data
+    const getUserData = async (UserID) => {
+      try {
+        const response = await AuthService.getProfile({ UserID });
+
+        if (response) {
+          const role = response.role;
+          const firstName = response.firstName;
+          const lastName = response.LastName;
+
+          setUser((prevUser) => ({
+            ...prevUser,
+            firstName,
+            lastName,
+            role,
+          }));
+
+        } else {
+          console.error("User data not found.");
+        }
+      } catch (error) {
+        console.error("An error occurred while fetching user data:", error);
+      }
+    };
+
     getUserData(authContext.userID);
   }, [authContext.userID]);
-  
+
   useEffect(() => {
-    const fetchImageForListing = async (listing) => {
-      const imageData = await AWSS3Service.getImage({ imageId: listing.image });
-      const imageBlob = convertUint8ArrayToBlob(imageData.imageData);
-      const imageUrl = URL.createObjectURL(imageBlob);
-      return { ...listing, image: imageUrl };
-    };
-  
+    // Fetch listing data
     const fetchListingDetails = async () => {
       try {
         const response = await ListingService.getListing({ ListingID: listingID });
-        setListings([response]); // Wrap the response in an array
-        console.log(response);
+        // Fetch the image for the retrieved listing
+        const imageData = await AWSS3Service.getImage({ imageId: response.image });
+        const imageBlob = convertUint8ArrayToBlob(imageData.imageData);
+        const imageUrl = URL.createObjectURL(imageBlob);
+        // Update the listing data with the image
+        const updatedListing = { ...response, image: imageUrl };
+        setListing([updatedListing]);
       } catch (error) {
         console.error('Error fetching listing details:', error);
       }
     };
   
-    // Fetch user data
-    getUserData(authContext.userID);
-  
     // Fetch listing data when listingID or user.role changes
     fetchListingDetails();
-  
-    if (user.role === "patron") {
-      ListingService.getAvailableListings(authContext.userID)
-        .then(async (allListings) => {
-          const listingsWithImages = await Promise.all(
-            allListings.map(fetchImageForListing)
-          );
-          setListings(listingsWithImages);
-        })
-        .catch((error) => {
-          console.error("Error fetching listings:", error);
-        });
-    } else if (user.role === "donor") {
-      ListingService.getAvailableListingsExcludeUser(authContext.userID)
-        .then(async (allListings) => {
-          const listingsWithImages = await Promise.all(
-            allListListings.map(fetchImageForListing)
-          );
-          setListings(listingsWithImages);
-        })
-        .catch((error) => {
-          console.error("Error fetching listings for donors:", error);
-        });
-    }
-  }, [user.role, authContext.userID]);
+  }, [listingID, user.role]);
 
   return (
     <div>
