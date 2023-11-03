@@ -1,3 +1,4 @@
 tfjs-*
 dataset
 flask/static/img/apples
+.venv

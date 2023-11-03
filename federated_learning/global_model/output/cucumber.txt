@@ -1,0 +1,77 @@
+
+
+Preparing training data image features..
+
+Training data image features loaded!
+
+__________________________________________________________________________________________
+Layer (type)                Input Shape               Output shape              Param #   
+==========================================================================================
+dense_Dense1 (Dense)        [[null,1024]]             [null,128]                131200    
+__________________________________________________________________________________________
+dense_Dense2 (Dense)        [[null,128]]              [null,2]                  258       
+==========================================================================================
+Total params: 131458
+Trainable params: 131458
+Non-trainable params: 0
+__________________________________________________________________________________________
+
+Training model..
+
+Epoch 1 / 10
+823ms 1125us/step - acc=0.893 loss=0.260 
+0 { loss: 0.259801983833313, acc: 0.8934425711631775 }
+Epoch 2 / 10
+691ms 944us/step - acc=0.984 loss=0.0540 
+1 { loss: 0.05396910384297371, acc: 0.9836065173149109 }
+Epoch 3 / 10
+675ms 922us/step - acc=0.993 loss=0.0262 
+2 { loss: 0.02620922401547432, acc: 0.993169367313385 }
+Epoch 4 / 10
+658ms 898us/step - acc=1.00 loss=8.38e-3 
+3 { loss: 0.008376671932637691, acc: 1 }
+Epoch 5 / 10
+654ms 894us/step - acc=1.00 loss=3.69e-3 
+4 { loss: 0.0036883435677736998, acc: 1 }
+Epoch 6 / 10
+642ms 877us/step - acc=1.00 loss=1.93e-3 
+5 { loss: 0.0019292882643640041, acc: 1 }
+Epoch 7 / 10
+628ms 858us/step - acc=1.00 loss=1.33e-3 
+6 { loss: 0.0013317983830347657, acc: 1 }
+Epoch 8 / 10
+625ms 854us/step - acc=1.00 loss=1.02e-3 
+7 { loss: 0.0010237941751256585, acc: 1 }
+Epoch 9 / 10
+633ms 864us/step - acc=1.00 loss=7.67e-4 
+8 { loss: 0.0007669509504921734, acc: 1 }
+Epoch 10 / 10
+623ms 851us/step - acc=1.00 loss=6.07e-4 
+9 { loss: 0.0006067808717489243, acc: 1 }
+
+Model trained!
+
+Model saved!
+
+Testing model..
+
+False Prediction: Rotten with 99.99735355377197% confidence (Actual: Fresh)
+File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/cucumber/test/fresh/c_f075.png
+
+False Prediction: Fresh with 99.30877089500427% confidence (Actual: Rotten)
+File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/cucumber/test/rotten/c_r126.png
+
+False Prediction: Fresh with 98.48982691764832% confidence (Actual: Rotten)
+File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/cucumber/test/rotten/c_r337.png
+
+False Prediction: Fresh with 99.71104860305786% confidence (Actual: Rotten)
+File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/cucumber/test/rotten/c_r373.png
+
+Confusion Matrix:
+Test Size: 185
+Accuracy: 97.83%
+Miss: 2.16%
+True Fresh: 99 (53.51%)
+False Fresh: 1 (0.54%)
+True Rotten: 82 (44.32%)
+False Rotten: 3 (1.62%)

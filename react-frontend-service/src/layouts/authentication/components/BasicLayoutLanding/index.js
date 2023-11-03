@@ -82,25 +82,14 @@ function BasicLayout({ image, children }) {
                     flexDirection="column"
                     justifyContent="center"
                     alignItems="center"
-                    padding="1.5rem"
+                    padding="5rem"
                     width="80%"
                   >
                     <Typography variant="h3" style={{ color: "white" }}>
-                      Log in to Material Dashboard NodeJS Live Preview
+                      Welcome to Food Flow
                     </Typography>
-                    <Typography variant="body2" style={{ color: "white" }} margin="0.5rem 0">
-                      Log in to see how you can go from frontend to fullstack in an instant with an
-                      API-based NodeJS backend
-                    </Typography>
-                    <MDBox
-                      display="flex"
-                      flexDirection="column"
-                      justifyContent="center"
-                      alignItems="center"
-                      marginBottom="0.5rem"
-                    >
-                      <Typography variant="body2" fontWeight="700" style={{ color: "white" }}>
-                        You can log in with
+                    <Typography variant="body2" fontWeight="700" style={{ color: "white" }}>
+                        You can log in with:
                       </Typography>
                       <List dense={true}>
                         <ListItem>
@@ -112,20 +101,14 @@ function BasicLayout({ image, children }) {
                                 fontWeight="400"
                                 style={{ color: "white" }}
                               >
-                                Username{" "}
                                 <Typography variant="span" fontWeight="700">
-                                  admin@jsonapi.com
-                                </Typography>{" "}
-                                with password{" "}
-                                <Typography variant="span" fontWeight="700">
-                                  secret
+                                  exampleUser, password123
                                 </Typography>
                               </Typography>
                             }
                           />
                         </ListItem>
                       </List>
-                    </MDBox>
                   </MDBox>
                 </MDBox>
               )}

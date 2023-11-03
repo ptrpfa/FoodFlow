@@ -36,8 +36,8 @@ Coded by www.creative-tim.com
 */
 
 // Material Dashboard 2 React layouts
-import Dashboard from "layouts/dashboard";
 import Listings from "layouts/listings";
+import Reserved from "layouts/reserved";
 import DetailedListing from "layouts/detailed-listing";
 
 import Notifications from "layouts/notifications";
@@ -52,45 +52,36 @@ import ResetPassword from "auth/reset-password";
 
 import Donor from "layouts/donor";
 
-import Reservation from "layouts/reservation";
+// import Reservation from "layouts/reservation";
 
 // @mui icons
 import Icon from "@mui/material/Icon";
+import FastfoodIcon from '@mui/icons-material/Fastfood';
+import FoodBankIcon from '@mui/icons-material/FoodBank';
 
 const routes = [
   {
     type: "collapse",
-    name: "Dashboard",
-    key: "dashboard",
-    icon: <Icon fontSize="small">dashboard</Icon>,
-    route: "/dashboard",
-    component: <Dashboard />,
+    name: "Available",
+    key: "listings",
+    icon: <FoodBankIcon fontSize="small" />,
+    route: "/listings",
+    component: <Listings />,
   },
   {
     type: "collapse",
-    name: "Listings",
-    key: "listings",
-    icon: <Icon fontSize="small">receipt_long</Icon>,
-    route: "/listings",
-    component: <Listings />,
-    // children: [
-    //   {
-    //     type: "item",
-    //     name: "Detailed Listing",
-    //     key: "detailed-listing",
-    //     icon: <Icon fontSize="small">receipt_long</Icon>,
-    //     route: "/listings/:listingId", // Use a dynamic route parameter
-    //     component: <DetailedListing />,
-    //     hidden: true, // Optionally hide it from the menu
-    //   },
-    // ],
+    name: "Reserved",
+    key: "reserved",
+    icon: <FastfoodIcon fontSize="small" />,
+    route: "/reserved",
+    component: <Reserved />,
   },
   {
     type: "item",
     name: "Detailed Listing",
     key: "detailed-listing",
     icon: <Icon fontSize="small">receipt_long</Icon>,
-    route: "/listings/:listingId",
+    route: "/listings/:listingID",
     component: <DetailedListing />,
   },
   {
@@ -109,15 +100,15 @@ const routes = [
     route: "/notifications",
     component: <Notifications />,
   },
+  // {
+  //   type: 'collapse', // Or you can use 'route' if it's not a sub-menu
+  //   name: 'Reservation', // Display name in the menu
+  //   key: 'reservation', // A unique key for the route
+  //   route: '/reservation', // URL path
+  //   component: <Reservation />, // The component to render
+  // },
   {
-    type: 'collapse', // Or you can use 'route' if it's not a sub-menu
-    name: 'Reservation', // Display name in the menu
-    key: 'reservation', // A unique key for the route
-    route: '/reservation', // URL path
-    component: <Reservation />, // The component to render
-  },
-  {
-    type: "collapse",
+    type: "route",
     name: "Sign In",
     key: "sign-in",
     icon: <Icon fontSize="small">login</Icon>,
@@ -133,7 +124,7 @@ const routes = [
     component: <UserProfile />,
   },
   {
-    type: "collapse",
+    type: "route",
     name: "Sign Up",
     key: "sign-up",
     icon: <Icon fontSize="small">assignment</Icon>,

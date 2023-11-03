@@ -64,7 +64,7 @@
                     // Get mobilenet's predicted outcome for the expanded rank tensor, and remove dimensions of 1 afterwards
                     return mobilenet.predict(test_tensor.expandDims()).squeeze();
                 });
-    
+                console.log("feature:", image_features);
                 // Append image feature into array of training data
                 training_data.push(image_features);
             }
@@ -148,6 +148,7 @@
         async function upload_btn_click() {
             alert("Button clicked!");
             const saveResult = await model.save('http://127.0.0.1:5000/upload_model');
+            // await model.save('downloads://test-model');
         }
 
         // Attach the event handler to the button

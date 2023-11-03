@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 
 import Grid from "@mui/material/Grid";
@@ -7,12 +7,13 @@ import Card from "@mui/material/Card";
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
 import MDButton from "components/MDButton";
-import MDSnackbar from "components/MDSnackbar";
 
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Footer from "examples/Footer";
 
+import { AuthContext } from "context";
+import AuthService from "../../services/auth-service";
 import ListingService from "services/listing-service"; 
 import AWSS3Service from "services/aws-s3-service";
 import reservationService from "services/reservation-service";
@@ -20,24 +21,46 @@ import reservationService from "services/reservation-service";
 import WebSocketService from "services/web-listener.js";
 
 
-function FoodListingsTable() {
-  const [infoSB, setInfoSB] = useState(false);
+// function FoodListingsTable() {
+//   const [infoSB, setInfoSB] = useState(false);
+
+function FoodListingsTable({ onUserUpdate }) {
+  const authContext = useContext(AuthContext);
   const [listings, setListings] = useState([]);
+  const [user, setUser] = useState({
+    firstName: "",
+    lastName: "",
+    role: "",
+  });
 
-  const openInfoSB = () => setInfoSB(true);
-  const closeInfoSB = () => setInfoSB(false);
+  const getUserData = async (UserID) => {
+    try {
+      const response = await AuthService.getProfile({ UserID: UserID });
 
-  const renderInfoSB = (
-    <MDSnackbar
-      icon="info"
-      title="Ni mama hen mei"
-      content="This will be linked to Ryan's view listing details"
-      dateTime="5 seconds ago"
-      open={infoSB}
-      onClose={closeInfoSB}
-      close={closeInfoSB}
-    />
-  );
+      if (response) {;
+        const role = response.role;
+        const firstName = response.firstName;
+        const lastName = response.LastName;
+        
+        setUser((prevUser) => ({
+          ...prevUser,
+          firstName,
+          lastName,
+          role,
+        }));
+        
+        onUserUpdate({ firstName, lastName });
+      } else {
+        console.error("User data not found.");
+      }
+    } catch (error) {
+      console.error("An error occurred while fetching user data:", error);
+    }
+  };
+
+  useEffect(() => {
+    getUserData(authContext.userID);
+  }, []);
 
   useEffect(() => {
     const fetchImageForListing = async (listing) => {
@@ -46,18 +69,32 @@ function FoodListingsTable() {
       const imageUrl = URL.createObjectURL(imageBlob);
       return { ...listing, image: imageUrl };
     };
-  
-    ListingService.getAllListing()
-      .then(async (allListings) => {
-        const listingsWithImages = await Promise.all(
-          allListings.map(fetchImageForListing)
-        );
-        setListings(listingsWithImages);
-      })
-      .catch((error) => {
-        console.error("Error fetching listings:", error);
-      });
-  }, []);
+
+    if (user.role === "patron") {
+      ListingService.getAvailableListings(authContext.userID)
+        .then(async (allListings) => {
+          const listingsWithImages = await Promise.all(
+            allListings.map(fetchImageForListing)
+          );
+          setListings(listingsWithImages);
+        })
+        .catch((error) => {
+          console.error("Error fetching listings:", error);
+        });
+    } 
+    else if (user.role === "donor") {
+      ListingService.getAvailableListingsExcludeUser(authContext.userID)
+        .then(async (allListings) => {
+          const listingsWithImages = await Promise.all(
+            allListings.map(fetchImageForListing)
+          );
+          setListings(listingsWithImages);
+        })
+        .catch((error) => {
+          console.error("Error fetching listings for donors:", error);
+        });
+    }
+  }, [user.role, authContext.userID]);
 
   const convertUint8ArrayToBlob = (uint8Array) => {
     return new Blob([uint8Array], { type: 'image/jpeg' });
@@ -155,7 +192,9 @@ function FoodListingsTable() {
                       <MDButton
                         variant="gradient"
                         color="info"
-                        onClick={openInfoSB}
+                        component={Link}
+                        to={`/listings/${listing.listingID}`}
+                        style={{ marginBottom: "1rem", marginTop: "1rem"}}
                         size="medium"
                       >
                         View Item
@@ -183,6 +222,17 @@ function FoodListingsTable() {
 
 function Listings() {
 
+  // const [user, setUser] = useState({
+  //   firstName: "",
+  //   lastName: "",
+  //   role: "",
+  // });
+
+  // // Callback function to update the user data in the parent component
+  // const handleUserUpdate = (userData) => {
+  //   setUser(userData);
+  // };
+
   return (
     <DashboardLayout>
       <DashboardNavbar />
@@ -190,7 +240,7 @@ function Listings() {
         <Grid container spacing={6}>
           <Grid item xs={12}>
             <div style={{ display: "flex", justifyContent: "space-between" }}>
-              <MDTypography variant="h3">Donor's Listings</MDTypography>
+              <MDTypography variant="h3">{user.firstName} {user.lastName}'s Listings</MDTypography>
               <Link to="/donor">
                 <MDButton variant="gradient" color="info">
                   Donate Food
@@ -199,7 +249,7 @@ function Listings() {
             </div>
           </Grid>
           <Grid item xs={12}>
-            <FoodListingsTable />
+            <FoodListingsTable onUserUpdate={handleUserUpdate} />
           </Grid>
         </Grid>
       </MDBox>
