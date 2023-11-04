@@ -1,4 +1,4 @@
-# pip install -U flask flask-cors tensorflow tensorflowjs tensorflow-macos tensorflow-federated
+# pip install -U flask flask-cors tensorflow tensorflowjs tensorflow-federated
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function

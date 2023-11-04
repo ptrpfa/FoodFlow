@@ -1,4 +1,5 @@
-import{ useState, useRef } from "react";
+import{ useState, useRef, useContext } from "react";
+import { Link } from "react-router-dom";
 
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
@@ -12,10 +13,12 @@ import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Footer from "examples/Footer";
 
 import AWSS3Service from "services/aws-s3-service";
+import { useUploadImageContext } from "context";
 
 function DonorForm() {
   const [selectedImage, setSelectedImage] = useState(null);
   const [uploadResponse, setUploadResponse] = useState(null);
+  const { setUploadImageId } = useUploadImageContext();
   const inputRef = useRef(null);
 
   const convertBlobToUint8Array = (blob) => {
@@ -41,7 +44,8 @@ function DonorForm() {
       try {
         const imageArray = await convertBlobToUint8Array(selectedImage);
         const uploadResponse = await AWSS3Service.uploadImage({ imageData: imageArray });
-
+        
+        setUploadImageId(uploadResponse.imageId);
         setUploadResponse(uploadResponse);
       } catch (error) {
         console.error("Error converting image to Uint8Array:", error);
@@ -62,7 +66,7 @@ function DonorForm() {
       <Card>
         <MDBox mx={2} mt={-3} py={3} px={2} variant="gradient" bgColor="info" borderRadius="lg" coloredShadow="info">
           <MDTypography variant="h6" color="white">
-            Photo of Food item
+            {"(1/2)"} Photo of Food item
           </MDTypography>
         </MDBox>
         <MDBox pt={3} ml={2}>
@@ -99,14 +103,15 @@ function DonorForm() {
           )}
         </MDBox>
         <Grid item xs={12} style={{ display: "flex", justifyContent: "flex-end", margin: "20px 20px 20px 0" }}>
-          <MDButton
-            variant="gradient"
-            color="info"
-            disabled={!uploadResponse || !uploadResponse.valid}
-            route="/next-page" // TO ROUTE TO PETER'S FEDERATED LEARNING
-          >
-            Next
-          </MDButton>
+          <Link to="/upload/donate">
+            <MDButton
+              variant="gradient"
+              color="info"
+              disabled={!uploadResponse || !uploadResponse.valid}
+            >
+              Next
+            </MDButton>
+          </Link>
         </Grid>
       </Card>
     </div>

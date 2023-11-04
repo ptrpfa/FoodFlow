@@ -6,6 +6,7 @@ import Card from "@mui/material/Card";
 
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
+import MDSnackbar from "components/MDSnackbar";
 import MDButton from "components/MDButton";
 
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
@@ -16,7 +17,13 @@ import { AuthContext } from "context";
 import AuthService from "../../services/auth-service";
 import ListingService from "services/listing-service"; 
 import AWSS3Service from "services/aws-s3-service";
-// import reservationService from "services/reservation-service";
+import reservationService from "services/reservation-service";
+
+import WebSocketService from "services/web-listener.js";
+
+
+// function FoodListingsTable() {
+//   const [infoSB, setInfoSB] = useState(false);
 
 function FoodListingsTable({ onUserUpdate }) {
   const authContext = useContext(AuthContext);
@@ -95,20 +102,48 @@ function FoodListingsTable({ onUserUpdate }) {
   };
 
   const groupedListings = [];
+  
   for (let i = 0; i < listings.length; i += 3) {
     groupedListings.push(listings.slice(i, i + 3));
   }
 
-  const handleReservation = () => {
-    // reservationService.makeReservation("This is a test reservation.")
-    //   .then(data => {
-    //     setMessage(data.message);
-    //   })
-    //   .catch(error => {
-    //     console.error("Reservation failed:", error);
-    //     setMessage("Reservation failed");
-    //   });
+  const [message, setMessage] = useState("");
+  const handleReservation = (product_id) => {
+    const quantity = 5;
+    reservationService.makeReservation(product_id, quantity)
+      // .then(data => {
+      //   setMessage(data.message);
+      // })
+      .catch(error => {
+        console.log("Reservation failed:", error);
+        setMessage("Reservation failed");
+      });
   }
+
+  const [messageSnackbar, setMessageSnackbar] = useState({ open: false, message: "" });
+  const closeMessageSnackbar = () => {
+    setMessageSnackbar({ open: false, message: "" });
+  }
+
+  const webSocketService = new WebSocketService();
+
+  webSocketService.onmessage = (message) => {
+
+    // Update the state to open the MDSnackbar with the received message
+    setMessageSnackbar({ open: true, message: message });
+
+    
+  };
+
+  const renderServerSB = (<MDSnackbar
+    icon="info"
+    title="Server Message:"
+    content={messageSnackbar.message}
+    dateTime="5 seconds ago"
+    open={messageSnackbar.open}
+    onClose={closeMessageSnackbar}
+    close={closeMessageSnackbar}
+  />);
 
   return (
     <div>
@@ -127,45 +162,54 @@ function FoodListingsTable({ onUserUpdate }) {
             Available Donated Food
           </MDTypography>
         </MDBox>
-        <MDBox pt={3}>
+        <MDBox pt={7}>
           {groupedListings.map((rowListings, rowIndex) => (
-            <Grid container spacing={2} key={rowIndex}>
+            <Grid container spacing={8} key={rowIndex}>
               {rowListings.map((listing, index) => (
                 <Grid item xs={4} key={index}>
-                    <Card style={{ margin: "8px"}}>
-                      <MDBox p={2}>
-                        <MDTypography variant="h6">{listing.name}</MDTypography>
-                        <div style={{ display: 'flex', justifyContent: 'center', margin: "0.5rem", height:"12rem"}}>
-                          <img 
-                            src={listing.image}
-                            style={{ maxWidth: "70%", maxHeight: "70%", margin:"auto"}}
-                            alt={listing.name}
-                          />
-                        </div>
-                        <div style={{height:"3rem", }}>
-                          <MDTypography style={{ fontStyle: 'italic', fontSize:"1rem" }}>{listing.description}</MDTypography>
-                        </div>
-                        <MDButton
-                          variant="gradient"
-                          color="info"
-                          component={Link}
-                          to={`/listings/${listing.listingID}`}
-                          style={{ marginBottom: "1rem", marginTop: "1rem"}}
-                          fullWidth
+                  <Card style={{ margin: "8px"}}>
+                      <MDBox p={9}>
+                        <MDBox
+                        mx={3}
+                        mt={-13}
+                        mb={3}
+                        ml={0}
+                        mr={0}
+                        py={1}
+                        px={4}
+                        variant="gradient"
+                        borderRadius="lg"
+                        coloredShadow="info"
                         >
-                          View Details
-                        </MDButton>
-                        {}
-                        <MDButton
-                          variant="gradient"
-                          color="warning"
-                          onClick={handleReservation}
-                          fullWidth
-                        >
-                          Reserve
-                        </MDButton>
+                        <img 
+                          src={listing.image}
+                          style={{  width: "100%", height: "100%" }}
+                          alt={listing.name}
+                        />
                       </MDBox>
-                    </Card>
+                      <MDTypography variant="h5">{listing.name}</MDTypography>
+                      
+                      <MDTypography>{listing.description}</MDTypography>
+                      <MDButton
+                        variant="gradient"
+                        color="info"
+                        component={Link}
+                        to={`/listings/${listing.listingID}`}
+                        style={{ marginBottom: "1rem", marginTop: "1rem"}}
+                        size="medium"
+                      >
+                        View Item
+                      </MDButton>
+                      <MDButton
+                        variant="gradient"
+                        color="info"
+                        onClick={() => handleReservation(listing.listingID)}
+                      >
+                        Reserve
+                      </MDButton>
+                      {renderServerSB}
+                    </MDBox>
+                  </Card>
                 </Grid>
               ))}
             </Grid>
@@ -177,6 +221,7 @@ function FoodListingsTable({ onUserUpdate }) {
 }
 
 function Listings() {
+
   const [user, setUser] = useState({
     firstName: "",
     lastName: "",

@@ -36,8 +36,8 @@ Coded by www.creative-tim.com
 */
 
 // Material Dashboard 2 React layouts
-import Listings from "layouts/listings";
-import Reserved from "layouts/reserved";
+import Listings from "layouts/listings/available";
+import Reserved from "layouts/listings/reserved";
 import DetailedListing from "layouts/detailed-listing";
 
 import Notifications from "layouts/notifications";
@@ -50,9 +50,8 @@ import Register from "auth/register";
 import ForgotPassword from "auth/forgot-password";
 import ResetPassword from "auth/reset-password";
 
-import Donor from "layouts/donor";
-
-// import Reservation from "layouts/reservation";
+import UploadFood from "layouts/donor/upload";
+import DonateFood from "layouts/donor/create";
 
 // @mui icons
 import Icon from "@mui/material/Icon";
@@ -87,10 +86,18 @@ const routes = [
   {
     type: "collapse",
     name: "Donate",
-    key: "donor",
+    key: "upload",
     icon: <Icon fontSize="small">assignment</Icon>,
-    route: "/donor",
-    component: <Donor />,
+    route: "/upload",
+    component: <UploadFood />,
+  },
+  {
+    type: "route",
+    name: "Donate",
+    key: "donate",
+    icon: <Icon fontSize="small">assignment</Icon>,
+    route: "/upload/donate",
+    component: <DonateFood />,
   },
   {
     type: "collapse",
@@ -100,13 +107,6 @@ const routes = [
     route: "/notifications",
     component: <Notifications />,
   },
-  // {
-  //   type: 'collapse', // Or you can use 'route' if it's not a sub-menu
-  //   name: 'Reservation', // Display name in the menu
-  //   key: 'reservation', // A unique key for the route
-  //   route: '/reservation', // URL path
-  //   component: <Reservation />, // The component to render
-  // },
   {
     type: "route",
     name: "Sign In",

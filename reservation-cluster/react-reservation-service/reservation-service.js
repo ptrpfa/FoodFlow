@@ -8,9 +8,17 @@ const port = 5003;
 const client = new kafka.KafkaClient({ kafkaHost: "kafka-service-1:29092" });
 const producer = new kafka.Producer(client);
 
+const WebSocket = require('ws');
+const reservationServerSocket = new WebSocket('ws://host.docker.internal:8282');
+
 // Create a Kafka Producer
 producer.on("ready", () => {
   console.log("Kafka producer is ready");
+});
+
+
+reservationServerSocket.on('open', () => {
+  console.log('Connected to WebSocket server');
 });
 
 // Handle producer errors
@@ -27,10 +35,7 @@ app.post("/reservation/create", (req, res) => {
   // Produce a reservation event to Kafka with all the necessary data
   const reservationData = {
     action: "create",
-    UserID,
-    ListingID,
-    Datetime,
-    Remarks,
+
   };
 
   // Produce to the reservation-topic
@@ -83,6 +88,21 @@ app.post("/reservation/create", (req, res) => {
         } else {
           console.log("Message sent successfully:", data);
           console.log("Reservation request sent to the database service");
+            //Simulate a new reservation being produced
+            const newReservation = {
+              msg_id: 123,
+              product_id: 12,
+              payload: 'Product Recieved',
+              sender: 'reservation-controller'
+              // Add other reservation details here
+            };
+            
+            // Convert the reservation to a JSON string
+            const reservationMessage = JSON.stringify(newReservation);
+
+            // Send the reservation message to the WebSocket server
+            reservationServerSocket.send(reservationMessage);
+
           res.status(200).json({
             message: "Reservation request sent",
             reservation: reservationData,

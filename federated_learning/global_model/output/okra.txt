@@ -1,0 +1,89 @@
+
+
+Preparing training data image features..
+
+Training data image features loaded!
+
+__________________________________________________________________________________________
+Layer (type)                Input Shape               Output shape              Param #   
+==========================================================================================
+dense_Dense1 (Dense)        [[null,1024]]             [null,128]                131200    
+__________________________________________________________________________________________
+dense_Dense2 (Dense)        [[null,128]]              [null,2]                  258       
+==========================================================================================
+Total params: 131458
+Trainable params: 131458
+Non-trainable params: 0
+__________________________________________________________________________________________
+
+Training model..
+
+Epoch 1 / 10
+875ms 1124us/step - acc=0.919 loss=0.196 
+0 { loss: 0.19553402066230774, acc: 0.9190231561660767 }
+Epoch 2 / 10
+733ms 942us/step - acc=0.952 loss=0.105 
+1 { loss: 0.10544300079345703, acc: 0.9524421691894531 }
+Epoch 3 / 10
+718ms 922us/step - acc=0.991 loss=0.0377 
+2 { loss: 0.037692926824092865, acc: 0.9910025596618652 }
+Epoch 4 / 10
+692ms 890us/step - acc=0.994 loss=0.0179 
+3 { loss: 0.017892759293317795, acc: 0.9935732483863831 }
+Epoch 5 / 10
+703ms 904us/step - acc=0.996 loss=0.0175 
+4 { loss: 0.017451969906687737, acc: 0.9961439371109009 }
+Epoch 6 / 10
+677ms 870us/step - acc=0.999 loss=7.93e-3 
+5 { loss: 0.007933152839541435, acc: 0.9987146258354187 }
+Epoch 7 / 10
+673ms 865us/step - acc=0.999 loss=4.25e-3 
+6 { loss: 0.004247750621289015, acc: 0.9987146258354187 }
+Epoch 8 / 10
+677ms 870us/step - acc=0.995 loss=9.14e-3 
+7 { loss: 0.00913557130843401, acc: 0.9948586225509644 }
+Epoch 9 / 10
+667ms 858us/step - acc=1.00 loss=1.79e-3 
+8 { loss: 0.001786274602636695, acc: 1 }
+Epoch 10 / 10
+666ms 856us/step - acc=1.00 loss=5.96e-4 
+9 { loss: 0.0005960252601653337, acc: 1 }
+
+Model trained!
+
+Model saved!
+
+Testing model..
+
+False Prediction: Rotten with 57.96823501586914% confidence (Actual: Fresh)
+File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/okra/test/fresh/o_f042.png
+
+False Prediction: Rotten with 99.18823838233948% confidence (Actual: Fresh)
+File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/okra/test/fresh/o_f256.png
+
+False Prediction: Rotten with 82.39461183547974% confidence (Actual: Fresh)
+File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/okra/test/fresh/o_f510.png
+
+False Prediction: Rotten with 90.44856429100037% confidence (Actual: Fresh)
+File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/okra/test/fresh/o_f563.png
+
+False Prediction: Fresh with 83.33723545074463% confidence (Actual: Rotten)
+File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/okra/test/rotten/o_r138.png
+
+False Prediction: Fresh with 94.72950100898743% confidence (Actual: Rotten)
+File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/okra/test/rotten/o_r189.png
+
+False Prediction: Fresh with 83.33723545074463% confidence (Actual: Rotten)
+File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/okra/test/rotten/o_r247.png
+
+False Prediction: Fresh with 94.72950100898743% confidence (Actual: Rotten)
+File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/okra/test/rotten/o_r298.png
+
+Confusion Matrix:
+Test Size: 195
+Accuracy: 95.90%
+Miss: 4.10%
+True Fresh: 123 (63.08%)
+False Fresh: 4 (2.05%)
+True Rotten: 64 (32.82%)
+False Rotten: 4 (2.05%)
