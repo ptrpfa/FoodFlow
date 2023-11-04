@@ -81,9 +81,9 @@
                 optimizer: 'adam',
                 // Use the correct loss function. If 2 classes of data, must use binaryCrossentropy.
                 // Else categoricalCrossentropy is used if more than 2 classes.
-                loss: (CLASS_NAMES.length === 2) ? 'binaryCrossentropy': 'categoricalCrossentropy', 
+                loss: (CLASS_NAMES.length === 2) ? 'binaryCrossentropy' : 'categoricalCrossentropy',
                 // As this is a classification problem you can record accuracy in the logs too!
-                metrics: ['accuracy']  
+                metrics: ['accuracy']
             });
         }
 
@@ -157,32 +157,27 @@
             let training_data = [];     // Store image features of training images
             let training_output = [];   // Store classification output of training images
 
-            // Perform some data augmentation
+            // Augment training tensor for more diversity in training data (instead of just one basic tensor from the image)
+            for(let degree = 0; degree < 360; degree+=15) {
+                // Obtain image features
+                let image_features = tf.tidy(function () {
+                    // Create tensor from image
+                    let test_tensor = tf.browser.fromPixels(test_img);
 
-            // Prepare training data
+                    // Augment tensor by rotating it every 15 degrees
+                    test_tensor = tf.image.rotateWithOffset(test_tensor.toFloat().expandDims(), degree * (Math.PI / 180)).squeeze();
 
-            // Update image (TEMPORARY)
-            // train_img.src = training_data_files[i];
-            // Ensure image is loaded before moving on
-            // await new Promise((resolve) => train_img.onload = resolve);
+                    // Resize tensor (value of data is between 0-255) and ensure all values are between 0 and 1 (for inputs into mobilenet model)
+                    test_tensor = tf.image.resizeBilinear(test_tensor, [224, 224], true).div(255);
 
-            // Obtain image features
-            let image_features = tf.tidy(function () {
-                // Create tensor from image
-                let test_tensor = tf.browser.fromPixels(test_img);
-
-                // Resize tensor (value of data is between 0-255) and ensure all values are between 0 and 1 (for inputs into mobilenet model)
-                test_tensor = tf.image.resizeBilinear(test_tensor, [224, 224], true).div(255);
-
-                // Get mobilenet's predicted outcome for the expanded rank tensor, and remove dimensions of 1 afterwards
-                return mobilenet.predict(test_tensor.expandDims()).squeeze();
-            });
-            console.log(image_features);
-            // Append image feature into array of training data
-            training_data.push(image_features);
-            training_output.push(correct_classification);
-            console.log(training_data);
-            console.log(training_output);
+                    // Get mobilenet's predicted outcome for the expanded rank tensor, and remove dimensions of 1 afterwards
+                    return mobilenet.predict(test_tensor.expandDims()).squeeze();
+                });
+                // Append image feature into array of training data
+                training_data.push(image_features);
+                training_output.push(correct_classification);
+            }
+            
             /* Model Training */
             // Shuffle training data
             tf.util.shuffleCombo(training_data, training_output);
@@ -195,7 +190,7 @@
 
             // Train classification head
             console.log("Training model locally on client device..")
-            await model.fit(input_tensor, onehot_output, { shuffle: true, batchSize: 5, epochs: 1000, callbacks: { onEpochEnd: (epoch, log) => console.log(epoch, log) } });
+            await model.fit(input_tensor, onehot_output, { shuffle: true, batchSize: 5, epochs: 10, callbacks: { onEpochEnd: (epoch, log) => console.log(epoch, log) } });
 
             // Dispose temporary tensors to release the WebGL memory allocated
             output_tensor.dispose();
