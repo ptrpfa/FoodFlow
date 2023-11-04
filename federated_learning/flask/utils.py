@@ -25,10 +25,10 @@ class ModelReceiver(object):
     weights_content = self._weight_bytes.read()
     
     # Save to file
-    with open("models/model.json", "wb") as json_file:
-            json_file.write(json_content)
-    with open("models/model.weights.bin", "wb") as weights_file:
-        weights_file.write(weights_content)
+    with open("models/saved/model.json", "wb") as json_file:
+      json_file.write(json_content)
+    with open("models/saved/weights.bin", "wb") as weights_file:
+      weights_file.write(weights_content)
 
     # Return deserialised model to caller
     return tfjs.converters.deserialize_keras_model(json_content, weight_data=[weights_content], use_unique_name_scope=True)

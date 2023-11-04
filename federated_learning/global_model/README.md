@@ -21,13 +21,13 @@ subset.js (Supplementary program used for training and testing models over a sub
 
 ### Program Usage
 ---
-| Note: Tensorflow, TensorflowJS, Tensorflow Federated is best suited to run on Windows or Linux based devices. It is unable to run properly on Silicon-based Mac devices. Running the program on a Linux-based server with `Python` and `NodeJS` installed is preferred.
+| Note: Tensorflow, TensorflowJS, Tensorflow Federated is best suited to run on Windows or Linux based devices. It is unable to run properly on Silicon-based Mac devices. Running the program on a **Linux-based server** with `Python` and `NodeJS` installed is preferred.
 
 1. Install all necessary programs and libraries (`Python` and `NodeJS`)
     ```
     # Debian-based Linux Installation (perform your own form of installations if installing on another type of device)
     sudo apt update
-    sudo apt-get -y install build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev python3 python3-pip git
+    sudo apt-get -y install build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev git
     sudo apt-get install -y ca-certificates curl gnupg
     sudo mkdir -p /etc/apt/keyrings
     curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
@@ -43,14 +43,8 @@ subset.js (Supplementary program used for training and testing models over a sub
 
     OR
 
-    npm install # Ensure you are within this directory with package.json
-
-    # Python
-    pip3 install -U flask flask-cors tensorflow tensorflowjs tensorflow-federated
-
-    OR
-
-    pip3 install -r requirements.txt # Ensure you are within the directory with requirements.txt
+    # Ensure you are within this directory with package.json
+    npm install
     ```
 
 3. The global model has already been pre-trained ahead of time and you should normally not need to re-train it again. However, if you choose to re-train the global model, run the following command:
