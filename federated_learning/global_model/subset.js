@@ -1,10 +1,10 @@
 /* 
-    Program used to train an overall global model using the entire dataset.
+    Program used to train smaller models for each subset of the dataset (ie apple model for apples dataset, okra model for okra dataset etc).
+    Ensure that MODEL_PATH, train_folder and test_folder are modified according to the subset chosen!
 */
 
 // Imports
 const fs = require('fs').promises;
-const sfs = require('fs');
 const path = require('path');
 const { createCanvas, Image } = require('canvas');
 const tf = require('@tensorflow/tfjs-node');
@@ -18,42 +18,21 @@ const IMAGE_WIDTH = 224;
 const IMAGE_HEIGHT = 224;
 const MODEL_URL = 'https://tfhub.dev/google/tfjs-model/imagenet/mobilenet_v3_small_100_224/feature_vector/5/default/1';
 const CLASS_NAMES = ['Fresh', 'Rotten'];
-const MODEL_PATH = 'file://./models/global';
+const MODEL_PATH = 'file://./models/tomato';
 
 // Training files
-var train_folder = undefined;        
+var train_folder = path.join(__dirname, 'dataset/vegetables/tomato/train');        
 var training_data_files = [];
 var training_data = [];   // Array to store image features of training data
 var training_output = []; // Array to store binary classification of training data
 
 // Test files
-var test_folder = undefined;        
+var test_folder = path.join(__dirname, 'dataset/vegetables/tomato/test');        
 var test_data_files = [];   
 var test_output = [];     // Array to store binary classification of test data
 
 // Metrics
 var confusion_matrix = [[0,0],[0,0]]; // 0:0 Fresh:True, 0:1 Fresh:False, 1:0 Rotten:False, 1:1 Rotten:True
-
-// Function to prepare global dataset
-async function prepare_global_files(current_folder) {
-    var files = sfs.readdirSync(current_folder);
-    for (const file of files) {
-        // Prepare file paths
-        var folder = path.join(current_folder, file);
-        var train_folder = path.join(folder, "train");
-        var test_folder = path.join(folder, "test");
-        console.log(`Preparing training and testing files for /${folder} folder..`);
-
-        // Preload training and testing arrays
-        await prepare_files(train_folder, training_data_files, training_output);
-        await prepare_files(test_folder, test_data_files, test_output);
-
-        // Debugging
-        console.log(`/${folder} files prepared!\n`);
-        console.log(`Size of training dataset: ${training_data_files.length}`);
-        console.log(`Size of test dataset: ${test_data_files.length}\n`);
-    }
-}
 
 // Function to preload training and test arrays
 async function prepare_files(folder_name, data_files, output) {
@@ -181,7 +160,6 @@ async function train_ml() {
     // Save model
     await model.save(MODEL_PATH);
     console.log("\nModel saved!");
-
 }
 
 // Function to load pre-saved model and test it (classification head)
@@ -247,7 +225,7 @@ async function test_model() {
     const false_rotten = ((falseNegative / test_data_files.length) * 100);
     const accuracy = (parseFloat(true_fresh) + parseFloat(true_rotten));
     const miss = (parseFloat(false_fresh) + parseFloat(false_rotten));
-    
+
     // Precision: Ratio of true positives to the sum of true positives and false positives. It measures the model's ability to correctly classify positive instances and minimize false positives. It is essential when minimizing false positives is critical.
     const precision = (truePositive / (truePositive + falsePositive));
     // Recall (Sensitivity or True Positive Rate): Ratio of true positives to the sum of true positives and false negatives. It measures the model's ability to correctly identify positive instances, minimizing false negatives. Recall is crucial when missing positive instances is undesirable.
@@ -271,22 +249,24 @@ async function test_model() {
     console.log(`Recall: ${recall.toFixed(2)}`);
     console.log(`Specificity: ${specificity.toFixed(2)}`);
     console.log(`F1 Score: ${f1Score.toFixed(2)}`);
+
 }
 
 // Program entrypoint
 async function main() {
     // Preload training and testing arrays
-    await prepare_global_files("dataset/fruits");
-    await prepare_global_files("dataset/vegetables");
+    await prepare_files(train_folder, training_data_files, training_output);
+    await prepare_files(test_folder, test_data_files, test_output);
 
     // Prepare mobilenet pre-trained model
     await prepare_mobilenet();
 
     // Function to train model (classification head)
-    await train_ml();
+    await train_ml(); // Comment this line out if you plan to just measure a specific model's performance
 
     // Function to load and test model (classification head)
     test_model();
+    
 }
 
 // Call main function
