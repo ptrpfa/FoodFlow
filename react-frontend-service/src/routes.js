@@ -80,7 +80,7 @@ const routes = [
     name: "Detailed Listing",
     key: "detailed-listing",
     icon: <Icon fontSize="small">receipt_long</Icon>,
-    route: "/listings/:listingId",
+    route: "/listings/:listingID",
     component: <DetailedListing />,
   },
   {
