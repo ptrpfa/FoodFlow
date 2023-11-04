@@ -18,6 +18,7 @@ import { useUploadImageContext } from "context";
 function DonorForm() {
   const [selectedImage, setSelectedImage] = useState(null);
   const [uploadResponse, setUploadResponse] = useState(null);
+  const [uploadingImage, setUploadingImage] = useState(false);
   const { setUploadImageId } = useUploadImageContext();
   const inputRef = useRef(null);
 
@@ -40,6 +41,7 @@ function DonorForm() {
   };
 
   const handleImageUpload = async () => {
+    setUploadingImage(true);
     if (selectedImage) {
       try {
         const imageArray = await convertBlobToUint8Array(selectedImage);
@@ -51,6 +53,7 @@ function DonorForm() {
         console.error("Error converting image to Uint8Array:", error);
       }
     }
+    setUploadingImage(false);
   };
 
   const handleImageChange = (event) => {
@@ -80,27 +83,53 @@ function DonorForm() {
             >
               Choose Image
             </MDButton>
-            <MDButton variant="gradient" color="info" onClick={handleImageUpload}>
-              Upload Image
-            </MDButton>
+            { 
+              selectedImage && (
+                uploadingImage ? (
+                  <MDButton variant="gradient" disabled>
+                    Uploading Image...
+                  </MDButton>
+                ) : (
+                  <MDButton variant="gradient" color="info" onClick={handleImageUpload}>
+                    Upload Image
+                  </MDButton>
+                )
+              )
+            }
           </div>
         </MDBox>
         <MDBox pt={3} ml={2} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          {uploadResponse && (
-            <div>
-              <p style={{ color: uploadResponse.valid ? "green" : "red" }}>
-                {uploadResponse.valid ? "Image is a valid food item." : "Image is not a valid food item."}
-              </p>
-            </div>
-          )}
-          {selectedImage ? (
-            <div>
-              <p>Selected Image:</p>
-              <img src={URL.createObjectURL(selectedImage)} alt="Selected Image" style={{ maxWidth: "100%", maxHeight: "200px" }} />
-            </div>
-          ) : (
-            <p style={{ color: "red" }}>No image selected.</p>
-          )}
+          {
+            selectedImage && uploadResponse ? (
+              <>
+                <div>
+                  <p style={{ color: uploadResponse.valid ? "green" : "red" }}>
+                    {uploadResponse.valid ? "Image is a valid food item." : "Image is not a valid food item."}
+                  </p>
+                </div>
+                <div>
+                  <p style={{ textAlign: "center" }}>Selected Image:</p>
+                  <img
+                    src={URL.createObjectURL(selectedImage)}
+                    alt="Selected Image"
+                    style={{ maxWidth: "100%", maxHeight: "200px" }} />
+                </div>
+              </>
+            ) : !selectedImage ? (
+              <p style={{ color: "red" }}>No image selected.</p>
+            ) : (
+              <>
+                <p style={{ color: "red" }}>Click "Upload Image" to continue</p>
+                <div>
+                  <p style={{ textAlign: "center" }}>Selected Image:</p>
+                  <img
+                    src={URL.createObjectURL(selectedImage)}
+                    alt="Selected Image"
+                    style={{ maxWidth: "100%", maxHeight: "200px" }} />
+                </div>
+              </>
+            )
+          }
         </MDBox>
         <Grid item xs={12} style={{ display: "flex", justifyContent: "flex-end", margin: "20px 20px 20px 0" }}>
           <Link to="/upload/donate">

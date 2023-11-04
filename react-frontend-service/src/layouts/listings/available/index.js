@@ -4,6 +4,12 @@ import { Link } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
 import MDButton from "components/MDButton";
@@ -26,6 +32,16 @@ function FoodListingsTable({ onUserUpdate }) {
     lastName: "",
     role: "",
   });
+
+  const [openDialog, setOpenDialog] = useState(false);
+
+  const handleReport = () => {
+    setOpenDialog(true);
+  };
+
+  const handleClose = () => {
+    setOpenDialog(false);
+  };
 
   const getUserData = async (UserID) => {
     try {
@@ -110,6 +126,10 @@ function FoodListingsTable({ onUserUpdate }) {
     //   });
   }
 
+  const handleReportConfirmation = () => {
+    // TRAIN MODEL HERE
+  };
+
   return (
     <div>
       <Card>
@@ -132,40 +152,70 @@ function FoodListingsTable({ onUserUpdate }) {
             <Grid container spacing={2} key={rowIndex}>
               {rowListings.map((listing, index) => (
                 <Grid item xs={4} key={index}>
-                    <Card style={{ margin: "8px"}}>
-                      <MDBox p={2}>
+                  <Card style={{ margin: "8px"}}>
+                    <MDBox p={2}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         <MDTypography variant="h6">{listing.name}</MDTypography>
-                        <div style={{ display: 'flex', justifyContent: 'center', margin: "0.5rem", height:"12rem"}}>
-                          <img 
-                            src={listing.image}
-                            style={{ maxWidth: "70%", maxHeight: "70%", margin:"auto"}}
-                            alt={listing.name}
-                          />
-                        </div>
-                        <div style={{height:"3rem", }}>
-                          <MDTypography style={{ fontStyle: 'italic', fontSize:"1rem" }}>{listing.description}</MDTypography>
-                        </div>
                         <MDButton
                           variant="gradient"
-                          color="info"
-                          component={Link}
-                          to={`/listings/${listing.listingID}`}
-                          style={{ marginBottom: "1rem", marginTop: "1rem"}}
-                          fullWidth
+                          color="error"
+                          onClick={handleReport}
                         >
-                          View Details
+                          Not fresh
                         </MDButton>
-                        {}
-                        <MDButton
-                          variant="gradient"
-                          color="warning"
-                          onClick={handleReservation}
-                          fullWidth
-                        >
-                          Reserve
+                      </div>
+                      <div style={{ display: 'flex', justifyContent: 'center', margin: "0.5rem", height:"12rem"}}>
+                        <img 
+                          src={listing.image}
+                          style={{ maxWidth: "70%", maxHeight: "70%", margin:"auto"}}
+                          alt={listing.name}
+                        />
+                      </div>
+                      <div style={{height:"3rem", }}>
+                        <MDTypography style={{ fontStyle: 'italic', fontSize:"1rem" }}>{listing.description}</MDTypography>
+                      </div>
+                      <MDButton
+                        variant="gradient"
+                        color="info"
+                        component={Link}
+                        to={`/listings/${listing.listingID}`}
+                        style={{ marginBottom: "1rem", marginTop: "1rem"}}
+                        fullWidth
+                      >
+                        View Details
+                      </MDButton>
+                      {}
+                      <MDButton
+                        variant="gradient"
+                        color="warning"
+                        onClick={handleReservation}
+                        fullWidth
+                      >
+                        Reserve
+                      </MDButton>
+                    </MDBox>
+                  </Card>
+                  <Dialog
+                      open={openDialog}
+                      onClose={handleClose}
+                      aria-labelledby="alert-dialog-title"
+                      aria-describedby="alert-dialog-description"
+                    >
+                      <DialogTitle id="alert-dialog-title">
+                        {`Report ${listing.name} as not fresh?`}
+                      </DialogTitle>
+                      <DialogContent>
+                        <DialogContentText id="alert-dialog-description">
+                          Are you sure you want to report this item as not fresh? This action may result in the item being potentially removed from listings if found to be inaccurate or in violation of our freshness standards.
+                        </DialogContentText>
+                      </DialogContent>
+                      <DialogActions>
+                        <MDButton variant="gradient" color="info" onClick={handleClose}>Close</MDButton>
+                        <MDButton  variant="gradient" color="error" onClick={handleReportConfirmation} autoFocus>
+                          Report as not fresh
                         </MDButton>
-                      </MDBox>
-                    </Card>
+                      </DialogActions>
+                    </Dialog>
                 </Grid>
               ))}
             </Grid>
