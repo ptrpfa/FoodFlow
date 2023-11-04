@@ -82,7 +82,7 @@ function DetailedListing(onUserUpdate) {
         const imageUrl = URL.createObjectURL(imageBlob);
         // Update the listing data with the image
         const updatedListing = { ...response, image: imageUrl };
-        setListing([updatedListing]);
+        setListing(updatedListing);
       } catch (error) {
         console.error('Error fetching listing details:', error);
       }
