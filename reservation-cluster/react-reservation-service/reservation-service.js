@@ -27,7 +27,6 @@ producer.on("error", (error) => {
 });
 //create Reservation Request
 app.post("/reservation/create", (req, res) => {
-  console.log("hello Create Function");
   const UserID = req.body.UserID;
   const ListingID = req.body.ListingID;
   const Datetime = new Date();
@@ -117,7 +116,6 @@ app.post("/reservation/create", (req, res) => {
 
 // Delete Reservation Request
 app.delete("/reservation/delete", (req, res) => {
-  console.log("Processing Delete Function");
   const ReservationID = req.body.ReservationID;
 
   // Payload for Kafka message
