@@ -20,6 +20,10 @@ producer.on("ready", () => {
   console.log("Kafka producer is ready");
 });
 
+// reservationServerSocket.on('open', () => {
+//   console.log('Connected to WebSocket server');
+// });
+
 // Handle producer errors
 producer.on("error", (error) => {
   console.error("Kafka producer error:", error);

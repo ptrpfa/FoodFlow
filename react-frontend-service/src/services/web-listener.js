@@ -14,13 +14,14 @@ class WebSocketService {
 
       const server_message = (event.data).toString();
       const reservationMessage = JSON.parse(server_message);
+      console.log(reservationMessage);
       const payload = '';
       
       //Get from localstorage   
       const msg_id  = reservationMessage.msg_id;
       const convo = localStorage.getItem(msg_id);
       const sender = reservationMessage.sender;
-   
+     
       if(convo != null){
         const convo_dict = JSON.parse(convo);
         if(!convo_dict.replies.includes(sender)){
@@ -49,7 +50,7 @@ class WebSocketService {
 
     };
   }
-  
+
   setReservationFailedTimer(msg_id) {
     const timeout = 5000; // 5000 milliseconds (5 seconds) as an example, adjust as needed
     setTimeout(() => {
