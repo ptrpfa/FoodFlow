@@ -67,11 +67,18 @@ File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/veget
 False Prediction: Fresh with 99.71104860305786% confidence (Actual: Rotten)
 File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/cucumber/test/rotten/c_r373.png
 
+~Model Performance~
 Confusion Matrix:
-Test Size: 185
-Accuracy: 97.83%
-Miss: 2.16%
 True Fresh: 99 (53.51%)
 False Fresh: 1 (0.54%)
 True Rotten: 82 (44.32%)
 False Rotten: 3 (1.62%)
+
+Test Size: 185
+Accuracy: 97.84%
+Miss: 2.16%
+
+Precision: 0.99
+Recall: 0.97
+Specificity: 0.99
+F1 Score: 0.98

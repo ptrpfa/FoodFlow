@@ -8,17 +8,9 @@ const port = 5003;
 const client = new kafka.KafkaClient({ kafkaHost: "kafka-service-1:29092" });
 const producer = new kafka.Producer(client);
 
-const WebSocket = require('ws');
-const reservationServerSocket = new WebSocket('ws://host.docker.internal:8282');
-
 // Create a Kafka Producer
 producer.on("ready", () => {
   console.log("Kafka producer is ready");
-});
-
-
-reservationServerSocket.on('open', () => {
-  console.log('Connected to WebSocket server');
 });
 
 // Handle producer errors
@@ -35,7 +27,10 @@ app.post("/reservation/create", (req, res) => {
   // Produce a reservation event to Kafka with all the necessary data
   const reservationData = {
     action: "create",
-
+    UserID,
+    ListingID,
+    Datetime,
+    Remarks,
   };
 
   // Produce to the reservation-topic
@@ -88,21 +83,6 @@ app.post("/reservation/create", (req, res) => {
         } else {
           console.log("Message sent successfully:", data);
           console.log("Reservation request sent to the database service");
-            //Simulate a new reservation being produced
-            const newReservation = {
-              msg_id: 123,
-              product_id: 12,
-              payload: 'Product Recieved',
-              sender: 'reservation-controller'
-              // Add other reservation details here
-            };
-            
-            // Convert the reservation to a JSON string
-            const reservationMessage = JSON.stringify(newReservation);
-
-            // Send the reservation message to the WebSocket server
-            reservationServerSocket.send(reservationMessage);
-
           res.status(200).json({
             message: "Reservation request sent",
             reservation: reservationData,
@@ -165,6 +145,61 @@ app.delete("/reservation/delete", (req, res) => {
     console.error("Kafka producer not ready, cannot send message");
     res.status(500).json({ message: "Kafka producer not ready" });
   }
+});
+
+//Get Reservation Request
+app.get("/reservation/:UserID", (req,res) => {
+  const UserID = req.params.UserID;
+
+  // Payload for Kafka message
+  const reservationData = {
+    action: "get",
+    UserID,
+  };
+
+  const payloads = [
+    {
+      topic: "reservation-topic",
+      messages: JSON.stringify(reservationData),
+    },
+  ];
+
+  let isResponseSent = false;
+  const kafkaTimeout = setTimeout(() => {
+    if (!isResponseSent) {
+      console.error("Kafka producer readiness timeout");
+      res.status(500).json({ message: "Delete reservation failed due to server timeout" });
+      isResponseSent = true;
+    }
+  }, 90000); 
+
+  function sendToKafka() {
+    producer.send(payloads, (error, data) => {
+      clearTimeout(kafkaTimeout); 
+      if (!isResponseSent) {
+        if (error) {
+          console.error("Error sending message to Kafka:", error);
+          res.status(500).json({ message: "Get reservation failed" });
+        } else {
+          console.log("Get reservation request sent successfully:", data);
+          res.status(200).json({
+            message: "Get reservation request sent",
+            reservation: reservationData,
+          });
+        }
+        isResponseSent = true;
+      }
+    });
+  }
+
+  if (producer.ready) {
+    sendToKafka();
+  } else {
+    console.error("Kafka producer not ready, cannot send message");
+    res.status(500).json({ message: "Kafka producer not ready" });
+  }
+
+
 });
 
 app.listen(port, () => {

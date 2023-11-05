@@ -121,11 +121,18 @@ File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/veget
 False Prediction: Fresh with 98.92521500587463% confidence (Actual: Rotten)
 File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/potato/test/rotten/p_r792.png
 
+~Model Performance~
 Confusion Matrix:
-Test Size: 269
-Accuracy: 91.82%
-Miss: 8.18%
 True Fresh: 107 (39.78%)
 False Fresh: 1 (0.37%)
 True Rotten: 140 (52.04%)
 False Rotten: 21 (7.81%)
+
+Test Size: 269
+Accuracy: 91.82%
+Miss: 8.18%
+
+Precision: 0.99
+Recall: 0.84
+Specificity: 0.99
+F1 Score: 0.91

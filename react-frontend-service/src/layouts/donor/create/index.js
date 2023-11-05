@@ -107,7 +107,7 @@ function DonorForm() {
       });
       console.log("Listing in JSON:", data);
   
-      const response = await ListingService.createListing({ data: data });
+      const response = await ListingService.createListing(JSON.parse(data));
       console.log("Listing created:", response);
   
       setUploadResponse({ valid: true, message: "Listing created successfully" });
@@ -151,6 +151,7 @@ function DonorForm() {
                 onChange={handleInputChange}
                 required
                 sx={{ pt: 1, pb: 2 }}
+                
               />
               <TextField
                 name="ExpiryDate"
@@ -162,6 +163,7 @@ function DonorForm() {
                 onChange={handleInputChange}
                 required
                 sx={{ pt: 1, pb: 2 }}
+                shrink
               />
               <TextField
                 name="Category"

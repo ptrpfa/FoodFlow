@@ -85,11 +85,18 @@ File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/fruit
 False Prediction: Fresh with 58.68048071861267% confidence (Actual: Rotten)
 File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/oranges/test/rotten/translation_Screen Shot 2018-06-12 at 11.32.41 PM.png
 
+~Model Performance~
 Confusion Matrix:
-Test Size: 771
-Accuracy: 98.70%
-Miss: 1.30%
 True Fresh: 366 (47.47%)
 False Fresh: 5 (0.65%)
 True Rotten: 395 (51.23%)
 False Rotten: 5 (0.65%)
+
+Test Size: 771
+Accuracy: 98.70%
+Miss: 1.30%
+
+Precision: 0.99
+Recall: 0.99
+Specificity: 0.99
+F1 Score: 0.99
