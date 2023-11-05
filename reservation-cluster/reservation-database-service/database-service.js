@@ -84,6 +84,7 @@ consumer.on('message', async (message) => {
          console.error("Error processing reservation retrieval:", error);
        }
        //send the response over to react
+       //connect socket
 
 });
 

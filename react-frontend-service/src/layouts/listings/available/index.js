@@ -23,6 +23,7 @@ import AuthService from "../../../services/auth-service";
 import ListingService from "services/listing-service"; 
 import AWSS3Service from "services/aws-s3-service";
 import reservationService from "services/reservation-service";
+import WebSocketService from "services/web-listener";
 
 function FoodListingsTable({ onUserUpdate }) {
   const authContext = useContext(AuthContext);
@@ -117,6 +118,7 @@ function FoodListingsTable({ onUserUpdate }) {
   }
 
   const handleReservation = (listingID) => {
+    const WebSocket = new WebSocketService()
     reservationService.makeReservation(authContext.userID, listingID)
       .then(data => {
         setMessage(data.message);
@@ -125,6 +127,7 @@ function FoodListingsTable({ onUserUpdate }) {
         console.error("Reservation failed:", error);
         setMessage("Reservation failed");
       });
+     WebSocket.socket.close() 
   };
 
   const handleReportConfirmation = () => {

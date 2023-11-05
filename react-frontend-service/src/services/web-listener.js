@@ -36,6 +36,14 @@ class WebSocketService {
 
       // Call the onmessage callback if it is defined
       if (this.onmessage) {
+      // const reservationMessage = JSON.parse(event.data); 
+      // const message = reservationMessage.payload;
+      // console.log('Received message:', message);
+      
+      // // Call the onmessage callback if it is defined
+      // if (this.onmessage) {
+      //   this.onmessage(message, false); // Assuming it's not binary
+      // }
         this.onmessage(reservationMessage.payload, false); // Assuming it's not binary
       }
 
