@@ -47,7 +47,8 @@ function DonorForm() {
         const imageArray = await convertBlobToUint8Array(selectedImage);
         const uploadResponse = await AWSS3Service.uploadImage({ imageData: imageArray });
         
-        setUploadImageId(uploadResponse.imageId);
+        const imageIdWithExtension = uploadResponse.imageId + ".jpg";
+        setUploadImageId(imageIdWithExtension);
         setUploadResponse(uploadResponse);
       } catch (error) {
         console.error("Error converting image to Uint8Array:", error);

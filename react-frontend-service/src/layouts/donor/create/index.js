@@ -97,7 +97,7 @@ function DonorForm() {
       const data = ({
         ...formData,
         UserID: authContext.userID,
-        Image: uploadImageId,
+        Image: uploadImageId, 
         Datetime: formattedDatetime,
         ExpiryDate: formattedExpiryDate,
         PickUpStartDate: formattedPickUpStartDate,
@@ -105,12 +105,13 @@ function DonorForm() {
         PickUpStartTime: formattedPickUpStartTime,
         PickUpEndTime: formattedPickUpEndTime,
       });
-      console.log("Listing in JSON:", data);
   
-      const response = await ListingService.createListing(JSON.parse(data));
+      const response = await ListingService.createListing(data);
       console.log("Listing created:", response);
   
       setUploadResponse({ valid: true, message: "Listing created successfully" });
+
+      window.location.href = '/mylistings';
     } catch (error) {
       console.error("Error creating listing:", error);
   
