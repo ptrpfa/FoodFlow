@@ -39,6 +39,7 @@ Coded by www.creative-tim.com
 import Listings from "layouts/listings/available";
 import Reserved from "layouts/listings/reserved";
 import DetailedListing from "layouts/detailed-listing";
+import UserListings from "layouts/user-listings";
 
 import Notifications from "layouts/notifications";
 import Reservation  from "layouts/reservation";
@@ -58,6 +59,7 @@ import DonateFood from "layouts/donor/create";
 import Icon from "@mui/material/Icon";
 import FastfoodIcon from '@mui/icons-material/Fastfood';
 import FoodBankIcon from '@mui/icons-material/FoodBank';
+import LocalPizzaIcon from '@mui/icons-material/LocalPizza';
 
 const routes = [
   {
@@ -67,6 +69,14 @@ const routes = [
     icon: <FoodBankIcon fontSize="small" />,
     route: "/listings",
     component: <Listings />,
+  },
+  {
+    type: "collapse",
+    name: "My listings",
+    key: "mylistings",
+    icon: <LocalPizzaIcon fontSize="small" />,
+    route: "/mylistings",
+    component: <UserListings />,
   },
   {
     type: "collapse",

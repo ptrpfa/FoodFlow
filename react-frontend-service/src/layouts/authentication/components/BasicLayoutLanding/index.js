@@ -86,7 +86,7 @@ function BasicLayout({ image, children }) {
                     width="80%"
                   >
                     <Typography variant="h3" style={{ color: "white" }}>
-                      Welcome to Food Flow
+                      Welcome to Food Flow<br /> <br />
                     </Typography>
                     <Typography variant="body2" fontWeight="700" style={{ color: "white" }}>
                         You can log in with:
@@ -102,7 +102,8 @@ function BasicLayout({ image, children }) {
                                 style={{ color: "white" }}
                               >
                                 <Typography variant="span" fontWeight="700">
-                                  exampleUser, password123
+                                  exampleUser, password123<br />
+                                  exampleUser2, password123
                                 </Typography>
                               </Typography>
                             }
@@ -112,7 +113,7 @@ function BasicLayout({ image, children }) {
                   </MDBox>
                 </MDBox>
               )}
-              <MDBox px={1} width="100%" mx="auto" paddingTop="1rem">
+              <MDBox px={1} width="100%" mx="auto">
                 <Grid container spacing={1} justifyContent="center" alignItems="center">
                   <Grid item xs={11} sm={9} md={5} lg={4} xl={3}>
                     {children}
