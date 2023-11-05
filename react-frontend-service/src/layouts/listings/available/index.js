@@ -152,7 +152,7 @@ function FoodListingsTable({ onUserUpdate }) {
           {groupedListings.map((rowListings, rowIndex) => (
             <Grid container spacing={2} key={rowIndex}>
               {rowListings.map((listing, index) => (
-                <Grid item xs={4} key={index}>
+                <Grid item xs={4} key={listing.listingID || index}>
                   <Card style={{ margin: "8px"}}>
                     <MDBox p={2}>
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -189,7 +189,7 @@ function FoodListingsTable({ onUserUpdate }) {
                       <MDButton
                         variant="gradient"
                         color="warning"
-                        onClick={handleReservation}
+                        onClick={() => handleReservation(listing.listingID)}
                         fullWidth
                       >
                         Reserve

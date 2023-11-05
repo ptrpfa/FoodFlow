@@ -13,7 +13,7 @@ const reservationService = {
       ListingID: ListingID,
       replies: []
     };
-  
+    console.log(newReservation);
     //Store the payload into local storage
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newReservation));
 
