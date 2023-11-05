@@ -1,7 +1,8 @@
 import { useState, useEffect, useMemo, useContext } from "react";
 
 // react-router components
-import { Routes, Route, Navigate, useLocation, useNavigate } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation, useNavigate, useParams } from "react-router-dom";
+
 
 // @mui material components
 import { ThemeProvider } from "@mui/material/styles";

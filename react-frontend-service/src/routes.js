@@ -54,6 +54,7 @@ import ResetPassword from "auth/reset-password";
 
 import UploadFood from "layouts/donor/upload";
 import DonateFood from "layouts/donor/create";
+import UpdateListing from "layouts/donor/update-listing";
 
 // @mui icons
 import Icon from "@mui/material/Icon";
@@ -93,6 +94,14 @@ const routes = [
     icon: <Icon fontSize="small">receipt_long</Icon>,
     route: "/listings/:listingID",
     component: <DetailedListing />,
+  },
+  {
+    type: "item",
+    name: "Update Listing",
+    key: "update-listing",
+    icon: <Icon fontSize="small">edit</Icon>,
+    route: "/listings/:listingID/update",
+    component: <UpdateListing />,
   },
   {
     type: "collapse",

@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useHistory } from "react-router-dom";
 
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
@@ -42,6 +42,17 @@ function DetailedListing(onUserUpdate) {
     //   });
   }
 
+  const handleDeleteListing = async () => {
+    try {
+      // Call the service function to delete the listing
+      await ListingService.deleteListing({ ListingID: listing.listingID });
+      // You may want to handle any further actions, e.g., displaying a success message.
+    } catch (error) {
+      console.error('Error deleting listing:', error);
+      // Handle any errors that occur during the deletion.
+    }
+  };
+
   useEffect(() => {
     // Fetch user data
     const getUserData = async (UserID) => {
@@ -52,8 +63,6 @@ function DetailedListing(onUserUpdate) {
           const role = response.role;
           const firstName = response.firstName;
           const lastName = response.LastName;
-
-          console.log(UserID);
 
           setUser((prevUser) => ({
             ...prevUser,
@@ -78,12 +87,13 @@ function DetailedListing(onUserUpdate) {
       try {
         const response = await ListingService.getListing({ ListingID: listingID });
         // // Fetch the image for the retrieved listing
-        const imageData = await AWSS3Service.getImage({ imageId: response.image });
-        const imageBlob = convertUint8ArrayToBlob(imageData.imageData);
-        const imageUrl = URL.createObjectURL(imageBlob);
-        // // Update the listing data with the image
-        const updatedListing = { ...response, image: imageUrl };
-        setListing(updatedListing);
+        // const imageData = await AWSS3Service.getImage({ imageId: response.image });
+        // const imageBlob = convertUint8ArrayToBlob(imageData.imageData);
+        // const imageUrl = URL.createObjectURL(imageBlob);
+        // // // Update the listing data with the image
+        // const updatedListing = { ...response, image: imageUrl };
+        // setListing(updatedListing);
+        setListing(response);
       } catch (error) {
         console.error('Error fetching listing details:', error);
       }
@@ -92,6 +102,7 @@ function DetailedListing(onUserUpdate) {
     // Fetch listing data when listingID or user.role changes
     fetchListingDetails();
   }, [listingID, user.role]);
+
 
   return (
     <div>
@@ -113,17 +124,47 @@ function DetailedListing(onUserUpdate) {
                   {listing.name}
                 </MDTypography>
 
-                {/* To Handle Reservation!!!!! */}
-                {authContext.userID === listing?.userID.toString() ? (
-                  null
-                ) : <MDButton
-                variant="gradient"
-                color="warning"
-                onClick={handleReservation}
-              >
-                Reserve
-              </MDButton>}
 
+                {authContext.userID === listing?.userID.toString() ? (
+                  <div>
+                    <MDButton
+                      variant="gradient"
+                      color="light"
+                      component={Link}
+                      to={`/listings/${listing.listingID}/update`}
+                      style={{ marginRight: '10px' }}
+                    >
+                      Update Listing
+                    </MDButton>
+                    <MDButton
+                      variant="gradient"
+                      color="error"
+                      onClick={handleDeleteListing}
+                    >
+                      Delete Listing
+                    </MDButton>
+                  </div>
+                ) : (
+                  // Listing status is available
+                  listing.status === 1 ? (
+                    <MDButton
+                      variant="gradient"
+                      color="warning"
+                      onClick={handleReservation}
+                    >
+                      Reserve
+                    </MDButton>
+                  ) : (
+                    <MDButton
+                      variant="gradient"
+                      color="warning"
+                      onClick={handleReservation}
+                      disabled={true} // the button will appear disabled if status is not 1 (0 or 2)
+                    >
+                      Reserve
+                    </MDButton>
+                  )
+                )}
               </div>
 
             </MDBox>
@@ -131,11 +172,11 @@ function DetailedListing(onUserUpdate) {
               <div style={{ display: 'flex' }}>
                 <div style={{ flex: 1 }}>
                   <div style={{ display: 'flex', justifyContent: 'left', margin: '0.5rem', height: '20rem' }}>
-                    <img
+                    {/* <img
                       src={listing.image}
                       style={{ maxWidth: '90%', maxHeight: '90%', margin: 'auto' }}
                       alt={listing.name}
-                    />
+                    /> */}
                   </div>
                 </div>
 
