@@ -41,6 +41,7 @@ import Reserved from "layouts/listings/reserved";
 import DetailedListing from "layouts/detailed-listing";
 
 import Notifications from "layouts/notifications";
+import Reservation  from "layouts/reservation";
 import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up";
 import UserProfile from "layouts/user-profile";
@@ -106,6 +107,14 @@ const routes = [
     icon: <Icon fontSize="small">notifications</Icon>,
     route: "/notifications",
     component: <Notifications />,
+  },
+  {
+    type: "collapse",
+    name: "Reservations",
+    key: "reservations",
+    icon: <FoodBankIcon fontSize="small" />,
+    route: "/reservations",
+    component: <Reservation />,
   },
   {
     type: "route",

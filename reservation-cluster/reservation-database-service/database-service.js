@@ -80,10 +80,10 @@ consumer.on('message', async (message) => {
          where: { UserID: payload.UserID },
          });
          console.log(`Reservations fetched for User ID ${payload.UserID}:`, reservations);
-
       } catch (error) {
          console.error("Error processing reservation retrieval:", error);
        }
+       //send the response over to react
 
 });
 

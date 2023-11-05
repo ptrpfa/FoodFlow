@@ -16,10 +16,11 @@ import { AuthContext } from "context";
 import AuthService from "../../../services/auth-service";
 import ListingService from "services/listing-service"; 
 import AWSS3Service from "services/aws-s3-service";
-// import reservationService from "services/reservation-service";
+import reservationService from "services/reservation-service";
 
 function FoodListingsTable({ onUserUpdate }) {
   const authContext = useContext(AuthContext);
+  const [message, setMessage] = useState('');
   const [listings, setListings] = useState([]);
   const [user, setUser] = useState({
     firstName: "",
@@ -85,15 +86,15 @@ function FoodListingsTable({ onUserUpdate }) {
     groupedListings.push(listings.slice(i, i + 3));
   }
 
-  const handleReservation = () => {
-    // reservationService.makeReservation("This is a test reservation.")
-    //   .then(data => {
-    //     setMessage(data.message);
-    //   })
-    //   .catch(error => {
-    //     console.error("Reservation failed:", error);
-    //     setMessage("Reservation failed");
-    //   });
+  const handleReservation = (ReservationID) => {
+    reservationService.deleteReservation(ReservationID)
+      .then(data => {
+        setMessage(data.message);
+      })
+      .catch(error => {
+        console.error("Delete failed:", error);
+        setMessage("Delete failed");
+      });
   }
 
   return (
@@ -145,7 +146,7 @@ function FoodListingsTable({ onUserUpdate }) {
                       <MDButton
                         variant="gradient"
                         color="error"
-                        onClick={handleReservation}
+                        onClick={() => handleReservation(listing.listingID)}
                         fullWidth
                       >
                         Cancel

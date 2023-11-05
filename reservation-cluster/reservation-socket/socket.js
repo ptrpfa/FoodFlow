@@ -8,15 +8,16 @@ const server = http.createServer((req, res) => {
 const wss = new WebSocket.Server({ server });
 
 wss.on('connection', (ws) => {
+  console.log('Client connected');
+
   ws.on('message', (message) => {
-    // Handle messages received from clients if needed
-    const msg_relay = message.toString();
+    console.log('Message received:', message);
     console.log(message.toString());
    
-    // Broadcast the received message to all connected clients
+    // Broadcast to all connected clients
     wss.clients.forEach((client) => {
-      if (client !== ws && client.readyState === WebSocket.OPEN) {
-        client.send(msg_relay);
+      if (client.readyState === WebSocket.OPEN) {
+        client.send(message);
       }
     });
   });
