@@ -118,11 +118,19 @@ File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/veget
 False Prediction: Fresh with 96.45171165466309% confidence (Actual: Rotten)
 File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/tomato/test/rotten/DSCN4223.jpg_0_5551.jpg
 
+
+~Model Performance~
 Confusion Matrix:
-Test Size: 737
-Accuracy: 97.15%
-Miss: 2.85%
 True Fresh: 362 (49.12%)
 False Fresh: 10 (1.36%)
 True Rotten: 354 (48.03%)
 False Rotten: 11 (1.49%)
+
+Test Size: 737
+Accuracy: 97.15%
+Miss: 2.85%
+
+Precision: 0.97
+Recall: 0.97
+Specificity: 0.97
+F1 Score: 0.97

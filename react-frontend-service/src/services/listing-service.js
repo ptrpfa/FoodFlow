@@ -19,13 +19,13 @@ class ListingService {
     message.setUserid(data.UserID);
     message.setName(data.Name);
     message.setDatetime(data.Datetime);
-    message.setExpiryDate(data.ExpiryDate);
+    message.setExpirydate(data.ExpiryDate);
     message.setCategory(data.Category);
     message.setDescription(data.Description);
     message.setImage(data.Image);
     message.setPickupaddressfirst(data.PickUpAddressFirst);
-    message.setPickupAddresssecond(data.PickUpAddressSecond);
-    message.setPickupAddressthird(data.PickUpAddressThird);
+    message.setPickupaddresssecond(data.PickUpAddressSecond);
+    message.setPickupaddressthird(data.PickUpAddressThird);
     message.setPickuppostalcode(data.PickUpPostalCode);
     message.setPickupstartdate(data.PickUpStartDate);
     message.setPickupenddate(data.PickUpEndDate);
@@ -315,8 +315,8 @@ class ListingService {
     message.setPickupenddate(payload.pickupenddate);
     message.setPickupstarttime(payload.pickupstarttime);
     message.setPickupendtime(payload.pickupendtime);
-    message.setContactphone(data.ContactPhone);
-    message.setContactemail(data.ContactEmail);
+    message.setContactphone(payload.ContactPhone);
+    message.setContactemail(payload.ContactEmail);
 
     return new Promise((resolve, reject) => {
       // gRPC

@@ -39,7 +39,7 @@ static_resources:
                             cluster: grpc-listing-service
                             max_stream_duration:
                               grpc_timeout_header_max: 0s
-                        - match: { prefix: "/reservation/create" }
+                        - match: { prefix: "/reservation/" }
                           route:
                             cluster: react-reservation
                       cors:

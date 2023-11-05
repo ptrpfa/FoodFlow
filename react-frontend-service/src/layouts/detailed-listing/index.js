@@ -53,6 +53,8 @@ function DetailedListing(onUserUpdate) {
           const firstName = response.firstName;
           const lastName = response.LastName;
 
+          console.log(UserID);
+
           setUser((prevUser) => ({
             ...prevUser,
             firstName,
@@ -67,7 +69,6 @@ function DetailedListing(onUserUpdate) {
         console.error("An error occurred while fetching user data:", error);
       }
     };
-
     getUserData(authContext.userID);
   }, [authContext.userID]);
 
@@ -76,18 +77,18 @@ function DetailedListing(onUserUpdate) {
     const fetchListingDetails = async () => {
       try {
         const response = await ListingService.getListing({ ListingID: listingID });
-        // Fetch the image for the retrieved listing
+        // // Fetch the image for the retrieved listing
         const imageData = await AWSS3Service.getImage({ imageId: response.image });
         const imageBlob = convertUint8ArrayToBlob(imageData.imageData);
         const imageUrl = URL.createObjectURL(imageBlob);
-        // Update the listing data with the image
+        // // Update the listing data with the image
         const updatedListing = { ...response, image: imageUrl };
-        setListing([updatedListing]);
+        setListing(updatedListing);
       } catch (error) {
         console.error('Error fetching listing details:', error);
       }
     };
-  
+
     // Fetch listing data when listingID or user.role changes
     fetchListingDetails();
   }, [listingID, user.role]);
@@ -113,9 +114,16 @@ function DetailedListing(onUserUpdate) {
                 </MDTypography>
 
                 {/* To Handle Reservation!!!!! */}
-                <MDButton variant="gradient" color="warning" onClick={handleReservation}>
-                  Reserve
-                </MDButton>
+                {authContext.userID === listing?.userID.toString() ? (
+                  null
+                ) : <MDButton
+                variant="gradient"
+                color="warning"
+                onClick={handleReservation}
+              >
+                Reserve
+              </MDButton>}
+
               </div>
 
             </MDBox>

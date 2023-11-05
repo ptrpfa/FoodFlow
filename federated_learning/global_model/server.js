@@ -1,5 +1,10 @@
+/* 
+    Program used to train an overall global model using the entire dataset.
+*/
+
 // Imports
 const fs = require('fs').promises;
+const sfs = require('fs');
 const path = require('path');
 const { createCanvas, Image } = require('canvas');
 const tf = require('@tensorflow/tfjs-node');
@@ -13,21 +18,42 @@ const IMAGE_WIDTH = 224;
 const IMAGE_HEIGHT = 224;
 const MODEL_URL = 'https://tfhub.dev/google/tfjs-model/imagenet/mobilenet_v3_small_100_224/feature_vector/5/default/1';
 const CLASS_NAMES = ['Fresh', 'Rotten'];
-const MODEL_PATH = 'file://./models/tomato';
+const MODEL_PATH = 'file://./models/global';
 
 // Training files
-var train_folder = path.join(__dirname, 'dataset/vegetables/tomato/train');        
+var train_folder = undefined;        
 var training_data_files = [];
 var training_data = [];   // Array to store image features of training data
 var training_output = []; // Array to store binary classification of training data
 
 // Test files
-var test_folder = path.join(__dirname, 'dataset/vegetables/tomato/test');        
+var test_folder = undefined;        
 var test_data_files = [];   
 var test_output = [];     // Array to store binary classification of test data
 
 // Metrics
 var confusion_matrix = [[0,0],[0,0]]; // 0:0 Fresh:True, 0:1 Fresh:False, 1:0 Rotten:False, 1:1 Rotten:True
+
+// Function to prepare global dataset
+async function prepare_global_files(current_folder) {
+    var files = sfs.readdirSync(current_folder);
+    for (const file of files) {
+        // Prepare file paths
+        var folder = path.join(current_folder, file);
+        var train_folder = path.join(folder, "train");
+        var test_folder = path.join(folder, "test");
+        console.log(`Preparing training and testing files for /${folder} folder..`);
+
+        // Preload training and testing arrays
+        await prepare_files(train_folder, training_data_files, training_output);
+        await prepare_files(test_folder, test_data_files, test_output);
+
+        // Debugging
+        console.log(`/${folder} files prepared!\n`);
+        console.log(`Size of training dataset: ${training_data_files.length}`);
+        console.log(`Size of test dataset: ${test_data_files.length}\n`);
+    }
+}
 
 // Function to preload training and test arrays
 async function prepare_files(folder_name, data_files, output) {
@@ -154,7 +180,6 @@ async function train_ml() {
 
     // Save model
     await model.save(MODEL_PATH);
-    
     console.log("\nModel saved!");
 
 }
@@ -209,35 +234,50 @@ async function test_model() {
         });
     }
 
-    // Print metrics
-    let true_fresh = ((confusion_matrix[0][0] / test_data_files.length) * 100).toFixed(2);
-    let false_fresh = ((confusion_matrix[0][1] / test_data_files.length) * 100).toFixed(2);
-    let true_rotten = ((confusion_matrix[1][1] / test_data_files.length) * 100).toFixed(2);
-    let false_rotten = ((confusion_matrix[1][0] / test_data_files.length) * 100).toFixed(2);
-    let accuracy = (parseFloat(true_fresh) + parseFloat(true_rotten)).toFixed(2);
-    let miss = (parseFloat(false_fresh) + parseFloat(false_rotten)).toFixed(2);
-    console.log("Confusion Matrix:");
-    console.log(`Test Size: ${test_data_files.length}`);
-    console.log(`Accuracy: ${accuracy}%`);
-    console.log(`Miss: ${miss}%`);    
-    console.log(`True Fresh: ${confusion_matrix[0][0]} (${true_fresh}%)`);
-    console.log(`False Fresh: ${confusion_matrix[0][1]} (${false_fresh}%)`);
-    console.log(`True Rotten: ${confusion_matrix[1][1]} (${true_rotten}%)`);
-    console.log(`False Rotten: ${confusion_matrix[1][0]} (${false_rotten}%)`);
+    /* Model Metrics */
+    const truePositive = confusion_matrix[0][0];
+    const falsePositive = confusion_matrix[0][1];
+    const trueNegative = confusion_matrix[1][1];
+    const falseNegative = confusion_matrix[1][0];
 
+    // Calculate percentages
+    const true_fresh = ((truePositive / test_data_files.length) * 100);
+    const false_fresh = ((falsePositive / test_data_files.length) * 100);
+    const true_rotten = ((trueNegative / test_data_files.length) * 100);
+    const false_rotten = ((falseNegative / test_data_files.length) * 100);
+    const accuracy = (parseFloat(true_fresh) + parseFloat(true_rotten));
+    const miss = (parseFloat(false_fresh) + parseFloat(false_rotten));
+    
+    // Precision: Ratio of true positives to the sum of true positives and false positives. It measures the model's ability to correctly classify positive instances and minimize false positives. It is essential when minimizing false positives is critical.
+    const precision = (truePositive / (truePositive + falsePositive));
+    // Recall (Sensitivity or True Positive Rate): Ratio of true positives to the sum of true positives and false negatives. It measures the model's ability to correctly identify positive instances, minimizing false negatives. Recall is crucial when missing positive instances is undesirable.
+    const recall = (truePositive / (truePositive + falseNegative));
+    // Specificity: Ratio of true negatives to the sum of true negatives and false positives. It measures the model's ability to correctly classify negative instances.
+    const specificity = (trueNegative / (trueNegative + falsePositive));
+    // F1 Score: Harmonic mean of precision and recall. It provides a balance between precision and recall. F1 Score is useful when you want to strike a balance between false positives and false negatives.
+    const f1Score = (2 * (precision * recall) / (precision + recall));
+
+    // Print results
+    console.log("\n~Model Performance~");
+    console.log("Confusion Matrix:");
+    console.log(`True Fresh: ${truePositive} (${true_fresh.toFixed(2)}%)`);
+    console.log(`False Fresh: ${falsePositive} (${false_fresh.toFixed(2)}%)`);
+    console.log(`True Rotten: ${trueNegative} (${true_rotten.toFixed(2)}%)`);
+    console.log(`False Rotten: ${falseNegative} (${false_rotten.toFixed(2)}%)`);
+    console.log(`\nTest Size: ${test_data_files.length}`);
+    console.log(`Accuracy: ${accuracy.toFixed(2)}%`);
+    console.log(`Miss: ${miss.toFixed(2)}%\n`);
+    console.log(`Precision: ${precision.toFixed(2)}`);
+    console.log(`Recall: ${recall.toFixed(2)}`);
+    console.log(`Specificity: ${specificity.toFixed(2)}`);
+    console.log(`F1 Score: ${f1Score.toFixed(2)}`);
 }
 
 // Program entrypoint
 async function main() {
     // Preload training and testing arrays
-    await prepare_files(train_folder, training_data_files, training_output);
-    await prepare_files(test_folder, test_data_files, test_output);
-
-    // Temporary
-    // training_data_files = training_data_files.slice(0, 70).concat(training_data_files.slice(-30));
-    // training_output = training_output.slice(0, 70).concat(training_output.slice(-30));
-    // test_data_files = test_data_files.slice(0, 70).concat(test_data_files.slice(-30));
-    // test_output = test_output.slice(0, 70).concat(test_output.slice(-30));
+    await prepare_global_files("dataset/fruits");
+    await prepare_global_files("dataset/vegetables");
 
     // Prepare mobilenet pre-trained model
     await prepare_mobilenet();
@@ -247,7 +287,6 @@ async function main() {
 
     // Function to load and test model (classification head)
     test_model();
-    
 }
 
 // Call main function

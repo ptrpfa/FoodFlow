@@ -94,6 +94,7 @@ const AuthContextProvider = ({ children }) => {
   const logout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("userid");
+    localStorage.removeItem("reportedListings");
     setIsAuthenticated(false);
     setUserID(null);
     navigate("/auth/login");

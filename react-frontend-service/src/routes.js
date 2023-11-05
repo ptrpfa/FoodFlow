@@ -39,8 +39,10 @@ Coded by www.creative-tim.com
 import Listings from "layouts/listings/available";
 import Reserved from "layouts/listings/reserved";
 import DetailedListing from "layouts/detailed-listing";
+import UserListings from "layouts/user-listings";
 
 import Notifications from "layouts/notifications";
+import Reservation  from "layouts/reservation";
 import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up";
 import UserProfile from "layouts/user-profile";
@@ -57,6 +59,7 @@ import DonateFood from "layouts/donor/create";
 import Icon from "@mui/material/Icon";
 import FastfoodIcon from '@mui/icons-material/Fastfood';
 import FoodBankIcon from '@mui/icons-material/FoodBank';
+import LocalPizzaIcon from '@mui/icons-material/LocalPizza';
 
 const routes = [
   {
@@ -66,6 +69,14 @@ const routes = [
     icon: <FoodBankIcon fontSize="small" />,
     route: "/listings",
     component: <Listings />,
+  },
+  {
+    type: "collapse",
+    name: "My listings",
+    key: "mylistings",
+    icon: <LocalPizzaIcon fontSize="small" />,
+    route: "/mylistings",
+    component: <UserListings />,
   },
   {
     type: "collapse",
@@ -80,7 +91,7 @@ const routes = [
     name: "Detailed Listing",
     key: "detailed-listing",
     icon: <Icon fontSize="small">receipt_long</Icon>,
-    route: "/listings/:listingId",
+    route: "/listings/:listingID",
     component: <DetailedListing />,
   },
   {
@@ -106,6 +117,14 @@ const routes = [
     icon: <Icon fontSize="small">notifications</Icon>,
     route: "/notifications",
     component: <Notifications />,
+  },
+  {
+    type: "collapse",
+    name: "Reservations",
+    key: "reservations",
+    icon: <FoodBankIcon fontSize="small" />,
+    route: "/reservations",
+    component: <Reservation />,
   },
   {
     type: "route",

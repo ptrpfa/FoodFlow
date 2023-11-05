@@ -58,11 +58,18 @@ Testing model..
 False Prediction: Fresh with 99.40540194511414% confidence (Actual: Rotten)
 File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/capsicum/test/rotten/IMG_20200901_181736.jpg_0_4478.jpg
 
+~Model Performance~
 Confusion Matrix:
-Test Size: 379
-Accuracy: 99.73%
-Miss: 0.26%
 True Fresh: 198 (52.24%)
 False Fresh: 0 (0.00%)
 True Rotten: 180 (47.49%)
 False Rotten: 1 (0.26%)
+
+Test Size: 379
+Accuracy: 99.74%
+Miss: 0.26%
+
+Precision: 1.00
+Recall: 0.99
+Specificity: 1.00
+F1 Score: 1.00

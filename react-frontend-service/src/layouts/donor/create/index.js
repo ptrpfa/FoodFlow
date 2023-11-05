@@ -17,8 +17,8 @@ import ListingService from "services/listing-service";
 
 function DonorForm() {
   const authContext = useContext(AuthContext);
-  const [uploadResponse, setUploadResponse] = useState(null);
   const { uploadImageId } = useUploadImageContext();
+  const [uploadResponse, setUploadResponse] = useState(null);
   const [formData, setFormData] = useState({
     UserID: "", 
     Name: "",
@@ -39,21 +39,65 @@ function DonorForm() {
     ContactEmail: "",
   });
     
+
+  function formatTimeTo24Hours(timeString) {
+    const [time, modifier] = timeString.split(" ");
+  
+    let [hours, minutes] = time.split(":");
+    hours = parseInt(hours, 10);
+    minutes = parseInt(minutes, 10);
+  
+    if (modifier === "PM" && hours < 12) {
+      hours += 12;
+    } else if (modifier === "AM" && hours === 12) {
+      hours = 0;
+    }
+  
+    const formattedTime = `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}`;
+    return formattedTime;
+  }
+
   const handleFormSubmit = async (event) => {
     event.preventDefault();
+    
     const currentDate = new Date();
-    const formattedDatetime = currentDate.toISOString();
-    const formattedExpiryDate = new Date(formData.ExpiryDate).toISOString();
-    const formattedPickUpStartDate = new Date(formData.PickUpStartDate).toISOString();
-    const formattedPickUpEndDate = new Date(formData.PickUpEndDate).toISOString();
-    const formattedPickUpStartTime = new Date(`1970-01-01T${formData.PickUpStartTime}`).toISOString();
-    const formattedPickUpEndTime = new Date(`1970-01-01T${formData.PickUpEndTime}`).toISOString();
+    const formattedDatetime = currentDate.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      hour: "numeric",
+      minute: "2-digit",
+    }).replace(/,/g, '').slice(0, -3);
+  
+    const ExpiryDateObject = new Date(formData.ExpiryDate);
+    const formattedExpiryDate = ExpiryDateObject.toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    }).replace(',', '');
+  
+    const PickUpStartDateObject = new Date(formData.PickUpStartDate);
+    const formattedPickUpStartDate = PickUpStartDateObject.toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    }).replace(',', '');
+  
+    const PickUpEndDateObject = new Date(formData.PickUpEndDate);
+    const formattedPickUpEndDate = PickUpEndDateObject.toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    }).replace(',', '');
+  
+    const formattedPickUpStartTime = formatTimeTo24Hours(formData.PickUpStartTime);
+    const formattedPickUpEndTime = formatTimeTo24Hours(formData.PickUpEndTime);    
   
     try {
-      const data = JSON.stringify({
+      const data = ({
         ...formData,
-        Image: uploadImageId,
         UserID: authContext.userID,
+        Image: uploadImageId, 
         Datetime: formattedDatetime,
         ExpiryDate: formattedExpiryDate,
         PickUpStartDate: formattedPickUpStartDate,
@@ -62,19 +106,18 @@ function DonorForm() {
         PickUpEndTime: formattedPickUpEndTime,
       });
   
-      console.log("Listing in JSON:", data);
-  
       const response = await ListingService.createListing(data);
       console.log("Listing created:", response);
   
       setUploadResponse({ valid: true, message: "Listing created successfully" });
+
+      window.location.href = '/mylistings';
     } catch (error) {
       console.error("Error creating listing:", error);
   
       setUploadResponse({ valid: false, message: "Failed to create listing" });
     }
   };
-  
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -109,6 +152,7 @@ function DonorForm() {
                 onChange={handleInputChange}
                 required
                 sx={{ pt: 1, pb: 2 }}
+                
               />
               <TextField
                 name="ExpiryDate"
@@ -120,6 +164,7 @@ function DonorForm() {
                 onChange={handleInputChange}
                 required
                 sx={{ pt: 1, pb: 2 }}
+                shrink
               />
               <TextField
                 name="Category"
@@ -250,7 +295,11 @@ function DonorForm() {
             </MDBox>
           </MDBox>
           <Grid item xs={12} style={{ display: "flex", justifyContent: "flex-end", margin: "20px 20px 20px 0" }}>
-            <MDButton variant="gradient" color="info" type="submit">
+            <MDButton 
+              variant="gradient"
+              color="info"
+              type="submit"
+              >
               Donate!
             </MDButton>
           </Grid>
@@ -259,7 +308,6 @@ function DonorForm() {
     </div>
   );
 }
-
 
 function Donor() {
   return (
