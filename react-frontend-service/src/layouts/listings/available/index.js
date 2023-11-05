@@ -28,12 +28,9 @@ import AWSS3Service from "services/aws-s3-service";
 import reservationService from "services/reservation-service";
 import WebSocketService from "services/web-listener";
 
-import WebSocketService from "services/web-listener.js";
-
-
 function FoodListingsTable({ onUserUpdate }) {
   const authContext = useContext(AuthContext);
-  const [message, setMessage] = useState(''); 
+  // const [message, setMessage] = useState(''); 
   const [listings, setListings] = useState([]);
   const [isModelLoading, setIsModelLoading] = useState(false);
   const [trainingModel, setTrainingModel] = useState(-1);
@@ -125,26 +122,12 @@ function FoodListingsTable({ onUserUpdate }) {
     groupedListings.push(listings.slice(i, i + 3));
   }
 
-  const handleReservation = (listingID) => {
-    const WebSocket = new WebSocketService()
-    reservationService.makeReservation(authContext.userID, listingID)
-      .then(data => {
-        setMessage(data.message);
-      })
-      .catch(error => {
-        console.error("Reservation failed:", error);
-        setMessage("Reservation failed");
-      });
-     WebSocket.socket.close() 
-  };
-
   const handleReportConfirmation = async (imageData, listingID) => {
     setOpenDialog(false);
     setTrainingModel(listingID);
     const response = await fetch(imageData);
     const blob = await response.blob();
     await ImageClassifierService.train_model(blob, 1);
-
 
     // Add the listing ID to the reported list in local storage
     const reportedListings = JSON.parse(localStorage.getItem('reportedListings') || '[]');
@@ -173,10 +156,53 @@ function FoodListingsTable({ onUserUpdate }) {
     prepareModel();
   }, []); // Empty dependency array means this effect runs once on mount
 
+
+  /* Rerservation Button Calls*/
   const [messageSnackbar, setMessageSnackbar] = useState({ open: false, message: "" });
   const closeMessageSnackbar = () => {
     setMessageSnackbar({ open: false, message: "" });
   }
+
+  // User click 'reserve' button 
+  const handleReservation = (listingID) => {
+    // Calls reservation-service.js
+    reservationService.makeReservation(authContext.userID, listingID)
+      .then(data => {
+        const msg_id = data.msg_id;
+        const convo = localStorage.getItem(msg_id);
+        const sender = data.sender;
+
+        if(convo != null){
+          // Reply is for this client
+          const convo_dict = JSON.parse(convo);
+          if(!convo_dict.replies.includes(sender)){
+            convo_dict.replies.push(sender);
+            
+            // Check in the event database has already sent back the success message
+            if (reservation.replies.length === 2) {
+              // Mark the conversation as successful
+              console.log(`Conversation with msg_id ${reservation.msg_id} is successful.`);
+              // Message from Kafka Service
+              setMessageSnackbar({ open: true, message: data.message });
+            }
+          }
+        }          
+      })
+      .catch(error => {
+        const msg_id = error.msg_id;
+        const convo = localStorage.getItem(msg_id);
+        
+        if(convo != null){
+          // Server url error
+          console.error("Reservation failed:", error);
+          // Remove the reservation request from localstorage
+          localStorage.removeItem(msg_id);
+          setMessageSnackbar({ open: true, message: `Reservation failed: ${error.message}`});
+        }
+
+      });
+
+  };
 
   const webSocketService = new WebSocketService();
 
@@ -197,6 +223,7 @@ function FoodListingsTable({ onUserUpdate }) {
     close={closeMessageSnackbar}
   />);
 
+  /* End of Reservation Button Call */ 
 
   return (
     <div>

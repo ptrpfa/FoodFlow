@@ -35,6 +35,7 @@ const reservationService = {
       replies: []
     };
     console.log(newReservation);
+
     //Store the payload into local storage
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newReservation));
 
@@ -43,12 +44,6 @@ const reservationService = {
         'Content-Type': 'application/json'
       }
     })
-      .then(response => {
-        console.log(response.data.message); 
-      })
-      .catch(error => {
-        throw error;
-      });
   },
   deleteReservation: (ReservationID) => {
     const deleteReservation = {
