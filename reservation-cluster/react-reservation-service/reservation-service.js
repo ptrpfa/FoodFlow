@@ -16,7 +16,6 @@ producer.on("ready", () => {
   console.log("Kafka producer is ready");
 });
 
-
 reservationServerSocket.on('open', () => {
   console.log('Connected to WebSocket server');
 });

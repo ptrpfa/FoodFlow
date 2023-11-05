@@ -6,6 +6,7 @@ import Card from "@mui/material/Card";
 
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
+import MDSnackbar from "components/MDSnackbar";
 import MDButton from "components/MDButton";
 
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
@@ -16,7 +17,10 @@ import { AuthContext } from "context";
 import AuthService from "../../../services/auth-service";
 import ListingService from "services/listing-service"; 
 import AWSS3Service from "services/aws-s3-service";
-// import reservationService from "services/reservation-service";
+import reservationService from "services/reservation-service";
+
+import WebSocketService from "services/web-listener.js";
+
 
 function FoodListingsTable({ onUserUpdate }) {
   const authContext = useContext(AuthContext);
@@ -99,16 +103,42 @@ function FoodListingsTable({ onUserUpdate }) {
     groupedListings.push(listings.slice(i, i + 3));
   }
 
-  const handleReservation = () => {
-    // reservationService.makeReservation("This is a test reservation.")
-    //   .then(data => {
-    //     setMessage(data.message);
-    //   })
-    //   .catch(error => {
-    //     console.error("Reservation failed:", error);
-    //     setMessage("Reservation failed");
-    //   });
+  const handleReservation = (product_id) => {
+    const quantity = 5;
+    reservationService.makeReservation(product_id, quantity)
+      // .then(data => {
+      //   setMessage(data.message);
+      // })
+      .catch(error => {
+        console.log("Reservation failed:", error);
+        setMessage("Reservation failed");
+      });
   }
+
+  const [messageSnackbar, setMessageSnackbar] = useState({ open: false, message: "" });
+  const closeMessageSnackbar = () => {
+    setMessageSnackbar({ open: false, message: "" });
+  }
+
+  const webSocketService = new WebSocketService();
+
+  webSocketService.onmessage = (message) => {
+
+    // Update the state to open the MDSnackbar with the received message
+    setMessageSnackbar({ open: true, message: message });
+    
+  };
+
+  const renderServerSB = (<MDSnackbar
+    icon="info"
+    title="Server Message:"
+    content={messageSnackbar.message}
+    dateTime="5 seconds ago"
+    open={messageSnackbar.open}
+    onClose={closeMessageSnackbar}
+    close={closeMessageSnackbar}
+  />);
+
 
   return (
     <div>
@@ -159,11 +189,12 @@ function FoodListingsTable({ onUserUpdate }) {
                         <MDButton
                           variant="gradient"
                           color="warning"
-                          onClick={handleReservation}
+                          onClick={() => handleReservation(listing.listingID)}
                           fullWidth
                         >
                           Reserve
                         </MDButton>
+                        {renderServerSB}
                       </MDBox>
                     </Card>
                 </Grid>

@@ -107,17 +107,29 @@ function FoodListingsTable({ onUserUpdate }) {
     groupedListings.push(listings.slice(i, i + 3));
   }
 
-  const [message, setMessage] = useState("");
   const handleReservation = (product_id) => {
-    const quantity = 5;
-    reservationService.makeReservation(product_id, quantity)
-      // .then(data => {
-      //   setMessage(data.message);
+      const quantity = 5;
+
+      // const timeoutDuration = 5000;
+      // console.log(product_id);
+
+      // // Create a promise that rejects after the timeout
+      // const timeoutPromise = new Promise((resolve, reject) => {
+      //   setTimeout(() => {
+      //     reject('Reservation request timed out');
+      //   }, timeoutDuration);
+      // });
+
+      // // Make a reservation request and race it with the timeout
+      // Promise.race([reservationService.makeReservation(product_id, quantity), timeoutPromise])
+      // .then((data) => {
+      //   setMessageSnackbar({ open: true, message: data.message });
       // })
-      .catch(error => {
-        console.log("Reservation failed:", error);
-        setMessage("Reservation failed");
-      });
+      // .catch((error) => {
+      //   setMessageSnackbar({ open: true, message: message });
+      //   console.log('Reservation failed:', error);
+      // });
+
   }
 
   const [messageSnackbar, setMessageSnackbar] = useState({ open: false, message: "" });
@@ -131,7 +143,6 @@ function FoodListingsTable({ onUserUpdate }) {
 
     // Update the state to open the MDSnackbar with the received message
     setMessageSnackbar({ open: true, message: message });
-
     
   };
 
@@ -205,7 +216,7 @@ function FoodListingsTable({ onUserUpdate }) {
                         color="info"
                         onClick={() => handleReservation(listing.listingID)}
                       >
-                        Reserve
+                        Reserve ME
                       </MDButton>
                       {renderServerSB}
                     </MDBox>

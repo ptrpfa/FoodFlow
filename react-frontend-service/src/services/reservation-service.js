@@ -15,13 +15,13 @@ const reservationService = {
       timestamp: new Date().toISOString(),
       replies: []
     };
-  
+    
     //Store the payload into local storage
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newReservation));
 
     return axios.post(`${API_BASE_URL}/reservation/create`, JSON.stringify(newReservation))
       .then(data => {
-        conole.log(data.message); 
+        console.log(data.message); 
       })
       .catch(error => {
         throw error;
