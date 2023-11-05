@@ -1,25 +1,49 @@
-import{ useState, useRef, useContext } from "react";
+import{ useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
+import CircularProgress from '@mui/material/CircularProgress';
 
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
 import MDButton from "components/MDButton";
+
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Footer from "examples/Footer";
 
 import AWSS3Service from "services/aws-s3-service";
+import ImageClassifierService from "services/image-classification-service";
 import { useUploadImageContext } from "context";
 
 function DonorForm() {
   const [selectedImage, setSelectedImage] = useState(null);
   const [uploadResponse, setUploadResponse] = useState(null);
   const [uploadingImage, setUploadingImage] = useState(false);
+  const [isModelLoading, setIsModelLoading] = useState(true);
+  const [validAndFresh, setValidAndFresh] = useState(false);
+  const [freshResponse, setFreshResponse] = useState(false);
+  const [trainingModel, setTrainingModel] = useState(false);
   const { setUploadImageId } = useUploadImageContext();
+
+  const [openDialog, setOpenDialog] = useState(false);
+
+  const handleArgue = () => {
+    setOpenDialog(true);
+  };
+
+  const handleClose = () => {
+    setOpenDialog(false);
+  };
+
+
   const inputRef = useRef(null);
 
   const convertBlobToUint8Array = (blob) => {
@@ -55,6 +79,7 @@ function DonorForm() {
       }
     }
     setUploadingImage(false);
+    setFreshResponse(false);
   };
 
   const handleImageChange = (event) => {
@@ -65,6 +90,35 @@ function DonorForm() {
     }
   };
 
+  const checkFreshness = async () => {
+    const freshness_prediction = await ImageClassifierService.classify_image(selectedImage, 0);
+    setFreshResponse(true);
+    setValidAndFresh(freshness_prediction === 0);
+  }
+
+  const disputeFreshness = async () => {
+    setOpenDialog(false);
+    setTrainingModel(true);
+    await ImageClassifierService.train_model(selectedImage, 0);
+    setTrainingModel(false);
+    setValidAndFresh(true);
+  }
+
+
+  useEffect(() => {
+    async function prepareModel(){
+      try {
+        await ImageClassifierService.prepare_ml();
+      } catch (error) {
+          console.error('Error loading models', error);
+      } finally {
+        setIsModelLoading(false);
+      }
+    }
+
+    prepareModel();
+  }, []); // Empty dependency array means this effect runs once on mount
+
   return (
     <div>
       <Card>
@@ -73,76 +127,142 @@ function DonorForm() {
             {"(1/2)"} Photo of Food item
           </MDTypography>
         </MDBox>
-        <MDBox pt={3} ml={2}>
-          <input type="file" accept="image/*" onChange={handleImageChange} style={{ display: "none" }} ref={inputRef} />
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <MDButton
-              variant="gradient"
-              color="info"
-              style={{ marginRight: "10px" }}
-              onClick={() => inputRef.current.click()}
-            >
-              Choose Image
-            </MDButton>
-            { 
-              selectedImage && (
-                uploadingImage ? (
-                  <MDButton variant="gradient" disabled>
-                    Uploading Image...
+        {
+          isModelLoading ? (
+            <MDBox textAlign="Center" my={2}>
+              Loading Image Freshness Classifier
+              <br />
+              <CircularProgress />
+            </MDBox>
+          ) : (
+            <MDBox>
+              <MDBox pt={3} ml={2}>
+                <input type="file" accept="image/*" onChange={handleImageChange} style={{ display: "none" }} ref={inputRef} />
+                <div style={{ display: 'flex', justifyContent: 'center' }}>
+                  <MDButton
+                    variant="gradient"
+                    color="info"
+                    style={{ marginRight: "10px" }}
+                    onClick={() => inputRef.current.click()}
+                  >
+                    Choose Image
                   </MDButton>
-                ) : (
-                  <MDButton variant="gradient" color="info" onClick={handleImageUpload}>
-                    Upload Image
+                  { 
+                    selectedImage && (
+                      uploadingImage ? (
+                        <MDButton variant="gradient" disabled>
+                          Uploading Image...
+                        </MDButton>
+                      ) : (
+                        !uploadResponse ? (
+                          <MDButton variant="gradient" color="info" onClick={handleImageUpload}>
+                            Upload Image
+                          </MDButton>
+                        ) : (
+                          uploadResponse.valid && !freshResponse ? (
+                            <MDButton variant="gradient" color="info" onClick={checkFreshness}>
+                              Check Freshness
+                            </MDButton>
+                          )
+                          : (
+                            !validAndFresh && (
+                              trainingModel ? (
+                                <MDButton variant="gradient" disabled>
+                                  Please wait...
+                                </MDButton>
+                              ) : (
+                                <MDButton variant="gradient" color="error" onClick={handleArgue}>
+                                  Nah bro looks fresh to me
+                                </MDButton>
+                              )
+                            )
+                          )
+                        )
+                      )
+                    )
+                  }
+                </div>
+              </MDBox>
+              <MDBox pt={3} ml={2} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                {
+                  selectedImage && uploadResponse ? (
+                    <>
+                      <MDBox textAlign="center">
+                        <p style={{ color: uploadResponse.valid ? "green" : "red" }}>
+                          {uploadResponse.valid ? "Image is a valid food item." : "Image is not a valid food item."}
+                        </p>
+                        {
+                        !freshResponse ? (
+                          <p style={{ color: "blue" }}>
+                            Check your food freshness to continue.
+                          </p>
+                          ) : (
+                            <p style={{ color: validAndFresh ? "green" : "red" }}>
+                              {validAndFresh ? "Looks fresh to me!" : "Looks nasty mate."}
+                            </p>
+                          )
+                        }
+
+                      </MDBox>
+                      <div>
+                        <p style={{ textAlign: "center" }}>Selected Image:</p>
+                        <img
+                          src={URL.createObjectURL(selectedImage)}
+                          alt="Selected Image"
+                          style={{ maxWidth: "100%", maxHeight: "200px" }} />
+                      </div>
+                    </>
+                  ) : !selectedImage ? (
+                    <p style={{ color: "red" }}>No image selected.</p>
+                  ) : (
+                    <>
+                      <p style={{ color: "blue" }}>Click "Upload Image" to continue</p>
+                      <div>
+                        <p style={{ textAlign: "center" }}>Selected Image:</p>
+                        <img
+                          src={URL.createObjectURL(selectedImage)}
+                          alt="Selected Image"
+                          style={{ maxWidth: "100%", maxHeight: "200px" }} />
+                      </div>
+                    </>
+                  )
+                }
+              </MDBox>
+              <Grid item xs={12} style={{ display: "flex", justifyContent: "flex-end", margin: "20px 20px 20px 0" }}>
+                <Link to="/upload/donate">
+                  <MDButton
+                    variant="gradient"
+                    color="info"
+                    disabled={!validAndFresh}
+                  >
+                    Next
                   </MDButton>
-                )
-              )
-            }
-          </div>
-        </MDBox>
-        <MDBox pt={3} ml={2} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          {
-            selectedImage && uploadResponse ? (
-              <>
-                <div>
-                  <p style={{ color: uploadResponse.valid ? "green" : "red" }}>
-                    {uploadResponse.valid ? "Image is a valid food item." : "Image is not a valid food item."}
-                  </p>
-                </div>
-                <div>
-                  <p style={{ textAlign: "center" }}>Selected Image:</p>
-                  <img
-                    src={URL.createObjectURL(selectedImage)}
-                    alt="Selected Image"
-                    style={{ maxWidth: "100%", maxHeight: "200px" }} />
-                </div>
-              </>
-            ) : !selectedImage ? (
-              <p style={{ color: "red" }}>No image selected.</p>
-            ) : (
-              <>
-                <p style={{ color: "red" }}>Click "Upload Image" to continue</p>
-                <div>
-                  <p style={{ textAlign: "center" }}>Selected Image:</p>
-                  <img
-                    src={URL.createObjectURL(selectedImage)}
-                    alt="Selected Image"
-                    style={{ maxWidth: "100%", maxHeight: "200px" }} />
-                </div>
-              </>
-            )
-          }
-        </MDBox>
-        <Grid item xs={12} style={{ display: "flex", justifyContent: "flex-end", margin: "20px 20px 20px 0" }}>
-          <Link to="/upload/donate">
-            <MDButton
-              variant="gradient"
-              color="info"
-              disabled={!uploadResponse || !uploadResponse.valid}
-            >
-              Next
+                </Link>
+              </Grid>
+            </MDBox>
+          )
+        }
+        <Dialog
+          open={openDialog}
+          onClose={handleClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">
+            Dispute Classification
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+            Our system has detected that the food is not safe for consumption. If you believe this is incorrect and the item is indeed fresh, please let us know. By doing so, you help us improve our accuracy. Would you like to proceed with classifying your item as an example of a fresh item?
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <MDButton variant="gradient" color="info" onClick={handleClose}>Close</MDButton>
+            <MDButton  variant="gradient" color="error" onClick={disputeFreshness} autoFocus>
+              Dispute as fresh
             </MDButton>
-          </Link>
-        </Grid>
+          </DialogActions>
+        </Dialog>
       </Card>
     </div>
   );

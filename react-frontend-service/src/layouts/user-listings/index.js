@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
+import CircularProgress from '@mui/material/CircularProgress';
 
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
@@ -26,8 +27,12 @@ function FoodListingsTable({ onUserUpdate }) {
   const [reservedListings, setReservedListings] = useState([]);
   const [availableListings, setAvailableListings] = useState([]);
   const [collectedListings, setCollectedListings] = useState([]);
-  const [collectedItemName, setCollectedItemName] = useState("");
 
+  const [reservedLoaded, setReservedLoaded] = useState(false);
+  const [availableLoaded, setAvailableLoaded] = useState(false);
+  const [collectedLoaded, setCollectedLoaded] = useState(false);
+
+  const [collectedItemName, setCollectedItemName] = useState("");
   const [user, setUser] = useState({
     firstName: "",
     lastName: "",
@@ -78,6 +83,7 @@ function FoodListingsTable({ onUserUpdate }) {
         const listingsWithImages = await Promise.all(
           allListings.map(fetchImageForListing)
         );
+        setReservedLoaded(true);
         setReservedListings(listingsWithImages);
       })
       .catch((error) => {
@@ -89,7 +95,9 @@ function FoodListingsTable({ onUserUpdate }) {
         const listingsWithImages = await Promise.all(
           allListings.map(fetchImageForListing)
         );
+        setAvailableLoaded(true);
         setAvailableListings(listingsWithImages);
+        console.log("done");
       })
       .catch((error) => {
         console.error("Error fetching listings:", error);
@@ -100,6 +108,7 @@ function FoodListingsTable({ onUserUpdate }) {
         const listingsWithImages = await Promise.all(
           allListings.map(fetchImageForListing)
         );
+        setCollectedLoaded(true);
         setCollectedListings(listingsWithImages);
       })
       .catch((error) => {
@@ -171,140 +180,169 @@ function FoodListingsTable({ onUserUpdate }) {
             Available
           </MDTypography>
           <Divider></Divider>
-          {groupedAvailableListings.length > 0 ? 
-            (groupedAvailableListings.map((rowListings, rowIndex) => (
-              <Grid container spacing={2} key={rowIndex}>
-                {rowListings.map((listing, index) => (
-                  <Grid item xs={4} key={index}>
-                    <Card style={{ margin: "8px" }}>
-                      <MDBox p={2}>
-                        <MDTypography variant="h6">{listing.name}</MDTypography>
-                        <div style={{ display: 'flex', justifyContent: 'center', margin: "0.5rem", height:"12rem"}}>
-                          <img 
-                            src={listing.image}
-                            style={{ maxWidth: "70%", maxHeight: "70%", margin:"auto"}}
-                            alt={listing.name}
-                          />
-                        </div>
-                        <div style={{height:"3rem", }}>
-                          <MDTypography style={{ fontStyle: 'italic', fontSize:"1rem" }}>{listing.description}</MDTypography>
-                        </div>
-                        <MDButton
-                          variant="gradient"
-                          color="info"
-                          component={Link}
-                          to={`/listings/${listing.listingID}`}
-                          style={{ marginBottom: "1rem", marginTop: "1rem"}}
-                          fullWidth
-                        >
-                          View Details
-                        </MDButton>
-                      </MDBox>
-                    </Card>
+          {
+            availableLoaded ? (
+              groupedAvailableListings.length > 0 ? (
+                groupedAvailableListings.map((rowListings, rowIndex) => (
+                  <Grid container spacing={2} key={rowIndex}>
+                    {
+                      rowListings.map((listing, index) => (
+                        <Grid item xs={4} key={index}>
+                          <Card style={{ margin: "8px" }}>
+                            <MDBox p={2}>
+                              <MDTypography variant="h6">{listing.name}</MDTypography>
+                              <div style={{ display: 'flex', justifyContent: 'center', margin: "0.5rem", height:"12rem"}}>
+                                <img 
+                                  src={listing.image}
+                                  style={{ maxWidth: "70%", maxHeight: "70%", margin:"auto"}}
+                                  alt={listing.name}
+                                />
+                              </div>
+                              <div style={{height:"3rem", }}>
+                                <MDTypography style={{ fontStyle: 'italic', fontSize:"1rem" }}>{listing.description}</MDTypography>
+                              </div>
+                              <MDButton
+                                variant="gradient"
+                                color="info"
+                                component={Link}
+                                to={`/listings/${listing.listingID}`}
+                                style={{ marginBottom: "1rem", marginTop: "1rem"}}
+                                fullWidth
+                              >
+                                View Details
+                              </MDButton>
+                            </MDBox>
+                          </Card>
+                        </Grid>
+                      ))
+                    }
                   </Grid>
-                ))}
-              </Grid>
-              
-            ))): (
-              <MDTypography variant="h6" style={{ textAlign: 'center', margin: '1.5rem' }}>
-                No listings available.
-              </MDTypography>
+                  ))
+              ): (
+                <MDTypography variant="h6" style={{ textAlign: 'center', margin: '1.5rem' }}>
+                  No listings available.
+                </MDTypography>
+              )
+            ) : (
+              <MDBox textAlign="center">
+                <CircularProgress/>
+              </MDBox>
             )
           }
           <MDTypography variant="h4" mx={2} px={2} mt={2}>
             Reserved
           </MDTypography>
           <Divider></Divider>
-          {groupedReservedListings.length > 0 ? 
-            (groupedReservedListings.map((rowListings, rowIndex) => (
-              <Grid container spacing={2} key={rowIndex}>
-                {rowListings.map((listing, index) => (
-                  <Grid item xs={4} key={index}>
-                    <Card style={{ margin: "8px" }}>
-                      <MDBox p={2}>
-                        <MDTypography variant="h6">{listing.name}</MDTypography>
-                        <div style={{ display: 'flex', justifyContent: 'center', margin: "0.5rem", height:"12rem"}}>
-                          <img 
-                            src={listing.image}
-                            style={{ maxWidth: "70%", maxHeight: "70%", margin:"auto"}}
-                            alt={listing.name}
-                          />
-                        </div>
-                        <div style={{height:"3rem", }}>
-                          <MDTypography style={{ fontStyle: 'italic', fontSize:"1rem" }}>{listing.description}</MDTypography>
-                        </div>
-                        <MDButton
-                          variant="gradient"
-                          color="info"
-                          component={Link}
-                          to={`/listings/${listing.listingID}`}
-                          style={{ marginBottom: "1rem", marginTop: "1rem"}}
-                          fullWidth
-                        >
-                          View Details
-                        </MDButton>
-                        <MDButton
-                          variant="gradient"
-                          color="success"
-                          onClick={() => collectedItem(listing.listingID)}
-                          fullWidth
-                        >
-                          Collected!
-                        </MDButton>
-                      </MDBox>
-                    </Card>
+          {
+            reservedLoaded ? (
+              groupedReservedListings.length > 0 ? (
+                groupedReservedListings.map((rowListings, rowIndex) => (
+                  <Grid container spacing={2} key={rowIndex}>
+                    {
+                      rowListings.map((listing, index) => (
+                        <Grid item xs={4} key={index}>
+                          <Card style={{ margin: "8px" }}>
+                            <MDBox p={2}>
+                              <MDTypography variant="h6">{listing.name}</MDTypography>
+                              <div style={{ display: 'flex', justifyContent: 'center', margin: "0.5rem", height:"12rem"}}>
+                                <img 
+                                  src={listing.image}
+                                  style={{ maxWidth: "70%", maxHeight: "70%", margin:"auto"}}
+                                  alt={listing.name}
+                                />
+                              </div>
+                              <div style={{height:"3rem", }}>
+                                <MDTypography style={{ fontStyle: 'italic', fontSize:"1rem" }}>{listing.description}</MDTypography>
+                              </div>
+                              <MDButton
+                                variant="gradient"
+                                color="info"
+                                component={Link}
+                                to={`/listings/${listing.listingID}`}
+                                style={{ marginBottom: "1rem", marginTop: "1rem"}}
+                                fullWidth
+                              >
+                                View Details
+                              </MDButton>
+                              <MDButton
+                                variant="gradient"
+                                color="success"
+                                onClick={() => collectedItem(listing.listingID)}
+                                fullWidth
+                              >
+                                Collected!
+                              </MDButton>
+                            </MDBox>
+                          </Card>
+                        </Grid>
+                      ))
+                    }
                   </Grid>
-                ))}
-              </Grid>
-            ))): (
-              <MDTypography variant="h6" style={{ textAlign: 'center', margin: '1.5rem' }}>
-                No listings reserved.
-              </MDTypography>
+                ))
+              ): (
+                <MDTypography variant="h6" style={{ textAlign: 'center', margin: '1.5rem' }}>
+                  No listings reserved.
+                </MDTypography>
+              )
+            ) : (
+              <MDBox textAlign="center">
+                <CircularProgress/>
+              </MDBox>
             )
           }
           <MDTypography variant="h4" mx={2} px={2} mt={2}>
             Collected
           </MDTypography>
           <Divider></Divider>
-          {groupedCollectedListings.length > 0 ? 
-            (groupedCollectedListings.map((rowListings, rowIndex) => (
-              <Grid container spacing={2} key={rowIndex}>
-                {rowListings.map((listing, index) => (
-                  <Grid item xs={4} key={index}>
-                    <Card style={{ margin: "8px" }}>
-                      <MDBox p={2}>
-                        <MDTypography variant="h6">{listing.name}</MDTypography>
-                        <div style={{ display: 'flex', justifyContent: 'center', margin: "0.5rem", height:"12rem"}}>
-                          <img 
-                            src={listing.image}
-                            style={{ maxWidth: "70%", maxHeight: "70%", margin:"auto"}}
-                            alt={listing.name}
-                          />
-                        </div>
-                        <div style={{height:"3rem", }}>
-                          <MDTypography style={{ fontStyle: 'italic', fontSize:"1rem" }}>{listing.description}</MDTypography>
-                        </div>
-                        <MDButton
-                          variant="gradient"
-                          color="info"
-                          component={Link}
-                          to={`/listings/${listing.listingID}`}
-                          style={{ marginBottom: "1rem", marginTop: "1rem"}}
-                          fullWidth
-                        >
-                          View Details
-                        </MDButton>
-                      </MDBox>
-                    </Card>
+          {
+            collectedLoaded ? (
+              groupedCollectedListings.length > 0 ? (
+                groupedCollectedListings.map((rowListings, rowIndex) => (
+                  <Grid container spacing={2} key={rowIndex}>
+                    {
+                      rowListings.map((listing, index) => (
+                        <Grid item xs={4} key={index}>
+                          <Card style={{ margin: "8px" }}>
+                            <MDBox p={2}>
+                              <MDTypography variant="h6">{listing.name}</MDTypography>
+                              <div style={{ display: 'flex', justifyContent: 'center', margin: "0.5rem", height:"12rem"}}>
+                                <img 
+                                  src={listing.image}
+                                  style={{ maxWidth: "70%", maxHeight: "70%", margin:"auto"}}
+                                  alt={listing.name}
+                                />
+                              </div>
+                              <div style={{height:"3rem", }}>
+                                <MDTypography style={{ fontStyle: 'italic', fontSize:"1rem" }}>{listing.description}</MDTypography>
+                              </div>
+                              <MDButton
+                                variant="gradient"
+                                color="info"
+                                component={Link}
+                                to={`/listings/${listing.listingID}`}
+                                style={{ marginBottom: "1rem", marginTop: "1rem"}}
+                                fullWidth
+                              >
+                                View Details
+                              </MDButton>
+                            </MDBox>
+                          </Card>
+                        </Grid>
+                      ))
+                    }
                   </Grid>
-                ))}
-              </Grid>
-            ))): (
-              <MDTypography variant="h6" style={{ textAlign: 'center', margin: '1.5rem' }}>
-                No listings collected.
-              </MDTypography>
+                ))
+              ): (
+                  <MDTypography variant="h6" style={{ textAlign: 'center', margin: '1.5rem' }}>
+                    No listings collected.
+                  </MDTypography>
+              )
+            ) : (
+              <MDBox textAlign="center">
+                <CircularProgress/>
+              </MDBox>
             )
-          }
+          } 
         </MDBox>
       </Card>
         <MDSnackbar
