@@ -1,11 +1,11 @@
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  creationTimestamp: "2023-11-05T19:14:55Z"
+  creationTimestamp: "2023-11-05T19:51:49Z"
   name: react-frontend-deployment
   namespace: food-flow
-  resourceVersion: "507945"
-  uid: 373c239c-1d95-4866-a6ce-c46998035701
+  resourceVersion: "511729"
+  uid: 77d42f88-cdb4-476a-88a1-bd0bb61896ee
 spec:
   maxReplicas: 8
   metrics:
@@ -22,18 +22,28 @@ spec:
     name: react-frontend-deployment
 status:
   conditions:
-  - lastTransitionTime: "2023-11-05T19:15:56Z"
-    message: the HPA controller was able to get the target's current scale
-    reason: SucceededGetScale
+  - lastTransitionTime: "2023-11-05T19:52:49Z"
+    message: recommended size matches current size
+    reason: ReadyForNewScale
     status: "True"
     type: AbleToScale
-  - lastTransitionTime: "2023-11-05T19:15:56Z"
-    message: 'the HPA was unable to compute the replica count: failed to get cpu utilization:
-      unable to get metrics for resource cpu: unable to fetch metrics from resource
-      metrics API: the server could not find the requested resource (get pods.metrics.k8s.io)'
-    reason: FailedGetResourceMetric
-    status: "False"
+  - lastTransitionTime: "2023-11-05T19:59:49Z"
+    message: the HPA was able to successfully calculate a replica count from cpu resource
+      utilization (percentage of request)
+    reason: ValidMetricFound
+    status: "True"
     type: ScalingActive
-  currentMetrics: null
+  - lastTransitionTime: "2023-11-05T19:59:49Z"
+    message: the desired replica count is less than the minimum replica count
+    reason: TooFewReplicas
+    status: "True"
+    type: ScalingLimited
+  currentMetrics:
+  - resource:
+      current:
+        averageUtilization: 0
+        averageValue: 1m
+      name: cpu
+    type: Resource
   currentReplicas: 2
-  desiredReplicas: 0
+  desiredReplicas: 2
