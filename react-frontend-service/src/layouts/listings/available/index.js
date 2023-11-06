@@ -205,13 +205,17 @@ function FoodListingsTable({ onUserUpdate }) {
   };
 
   const webSocketService = new WebSocketService();
-
-  webSocketService.onmessage = (message) => {
-
-    // Update the state to open the MDSnackbar with the received message
-    setMessageSnackbar({ open: true, message: message });
-    
-  };
+ 
+  async function connectWebSocket() {
+    await webSocketService.getSocketOpenPromise();
+  
+    webSocketService.onmessage = (message) => {
+      // Update the state to open the MDSnackbar with the received message
+      setMessageSnackbar({ open: true, message: message });
+    };
+  }
+  
+  connectWebSocket();
 
   const renderServerSB = (<MDSnackbar
     icon="info"
@@ -304,6 +308,7 @@ function FoodListingsTable({ onUserUpdate }) {
                             >
                               Reserve
                             </MDButton>
+                            {renderServerSB}
                           </MDBox>
                         </Card>
                         <Dialog
