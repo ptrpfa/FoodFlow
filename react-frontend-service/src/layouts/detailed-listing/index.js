@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from "react";
-import { Link, useParams, useHistory } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
@@ -7,6 +7,12 @@ import Card from "@mui/material/Card";
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
 import MDButton from "components/MDButton";
+
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
@@ -27,9 +33,18 @@ function DetailedListing(onUserUpdate) {
     role: "",
   });
 
-  const convertUint8ArrayToBlob = (uint8Array) => {
-    return new Blob([uint8Array], { type: 'image/jpeg' });
+  const [openDialog, setOpenDialog] = useState(false);
+  const [deleteSuccess, setDeleteSuccess] = useState(false);
+
+  const handleClose = () => {
+    setOpenDialog(false);
   };
+
+  const navigate = useNavigate();
+  const closeDeleteSuccess = () => {
+    setDeleteSuccess(false);
+    navigate('/mylistings');
+  }
 
   const handleReservation = () => {
     // reservationService.makeReservation("This is a test reservation.")
@@ -42,14 +57,24 @@ function DetailedListing(onUserUpdate) {
     //   });
   }
 
+  const convertUint8ArrayToBlob = (uint8Array) => {
+    return new Blob([uint8Array], { type: 'image/jpeg' });
+  };
+
   const handleDeleteListing = async () => {
+    setOpenDialog(true);
+  }
+
+  const handleDeleteListingConfirm = async () => {
     try {
       // Call the service function to delete the listing
       await ListingService.deleteListing({ ListingID: listing.listingID });
-      // You may want to handle any further actions, e.g., displaying a success message.
+
+      // Display success message.
+      setOpenDialog(false);
+      setDeleteSuccess(true);
     } catch (error) {
       console.error('Error deleting listing:', error);
-      // Handle any errors that occur during the deletion.
     }
   };
 
@@ -216,13 +241,52 @@ function DetailedListing(onUserUpdate) {
                 </div>
               </div>
             </MDBox>
-
-
           </Card>
         </div>
       ) : (
         <div>Loading...</div>
       )}
+      <Dialog
+        open={openDialog}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          "Delete listing?"
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Are you sure you want to delete this listing? This action is not reversible!
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <MDButton variant="gradient" color="info" onClick={handleClose}>Close</MDButton>
+          <MDButton  variant="gradient" color="error" onClick={() => handleDeleteListingConfirm(listingID)} autoFocus>
+            Delete
+          </MDButton>
+        </DialogActions>
+      </Dialog>
+      <Dialog
+        open={deleteSuccess}
+        onClose={closeDeleteSuccess}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          Success
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Your listing has been deleted.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <MDButton variant="gradient" color="success" onClick={() => closeDeleteSuccess()} autoFocus>
+            Return Home
+          </MDButton>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }
