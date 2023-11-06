@@ -1,14 +1,16 @@
 class WebSocketService {
   constructor() {
     this.socket = new WebSocket('ws://host.docker.internal:8282');
-    
-    this.socket.onopen = () => {
-      console.log('WebSocket connection is open');
-    };
-    
-    this.socket.onclose = () => {
-      console.log('WebSocket connection is closed');
-    };
+    this.socketOpenPromise = new Promise((resolve) => {
+      this.socket.onopen = () => {
+        console.log('WebSocket connection is open');
+        resolve(); // Resolve the promise when the connection is open
+      };
+
+      this.socket.onclose = () => {
+        console.log('WebSocket connection is closed');
+      };
+    });
 
     this.socket.onmessage = (event) => {
 
@@ -42,23 +44,12 @@ class WebSocketService {
           }
         }
       }
-      // Call the onmessage callback if it is defined
-      // if (this.onmessage) {
-      // const reservationMessage = JSON.parse(event.data); 
-      // const message = reservationMessage.payload;
-      // console.log('Received message:', message);
-      
-      // // Call the onmessage callback if it is defined
-      // if (this.onmessage) {
-      //   this.onmessage(message, false); // Assuming it's not binary
-      // }
-
-        // this.onmessage(payload, false); // Assuming it's not binary
-      // }
-
     };
-  }
 
+  }
+  getSocketOpenPromise() {
+    return this.socketOpenPromise;
+  }
   // setReservationFailedTimer(msg_id) {
   //   const timeout = 5000; // 5000 milliseconds (5 seconds) as an example, adjust as needed
   //   setTimeout(() => {
