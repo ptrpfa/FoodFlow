@@ -32,7 +32,7 @@ function FoodListingsTable({ onUserUpdate }) {
   const authContext = useContext(AuthContext);
   // const [message, setMessage] = useState(''); 
   const [listings, setListings] = useState([]);
-  const [isModelLoading, setIsModelLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [trainingModel, setTrainingModel] = useState(-1);
   const [user, setUser] = useState({
     firstName: "",
@@ -80,6 +80,7 @@ function FoodListingsTable({ onUserUpdate }) {
   }, []);
 
   useEffect(() => {
+    setIsLoading(true);
     const fetchImageForListing = async (listing) => {
       const imageData = await AWSS3Service.getImage({ imageId: listing.image });
       const imageBlob = convertUint8ArrayToBlob(imageData.imageData);
@@ -127,7 +128,12 @@ function FoodListingsTable({ onUserUpdate }) {
     setTrainingModel(listingID);
     const response = await fetch(imageData);
     const blob = await response.blob();
+
+    // Train client side model
     await ImageClassifierService.train_model(blob, 1);
+
+    // Upload model
+    await ImageClassifierService.upload();
 
     // Add the listing ID to the reported list in local storage
     const reportedListings = JSON.parse(localStorage.getItem('reportedListings') || '[]');
@@ -149,11 +155,14 @@ function FoodListingsTable({ onUserUpdate }) {
       } catch (error) {
           console.error('Error loading models', error);
       } finally {
-        setIsModelLoading(false);
+        setIsLoading(false);
       }
     }
-
     prepareModel();
+
+    return () => {
+      ImageClassifierService.dispose_models();
+    };
   }, []); // Empty dependency array means this effect runs once on mount
 
 
@@ -248,9 +257,9 @@ function FoodListingsTable({ onUserUpdate }) {
         </MDBox>
         <MDBox pt={3}>
           {
-            isModelLoading ? (
+            isLoading ? (
               <MDBox textAlign="Center" my={2}>
-                Loading Image Freshness Classifier
+                Loading Available Listings...
                 <br />
                 <CircularProgress />
               </MDBox>

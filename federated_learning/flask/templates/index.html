@@ -37,6 +37,7 @@
         let model = undefined;                      // Classification head of model (built on top of base model)
         var model_classification = undefined;       // Classification made by model (0: Fresh, 1: Rotten)
         var correct_classification = undefined;     // Correct classification provided by user (0: Fresh, 1: Rotten)
+        var training_size = 0;                      // Training size (no of images/tensors client model is trained on)
 
         // Constants
         const MODEL_URL = 'https://tfhub.dev/google/tfjs-model/imagenet/mobilenet_v3_small_100_224/feature_vector/5/default/1';
@@ -176,6 +177,7 @@
                 // Append image feature into array of training data
                 training_data.push(image_features);
                 training_output.push(correct_classification);
+                training_size++;
             }
             
             /* Model Training */
@@ -201,6 +203,7 @@
 
         // Function for uploading client model to the server for federated learning
         async function upload_model() {
+            model.setUserDefinedMetadata({"training_size": training_size});
             const saveResult = await model.save(`${SERVER_URL}/upload_model`);
             alert("Model uploaded for federated learning!");
         }

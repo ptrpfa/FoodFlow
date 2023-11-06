@@ -16,6 +16,7 @@ import Footer from "examples/Footer";
 import { AuthContext, useUploadImageContext } from "context";
 import AuthService from "../../../services/auth-service";
 import ListingService from "services/listing-service";
+import list from "assets/theme/components/list";
 
 function UpdateListing() {
   const { listingID } = useParams();
@@ -28,23 +29,24 @@ function UpdateListing() {
   });
 
   const [formData, setFormData] = useState({
-    UserID: "",
+    UserID: authContext.userID,
+    ListingID: listing.listingID,
     Name: listing.name,
-    Datetime: "",
+    Datetime: listing.dateTime,
     ExpiryDate: listing.expiryDate,
-    Category: "",
-    Description: "",
-    Image: "",
-    PickUpAddressFirst: "",
-    PickUpAddressSecond: "",
-    PickUpAddressThird: "",
-    PickUpPostalCode: "",
-    PickUpStartDate: "",
-    PickUpEndDate: "",
-    PickUpStartTime: "",
-    PickUpEndTime: "",
-    ContactPhone: "",
-    ContactEmail: "",
+    Category: listing.category,
+    Description: listing.description,
+    Image: listing.image,
+    PickUpAddressFirst: listing.pickUpAddressFirst,
+    PickUpAddressSecond: listing.pickUpAddressSecond,
+    PickUpAddressThird: listing.pickUpAddressThird,
+    PickUpPostalCode: listing.pickUpPostalCode,
+    PickUpStartDate: listing.pickUpStartDate,
+    PickUpEndDate: listing.pickUpEndDate,
+    PickUpStartTime: listing.pickUpStartTime,
+    PickUpEndTime: listing.pickUpEndTime,
+    ContactPhone: listing.contactPhone,
+    ContactEmail: listing.contactEmail,
   });
 
   const moment = require('moment-timezone');
@@ -98,14 +100,36 @@ function UpdateListing() {
     const fetchListingDetails = async () => {
       try {
         const response = await ListingService.getListing({ ListingID: listingID });
-        // // Fetch the image for the retrieved listing
+        // Fetch the image for the retrieved listing
         // const imageData = await AWSS3Service.getImage({ imageId: response.image });
         // const imageBlob = convertUint8ArrayToBlob(imageData.imageData);
         // const imageUrl = URL.createObjectURL(imageBlob);
-        // // // Update the listing data with the image
+        // Update the listing data with the image
         // const updatedListing = { ...response, image: imageUrl };
-        // setListing(updatedListing);
         setListing(response);
+        console.log("original: ", response);
+
+        setFormData({
+          UserID: authContext.userID,
+          ListingID: response.listingID,
+          Name: response.name,
+          Datetime: response.dateTime,
+          ExpiryDate: response.expiryDate,
+          Category: response.category,
+          Description: response.description,
+          Image: response.image,
+          PickUpAddressFirst: response.pickUpAddressFirst,
+          PickUpAddressSecond: response.pickUpAddressSecond,
+          PickUpAddressThird: response.pickUpAddressThird,
+          PickUpPostalCode: response.pickUpPostalCode,
+          PickUpStartDate: response.pickUpStartDate,
+          PickUpEndDate: response.pickUpEndDate,
+          PickUpStartTime: response.pickUpStartTime,
+          PickUpEndTime: response.pickUpEndTime,
+          ContactPhone: response.contactPhone,
+          ContactEmail: response.contactEmail,
+        });
+        console.log()
       } catch (error) {
         console.error('Error fetching listing details:', error);
       }
@@ -117,75 +141,83 @@ function UpdateListing() {
 
   const handleFormUpdate = async (event) => {
     event.preventDefault();
+    if (!listingID) {
+      console.error('Invalid listing ID.');
+      return;
+    }
+    else {
+      console.log(listingID);
 
-    function formatTimeTo24Hours(timeString) {
-      const [time, modifier] = timeString.split(" ");
+      function formatTimeTo24Hours(timeString) {
+        const [time, modifier] = timeString.split(" ");
 
-      let [hours, minutes] = time.split(":");
-      hours = parseInt(hours, 10);
-      minutes = parseInt(minutes, 10);
+        let [hours, minutes] = time.split(":");
+        hours = parseInt(hours, 10);
+        minutes = parseInt(minutes, 10);
 
-      if (modifier === "PM" && hours < 12) {
-        hours += 12;
-      } else if (modifier === "AM" && hours === 12) {
-        hours = 0;
+        if (modifier === "PM" && hours < 12) {
+          hours += 12;
+        } else if (modifier === "AM" && hours === 12) {
+          hours = 0;
+        }
+
+        const formattedTime = `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}`;
+        return formattedTime;
       }
 
-      const formattedTime = `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}`;
-      return formattedTime;
-    }
+      const currentDate = new Date();
+      const formattedDatetime = currentDate.toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+        hour: "numeric",
+        minute: "2-digit",
+      }).replace(/,/g, '').slice(0, -3);
 
-    const currentDate = new Date();
-    const formattedDatetime = currentDate.toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-      hour: "numeric",
-      minute: "2-digit",
-    }).replace(/,/g, '').slice(0, -3);
+      const ExpiryDateObject = new Date(formData.ExpiryDate);
+      const formattedExpiryDate = ExpiryDateObject.toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+      }).replace(',', '');
 
-    const ExpiryDateObject = new Date(formData.ExpiryDate);
-    const formattedExpiryDate = ExpiryDateObject.toLocaleDateString("en-US", {
-      month: "short",
-      day: "numeric",
-      year: "numeric",
-    }).replace(',', '');
+      const PickUpStartDateObject = new Date(formData.PickUpStartDate);
+      const formattedPickUpStartDate = PickUpStartDateObject.toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+      }).replace(',', '');
 
-    const PickUpStartDateObject = new Date(formData.PickUpStartDate);
-    const formattedPickUpStartDate = PickUpStartDateObject.toLocaleDateString("en-US", {
-      month: "short",
-      day: "numeric",
-      year: "numeric",
-    }).replace(',', '');
+      const PickUpEndDateObject = new Date(formData.PickUpEndDate);
+      const formattedPickUpEndDate = PickUpEndDateObject.toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+      }).replace(',', '');
 
-    const PickUpEndDateObject = new Date(formData.PickUpEndDate);
-    const formattedPickUpEndDate = PickUpEndDateObject.toLocaleDateString("en-US", {
-      month: "short",
-      day: "numeric",
-      year: "numeric",
-    }).replace(',', '');
+      const formattedPickUpStartTime = formatTimeTo24Hours(formData.PickUpStartTime);
+      const formattedPickUpEndTime = formatTimeTo24Hours(formData.PickUpEndTime);
 
-    const formattedPickUpStartTime = formatTimeTo24Hours(formData.PickUpStartTime);
-    const formattedPickUpEndTime = formatTimeTo24Hours(formData.PickUpEndTime);
+      try {
+        const data = {
+          ...formData,
+          listingID: listingID,
+          UserID: authContext.userID,
+          Datetime: formattedDatetime,
+          ExpiryDate: formattedExpiryDate,
+          PickUpStartDate: formattedPickUpStartDate,
+          PickUpEndDate: formattedPickUpEndDate,
+          // PickUpStartTime: formattedPickUpStartTime,
+          // PickUpEndTime: formattedPickUpEndTime,
+        };
 
-    try {
-      const data = {
-        ...formData,
-        ListingID: listingID,
-        UserID: authContext.userID,
-        Datetime: formattedDatetime,
-        ExpiryDate: formattedExpiryDate,
-        PickUpStartDate: formattedPickUpStartDate,
-        PickUpEndDate: formattedPickUpEndDate,
-        // PickUpStartTime: formattedPickUpStartTime,
-        // PickUpEndTime: formattedPickUpEndTime,
-      };
+        console.log(data);
+        const response = await ListingService.updateListing(data);
+        console.log("Listing updated:", response);
 
-      const response = await ListingService.updateListing(data);
-      console.log("Listing updated:", response);
-
-    } catch (error) {
-      console.error("Error updating listing:", error);
+      } catch (error) {
+        console.error("Error updating listing:", error);
+      }
     }
   };
 
@@ -194,17 +226,6 @@ function UpdateListing() {
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
-      expiryDate: value,
-      category: value,
-      description: value,
-      pickUpAddressFirst: value,
-      pickUpAddressSecond: value,
-      pickUpAddressThird: value,
-      pickUpPostalCode: value,
-      pickUpStartDate: value,
-      pickUpEndDate: value,
-      contactPhone: value,
-      contactEmail: value
     }));
   };
 
@@ -304,7 +325,7 @@ function UpdateListing() {
                 onChange={handleInputChange}
                 required
                 sx={{ pt: 1, pb: 2 }}
-              />              
+              />
               <TextField
                 name="PickUpStartDate"
                 label="Pick-Up Start Date"

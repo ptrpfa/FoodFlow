@@ -3,7 +3,7 @@ const ReservationModel = require('./reservation');
 const ListingModel = require('./listing');
 
 const sequelize = new Sequelize('foodflow', 'root', 'sikeloong', {
-  host: '34.124.232.171',
+  host: '34.124.250.62',
   port: 3306,
   dialect: 'mysql',
 });

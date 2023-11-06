@@ -321,27 +321,37 @@ class ListingService {
     return new Promise((resolve, reject) => {
       // gRPC
       listing_client.updateListing(message, null, (err, response) => {
-        resolve({
-          listingID: response.getListingid(),
-          userID: response.getUserid(),
-          name: response.getName(),
-          datetime: response.getDatetime(),
-          expiryDate: response.getExpirydate(),
-          category: response.getCategory(),
-          status: response.getStatus(),
-          description: response.getDescription(),
-          image: response.getImage(),
-          pickUpAddressFirst: response.getPickupaddressfirst(),
-          pickUpAddressSecond: response.getPickupaddresssecond(),
-          pickUpAddressThird: response.getPickupaddressthird(),
-          pickUpPostalCode: response.getPickuppostalcode(),
-          pickUpStartDate: response.getPickupstartdate(),
-          pickUpEndDate: response.getPickupenddate(),
-          pickUpStartTime: response.getPickupstarttime(),
-          pickUpEndTime: response.getPickupendtime(),
-          contactPhone: response.getContactphone(),
-          contactEmail: response.getContactemail(),
-        });
+        if (err) {
+          console.error('Error updating listing:', err);
+          reject(err);
+        } else {
+          if (response) {
+            resolve({
+              listingID: response.getListingid(),
+              userID: response.getUserid(),
+              name: response.getName(),
+              datetime: response.getDatetime(),
+              expiryDate: response.getExpirydate(),
+              category: response.getCategory(),
+              status: response.getStatus(),
+              description: response.getDescription(),
+              image: response.getImage(),
+              pickUpAddressFirst: response.getPickupaddressfirst(),
+              pickUpAddressSecond: response.getPickupaddresssecond(),
+              pickUpAddressThird: response.getPickupaddressthird(),
+              pickUpPostalCode: response.getPickuppostalcode(),
+              pickUpStartDate: response.getPickupstartdate(),
+              pickUpEndDate: response.getPickupenddate(),
+              pickUpStartTime: response.getPickupstarttime(),
+              pickUpEndTime: response.getPickupendtime(),
+              contactPhone: response.getContactphone(),
+              contactEmail: response.getContactemail(),
+            });
+          } else {
+            console.error('Response is null.');
+            reject('Null response'); // Handle the null response appropriately
+          }
+        }
       });
     });
   };
