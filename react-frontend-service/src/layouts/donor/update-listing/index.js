@@ -13,10 +13,9 @@ import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Footer from "examples/Footer";
 
-import { AuthContext, useUploadImageContext } from "context";
+import { AuthContext } from "context";
 import AuthService from "../../../services/auth-service";
 import ListingService from "services/listing-service";
-import list from "assets/theme/components/list";
 
 function UpdateListing() {
   const { listingID } = useParams();
@@ -29,24 +28,22 @@ function UpdateListing() {
   });
 
   const [formData, setFormData] = useState({
-    UserID: authContext.userID,
-    ListingID: listing.listingID,
-    Name: listing.name,
-    Datetime: listing.dateTime,
-    ExpiryDate: listing.expiryDate,
-    Category: listing.category,
-    Description: listing.description,
-    Image: listing.image,
-    PickUpAddressFirst: listing.pickUpAddressFirst,
-    PickUpAddressSecond: listing.pickUpAddressSecond,
-    PickUpAddressThird: listing.pickUpAddressThird,
-    PickUpPostalCode: listing.pickUpPostalCode,
-    PickUpStartDate: listing.pickUpStartDate,
-    PickUpEndDate: listing.pickUpEndDate,
-    PickUpStartTime: listing.pickUpStartTime,
-    PickUpEndTime: listing.pickUpEndTime,
-    ContactPhone: listing.contactPhone,
-    ContactEmail: listing.contactEmail,
+    listingID: listing.listingID,
+    name: listing.name,
+    datetime: listing.dateTime,
+    expirydate: listing.expiryDate,
+    category: listing.category,
+    description: listing.description,
+    pickupaddressfirst: listing.pickUpAddressFirst,
+    pickupaddresssecond: listing.pickUpAddressSecond,
+    pickupaddressthird: listing.pickUpAddressThird,
+    pickuppostalcode: listing.pickUpPostalCode,
+    pickupstartdate: listing.pickUpStartDate,
+    pickupenddate: listing.pickUpEndDate,
+    pickupstarttime: listing.pickUpStartTime,
+    pickupendtime: listing.pickUpEndTime,
+    contactphone: listing.contactPhone,
+    contactemail: listing.contactEmail,
   });
 
   const moment = require('moment-timezone');
@@ -63,9 +60,6 @@ function UpdateListing() {
 
     return formattedDate.format('YYYY-MM-DD');
   };
-
-  const timeZone = 'Asia/Singapore';
-  const formattedDate = formatDateForInput(listing.pickUpStartDate, timeZone);
 
   useEffect(() => {
     // Fetch user data
@@ -100,36 +94,26 @@ function UpdateListing() {
     const fetchListingDetails = async () => {
       try {
         const response = await ListingService.getListing({ ListingID: listingID });
-        // Fetch the image for the retrieved listing
-        // const imageData = await AWSS3Service.getImage({ imageId: response.image });
-        // const imageBlob = convertUint8ArrayToBlob(imageData.imageData);
-        // const imageUrl = URL.createObjectURL(imageBlob);
-        // Update the listing data with the image
-        // const updatedListing = { ...response, image: imageUrl };
         setListing(response);
-        console.log("original: ", response);
 
         setFormData({
-          UserID: authContext.userID,
-          ListingID: response.listingID,
-          Name: response.name,
-          Datetime: response.dateTime,
-          ExpiryDate: response.expiryDate,
-          Category: response.category,
-          Description: response.description,
-          Image: response.image,
-          PickUpAddressFirst: response.pickUpAddressFirst,
-          PickUpAddressSecond: response.pickUpAddressSecond,
-          PickUpAddressThird: response.pickUpAddressThird,
-          PickUpPostalCode: response.pickUpPostalCode,
-          PickUpStartDate: response.pickUpStartDate,
-          PickUpEndDate: response.pickUpEndDate,
-          PickUpStartTime: response.pickUpStartTime,
-          PickUpEndTime: response.pickUpEndTime,
-          ContactPhone: response.contactPhone,
-          ContactEmail: response.contactEmail,
+          listingID: response.listingID,
+          name: response.name,
+          datetime: response.dateTime,
+          expirydate: response.expiryDate,
+          category: response.category,
+          description: response.description,
+          pickupaddressfirst: response.pickUpAddressFirst,
+          pickupaddresssecond: response.pickUpAddressSecond,
+          pickupaddressthird: response.pickUpAddressThird,
+          pickuppostalcode: response.pickUpPostalCode,
+          pickupstartdate: response.pickUpStartDate,
+          pickupenddate: response.pickUpEndDate,
+          pickupstarttime: response.pickUpStartTime,
+          pickupendtime: response.pickUpEndTime,
+          contactphone: response.contactPhone,
+          contactemail: response.contactEmail,
         });
-        console.log()
       } catch (error) {
         console.error('Error fetching listing details:', error);
       }
@@ -139,6 +123,26 @@ function UpdateListing() {
     fetchListingDetails();
   }, [listingID, user.role]);
 
+  function formatTimeTo24Hours(timeString) {
+    if (!timeString) {
+      return "";
+    }
+    const [time, modifier] = timeString.split(" ");
+
+    let [hours, minutes] = time.split(":");
+    hours = parseInt(hours, 10);
+    minutes = parseInt(minutes, 10);
+
+    if (modifier === "PM" && hours < 12) {
+      hours += 12;
+    } else if (modifier === "AM" && hours === 12) {
+      hours = 0;
+    }
+
+    const formattedTime = `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}`;
+    return formattedTime;
+  }
+
   const handleFormUpdate = async (event) => {
     event.preventDefault();
     if (!listingID) {
@@ -146,25 +150,6 @@ function UpdateListing() {
       return;
     }
     else {
-      console.log(listingID);
-
-      function formatTimeTo24Hours(timeString) {
-        const [time, modifier] = timeString.split(" ");
-
-        let [hours, minutes] = time.split(":");
-        hours = parseInt(hours, 10);
-        minutes = parseInt(minutes, 10);
-
-        if (modifier === "PM" && hours < 12) {
-          hours += 12;
-        } else if (modifier === "AM" && hours === 12) {
-          hours = 0;
-        }
-
-        const formattedTime = `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}`;
-        return formattedTime;
-      }
-
       const currentDate = new Date();
       const formattedDatetime = currentDate.toLocaleDateString("en-US", {
         year: "numeric",
@@ -174,44 +159,41 @@ function UpdateListing() {
         minute: "2-digit",
       }).replace(/,/g, '').slice(0, -3);
 
-      const ExpiryDateObject = new Date(formData.ExpiryDate);
+      const ExpiryDateObject = new Date(formData.expirydate);
       const formattedExpiryDate = ExpiryDateObject.toLocaleDateString("en-US", {
         month: "short",
         day: "numeric",
         year: "numeric",
       }).replace(',', '');
 
-      const PickUpStartDateObject = new Date(formData.PickUpStartDate);
+      const PickUpStartDateObject = new Date(formData.pickupstartdate);
       const formattedPickUpStartDate = PickUpStartDateObject.toLocaleDateString("en-US", {
         month: "short",
         day: "numeric",
         year: "numeric",
       }).replace(',', '');
 
-      const PickUpEndDateObject = new Date(formData.PickUpEndDate);
+      const PickUpEndDateObject = new Date(formData.pickupenddate);
       const formattedPickUpEndDate = PickUpEndDateObject.toLocaleDateString("en-US", {
         month: "short",
         day: "numeric",
         year: "numeric",
       }).replace(',', '');
 
-      const formattedPickUpStartTime = formatTimeTo24Hours(formData.PickUpStartTime);
-      const formattedPickUpEndTime = formatTimeTo24Hours(formData.PickUpEndTime);
+      const formattedPickUpStartTime = formatTimeTo24Hours(formData.pickupstarttime);
+      const formattedPickUpEndTime = formatTimeTo24Hours(formData.pickupendtime);
 
       try {
         const data = {
           ...formData,
-          listingID: listingID,
-          UserID: authContext.userID,
-          Datetime: formattedDatetime,
-          ExpiryDate: formattedExpiryDate,
-          PickUpStartDate: formattedPickUpStartDate,
-          PickUpEndDate: formattedPickUpEndDate,
-          // PickUpStartTime: formattedPickUpStartTime,
-          // PickUpEndTime: formattedPickUpEndTime,
+          datetime: formattedDatetime,
+          expirydate: formattedExpiryDate,
+          pickupstartdate: formattedPickUpStartDate,
+          pickupenddate: formattedPickUpEndDate,
+          pickupstarttime: formattedPickUpStartTime,
+          pickupendtime: formattedPickUpEndTime,
         };
 
-        console.log(data);
         const response = await ListingService.updateListing(data);
         console.log("Listing updated:", response);
 
@@ -242,154 +224,152 @@ function UpdateListing() {
           <MDBox px={2} pt={3} variant="gradient">
             <MDBox pt={1}>
               <TextField
-                name="Name"
+                name="name"
                 label="Name"
                 variant="outlined"
                 fullWidth
-                value={formData.Name || listing.name}
+                value={formData.name || listing.name}
                 onChange={handleInputChange}
                 required
                 sx={{ pt: 1, pb: 2 }}
               />
               <TextField
-                name="ExpiryDate"
+                name="expirydate"
                 label="Expiry Date"
                 variant="outlined"
                 type="date"
                 fullWidth
-                value={formatDateForInput(formData.ExpiryDate || listing.expiryDate)}
+                value={formatDateForInput(formData.expirydate || listing.expiryDate)}
                 onChange={handleInputChange}
                 required
                 sx={{ pt: 1, pb: 2 }}
                 shrink
               />
               <TextField
-                name="Category"
+                name="category"
                 label="Category"
                 variant="outlined"
                 fullWidth
-                value={formData.Category || listing.category}
+                value={formData.category || listing.category}
                 onChange={handleInputChange}
                 required
                 sx={{ pt: 1, pb: 2 }}
               />
               <TextField
-                name="Description"
+                name="description"
                 label="Description"
                 variant="outlined"
                 multiline
                 rows={4}
                 fullWidth
-                value={formData.Description || listing.description}
+                value={formData.description || listing.description}
                 onChange={handleInputChange}
                 required
                 sx={{ pt: 1, pb: 2 }}
               />
               <TextField
-                name="PickUpAddressFirst"
+                name="pickupaddressfirst"
                 label="Pick-Up Address (Line 1)"
                 variant="outlined"
                 fullWidth
-                value={formData.PickUpAddressFirst || listing.pickUpAddressFirst}
+                value={formData.pickupaddressfirst || listing.pickUpAddressFirst}
                 onChange={handleInputChange}
                 placeholder={listing.pickUpAddressFirst}
                 required
                 sx={{ pt: 1, pb: 2 }}
               />
               <TextField
-                name="PickUpAddressSecond"
+                name="pickupaddresssecond"
                 label="Pick-Up Address (Line 2)"
                 variant="outlined"
                 fullWidth
-                value={formData.PickUpAddressSecond || listing.pickUpAddressSecond}
+                value={formData.pickupaddresssecond || listing.pickUpAddressSecond}
                 onChange={handleInputChange}
                 required
                 sx={{ pt: 1, pb: 2 }}
               />
               <TextField
-                name="PickUpAddressThird"
+                name="pickupaddressthird"
                 label="Pick-Up Address (Line 3)"
                 variant="outlined"
                 fullWidth
-                value={formData.PickUpAddressThird || listing.pickUpAddressThird}
+                value={formData.pickupaddressthird || listing.pickUpAddressThird}
                 onChange={handleInputChange}
                 required
                 sx={{ pt: 1, pb: 2 }}
               />
               <TextField
-                name="PickUpPostalCode"
+                name="pickuppostalcode"
                 label="Pick-Up Postal Code"
                 variant="outlined"
                 fullWidth
-                value={formData.PickUpPostalCode || listing.pickUpPostalCode}
+                value={formData.pickuppostalcode || listing.pickUpPostalCode}
                 onChange={handleInputChange}
                 required
                 sx={{ pt: 1, pb: 2 }}
               />
               <TextField
-                name="PickUpStartDate"
+                name="pickupstartdate"
                 label="Pick-Up Start Date"
                 variant="outlined"
                 type="date"
                 fullWidth
-                value={formatDateForInput(formData.PickUpStartDate || listing.pickUpStartDate)}
+                value={formatDateForInput(formData.pickupstartdate || listing.pickUpStartDate)}
                 onChange={handleInputChange}
                 required
                 sx={{ pt: 1, pb: 2 }}
               />
               <TextField
-                name="PickUpEndDate"
+                name="pickupenddate"
                 label="Pick-Up End Date"
                 variant="outlined"
                 type="date"
                 fullWidth
-                value={formatDateForInput(formData.PickUpEndDate || listing.pickUpEndDate)}
+                value={formatDateForInput(formData.pickupenddate || listing.pickUpEndDate)}
                 onChange={handleInputChange}
                 required
                 sx={{ pt: 1, pb: 2 }}
               />
-              {/* <MDTypography variant='p' style={{ fontSize: '12px', color: '#D3D3D3' }}>Current: {listing.pickUpStartTime}</MDTypography>
               <TextField
-                name="PickUpStartTime"
+                name="pickupstarttime"
                 label="Pick-Up Start Time"
                 variant="outlined"
                 type="time"
                 fullWidth
-                value={formatTimeTo12Hours(formData.PickUpStartTime || listing.pickUpStartTime)}
+                value={formatTimeTo24Hours(formData.pickupstarttime || listing.pickUpStartTime)}
                 onChange={handleInputChange}
                 required
                 sx={{ pt: 1, pb: 2 }}
               />
 
-              <MDTypography variant='p' style={{ fontSize: '12px', color: '#D3D3D3' }}>Current: {listing.pickUpEndTime}</MDTypography>
               <TextField
-                name="PickUpEndTime"
+                name="pickupendtime"
                 label="Pick-Up End Time"
                 variant="outlined"
                 type="time"
                 fullWidth
-                value={formatTimeTo12Hours(formData.PickUpEndTime || listing.pickUpEndTime)}
+                value={formatTimeTo24Hours(formData.pickupendtime || listing.pickUpEndTime)}
                 onChange={handleInputChange}
                 required
                 sx={{ pt: 1, pb: 2 }}
-              /> */}
+              />
 
               <TextField
-                name="ContactPhone"
+                name="contactphone"
                 label="Contact Phone"
                 variant="outlined"
                 fullWidth
-                value={formData.ContactPhone || listing.contactPhone}
+                value={formData.contactphone || listing.contactPhone}
                 onChange={handleInputChange}
                 required
                 sx={{ pt: 1, pb: 2 }}
               />
               <TextField
-                name="ContactEmail"
+                name="contactemail"
                 label="Contact Email"
                 variant="outlined"
                 fullWidth
-                value={formData.ContactEmail || listing.contactEmail}
+                value={formData.contactemail || listing.contactEmail}
                 onChange={handleInputChange}
                 required
                 sx={{ pt: 1, pb: 2 }}

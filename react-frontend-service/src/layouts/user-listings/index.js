@@ -97,7 +97,6 @@ function FoodListingsTable({ onUserUpdate }) {
         );
         setAvailableLoaded(true);
         setAvailableListings(listingsWithImages);
-        console.log("done");
       })
       .catch((error) => {
         console.error("Error fetching listings:", error);

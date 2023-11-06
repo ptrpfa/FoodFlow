@@ -315,8 +315,8 @@ class ListingService {
     message.setPickupenddate(payload.pickupenddate);
     message.setPickupstarttime(payload.pickupstarttime);
     message.setPickupendtime(payload.pickupendtime);
-    message.setContactphone(payload.ContactPhone);
-    message.setContactemail(payload.ContactEmail);
+    message.setContactphone(payload.contactphone);
+    message.setContactemail(payload.contactemail);
 
     return new Promise((resolve, reject) => {
       // gRPC

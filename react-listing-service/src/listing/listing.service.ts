@@ -137,10 +137,57 @@ export class ListingService {
     ListingID: Prisma.ListingWhereUniqueInput,
     UpdateListingDto: UpdateListingDto,
   ): Promise<ProtoListing> {
+    let data = {...UpdateListingDto};
+
+    let formattedDatetime = null
+    let formattedExpiryDate = null
+    let formattedPickUpStartDate = null
+    let formattedPickUpEndDate = null
+    let formattedPickUpStartTime = null
+    let formattedPickUpEndTime = null
+
+    // Check if 'ExpiryDate' exists and is not null/undefined.
+    if ('Datetime' in UpdateListingDto && UpdateListingDto.Datetime != null) {
+      formattedDatetime = this.parseDate(UpdateListingDto.Datetime);
+    }
+    
+    // Check if 'ExpiryDate' exists and is not null/undefined.
+    if ('ExpiryDate' in UpdateListingDto && UpdateListingDto.ExpiryDate != null) {
+      formattedExpiryDate = this.parseDate(UpdateListingDto.ExpiryDate);
+    }
+
+    // Check if 'PickUpStartDate' exists and is not null/undefined.
+    if ('PickUpStartDate' in UpdateListingDto && UpdateListingDto.PickUpStartDate != null) {
+      formattedPickUpStartDate = this.parseDate(UpdateListingDto.PickUpStartDate);
+    }
+
+    // Check if 'PickUpEndDate' exists and is not null/undefined.
+    if ('PickUpEndDate' in UpdateListingDto && UpdateListingDto.PickUpEndDate != null) {
+      formattedPickUpEndDate = this.parseDate(UpdateListingDto.PickUpEndDate);
+    }
+
+    // Check if 'PickUpStartTime' exists and is not null/undefined.
+    if ('PickUpStartTime' in UpdateListingDto && UpdateListingDto.PickUpStartTime != null) {
+      formattedPickUpStartTime = this.convertTimeToDate(UpdateListingDto.PickUpStartTime);
+    }
+
+    // Check if 'PickUpEndTime' exists and is not null/undefined.
+    if ('PickUpEndTime' in UpdateListingDto && UpdateListingDto.PickUpEndTime != null) {
+      formattedPickUpEndTime = this.convertTimeToDate(UpdateListingDto.PickUpEndTime);
+    }
+
     return this.parseProtolisting(
       await this.prisma.listing.update({
         where: ListingID,
-        data: UpdateListingDto,
+        data: {
+          ...data,
+          Datetime: formattedDatetime,
+          ExpiryDate: formattedExpiryDate,
+          PickUpStartDate: formattedPickUpStartDate,
+          PickUpEndDate: formattedPickUpEndDate,
+          PickUpStartTime: formattedPickUpStartTime,
+          PickUpEndTime: formattedPickUpEndTime,
+        },
       }),
     );
   }
