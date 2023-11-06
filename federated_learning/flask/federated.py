@@ -9,3 +9,6 @@ import os
 file_global_model = "models/model.h5"
 global_model = tf.keras.saving.load_model(file_global_model)
 global_model.summary()
+
+# Simple averaging is performed, regardless of host
+pass
