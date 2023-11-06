@@ -8,7 +8,7 @@ const CLASS_NAMES = ['Fresh', 'Rotten'];
 
 let model = undefined;      // Classification head of model (built on top of base model
 let mobilenet = undefined;  // Mobilenet model (base model)
-
+var training_size = 0;      // Training size (no of images/tensors client model is trained on)
 
 class ImageClassifierService {
     
@@ -127,6 +127,7 @@ class ImageClassifierService {
             // Append image feature into array of training data
             training_data.push(image_features);
             training_output.push(userPrediction);
+            training_size++;
         }
         
         /* Model Training */
@@ -151,6 +152,7 @@ class ImageClassifierService {
 
     // Function for uploading client model to the server for federated learning
     upload_model = async() => {
+        model.setUserDefinedMetadata({"training_size": training_size});
         const saveResult = await model.save(`${SERVER_URL}/upload_model`);
         alert("Model uploaded for federated learning!");
     }
