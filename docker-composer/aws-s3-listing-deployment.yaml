@@ -15,6 +15,11 @@ spec:
       containers:
         - name: aws-s3-listing
           image: skyish/aws-s3-listing:latest
+          envFrom:
+            - configMapRef:
+                name: deployment_configmap
+            - secretRef:
+                name: deployment_secret
           ports:
             - containerPort: 5001
 

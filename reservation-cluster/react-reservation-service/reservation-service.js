@@ -121,6 +121,7 @@ app.post("/reservation/create", (req, res) => {
 // Delete Reservation Request
 app.delete("/reservation/delete", (req, res) => {
   const ReservationID = req.body.ReservationID;
+  const msg_id = req.body.msg_id;
 
   // Payload for Kafka message
   const reservationData = {
@@ -139,7 +140,7 @@ app.delete("/reservation/delete", (req, res) => {
   const kafkaTimeout = setTimeout(() => {
     if (!isResponseSent) {
       console.error("Kafka producer readiness timeout");
-      res.status(500).json({ message: "Delete reservation failed due to server timeout" });
+      res.status(500).json({ msg_id: msg_id, message: "Delete reservation failed due to server timeout" });
       isResponseSent = true;
     }
   }, 90000); 
@@ -150,10 +151,11 @@ app.delete("/reservation/delete", (req, res) => {
       if (!isResponseSent) {
         if (error) {
           console.error("Error sending message to Kafka:", error);
-          res.status(500).json({ message: "Delete reservation failed" });
+          res.status(500).json({msg_id: msg_id, message: "Delete reservation failed" });
         } else {
           console.log("Delete reservation request sent successfully:", data);
           res.status(200).json({
+            msg_id: msg_id,
             message: "Delete reservation request sent",
             reservation: reservationData,
           });
@@ -167,14 +169,15 @@ app.delete("/reservation/delete", (req, res) => {
     sendToKafka();
   } else {
     console.error("Kafka producer not ready, cannot send message");
-    res.status(500).json({ message: "Kafka producer not ready" });
+    res.status(500).json({ msg_id: msg_id, message: "Kafka producer not ready" });
   }
 });
 
 //Get Reservation Request
 app.get("/reservation/:UserID", (req,res) => {
   const UserID = req.params.UserID;
-
+  const msg_id = req.body.msg_id;
+  
   // Payload for Kafka message
   const reservationData = {
     action: "get",
@@ -192,7 +195,7 @@ app.get("/reservation/:UserID", (req,res) => {
   const kafkaTimeout = setTimeout(() => {
     if (!isResponseSent) {
       console.error("Kafka producer readiness timeout");
-      res.status(500).json({ message: "Delete reservation failed due to server timeout" });
+      res.status(500).json({ msg_id: msg_id, message: "Delete reservation failed due to server timeout" });
       isResponseSent = true;
     }
   }, 90000); 
@@ -203,10 +206,11 @@ app.get("/reservation/:UserID", (req,res) => {
       if (!isResponseSent) {
         if (error) {
           console.error("Error sending message to Kafka:", error);
-          res.status(500).json({ message: "Get reservation failed" });
+          res.status(500).json({ msg_id: msg_id, message: "Get reservation failed" });
         } else {
           console.log("Get reservation request sent successfully:", data);
           res.status(200).json({
+            msg_id: msg_id,
             message: "Get reservation request sent",
             reservation: reservationData,
           });
@@ -220,7 +224,7 @@ app.get("/reservation/:UserID", (req,res) => {
     sendToKafka();
   } else {
     console.error("Kafka producer not ready, cannot send message");
-    res.status(500).json({ message: "Kafka producer not ready" });
+    res.status(500).json({ msg_id: msg_id, message: "Kafka producer not ready" });
   }
 
 

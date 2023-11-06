@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: deployment_configmap
+data:
+  DATABASE_URL: "mysql://root:sikeloong@34.124.250.62:3306/foodflow"
+  # AWS S3 Config
+  AWS_ACCESS_KEY_ID: AKIAQEPNIPNP2R5WFFFP
+  AWS_S3_REGION: ap-southeast-1
+  AWS_S3_BUCKET: cloud-proj-bucket
+  QUEUE_URL: https://sqs.ap-southeast-1.amazonaws.com/009624386399/image-detail-processor
+  # FrontEnd
+  
