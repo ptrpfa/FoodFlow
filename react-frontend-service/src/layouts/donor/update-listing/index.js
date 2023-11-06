@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
@@ -196,7 +196,7 @@ function UpdateListing() {
 
         const response = await ListingService.updateListing(data);
         console.log("Listing updated:", response);
-
+        window.location.href = '/mylistings';
       } catch (error) {
         console.error("Error updating listing:", error);
       }
