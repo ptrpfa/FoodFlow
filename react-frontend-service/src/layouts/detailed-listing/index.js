@@ -86,14 +86,13 @@ function DetailedListing(onUserUpdate) {
     const fetchListingDetails = async () => {
       try {
         const response = await ListingService.getListing({ ListingID: listingID });
-        // // Fetch the image for the retrieved listing
-        // const imageData = await AWSS3Service.getImage({ imageId: response.image });
-        // const imageBlob = convertUint8ArrayToBlob(imageData.imageData);
-        // const imageUrl = URL.createObjectURL(imageBlob);
-        // // // Update the listing data with the image
-        // const updatedListing = { ...response, image: imageUrl };
-        // setListing(updatedListing);
-        setListing(response);
+        // Fetch the image for the retrieved listing
+        const imageData = await AWSS3Service.getImage({ imageId: response.image });
+        const imageBlob = convertUint8ArrayToBlob(imageData.imageData);
+        const imageUrl = URL.createObjectURL(imageBlob);
+        // Update the listing data with the image
+        const updatedListing = { ...response, image: imageUrl };
+        setListing(updatedListing);
       } catch (error) {
         console.error('Error fetching listing details:', error);
       }
@@ -123,8 +122,6 @@ function DetailedListing(onUserUpdate) {
                 <MDTypography variant="h5" color="white">
                   {listing.name}
                 </MDTypography>
-
-
                 {authContext.userID === listing?.userID.toString() ? (
                   <div>
                     <MDButton
@@ -172,11 +169,11 @@ function DetailedListing(onUserUpdate) {
               <div style={{ display: 'flex' }}>
                 <div style={{ flex: 1 }}>
                   <div style={{ display: 'flex', justifyContent: 'left', margin: '0.5rem', height: '20rem' }}>
-                    {/* <img
+                    <img
                       src={listing.image}
                       style={{ maxWidth: '90%', maxHeight: '90%', margin: 'auto' }}
                       alt={listing.name}
-                    /> */}
+                    />
                   </div>
                 </div>
 
