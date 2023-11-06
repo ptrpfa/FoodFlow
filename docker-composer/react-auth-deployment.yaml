@@ -15,6 +15,11 @@ spec:
       containers:
         - name: react-auth
           image: skyish/react-auth:latest
+          envFrom:
+            - configMapRef:
+                name: deployment-configmap
+            - secretRef:
+                name: deployment-secret
           ports:
             - containerPort: 5000
 

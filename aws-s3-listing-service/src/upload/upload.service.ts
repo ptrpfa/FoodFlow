@@ -5,7 +5,6 @@ import {
   DeleteObjectCommand,
   S3Client,
 } from '@aws-sdk/client-s3';
-import { ConfigService } from '@nestjs/config';
 import { v4 as uuidv4 } from 'uuid';
 import {
   ReceiveMessageCommand,
@@ -16,18 +15,18 @@ import {
 @Injectable()
 export class UploadService {
   private readonly s3Client = new S3Client({
-    region: this.configService.getOrThrow('AWS_S3_REGION'),
+    region: process.env.AWS_S3_REGION,
   });
 
   private readonly sqsClient = new SQSClient({
-    region: this.configService.getOrThrow('AWS_S3_REGION'),
+    region: process.env.AWS_S3_REGION,
   });
 
-  constructor(private readonly configService: ConfigService) {}
+  constructor() {}
 
   async uploadImage(image: Uint8Array) {
     const imageUUID = uuidv4();
-    const bucket_name = this.configService.getOrThrow('AWS_S3_BUCKET');
+    const bucket_name = process.env.AWS_S3_BUCKET;
 
     await this.s3Client.send(
       new PutObjectCommand({
@@ -49,7 +48,7 @@ export class UploadService {
     while (running) {
       const response_queue = await this.sqsClient.send(
         new ReceiveMessageCommand({
-          QueueUrl: this.configService.getOrThrow('QUEUE_URL'),
+          QueueUrl: process.env.QUEUE_URL,
           MaxNumberOfMessages: 10,
           WaitTimeSeconds: 10,
         }),
@@ -63,7 +62,7 @@ export class UploadService {
             // Remove the message from the queue
             await this.sqsClient.send(
               new DeleteMessageCommand({
-                QueueUrl: this.configService.getOrThrow('QUEUE_URL'),
+                QueueUrl: process.env.QUEUE_URL,
                 ReceiptHandle: message.ReceiptHandle,
               }),
             );
@@ -76,7 +75,7 @@ export class UploadService {
   }
 
   async *getMultipleImages(imageIds: string[]) {
-    const bucket_name = this.configService.getOrThrow('AWS_S3_BUCKET');
+    const bucket_name = process.env.AWS_S3_BUCKET;
     for (const key of imageIds) {
       const data = await this.s3Client.send(
         new GetObjectCommand({
@@ -93,7 +92,7 @@ export class UploadService {
   }
 
   async getImage(imageId: string) {
-    const bucket_name = this.configService.getOrThrow('AWS_S3_BUCKET');
+    const bucket_name = process.env.AWS_S3_BUCKET;
     const data = await this.s3Client.send(
       new GetObjectCommand({
         Bucket: bucket_name,
@@ -106,7 +105,7 @@ export class UploadService {
   }
 
   async deleteImage(imageId: string) {
-    const bucket_name = this.configService.getOrThrow('AWS_S3_BUCKET');
+    const bucket_name = process.env.AWS_S3_BUCKET;
     const data = await this.s3Client.send(
       new DeleteObjectCommand({
         Bucket: bucket_name,

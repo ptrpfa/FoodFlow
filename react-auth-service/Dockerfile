@@ -20,5 +20,5 @@ RUN npx prisma generate
 # Step 7: Expose the port
 EXPOSE 5000
 
-# Step 8: Set the command to run your app
+# Step 8: Run the server
 CMD ["npm", "run", "start:dev"]
