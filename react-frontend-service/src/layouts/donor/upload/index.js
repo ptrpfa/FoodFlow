@@ -99,7 +99,12 @@ function DonorForm() {
   const disputeFreshness = async () => {
     setOpenDialog(false);
     setTrainingModel(true);
+
+    // Train client side model
     await ImageClassifierService.train_model(selectedImage, 0);
+
+    // Upload model
+    await ImageClassifierService.upload();
     setTrainingModel(false);
     setValidAndFresh(true);
   }
@@ -117,6 +122,10 @@ function DonorForm() {
     }
 
     prepareModel();
+
+    return () => {
+      ImageClassifierService.dispose_models();
+    };
   }, []); // Empty dependency array means this effect runs once on mount
 
   return (

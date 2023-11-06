@@ -6,10 +6,8 @@ const MODEL_URL = 'https://tfhub.dev/google/tfjs-model/imagenet/mobilenet_v3_sma
 const SERVER_URL = 'http://35.194.95.239:80';
 const CLASS_NAMES = ['Fresh', 'Rotten'];
 
-let model = undefined; // Classification head of model (built on top of base model
-let mobilenet = undefined; // Mobilenet model (base model)
-let model_classification = undefined;       // Classification made by model (0: Fresh, 1: Rotten)
-let correct_classification = undefined;     // Correct classification provided by user (0: Fresh, 1: Rotten)
+let model = undefined;      // Classification head of model (built on top of base model
+let mobilenet = undefined;  // Mobilenet model (base model)
 
 
 class ImageClassifierService {
@@ -44,7 +42,6 @@ class ImageClassifierService {
         } else {
             console.log("Model is already loaded")
         }
-        console.log("Done")
         return;
     }
 
@@ -154,8 +151,13 @@ class ImageClassifierService {
 
     // Function for uploading client model to the server for federated learning
     upload_model = async() => {
-        const saveResult = await this.model.save(`${SERVER_URL}/upload_model`);
+        const saveResult = await model.save(`${SERVER_URL}/upload_model`);
         alert("Model uploaded for federated learning!");
+    }
+
+    dispose_models = () => {
+        model = undefined;
+        mobilenet = undefined;
     }
 }
 
