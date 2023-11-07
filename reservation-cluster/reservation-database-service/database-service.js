@@ -1,11 +1,15 @@
 const kafka = require('kafka-node');
 const { sequelize, Reservation, Listing } = require('./db');
+const client = new kafka.KafkaClient({ kafkaHost: "kafka-service-1:9092" });
+const topicToWaitFor = 'reservation-topic';
 
-const client = new kafka.KafkaClient({ kafkaHost: "kafka-service-1:29092" });
-const consumer = new kafka.Consumer(client, [{ topic: 'reservation-topic' }], { groupId: 'reservation-group' });
 
+
+
+// WebSocket setup
 const WebSocket = require('ws');
-const databaseServerSocket = new WebSocket('ws://host.docker.internal:8282');
+const wsUrl = 'ws://host.docker.internal:8282';
+const databaseServerSocket = new WebSocket(wsUrl);
 
 databaseServerSocket.on('open', () => {
   console.log('Database Controller: Connected to WebSocket server');
@@ -34,12 +38,10 @@ function checkTopicAvailability() {
    });
  }
 
-checkTopicAvailability()
-  .then(() => {
-       // Now that the topic is available, you can proceed to create your Kafka consumer
-      const consumer = new kafka.Consumer(client, [{ topic: topicToWaitFor }], { groupId: 'reservation-group' });
-    
+checkTopicAvailability().then(() => {
+      const consumer = new kafka.Consumer(client, [{ topic: topicToWaitFor }], { groupId: 'reservation-group' }); 
       consumer.on('message', async (message) => {
+         
          console.log("Kafka Consumer message received");
          const payload = JSON.parse(message.value);
          const msg_id = payload.msg_id;
@@ -83,6 +85,7 @@ checkTopicAvailability()
                await transaction.commit();
                console.log(`Reservation ID ${reservation.id} created for Listing ID ${payload.ListingID}`);
                const newReservation = {
+                  action:'create',
                   msg_id: msg_id,
                   status: 200,
                   sender: 'reservation-controller'
@@ -115,46 +118,73 @@ checkTopicAvailability()
          else if (payload.action === 'delete') {
             const transaction = await sequelize.transaction();
             try {
-            // Get the reservation to find the associated ListingID
-            const reservation = await Reservation.findByPk(payload.ReservationID, { transaction });
-            if (!reservation) {
-               throw new Error('Reservation not found');
-            }
-            // Extract the ListingID from the reservation
-            const { ListingID } = reservation;
-
-            // Delete the reservation
-            await Reservation.destroy({
-               where: { ReservationID: payload.ReservationID },
-               transaction
-            });
-
-            // Update the Listing.Status to 1 to make it available
-            await Listing.update({ Status: 1 }, {
-               where: { ListingID: ListingID },
-               transaction
-            });
-
-            // Commit the transaction
-            await transaction.commit();
-            console.log(`Reservation ID ${payload.ReservationID} deleted and Listing ID ${ListingID} set to available.`);
+              // Get the reservation to find the associated ListingID
+              console.log(payload.ReservationID)
+              const reservation = await Reservation.findByPk(payload.ReservationID, { transaction });
+              if (!reservation) {
+                const errorMessage = `Reservation with ID ${payload.ReservationID} not found.`;
+                console.error(errorMessage);
+                throw new Error(errorMessage);
+              }
+              // Extract the ListingID from the reservation
+              const { ListingID } = reservation;
+          
+              // Delete the reservation
+              await Reservation.destroy({
+                where: { ReservationID: payload.ReservationID },
+                transaction
+              });
+          
+              // Update the Listing.Status to 1 to make it available
+              await Listing.update({ Status: 1 }, {
+                where: { ListingID: ListingID },
+                transaction
+              });
+          
+              // Commit the transaction
+              await transaction.commit();
+              console.log(`Reservation ID ${payload.ReservationID} deleted and Listing ID ${ListingID} set to available.`);
+              // Send a WebSocket message to the client to inform of success
+              const deleteSuccessMessage = {
+                action: 'delete',
+                msg_id: payload.msg_id,
+                status: 200,
+                payload: `Reservation ID ${payload.ReservationID} successfully deleted.`,
+                sender: 'reservation-controller'
+              };
+              databaseServerSocket.send(JSON.stringify(deleteSuccessMessage));
             } catch (error) {
-            // Rollback the transaction in case of any error
-            await transaction.rollback();
-            console.error("Error processing reservation deletion:", error);
+              // Rollback the transaction in case of any error
+              await transaction.rollback();
+              console.error("Error processing reservation deletion:", error);
+              // Send a WebSocket message to the client to inform of the error
+              const deleteErrorMessage = {
+                msg_id: payload.msg_id,
+                status: 500,
+                payload: `Error processing reservation deletion: ${error.message}`,
+                sender: 'reservation-controller'
+              };
+              databaseServerSocket.send(JSON.stringify(deleteErrorMessage));
             }
-         }
+          }
          else if (payload.action === 'get')
             try {
                // Fetch all reservations for the given UserID
                const reservations = await Reservation.findAll({
                where: { UserID: payload.UserID },
                });
-               console.log(`Reservations fetched for User ID ${payload.UserID}:`, reservations);
+                 // Package the reservations in a message object
+               const getReservation = {
+                  type: 'RESERVATION_DATA', 
+                  data: reservations 
+               };
+                //Send the reservation message to the WebSocket server
+               const reservationMessage = JSON.stringify(getReservation);
+               databaseServerSocket.send(reservationMessage);               
+               console.log(`Reservations fetched for User ID ${payload.UserID}:`, reservationMessage);
             } catch (error) {
                console.error("Error processing reservation retrieval:", error);
             }
-
       });
   })
   .catch((error) => {

@@ -46,10 +46,7 @@ const reservationService = {
     })
   },
   deleteReservation: (ReservationID) => {
-    const deleteReservation = {
-      ReservationID: ReservationID,
-    };
-    return axios.delete(`${API_BASE_URL}/reservation/delete`, deleteReservation, {
+    return axios.delete(`${API_BASE_URL}/reservation/delete/${ReservationID}`, {
       headers: {
         'Content-Type': 'application/json'
       }

@@ -12,22 +12,44 @@ import Footer from "examples/Footer";
 import { AuthContext } from 'context';
 import reservationService from 'services/reservation-service';
 import AuthService from "../../services/auth-service";
+import WebSocketService from "services/web-listener";
+
 
 function Reservation() {
-  const authContext = useContext(AuthContext); // Use useContext to get the user context
+  const authContext = useContext(AuthContext); 
   const [reservations, setReservations] = useState([]);
+  const [message, setMessage] = useState(''); 
   const [user, setUser] = useState({
     firstName: "",
     lastName: "",
     role: "",
   });
+
+  const handleReservation = (ReservationID) => {
+    reservationService.deleteReservation(ReservationID)
+      .then(response => {
+        setMessage(response.data.message); // Set the success message from the response
+        // Filter out the canceled reservation
+        setReservations(reservations.filter(reservation => reservation.ReservationID !== ReservationID));
+      })
+      .catch(error => {
+        console.error("Delete failed:", error);
+        setMessage("Delete failed"); // Set the error message
+      });
+  };
+
+  const [deleteSnackbar, setDeleteSnackbar] = useState({ open: false, message: "" });
+  const closeDeleteSnackbar = () => {
+    setDeleteSnackbar({ open: false, message: "" });
+  };
+  
+
   
   useEffect(() => {
     console.log('Current UserID:', authContext.userID); // Print the current UserID
     const getUserData = async () => {
       try {
         const response = await AuthService.getProfile({ UserID: authContext.userID });
-
         if (response) {
           setUser({
             ...user,
@@ -64,18 +86,91 @@ function Reservation() {
     }
   }, [authContext.userID]);
 
-  const renderReservation = (reservation) => {
-    return (
-      <div key={reservation.ReservationID} style={{margin: "10px", padding: "15px", border: "1px solid #ddd", borderRadius: "4px"}}>
-        <h4>Reservation ID: {reservation.ReservationID}</h4>
-        <p>Date and Time: {new Date(reservation.Datetime).toLocaleString()}</p>
-        <p>Remarks: {reservation.Remarks}</p>
-        <p>User ID: {reservation.UserID}</p>
-        <p>Listing ID: {reservation.ListingID}</p>
-      </div>
-    );
-  };
+  useEffect(() => {
+    const webSocket = new WebSocket('ws://localhost:8282');
 
+    webSocket.onopen = () => {
+      console.log('WebSocket for Get Reservation is Connected');
+    };
+
+    webSocket.onmessage = (event) => {
+      const message = JSON.parse(event.data);
+      if (message.type === 'RESERVATION_DATA') {
+        setReservations(message.data);
+      }
+    };
+
+    webSocket.onerror = (error) => {
+      console.error('WebSocket Error:', error);
+    };
+
+    return () => {
+      webSocket.close();
+    };
+  }, []); 
+
+  useEffect(() => {
+    const webSocket = new WebSocket('ws://localhost:8282');
+  
+    webSocket.onopen = () => {
+      console.log('WebSocket for Delete Reservation is Connected');
+    };
+  
+    webSocket.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+  
+      // Check if the message is a delete confirmation
+      if (data.status === 200 && data.action === 'delete') {
+        setDeleteSnackbar({ open: true, message: "Reservation deleted successfully" });
+        // Also remove the reservation from the list
+        setReservations(currentReservations => 
+          currentReservations.filter(reservation => reservation.ReservationID.toString() !== data.msg_id)
+        );
+      } else if (data.status === 500 && data.action === 'delete') {
+        setDeleteSnackbar({ open: true, message: data.payload });
+      }
+    };
+  
+    webSocket.onerror = (error) => {
+      console.error('WebSocket Error:', error);
+    };
+  
+    return () => {
+      webSocket.close();
+    };
+  }, []);
+
+  const renderDeleteSnackbar = (
+    <MDSnackbar
+      icon="info"
+      title="Server Message:"
+      content={deleteSnackbar.message}
+      dateTime="5 seconds ago"
+      open={deleteSnackbar.open}
+      onClose={closeDeleteSnackbar}
+      close={closeDeleteSnackbar}
+      autoHideDuration={6000} 
+    />
+  );
+
+  const renderReservation = (reservation) => (
+    <div key={reservation.ReservationID} style={{ margin: "10px", padding: "15px", border: "1px solid #ddd", borderRadius: "4px" }}>
+      <h4>Reservation ID: {reservation.ReservationID}</h4>
+      <p>Date and Time: {new Date(reservation.Datetime).toLocaleString()}</p>
+      <p>Remarks: {reservation.Remarks}</p>
+      <p>User ID: {reservation.UserID}</p>
+      <p>Listing ID: {reservation.ListingID}</p>
+      <MDButton
+        variant="gradient"
+        color="error"
+        onClick={() => handleReservation(reservation.ReservationID)}
+        fullWidth
+      >
+        Cancel
+      </MDButton>
+    </div>
+  );
+  
   return (
     <DashboardLayout>
       <DashboardNavbar />
@@ -86,15 +181,12 @@ function Reservation() {
             <MDTypography variant="h6">User ID: {authContext.userID}</MDTypography>
           </Grid>
           <Grid item xs={12}>
-            {reservations.length > 0 ? (
-              reservations.map(renderReservation) // Render each reservation
-            ) : (
-              <MDTypography>No reservations found.</MDTypography>
-            )}
+            {reservations.length > 0 ? reservations.map(renderReservation) : <MDTypography>No reservations found.</MDTypography>}
           </Grid>
         </Grid>
       </MDBox>
       <Footer />
+      {renderDeleteSnackbar}
     </DashboardLayout>
   );
 }
