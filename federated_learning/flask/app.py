@@ -20,7 +20,7 @@ def start_federated():
 
   # Check if minimum number of client models has been reached to initiate federated learning 
   if(no_client_models >= MIN_FEDERATED_SIZE):
-    print("Starting Federated Learning!")
+    print("\nStarting Federated Learning!")
     
     # Obtain mutex lock to access the global model
     with lock_global_model:
@@ -34,7 +34,7 @@ def start_federated():
       copy_clients = list_client_models.copy()
       copy_training_size = overall_training_size # Integers are immutable
     
-    print("Performing Federated Averaging..")
+    print("\nPerforming Federated Averaging..")
     # Iterate through list of clients
     for current_client in copy_clients:
       print("\nTraining using Client:", current_client['file_path'])
@@ -46,17 +46,17 @@ def start_federated():
       copy_global_weights = np.add(copy_global_weights, client_weights)
     # Update the weights of the global model copy
     copy_global_model.set_weights(copy_global_weights)
-    print("Federated Averaging completed!")
+    print("\nFederated Averaging completed!")
 
-    print("Updating the global model..")
+    print("\nUpdating the global model..")
     # Obtain mutex lock to modify the global model
     with lock_global_model:
       # Save the updated federated global model
       tfjs.converters.save_keras_model(copy_global_model, FOLDER_GLOBAL_MODEL)  # JSON and weights file
       copy_global_model.save(FILE_GLOBAL_MODEL)                                 # .h5 file
-    print("Global model updated!")
+    print("\nGlobal model updated!")
 
-    print("Updating the list of accepted clients..")
+    print("\nUpdating the list of accepted clients..")
     # Obtain mutex lock to modify the list of accepted clients
     with lock_list_client_models:
       # Loop through each client that was previously used to train the global model
@@ -69,9 +69,9 @@ def start_federated():
         no_client_models -= 1
       # Update the client models file
       update_client_models_file(list_client_models)
-    print("Updated list of accepted clients!")
+    print("\nUpdated list of accepted clients!")
 
-    print("Federated Learning Completed!")
+    print("\nFederated Learning Completed!", end="\n\n")
 
 # Route for client-facing page (TEMPORARY)
 @app.route("/")

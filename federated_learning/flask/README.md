@@ -3,7 +3,7 @@ Simple Flask server used for federated learning of food safety for binary classi
 
 ### Program Usage
 ---
-| Note: Tensorflow, TensorflowJS, Tensorflow Federated is best suited to run on Windows or Linux based devices. It is unable to run properly on Silicon-based Mac devices. Running the program on a **Linux-based server** with `Python` and `NodeJS` installed is preferred.
+| Note: Tensorflow and TensorflowJS are best suited to run on Windows or Linux based devices. It is unable to run properly on Silicon-based Mac devices. Running the program on a **Linux-based server** with `Python` and `NodeJS` installed is preferred.
 
 1. Install all necessary programs and libraries (`Python`)
     ```
