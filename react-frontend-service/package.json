@@ -35,7 +35,7 @@
     "yup": "^1.3.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "react-scripts --trace-deprecation start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
@@ -70,7 +70,5 @@
     "eslint-plugin-react": "^7.29.4",
     "eslint-plugin-react-hooks": "^4.3.0",
     "prettier": "^3.0.3"
-  },
-  "homepage": "https://material-dashboard-react-nodejs.creative-tim.com/",
-  "proxy": "https://node-json-api-free.creative-tim.com/"
+  }
 }

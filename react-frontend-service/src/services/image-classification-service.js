@@ -1,6 +1,5 @@
 import * as tf from '@tensorflow/tfjs';
 
-
 // Constants
 const MODEL_URL = 'https://tfhub.dev/google/tfjs-model/imagenet/mobilenet_v3_small_100_224/feature_vector/5/default/1';
 const SERVER_URL = 'http://35.194.95.239:80';
@@ -11,34 +10,46 @@ let mobilenet = undefined;  // Mobilenet model (base model)
 var training_size = 0;      // Training size (no of images/tensors client model is trained on)
 
 class ImageClassifierService {
-    
 
+    async isModelURLAvailable(url) {
+        try {
+            const response = await fetch(url);
+            return response.ok;
+        } catch (error) {
+            return false;
+        }
+    }
+    
      prepare_ml = async () => {
         if (!model && !mobilenet) {
             console.log("Preparing model")
-            // Load pre-trained mobilenet model (image feature vectors) from TensorFlowHub
-            mobilenet = await tf.loadGraphModel(MODEL_URL, { fromTFHub: true });
-        
-            // NOTE: Tidy function is used for automatic memory clean ups (clean up all intermediate tensors afterwards to avoid memory leaks)
-            // dispose() to release the WebGL memory allocated for the return value of predict
-            tf.tidy(() => {
-                // Warm up the model by passing zeros through it once, to make first prediction faster
-                mobilenet.predict(tf.zeros([1, 224, 224, 3])).dispose();   // Tensor of 1 x 224px x 224px x 3 colour channels (RGB)
-            });
-        
-            // Load model (classification head) from Flask endpoint
-            model = await tf.loadLayersModel(`${SERVER_URL}/get_model/model.json`);
-        
-            // Compile model
-            model.compile({
-                // Adam changes the learning rate over time which is useful.
-                optimizer: 'adam',
-                // Use the correct loss function. If 2 classes of data, must use binaryCrossentropy.
-                // Else categoricalCrossentropy is used if more than 2 classes.
-                loss: (CLASS_NAMES.length === 2) ? 'binaryCrossentropy' : 'categoricalCrossentropy',
-                // As this is a classification problem you can record accuracy in the logs too!
-                metrics: ['accuracy']
-            });
+            if (await this.isModelURLAvailable(MODEL_URL)) {
+                // Load pre-trained mobilenet model (image feature vectors) from TensorFlowHub
+                mobilenet = await tf.loadGraphModel(MODEL_URL, { fromTFHub: true });
+            
+                // NOTE: Tidy function is used for automatic memory clean ups (clean up all intermediate tensors afterwards to avoid memory leaks)
+                // dispose() to release the WebGL memory allocated for the return value of predict
+                tf.tidy(() => {
+                    // Warm up the model by passing zeros through it once, to make first prediction faster
+                    mobilenet.predict(tf.zeros([1, 224, 224, 3])).dispose();   // Tensor of 1 x 224px x 224px x 3 colour channels (RGB)
+                });
+            
+                // Load model (classification head) from Flask endpoint
+                model = await tf.loadLayersModel(`${SERVER_URL}/get_model/model.json`);
+            
+                // Compile model
+                model.compile({
+                    // Adam changes the learning rate over time which is useful.
+                    optimizer: 'adam',
+                    // Use the correct loss function. If 2 classes of data, must use binaryCrossentropy.
+                    // Else categoricalCrossentropy is used if more than 2 classes.
+                    loss: (CLASS_NAMES.length === 2) ? 'binaryCrossentropy' : 'categoricalCrossentropy',
+                    // As this is a classification problem you can record accuracy in the logs too!
+                    metrics: ['accuracy']
+                });
+            }else{
+                console.log("Nodel Url not available...");
+            }
         } else {
             console.log("Model is already loaded")
         }

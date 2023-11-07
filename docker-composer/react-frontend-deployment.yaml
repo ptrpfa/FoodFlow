@@ -17,8 +17,8 @@ spec:
           image: skyish/react-frontend:latest
           resources:
             requests:
-              memory: "1Gi"  
-              cpu: "1"      
+              memory: "512Mi"  
+              cpu: "2"      
             limits:
               memory: "2Gi"   # Limit the federated learning
               cpu: "2"        
