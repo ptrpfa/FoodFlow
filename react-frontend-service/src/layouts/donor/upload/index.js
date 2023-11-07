@@ -1,3 +1,13 @@
+/**
+=========================================================
+* Food Flow
+=========================================================
+* Template used - Material Dashboard 2 React - v2.1.0
+* Product Page: https://www.creative-tim.com/product/material-dashboard-react
+* Copyright 2022 Creative Tim (https://www.creative-tim.com)
+=========================================================
+*/
+
 import{ useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 
@@ -15,9 +25,9 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
-import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
-import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-import Footer from "examples/Footer";
+import DashboardLayout from "page-components/LayoutContainers/DashboardLayout";
+import DashboardNavbar from "page-components/Navbars/DashboardNavbar";
+import Footer from "page-components/Footer";
 
 import AWSS3Service from "services/aws-s3-service";
 import ImageClassifierService from "services/image-classification-service";

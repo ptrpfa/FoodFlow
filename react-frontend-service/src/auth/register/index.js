@@ -5,6 +5,15 @@ import { Link } from "react-router-dom";
 // @mui material components
 import Card from "@mui/material/Card";
 import Checkbox from "@mui/material/Checkbox";
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
@@ -25,23 +34,55 @@ import { InputLabel } from "@mui/material";
 function Register() {
   const authContext = useContext(AuthContext);
 
+  const [terms, setTerms] = useState();
+
   const [inputs, setInputs] = useState({
-    name: "",
+    username: "",
+    firstname: "",
+    lastname: "",
+    role: "",
     email: "",
     password: "",
+    dob: "",
+    addressfirst: "",
+    addresssecond: "",
+    addressthird: "",
+    postalcode: "",
     agree: false,
   });
 
   const [errors, setErrors] = useState({
-    nameError: false,
-    emailError: false,
-    passwordError: false,
-    agreeError: false,
+    usernameError: "",
+    firstnameError: "",
+    lastnameError: "",
+    roleError: "",
+    emailError: "",
+    passwordError: "",
+    dobError: "",
+    addressfirstError: "",
+    addresssecondError: "",
+    addressthirdError: "",
+    postalcodeError: "",
     error: false,
     errorText: "",
   });
 
+  const openTerms = () => {
+    setTerms(true);
+  }
+
+  const closeTerms = () => {
+    setTerms(false);
+  }
+
   const changeHandler = (e) => {
+    if (e.target.name === "agree") {
+      setInputs({
+        ...inputs,
+        ["agree"]: e.target.checked,
+      });
+      return;
+    } 
     setInputs({
       ...inputs,
       [e.target.name]: e.target.value,
@@ -53,62 +94,85 @@ function Register() {
 
     const mailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
-    if (inputs.name.trim().length === 0) {
-      setErrors({ ...errors, nameError: true });
+    console.log(errors);
+    console.log(inputs);
+
+    const newErrors = {};
+    newErrors.usernameError = inputs.username.trim().length === 0;
+    newErrors.firstnameError = inputs.firstname.trim().length === 0;
+    newErrors.lastnameError = inputs.lastname.trim().length === 0;
+    newErrors.roleError = inputs.role.trim().length === 0;
+
+    newErrors.emailError = inputs.email.trim().length === 0 || !inputs.email.trim().match(mailFormat);
+    newErrors.passwordError = inputs.password.trim().length < 8;
+    newErrors.dobError = inputs.dob.trim().length === 0;
+    newErrors.addressfirstError = inputs.addressfirst.trim().length === 0;
+    newErrors.addresssecondError = inputs.addresssecond.trim().length === 0;
+    newErrors.addressthirdError = inputs.addressthird.trim().length === 0;
+    newErrors.postalcodeError = inputs.postalcode.trim().length === 0;
+    newErrors.agreeError = inputs.agree === false;
+
+    setErrors(newErrors);
+
+    if (Object.values(newErrors).some(error => error)) {
       return;
     }
 
-    if (inputs.email.trim().length === 0 || !inputs.email.trim().match(mailFormat)) {
-      setErrors({ ...errors, emailError: true });
-      return;
-    }
-
-    if (inputs.password.trim().length < 8) {
-      setErrors({ ...errors, passwordError: true });
-      return;
-    }
-
-    if (inputs.agree === false) {
-      setErrors({ ...errors, agreeError: true });
-      return;
-    }
-
-    // here will be the post action to add a user to the db
-    const newUser = { name: inputs.name, email: inputs.email, password: inputs.password };
-
-    const myData = {
-      data: {
-        type: "users",
-        attributes: { ...newUser, password_confirmation: newUser.password },
-        relationships: {
-          roles: {
-            data: [
-              {
-                type: "roles",
-                id: "1",
-              },
-            ],
-          },
-        },
-      },
+    // gRPC to create new user
+    const newUser = { 
+      Username: inputs.username, 
+      FirstName: inputs.firstname, 
+      LastName: inputs.lastname,
+      DOB: inputs.dob,
+      Role: inputs.role,
+      Password: inputs.password,
+      AddressFirst: inputs.addressfirst,
+      AddressSecond: inputs.addresssecond,
+      AddressThird: inputs.addressthird,
+      PostalCode: inputs.postalcode,
+      Email: inputs.email,
     };
 
     try {
-      const response = await AuthService.register(myData);
-      authContext.login(response.access_token, response.refresh_token);
+      await AuthService.register(newUser);
+
+      const loginData = {
+        Username: inputs.username,
+        Password: inputs.password,
+      }
+      const loginResponse = await AuthService.login(loginData);
+    
+      if (loginResponse.validated) {
+        authContext.login(loginResponse.token, loginResponse.userid);
+      } 
 
       setInputs({
-        name: "",
+        username: "",
+        firstname: "",
+        lastname: "",
+        role: "",
         email: "",
         password: "",
+        dob: "",
+        addressfirst: "",
+        addresssecond: "",
+        addressthird: "",
+        postalcode: "",
         agree: false,
       });
 
       setErrors({
-        nameError: false,
-        emailError: false,
-        passwordError: false,
-        agreeError: false,
+        usernameError: "",
+        firstnameError: "",
+        lastnameError: "",
+        roleError: "",
+        emailError: "",
+        passwordError: "",
+        dobError: "",
+        addressfirstError: "",
+        addresssecondError: "",
+        addressthirdError: "",
+        postalcodeError: "",
         error: false,
         errorText: "",
       });
@@ -119,15 +183,15 @@ function Register() {
   };
 
   return (
-    <CoverLayout image={bgImage}>
-      <Card>
+    <CoverLayout image={bgImage} >
+      <Card style={{maxHeight: "65vh", overflowY: "auto"}}>
         <MDBox
           variant="gradient"
           bgColor="info"
           borderRadius="lg"
           coloredShadow="success"
           mx={2}
-          mt={-3}
+          mt={2}
           p={3}
           mb={1}
           textAlign="center"
@@ -144,13 +208,30 @@ function Register() {
             <MDBox mb={2}>
               <MDInput
                 type="text"
-                label="Name"
+                label="Username"
                 variant="standard"
                 fullWidth
-                name="name"
-                value={inputs.name}
+                name="username"
+                value={inputs.username}
                 onChange={changeHandler}
-                error={errors.nameError}
+                error={errors.usernameError}
+              />
+              {errors.usernameError && (
+                <MDTypography variant="caption" color="error" fontWeight="light">
+                  The username cannot be empty
+                </MDTypography>
+              )}
+            </MDBox>
+            <MDBox mb={2}>
+              <MDInput
+                type="text"
+                label="First Name"
+                variant="standard"
+                fullWidth
+                name="firstname"
+                value={inputs.firstname}
+                onChange={changeHandler}
+                error={errors.firstnameError}
                 inputProps={{
                   autoComplete: "name",
                   form: {
@@ -158,9 +239,54 @@ function Register() {
                   },
                 }}
               />
-              {errors.nameError && (
+              {errors.firstnameError && (
                 <MDTypography variant="caption" color="error" fontWeight="light">
-                  The name can not be empty
+                  The first name cannot be empty
+                </MDTypography>
+              )}
+            </MDBox>
+            <MDBox mb={2}>
+              <MDInput
+                type="text"
+                label="Last Name"
+                variant="standard"
+                fullWidth
+                name="lastname"
+                value={inputs.lastname}
+                onChange={changeHandler}
+                error={errors.lastnameError}
+                inputProps={{
+                  autoComplete: "name",
+                  form: {
+                    autoComplete: "off",
+                  },
+                }}
+              />
+              {errors.lastnameError && (
+                <MDTypography variant="caption" color="error" fontWeight="light">
+                  The last name cannot be empty
+                </MDTypography>
+              )}
+            </MDBox>
+            <MDBox mb={2}>
+              <FormControl fullWidth variant="standard">
+                <InputLabel id="role-select-label">Role</InputLabel>
+                <Select
+                  style={{ height: 40 }}
+                  labelId="role-select-label"
+                  id="role-select"
+                  label="Role"
+                  name="role"
+                  value={inputs.role}
+                  onChange={changeHandler}
+                >
+                  <MenuItem value={"donor"}>Donor</MenuItem>
+                  <MenuItem value={"patron"}>Patron</MenuItem>
+                </Select>
+              </FormControl>
+              {errors.roleError && (
+                <MDTypography variant="caption" color="error" fontWeight="light">
+                  The role cannot be empty
                 </MDTypography>
               )}
             </MDBox>
@@ -204,24 +330,109 @@ function Register() {
                 </MDTypography>
               )}
             </MDBox>
+            <MDBox mb={2}>
+              <MDInput
+                type="date"
+                label="Date of Birth"
+                variant="standard"
+                fullWidth
+                name="dob"
+                value={inputs.dob}
+                onChange={changeHandler}
+                error={errors.dobError}
+              />
+              {errors.dobError && (
+                <MDTypography variant="caption" color="error" fontWeight="light">
+                  The date of birth cannot be empty
+                </MDTypography>
+              )}
+            </MDBox>
+            <MDBox mb={2}>
+              <MDInput
+                type="text"
+                label="Address First Line"
+                variant="standard"
+                fullWidth
+                name="addressfirst"
+                value={inputs.addressfirst}
+                onChange={changeHandler}
+                error={errors.addressfirstError}
+              />
+              {errors.addressfirstError && (
+                <MDTypography variant="caption" color="error" fontWeight="light">
+                  The first address line cannot be empty
+                </MDTypography>
+              )}
+            </MDBox>
+            <MDBox mb={2}>
+              <MDInput
+                type="text"
+                label="Address Second Line"
+                variant="standard"
+                fullWidth
+                name="addresssecond"
+                value={inputs.addresssecond}
+                onChange={changeHandler}
+                error={errors.addresssecondError}
+              />
+              {errors.addresssecondError && (
+                <MDTypography variant="caption" color="error" fontWeight="light">
+                  The second address line cannot be empty
+                </MDTypography>
+              )}
+            </MDBox>
+            <MDBox mb={2}>
+              <MDInput
+                type="text"
+                label="Address Third Line"
+                variant="standard"
+                fullWidth
+                name="addressthird"
+                value={inputs.addressthird}
+                onChange={changeHandler}
+                error={errors.addressthirdError}
+              />
+              {errors.addressthirdError && (
+                <MDTypography variant="caption" color="error" fontWeight="light">
+                  The third address line cannot be empty
+                </MDTypography>
+              )}
+            </MDBox>
+            <MDBox mb={2}>
+              <MDInput
+                type="text"
+                label="Postal Code"
+                variant="standard"
+                fullWidth
+                name="postalcode"
+                value={inputs.postalcode}
+                onChange={changeHandler}
+                error={errors.postalcodeError}
+              />
+              {errors.postalcodeError && (
+                <MDTypography variant="caption" color="error" fontWeight="light">
+                  The postal code cannot be empty
+                </MDTypography>
+              )}
+            </MDBox>
             <MDBox display="flex" alignItems="center" ml={-1}>
               <Checkbox name="agree" id="agree" onChange={changeHandler} />
               <InputLabel
                 variant="standard"
                 fontWeight="regular"
                 color="text"
-                sx={{ lineHeight: "1.5", cursor: "pointer" }}
+                sx={{ lineHeight: "1.5"}}
                 htmlFor="agree"
               >
                 &nbsp;&nbsp;I agree to the&nbsp;
               </InputLabel>
               <MDTypography
-                component={Link}
-                to="/auth/login"
+                onClick={openTerms}
                 variant="button"
                 fontWeight="bold"
                 color="info"
                 textGradient
+                style={{ cursor: 'pointer' }}
               >
                 Terms and Conditions
               </MDTypography>
@@ -238,7 +449,7 @@ function Register() {
             )}
             <MDBox mt={4} mb={1}>
               <MDButton variant="gradient" color="info" fullWidth type="submit">
-                sign in
+                register and sign in
               </MDButton>
             </MDBox>
             <MDBox mt={3} mb={1} textAlign="center">
@@ -257,6 +468,33 @@ function Register() {
               </MDTypography>
             </MDBox>
           </MDBox>
+          <Dialog
+            open={terms}
+            onClose={closeTerms}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+          >
+            <DialogTitle id="alert-dialog-title">
+              Terms of Service and Data Use
+            </DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-description">
+                By checking the box below, you agree to the following:
+                <br/>
+                <br/>
+                1. Data Collection: We use federated learning to collect anonymized, aggregated data insights from your usage to improve our services.
+                <br/>
+                <br/>
+                2. Privacy: Your personal data remains on your device and is not directly accessed by our servers.
+                <br/>
+                <br/>
+                3. Consent: Clicking "I Accept" indicates your consent to these terms.
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <MDButton variant="gradient" color="info" onClick={closeTerms}>Close</MDButton>
+            </DialogActions>
+          </Dialog>
         </MDBox>
       </Card>
     </CoverLayout>
