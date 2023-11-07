@@ -26,11 +26,7 @@ Simple Flask server used for federated learning of food safety for binary classi
     # Ensure you are within the directory with requirements.txt
     pip3 install -r requirements.txt 
     ```
-4. Run the server (ensure multi-threading is enabled)
+4. Run the Flask server
     ```
-    python3 -m flask --app server --debug run
-
-    OR
-
-    sudo flask run --host=0.0.0.0 --port=80 --with-threads --debug
+    sudo python3 app.py
     ```

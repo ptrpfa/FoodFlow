@@ -1,10 +1,12 @@
 import tensorflow as tf
 import tensorflowjs as tfjs
+import numpy as np
 import io
 import time
 import os
 import json
 import hashlib
+import re
 from config import *
 
 """ Functions """
@@ -25,15 +27,21 @@ def get_hash(object, is_file=True):
     sha256.update(object.encode())
   return sha256.hexdigest()
 
-# Function to calculate the SHA256 hash of a model (assume model.json and weights.bin are present in the file path provided)
+# Function to calculate the SHA256 hash of a model (assume model.json and its corresponding weights.bin file are present in the file path provided)
 def get_model_hash(folder_path):
   # NOTE: .h5 model file is not used as it will always produce a different hash
   # Get hash of JSON and weights file
   json_hash = get_hash(f"{folder_path}/model.json")
-  if(os.path.exists(f"{folder_path}/weights.bin")):
-    weights_hash = get_hash(f"{folder_path}/weights.bin")
-  else:
-    weights_hash = get_hash(f"{folder_path}/model.weights.bin")
+  
+  # Read JSON file to get the corresponding weights file
+  with open(f"{folder_path}/model.json", "r") as json_file:
+    weights_file = json.load(json_file)['weightsManifest'][0]['paths'][0]
+    if(re.match("\.\/(.*)", weights_file)):
+      weights_file = re.match("\.\/(.*)", weights_file).group(1)
+  
+  # Get hash of weights file
+  weights_hash = get_hash(f"{folder_path}/{weights_file}")
+
   # Get hash of concatenated hashes
   return get_hash(json_hash + weights_hash, is_file=False)
 
@@ -68,7 +76,11 @@ def update_client_models_file(new_list):
 # Function to load a list from the accepted client models file
 def load_client_models_file():
   with open(FILE_CLIENT_MODELS, "r") as file:
-    return json.load(file)
+    list_clients = json.load(file)
+  training_size = 0
+  for i in list_clients:
+    training_size += i['training_size']
+  return len(list_clients), list_clients, training_size
   
 """ Classes """
 # Class to receive models from client edge devices
@@ -117,7 +129,7 @@ class ModelReceiver(object):
       # Remove user defined metadata before saving model.json
       del json_dict['userDefinedMetadata']
       json.dump(json_dict, json_file)
-    with open(f"{subdirectory}/weights.bin", "wb") as weights_file:
+    with open(f"{subdirectory}/model.weights.bin", "wb") as weights_file:
       weights_file.write(weights_content)
 
     # Create environment for model

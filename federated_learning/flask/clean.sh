@@ -4,4 +4,8 @@
 sudo rm -rf models/saved/*
 echo "[]" > models/client_models.txt
 
-# Clean up to remove files not within the client_models txt
+# Reset global model
+sudo rm models/*.bin
+sudo rm models/*.h5
+sudo rm models/*.json
+cp models/global/* models/.
