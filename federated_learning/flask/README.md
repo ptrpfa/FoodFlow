@@ -53,4 +53,4 @@ These endpoints are listed below:
     ```
     sudo python3 app.py
     ```
-6. Access 
+6. If you are just testing the Flask server, navigate to the the `/` endpoint on a web browser to view the testing page. A demo is available [here](https://www.youtube.com/watch?v=m28YuqPx-1c). Otherwise, configure your client Tensorflow.js devices to link to the Flask server to communicate with it!
