@@ -1,1 +1,1 @@
-[{"file_path": "models/saved/1699266842", "training_size": 24, "hash": "4132a38c10b49fab49c64ef99c3c5261dccd54177027f1b98becf2ecaa2834db"}, {"file_path": "models/saved/1699266870", "training_size": 48, "hash": "e1c323a62f95c7461c78ce6ce6917b28042fb6b0d94e18202fcf2bd2a6153bd4"}]
+[]

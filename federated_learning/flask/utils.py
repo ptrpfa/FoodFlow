@@ -1,7 +1,6 @@
 import tensorflow as tf
 import tensorflowjs as tfjs
 import io
-import threading
 import time
 import os
 import json
@@ -51,7 +50,7 @@ def check_new_model(model, list_models, global_hash):
     return False
   # Check for invalid training size
   if(model['training_size'] <= 0):
-    print("\nTraining size of model is 0!")
+    print("\nTraining size of model is invalid!")
     return False
   # Loop through each model in the list of models
   for current_model in list_models:
@@ -76,7 +75,6 @@ def load_client_models_file():
 class ModelReceiver(object):
   # Constructor
   def __init__(self):
-    self.lock = threading.Lock() # Lock for synchronisations
     self._model_json_bytes = None
     self._model_json_writer = None
     self._weight_bytes = None
@@ -84,18 +82,13 @@ class ModelReceiver(object):
 
   # Function to handle incoming uploaded model data (JSON and weights.bin)
   def stream_factory(self, total_content_length, content_type, filename, content_length=None):
-    # Note: this example code isnot* thread-safe.
     if filename == 'model.json':
-      # Lock before accessing shared resources
-      with self.lock:
-        self._model_json_bytes = io.BytesIO()
-        self._model_json_writer = io.BufferedWriter(self._model_json_bytes)
+      self._model_json_bytes = io.BytesIO()
+      self._model_json_writer = io.BufferedWriter(self._model_json_bytes)
       return self._model_json_writer
     elif filename == 'model.weights.bin':
-      # Lock before accessing shared resources
-      with self.lock:
-        self._weight_bytes = io.BytesIO()
-        self._weight_writer = io.BufferedWriter(self._weight_bytes)
+      self._weight_bytes = io.BytesIO()
+      self._weight_writer = io.BufferedWriter(self._weight_bytes)
       return self._weight_writer
 
   # Function to save model files (JSON, weights and .h5 workable model)
@@ -106,37 +99,37 @@ class ModelReceiver(object):
     subdirectory = f"models/saved/{unix_timestamp}"
     os.makedirs(subdirectory, exist_ok=True)
 
-    # Lock before accessing shared resources
-    with self.lock:
-      # Prepare writers
-      self._model_json_writer.flush()
-      self._weight_writer.flush()
-      self._model_json_writer.seek(0)
-      self._weight_writer.seek(0)
-      
-      # Get model's JSON configurations
-      json_content = self._model_json_bytes.read()
-      # Get model's weights
-      weights_content = self._weight_bytes.read()
-      # Get training size
-      json_dict = json.loads(json_content)
-      training_size = json_dict['userDefinedMetadata']['training_size']
-      # Save model and weights in their basic forms
-      with open(f"{subdirectory}/model.json", "w") as json_file:
-        # Remove user defined metadata before saving model.json
-        del json_dict['userDefinedMetadata']
-        json.dump(json_dict, json_file)
-      with open(f"{subdirectory}/weights.bin", "wb") as weights_file:
-        weights_file.write(weights_content)
+    # Prepare writers
+    self._model_json_writer.flush()
+    self._weight_writer.flush()
+    self._model_json_writer.seek(0)
+    self._weight_writer.seek(0)
+    
+    # Get model's JSON configurations
+    json_content = self._model_json_bytes.read()
+    # Get model's weights
+    weights_content = self._weight_bytes.read()
+    # Get training size
+    json_dict = json.loads(json_content)
+    training_size = json_dict['userDefinedMetadata']['training_size']
+    # Save model and weights in their basic forms
+    with open(f"{subdirectory}/model.json", "w") as json_file:
+      # Remove user defined metadata before saving model.json
+      del json_dict['userDefinedMetadata']
+      json.dump(json_dict, json_file)
+    with open(f"{subdirectory}/weights.bin", "wb") as weights_file:
+      weights_file.write(weights_content)
 
+    # Create environment for model
+    with tf.Graph().as_default(), tf.compat.v1.Session():
       # Prepare workable model
       current_model = tfjs.converters.deserialize_keras_model(json_content, weight_data=[weights_content], use_unique_name_scope=True)
 
       # Save workable model
       current_model.save(f"{subdirectory}/model.h5")
 
-      # Get SHA256 hash of model
-      hash = get_model_hash(subdirectory)
+    # Get SHA256 hash of model
+    hash = get_model_hash(subdirectory)
 
-      # Return current model
-      return {"model": current_model, "file_path": subdirectory, "training_size": training_size, "hash": hash}
+    # Return current model
+    return {"file_path": subdirectory, "training_size": training_size, "hash": hash}
