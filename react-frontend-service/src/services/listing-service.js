@@ -296,7 +296,7 @@ class ListingService {
     });
   };
 
-  // TODO: implement
+  
   updateListing = async (payload) => {
     let message = new UpdateListingDto();
     message.setListingid(payload.listingID);
@@ -349,7 +349,6 @@ class ListingService {
             });
           } else {
             console.error('Response is null.');
-            reject('Null response'); // Handle the null response appropriately
           }
         }
       });

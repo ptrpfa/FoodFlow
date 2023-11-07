@@ -8,9 +8,9 @@ import MDButton from "components/MDButton";
 import MDAlert from "components/MDAlert";
 
 // Material Dashboard 2 React example components
-import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
-import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-import Footer from "examples/Footer";
+import DashboardLayout from "page-components/LayoutContainers/DashboardLayout";
+import DashboardNavbar from "page-components/Navbars/DashboardNavbar";
+import Footer from "page-components/Footer";
 
 // Overview page components
 import Header from "layouts/user-profile/Header";

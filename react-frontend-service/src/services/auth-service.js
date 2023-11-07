@@ -33,7 +33,7 @@ class AuthService {
   register = async (credentials) => {
     let message = new CreateUserDto();
     message.setUsername(credentials.Username);
-    message.setPassword(credentials.FirstName);
+    message.setFirstname(credentials.FirstName);
     message.setLastname(credentials.LastName);
     message.setDob(credentials.DOB);
     message.setRole(credentials.Role);
@@ -109,7 +109,7 @@ class AuthService {
       });
     });
   };
-  // TODO: Implement
+  
   updateProfile = async (newInfo) => {
     let message = new UpdateUserDto();
     message.setUsername(newInfo.username);
