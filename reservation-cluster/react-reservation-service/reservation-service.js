@@ -5,7 +5,7 @@ app.timeout = 90000;
 app.use(express.json());
 const port = 5003;
 
-const client = new kafka.KafkaClient({ kafkaHost: "kafka-service-1:29092" });
+const client = new kafka.KafkaClient({ kafkaHost: "kafka-service-1:9092" });
 const producer = new kafka.Producer(client);
 
 // const WebSocket = require('ws');
@@ -41,7 +41,7 @@ app.post("/reservation/create", (req, res) => {
     Datetime,
     Remarks,
   };
-
+  console.log(reservationData);
   // Produce to the reservation-topic
   const payloads = [
     {
@@ -87,7 +87,6 @@ app.post("/reservation/create", (req, res) => {
       if (!isResponseSent) {
         if (error) {
           console.error("Error sending message to Kafka:", error);
-          console.log("Payload:", JSON.stringify(payloads));
           res.status(500).json({ msg_id: msg_id, message: "Reservation failed due to message sending error" });
         } else {
           console.log("Message sent successfully:", data);
@@ -119,23 +118,22 @@ app.post("/reservation/create", (req, res) => {
 });
 
 // Delete Reservation Request
-app.delete("/reservation/delete", (req, res) => {
-  const ReservationID = req.body.ReservationID;
+app.delete("/reservation/delete/:ReservationID", (req, res) => {
+  const ReservationID = req.params.ReservationID; 
   const msg_id = req.body.msg_id;
 
   // Payload for Kafka message
   const reservationData = {
     action: "delete",
     ReservationID,
+    msg_id
   };
-
   const payloads = [
     {
       topic: "reservation-topic",
       messages: JSON.stringify(reservationData),
-    },
+    },    
   ];
-
   let isResponseSent = false;
   const kafkaTimeout = setTimeout(() => {
     if (!isResponseSent) {

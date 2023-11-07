@@ -42,7 +42,6 @@ class UploadService {
     });
   };
 
-  // TODO: Implement
   getMultipleImages = async (payload) => {
     let message = new MultipleImageRequest();
 
