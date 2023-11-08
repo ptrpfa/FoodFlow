@@ -93,12 +93,13 @@ const reservationService = {
       }
     })
       .then(response => {
-        console.log(response.data.message); 
+        resolve(response.data);
       })
       .catch(error => {
-        throw error;
+        resolve(error);
       });
   },
+
   getReservationsByUserId: (UserID) => {
     // No need to create an object, just pass UserID in the URL
     return axios.get(`${API_BASE_URL}/reservation/${UserID}`, {

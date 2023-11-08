@@ -227,7 +227,7 @@ function FoodListingsTable({ onUserUpdate }) {
                     }
                   </Grid>
                   ))
-              ): (
+              ) : (
                 <MDTypography variant="h6" style={{ textAlign: 'center', margin: '1.5rem' }}>
                   No listings available.
                 </MDTypography>

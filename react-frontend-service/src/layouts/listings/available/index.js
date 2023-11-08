@@ -8,7 +8,7 @@
 =========================================================
 */
 
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useMemo } from "react";
 import { Link } from "react-router-dom";
 
 import Grid from "@mui/material/Grid";
@@ -38,10 +38,15 @@ import AWSS3Service from "services/aws-s3-service";
 import reservationService from "services/reservation-service";
 import WebSocketService from "services/web-listener";
 
+
 function FoodListingsTable({ onUserUpdate }) {
   const authContext = useContext(AuthContext);
   // const [message, setMessage] = useState(''); 
   const [listings, setListings] = useState([]);
+  const [groupedListings, setGroupedListings] = useState([]);
+  const [reservedListings, setReservedListings] = useState([]);
+  const [reservingListingID, setReservingListingID] = useState(0);  
+  const [reserved, setReserved] = useState(false);  
   const [isLoading, setIsLoading] = useState(false);
   const [trainingModel, setTrainingModel] = useState(-1);
   const [user, setUser] = useState({
@@ -50,7 +55,9 @@ function FoodListingsTable({ onUserUpdate }) {
     role: "",
   });
 
+  const [messageSnackbar, setMessageSnackbar] = useState({ open: false, message: "" });
   const [openDialog, setOpenDialog] = useState(false);
+  const webSocketService = useMemo(() => new WebSocketService(), []);
 
   const handleReport = () => {
     setOpenDialog(true);
@@ -84,6 +91,53 @@ function FoodListingsTable({ onUserUpdate }) {
       console.error("An error occurred while fetching user data:", error);
     }
   };
+
+  function socketCleanup(){
+    if (webSocketService.socket && webSocketService.socket.readyState === WebSocket.OPEN) {
+      webSocketService.socket.close();
+    }
+  }
+
+  useEffect(() => {
+    const formattedListings = [];
+    const showListings = listings.filter (listing => !reservedListings.includes(listing.listingID));
+    for (let i = 0; i < showListings.length; i += 3) {
+      formattedListings.push(showListings.slice(i, i + 3));
+    }
+    setGroupedListings(formattedListings);
+  }, [listings, reservedListings])
+
+  useEffect(() => {
+    if (!reserved || reservingListingID === 0) {
+      return;
+    }
+
+    const currentReserved = [...reservedListings, reservingListingID];
+    currentReserved.push(reservingListingID);
+    setReservedListings(currentReserved);
+
+    setReservingListingID(0);
+    setReserved(false);
+  }, [reserved, reservingListingID])
+
+  useEffect(() => {
+    async function connectWebSocket() {
+      await webSocketService.setupWebSocket();
+      
+      webSocketService.onmessage = (message) => {
+        // Update the state to open the MDSnackbar with the received message
+        setMessageSnackbar({ open: true, message: message });
+        setReserved(true);
+      };
+    }
+    
+    connectWebSocket();
+      
+    return () => {
+      // Cleanup function
+      socketCleanup();
+    }
+  }, []);
 
   useEffect(() => {
     getUserData(authContext.userID);
@@ -127,11 +181,6 @@ function FoodListingsTable({ onUserUpdate }) {
   const convertUint8ArrayToBlob = (uint8Array) => {
     return new Blob([uint8Array], { type: 'image/jpeg' });
   };
-
-  const groupedListings = [];
-  for (let i = 0; i < listings.length; i += 3) {
-    groupedListings.push(listings.slice(i, i + 3));
-  }
 
   const handleReportConfirmation = async (imageData, listingID) => {
     setOpenDialog(false);
@@ -177,7 +226,6 @@ function FoodListingsTable({ onUserUpdate }) {
 
 
   /* Rerservation Button Calls*/
-  const [messageSnackbar, setMessageSnackbar] = useState({ open: false, message: "" });
   const closeMessageSnackbar = () => {
     setMessageSnackbar({ open: false, message: "" });
   }
@@ -185,6 +233,7 @@ function FoodListingsTable({ onUserUpdate }) {
   // User click 'reserve' button 
   const handleReservation = (listingID) => {
     // Calls reservation-service.js
+    setReservingListingID(listingID);
     reservationService.makeReservation(authContext.userID, listingID)
       .then(data => {
         const msg_id = data.msg_id;
@@ -192,13 +241,14 @@ function FoodListingsTable({ onUserUpdate }) {
         const sender = data.sender;
 
         if(convo != null){
+          console.log("Index received message");
           // Reply is for this client
           const convo_dict = JSON.parse(convo);
           if(!convo_dict.replies.includes(sender)){
             convo_dict.replies.push(sender);
             
             // Check in the event database has already sent back the success message
-            if (reservation.replies.length === 2) {
+            if (convo_dict.replies.length === 2) {
               // Mark the conversation as successful
               console.log(`Conversation with msg_id ${reservation.msg_id} is successful.`);
               // Message from Kafka Service
@@ -222,31 +272,11 @@ function FoodListingsTable({ onUserUpdate }) {
         }
 
       });
-
   };
-
-  const webSocketService = new WebSocketService();
  
-  async function connectWebSocket() {
-    await webSocketService.getSocketOpenPromise();
-  
-    webSocketService.onmessage = (message) => {
-      // Update the state to open the MDSnackbar with the received message
-      setMessageSnackbar({ open: true, message: message });
-    };
-  }
-  
-  connectWebSocket();
 
-  const renderServerSB = (<MDSnackbar
-    icon="info"
-    title="Server Message:"
-    content={messageSnackbar.message}
-    dateTime="5 seconds ago"
-    open={messageSnackbar.open}
-    onClose={closeMessageSnackbar}
-    close={closeMessageSnackbar}
-  />);
+
+  // const renderServerSB = ();
 
   /* End of Reservation Button Call */ 
 
@@ -275,7 +305,7 @@ function FoodListingsTable({ onUserUpdate }) {
                 <br />
                 <CircularProgress />
               </MDBox>
-            ) : (
+            ) : groupedListings.length > 0 ? (
               groupedListings.map((rowListings, rowIndex) => (
                 <Grid container spacing={2} key={rowIndex}>
                   {rowListings.map((listing, index) => {
@@ -329,7 +359,15 @@ function FoodListingsTable({ onUserUpdate }) {
                             >
                               Reserve
                             </MDButton>
-                            {renderServerSB}
+                            <MDSnackbar
+                              icon="info"
+                              title="Server Message:"
+                              content={messageSnackbar.message}
+                              dateTime="5 seconds ago"
+                              open={messageSnackbar.open}
+                              onClose={closeMessageSnackbar}
+                              close={closeMessageSnackbar}
+                            />
                           </MDBox>
                         </Card>
                         <Dialog
@@ -358,6 +396,10 @@ function FoodListingsTable({ onUserUpdate }) {
                   })}
                 </Grid>
               ))
+            ) : (
+              <MDTypography variant="h6" style={{ textAlign: 'center', margin: '1.5rem' }}>
+                No listings available.
+              </MDTypography>
             )
           }
         </MDBox>

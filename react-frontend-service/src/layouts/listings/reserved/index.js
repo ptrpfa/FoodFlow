@@ -8,8 +8,8 @@
 =========================================================
 */
 
-import { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect, useContext, useMemo } from "react";
+import { Link, unstable_useViewTransitionState } from "react-router-dom";
 
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
@@ -31,12 +31,14 @@ function FoodListingsTable({ onUserUpdate }) {
   const authContext = useContext(AuthContext);
   const [message, setMessage] = useState('');
   const [listings, setListings] = useState([]);
+  const [socketConnected, setSocketConnected] = useState(false);
+  const [deleteSnackbar, setDeleteSnackbar] = useState({ open: false, message: "" });
   const [user, setUser] = useState({
     firstName: "",
     lastName: "",
     role: "",
   });
-  const [socketConnected, setSocketConnected] = useState(false);
+
 
   const getUserData = async (UserID) => {
     try {
@@ -67,63 +69,51 @@ function FoodListingsTable({ onUserUpdate }) {
     getUserData(authContext.userID);
   }, []);
 
+  function socketCleanup(webSocket){
+    if (webSocket && webSocket.readyState === WebSocket.OPEN) {
+      webSocket.close();
+    }
+  }
+
   useEffect(() => {
     const webSocket = new WebSocket('ws://localhost:8282');
-
+    
     webSocket.onopen = () => {
-      console.log('WebSocket for Get Reservation is Connected');
+      console.log("Websocket is Connected");
       setSocketConnected(true);
     };
 
     webSocket.onmessage = (event) => {
       const message = JSON.parse(event.data);
+      // GET
       if (message.type === 'RESERVATION_DATA') {
-        console.log(listings);
+        console.log(message);
         setListings(message.data);
       }
-    };
-
-    webSocket.onerror = (error) => {
-      console.error('WebSocket Error:', error);
-    };
-
-    return () => {
-      webSocket.close();
-    };
-  }, []); 
-
-  useEffect(() => {
-    const webSocket = new WebSocket('ws://localhost:8282');
-  
-    webSocket.onopen = () => {
-      console.log('WebSocket for Delete Reservation is Connected');
-    };
-  
-    webSocket.onmessage = (event) => {
-      const data = JSON.parse(event.data);
-  
+      // DELETE
       // Check if the message is a delete confirmation
-      if (data.status === 200 && data.action === 'delete') {
+      if (message.status === 200 && message.action === 'delete') {
         setDeleteSnackbar({ open: true, message: "Reservation deleted successfully" });
         // Also remove the reservation from the list
         setListings(currentReservations => 
-          currentReservations.filter(reservation => reservation.ReservationID.toString() !== data.msg_id)
+          currentReservations.filter(reservation => reservation.ReservationID.toString() !== message.msg_id)
         );
-      } else if (data.status === 500 && data.action === 'delete') {
-        setDeleteSnackbar({ open: true, message: data.payload });
+      } else if (message.status === 500 && message.action === 'delete') {
+        setDeleteSnackbar({ open: true, message: message.payload });
       }
     };
-  
-    webSocket.onerror = (error) => {
-      console.error('WebSocket Error:', error);
-    };
-  
+
+      
     return () => {
-      webSocket.close();
-    };
+      // Cleanup function
+      socketCleanup(webSocket);
+    }
   }, []);
 
   useEffect(() => {
+    if (!socketConnected) {
+      return; // If socket is not connected, exit the effect early
+    }
     const fetchImageForListing = async (listing) => {
       const imageData = await AWSS3Service.getImage({ imageId: listing.image });
       const imageBlob = convertUint8ArrayToBlob(imageData.imageData);

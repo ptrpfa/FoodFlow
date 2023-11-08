@@ -178,12 +178,15 @@ function DonorForm() {
                             Upload Image
                           </MDButton>
                         ) : (
-                          uploadResponse.valid && !freshResponse ? (
-                            <MDButton variant="gradient" color="info" onClick={checkFreshness}>
-                              Check Freshness
-                            </MDButton>
+                          !freshResponse ? (
+                            uploadResponse.valid && (
+                              <MDButton variant="gradient" color="info" onClick={checkFreshness}>
+                                Check Freshness
+                              </MDButton>
+                            )
                           )
                           : (
+
                             !validAndFresh && (
                               trainingModel ? (
                                 <MDButton variant="gradient" disabled>
@@ -191,7 +194,7 @@ function DonorForm() {
                                 </MDButton>
                               ) : (
                                 <MDButton variant="gradient" color="error" onClick={handleArgue}>
-                                  Nah bro looks fresh to me
+                                  Looks fresh to me
                                 </MDButton>
                               )
                             )
@@ -211,14 +214,16 @@ function DonorForm() {
                           {uploadResponse.valid ? "Image is a valid food item." : "Image is not a valid food item."}
                         </p>
                         {
-                        !freshResponse ? (
-                          <p style={{ color: "blue" }}>
-                            Check your food freshness to continue.
-                          </p>
-                          ) : (
-                            <p style={{ color: validAndFresh ? "green" : "red" }}>
-                              {validAndFresh ? "Looks fresh to me!" : "Looks nasty mate."}
-                            </p>
+                          uploadResponse.valid && (
+                            !freshResponse ? (
+                              <p style={{ color: "blue" }}>
+                                Check your food freshness to continue.
+                              </p>
+                            ) : (
+                              <p style={{ color: validAndFresh ? "green" : "red" }}>
+                                {validAndFresh ? "Looks fresh to me!" : "Doesn't look fresh!"}
+                              </p>
+                            )
                           )
                         }
 
@@ -248,15 +253,26 @@ function DonorForm() {
                 }
               </MDBox>
               <Grid item xs={12} style={{ display: "flex", justifyContent: "flex-end", margin: "20px 20px 20px 0" }}>
-                <Link to="/upload/donate">
-                  <MDButton
-                    variant="gradient"
-                    color="info"
-                    disabled={!validAndFresh}
-                  >
-                    Next
-                  </MDButton>
-                </Link>
+                {
+                  !validAndFresh ? (
+                    <MDButton
+                      variant="gradient"
+                      color="info"
+                      disabled
+                    >
+                      Upload Image First!
+                    </MDButton>
+                  ) : (
+                    <Link to="/upload/donate">
+                      <MDButton
+                        variant="gradient"
+                        color="info"
+                      >
+                        Next
+                      </MDButton>
+                    </Link>
+                  )
+                }
               </Grid>
             </MDBox>
           )
