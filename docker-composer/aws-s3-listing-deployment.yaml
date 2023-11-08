@@ -12,6 +12,10 @@ spec:
       labels:
         app: aws-s3-listing
     spec:
+      dnsConfig:
+        options:
+        - name: ndots
+          value: "2"
       containers:
         - name: aws-s3-listing
           image: skyish/aws-s3-listing:latest

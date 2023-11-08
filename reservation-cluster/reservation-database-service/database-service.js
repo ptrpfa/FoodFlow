@@ -3,9 +3,6 @@ const { sequelize, Reservation, Listing } = require('./db');
 const client = new kafka.KafkaClient({ kafkaHost: "kafka-service-1:9092" });
 const topicToWaitFor = 'reservation-topic';
 
-
-
-
 // WebSocket setup
 const WebSocket = require('ws');
 const wsUrl = 'ws://host.docker.internal:8282';
@@ -88,7 +85,7 @@ checkTopicAvailability().then(() => {
                   action:'create',
                   msg_id: msg_id,
                   status: 200,
-                  sender: 'reservation-controller'
+                  sender: 'database-controller'
                };
                // Convert the reservation to a JSON string
                const reservationMessage = JSON.stringify(newReservation);
@@ -103,7 +100,7 @@ checkTopicAvailability().then(() => {
                   msg_id: msg_id,
                   status: 500,
                   payload: `Error processing reservation creation: ${error.message}`,
-                  sender: 'reservation-controller'
+                  sender: 'database-controller'
                };
                // Convert the reservation to a JSON string
                const reservationMessage = JSON.stringify(newReservation);
@@ -150,7 +147,7 @@ checkTopicAvailability().then(() => {
                 msg_id: payload.msg_id,
                 status: 200,
                 payload: `Reservation ID ${payload.ReservationID} successfully deleted.`,
-                sender: 'reservation-controller'
+                sender: 'database-controller'
               };
               databaseServerSocket.send(JSON.stringify(deleteSuccessMessage));
             } catch (error) {
@@ -162,7 +159,7 @@ checkTopicAvailability().then(() => {
                 msg_id: payload.msg_id,
                 status: 500,
                 payload: `Error processing reservation deletion: ${error.message}`,
-                sender: 'reservation-controller'
+                sender: 'database-controller'
               };
               databaseServerSocket.send(JSON.stringify(deleteErrorMessage));
             }

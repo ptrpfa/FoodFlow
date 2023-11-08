@@ -5,6 +5,7 @@ namespace_name="food-flow"
 
 # Check if the namespace already exists
 if kubectl get namespace "$namespace_name" &> /dev/null; then
+  kubectl create namespace "$namespace_name"
   echo "Namespace $namespace_name already exists."
 else
   # Create the namespace
