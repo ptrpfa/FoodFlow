@@ -28,18 +28,41 @@ class UploadService {
     });
   };
 
-  getImage = async (payload) => {
+  getImage = async (payload, maxRetries = 3) => {
     let message = new ImageRequest();
     message.setImageid(payload.imageId);
-
-    return new Promise((resolve, reject) => {
-      // gRPC
-      image_client.getImage(message, null, (err, response) => {
-        resolve({
-          imageData: response.getImagedata(),
+  
+    const requestImage = () => {
+      return new Promise((resolve, reject) => {
+        image_client.getImage(message, null, (err, response) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve({
+              imageData: response.getImagedata(),
+            });
+          }
         });
       });
-    });
+    };
+  
+    let retryCount = 0;
+  
+    const tryRequest = async () => {
+      try {
+        return await requestImage();
+      } catch (error) {
+        retryCount++;
+        if (retryCount < maxRetries) {
+          console.error(`Retrying request (attempt ${retryCount})`);
+          return tryRequest();
+        } else {
+          throw error; // Max retries exceeded, propagate the error.
+        }
+      }
+    };
+  
+    return tryRequest();
   };
 
   getMultipleImages = async (payload) => {
