@@ -203,6 +203,8 @@ function FoodListingsTable({ onUserUpdate }) {
               console.log(`Conversation with msg_id ${reservation.msg_id} is successful.`);
               // Message from Kafka Service
               setMessageSnackbar({ open: true, message: data.message });
+              // Remove from localstorage
+              localStorage.removeItem(msg_id);
             }
           }
         }          

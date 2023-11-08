@@ -24,7 +24,22 @@ const API_BASE_URL = "http://localhost:9900";
 //   }
 // };
 
+const checkLocalStorage = (msg_id) => {
+  const reservationData = JSON.parse(localStorage.getItem(msg_id));
+
+  if (reservationData) {
+    // Data is found in local storage, so return the data
+    payload = "Reservation is successful";
+    return Promise.resolve(payload);
+  }else{
+     // Data is found in local storage, so return the data
+     payload = "Reservation is unsuccessfull";
+     return Promise.resolve(payload);
+  }
+};
+
 const reservationService = {
+  
   makeReservation: (UserID,ListingID) => {
     const LOCAL_STORAGE_KEY = uuidv4(); 
     //Prep the payload with the uuid key 
@@ -34,16 +49,41 @@ const reservationService = {
       ListingID: ListingID,
       replies: []
     };
-    console.log(newReservation);
 
     //Store the payload into local storage
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newReservation));
+      
+    // Set up a timer to check local storage after 5 seconds
+    const checkLocalStorageInterval = setInterval(() => {
+      checkLocalStorage(LOCAL_STORAGE_KEY).then(payload => {
+        // Data found in local storage, clear the interval
+        clearInterval(checkLocalStorageInterval);
+        if (data) {
+          // Data is available, resolve the main promise with the data
+          resolve(payload);
+        }
+      });
+    }, 5000);
 
-    return axios.post(`${API_BASE_URL}/reservation/create`, newReservation, {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
+    return new Promise((resolve, reject) => {
+      axios
+        .post(`${API_BASE_URL}/reservation/create`, newReservation, {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+        .then(response => {
+          // Reservation data received, clear the interval
+          clearInterval(checkLocalStorageInterval);
+          resolve(response.data);
+        })
+        .catch(error => {
+          // Handle the error here
+          clearInterval(checkLocalStorageInterval);
+          reject(error);
+        });
+    });
+
   },
   deleteReservation: (ReservationID) => {
     return axios.delete(`${API_BASE_URL}/reservation/delete/${ReservationID}`, {
@@ -71,6 +111,7 @@ const reservationService = {
       throw error;
     });
   }
+  
 }
 
 export default reservationService;
