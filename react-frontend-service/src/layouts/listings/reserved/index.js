@@ -24,9 +24,8 @@ import Footer from "page-components/Footer";
 
 import { AuthContext } from "context";
 import AuthService from "../../../services/auth-service";
-import ListingService from "services/listing-service"; 
-import AWSS3Service from "services/aws-s3-service";
 import reservationService from "services/reservation-service";
+import AWSS3Service from "services/aws-s3-service";
 
 function FoodListingsTable({ onUserUpdate }) {
   const authContext = useContext(AuthContext);
@@ -37,6 +36,7 @@ function FoodListingsTable({ onUserUpdate }) {
     lastName: "",
     role: "",
   });
+  const [socketConnected, setSocketConnected] = useState(false);
 
   const getUserData = async (UserID) => {
     try {
@@ -68,6 +68,62 @@ function FoodListingsTable({ onUserUpdate }) {
   }, []);
 
   useEffect(() => {
+    const webSocket = new WebSocket('ws://localhost:8282');
+
+    webSocket.onopen = () => {
+      console.log('WebSocket for Get Reservation is Connected');
+      setSocketConnected(true);
+    };
+
+    webSocket.onmessage = (event) => {
+      const message = JSON.parse(event.data);
+      if (message.type === 'RESERVATION_DATA') {
+        console.log(listings);
+        setListings(message.data);
+      }
+    };
+
+    webSocket.onerror = (error) => {
+      console.error('WebSocket Error:', error);
+    };
+
+    return () => {
+      webSocket.close();
+    };
+  }, []); 
+
+  useEffect(() => {
+    const webSocket = new WebSocket('ws://localhost:8282');
+  
+    webSocket.onopen = () => {
+      console.log('WebSocket for Delete Reservation is Connected');
+    };
+  
+    webSocket.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+  
+      // Check if the message is a delete confirmation
+      if (data.status === 200 && data.action === 'delete') {
+        setDeleteSnackbar({ open: true, message: "Reservation deleted successfully" });
+        // Also remove the reservation from the list
+        setListings(currentReservations => 
+          currentReservations.filter(reservation => reservation.ReservationID.toString() !== data.msg_id)
+        );
+      } else if (data.status === 500 && data.action === 'delete') {
+        setDeleteSnackbar({ open: true, message: data.payload });
+      }
+    };
+  
+    webSocket.onerror = (error) => {
+      console.error('WebSocket Error:', error);
+    };
+  
+    return () => {
+      webSocket.close();
+    };
+  }, []);
+
+  useEffect(() => {
     const fetchImageForListing = async (listing) => {
       const imageData = await AWSS3Service.getImage({ imageId: listing.image });
       const imageBlob = convertUint8ArrayToBlob(imageData.imageData);
@@ -75,17 +131,25 @@ function FoodListingsTable({ onUserUpdate }) {
       return { ...listing, image: imageUrl };
     };
 
-    ListingService.getReservedListings({ Userid: authContext.userID })
-      .then(async (allListings) => {
+    const fetchReservations = async () => {
+      try {
+        const response = await reservationService.getReservationsByUserId(authContext.userID);
+        const listings = Array.isArray(response.data) ? response.data : [];
         const listingsWithImages = await Promise.all(
-          allListings.map(fetchImageForListing)
+          listings.map(fetchImageForListing)
         );
         setListings(listingsWithImages);
-      })
-      .catch((error) => {
-        console.error("Error fetching listings:", error);
-      });
-  }, [user.role, authContext.userID]);
+
+      } catch (error) {
+        console.error('Failed to fetch reservations:', error);
+        setListings([]);
+      }
+    };
+
+    if (authContext.userID) {
+      fetchReservations();
+    }
+  }, [socketConnected]);
 
   const convertUint8ArrayToBlob = (uint8Array) => {
     return new Blob([uint8Array], { type: 'image/jpeg' });
@@ -106,6 +170,8 @@ function FoodListingsTable({ onUserUpdate }) {
         setMessage("Delete failed");
       });
   }
+
+  
 
   return (
     <div>

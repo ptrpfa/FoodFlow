@@ -102,9 +102,15 @@ export class ListingService {
     return this.parseProtolistingArray(
       await this.prisma.listing.findMany({
         where: {
-          UserID: {
-            not: UserID,
-          },
+          AND: [
+            { 
+              UserID: {
+                not: UserID
+              } 
+            }, { 
+              Status: 1 
+            }
+          ],
         },
       }),
     );

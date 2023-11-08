@@ -114,7 +114,7 @@ function DonorForm() {
     await ImageClassifierService.train_model(selectedImage, 0);
 
     // Upload model
-    await ImageClassifierService.upload();
+    await ImageClassifierService.upload_model();
     setTrainingModel(false);
     setValidAndFresh(true);
   }

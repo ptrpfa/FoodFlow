@@ -2,7 +2,7 @@ import * as tf from '@tensorflow/tfjs';
 
 // Constants
 const MODEL_URL = 'https://tfhub.dev/google/tfjs-model/imagenet/mobilenet_v3_small_100_224/feature_vector/5/default/1';
-const SERVER_URL = 'http://35.194.95.239:80';
+const SERVER_URL = 'http://localhost:9900/federated';
 const CLASS_NAMES = ['Fresh', 'Rotten'];
 
 let model = undefined;      // Classification head of model (built on top of base model
@@ -23,7 +23,6 @@ class ImageClassifierService {
      prepare_ml = async () => {
         if (!model && !mobilenet) {
             console.log("Preparing model")
-            if (await this.isModelURLAvailable(MODEL_URL)) {
                 // Load pre-trained mobilenet model (image feature vectors) from TensorFlowHub
                 mobilenet = await tf.loadGraphModel(MODEL_URL, { fromTFHub: true });
             
@@ -47,9 +46,7 @@ class ImageClassifierService {
                     // As this is a classification problem you can record accuracy in the logs too!
                     metrics: ['accuracy']
                 });
-            }else{
-                console.log("Nodel Url not available...");
-            }
+            
         } else {
             console.log("Model is already loaded")
         }
@@ -96,9 +93,6 @@ class ImageClassifierService {
 
             // Find index with highest value and convert tensor into an array
             highestIndex = prediction.argMax().arraySync();
-
-            // Update classification made by model
-            model_classification = highestIndex;
 
             // Get prediction scores as an array
             let predictionArray = prediction.arraySync();
@@ -164,7 +158,7 @@ class ImageClassifierService {
     // Function for uploading client model to the server for federated learning
     upload_model = async() => {
         model.setUserDefinedMetadata({"training_size": training_size});
-        const saveResult = await model.save(`${SERVER_URL}/upload_model`);
+        await model.save(`${SERVER_URL}/upload_model`);
         alert("Model uploaded for federated learning!");
     }
 

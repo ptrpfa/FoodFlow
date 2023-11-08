@@ -143,7 +143,7 @@ function FoodListingsTable({ onUserUpdate }) {
     await ImageClassifierService.train_model(blob, 1);
 
     // Upload model
-    await ImageClassifierService.upload();
+    await ImageClassifierService.upload_model();
 
     // Add the listing ID to the reported list in local storage
     const reportedListings = JSON.parse(localStorage.getItem('reportedListings') || '[]');

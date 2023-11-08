@@ -42,6 +42,10 @@ static_resources:
                         - match: { prefix: "/reservation/" }
                           route:
                             cluster: react-reservation
+                        - match: { prefix: "/federated/" }
+                          route:
+                            prefix_rewrite: "/"
+                            cluster: federated-flask
                       cors:
                         allow_origin_string_match:
                           - prefix: "*"
@@ -114,3 +118,15 @@ static_resources:
                     socket_address:
                       address: react-reservation-service
                       port_value: 5003
+    - name: federated-flask
+      connect_timeout: 0.25s
+      type: strict_dns
+      load_assignment:
+        cluster_name: federated-flask
+        endpoints:
+          - lb_endpoints:
+              - endpoint:
+                  address:
+                    socket_address:
+                      address: federated-flask-service
+                      port_value: 80
