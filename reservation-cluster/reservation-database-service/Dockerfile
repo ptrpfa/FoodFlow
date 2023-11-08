@@ -1,5 +1,5 @@
 # Use an official Node.js runtime as a parent image
-FROM node:slim
+FROM node:lts-bookworm-slim
 
 # Set the working directory
 WORKDIR /app
