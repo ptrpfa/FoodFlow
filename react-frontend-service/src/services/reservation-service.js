@@ -29,12 +29,12 @@ const checkLocalStorage = (msg_id) => {
 
   if (reservationData) {
     // Data is found in local storage, so return the data
-    payload = "Reservation is successful";
-    return Promise.resolve(payload);
+    var payload = "Reservation is successful";
+    Promise.resolve(payload);
   }else{
      // Data is found in local storage, so return the data
-     payload = "Reservation is unsuccessfull";
-     return Promise.resolve(payload);
+     var payload = "Reservation is unsuccessfull";
+    Promise.resolve(payload);
   }
 };
 
@@ -56,11 +56,12 @@ const reservationService = {
     // Set up a timer to check local storage after 5 seconds
     const checkLocalStorageInterval = setInterval(() => {
       checkLocalStorage(LOCAL_STORAGE_KEY).then(payload => {
+        console.log(payload);
         // Data found in local storage, clear the interval
         clearInterval(checkLocalStorageInterval);
-        if (data) {
+        if (payload) {
           // Data is available, resolve the main promise with the data
-          resolve(payload);
+          return(payload);
         }
       });
     }, 5000);
@@ -80,7 +81,7 @@ const reservationService = {
         .catch(error => {
           // Handle the error here
           clearInterval(checkLocalStorageInterval);
-          reject(error);
+          resolve(error);
         });
     });
 

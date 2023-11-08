@@ -13,9 +13,6 @@ RUN npm install
 # Step 5: Copy the rest of the code
 COPY . .
 
-# SET DNS
-DOCKER_OPTS="--dns=8.8.8.8 --dns=8.8.4.4"
-
 # Step 6: Expose the port
 EXPOSE 5001
 

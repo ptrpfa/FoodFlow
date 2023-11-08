@@ -13,9 +13,8 @@ spec:
         app: aws-s3-listing
     spec:
       dnsConfig:
-        options:
-        - name: ndots
-          value: "2"
+        nameservers:
+          - 8.8.8.8
       containers:
         - name: aws-s3-listing
           image: skyish/aws-s3-listing:latest
