@@ -91,7 +91,8 @@ const reservationService = {
     
     const payload = {
       ReservationID: ReservationID,
-      msg_id: LOCAL_STORAGE_KEY
+      msg_id: LOCAL_STORAGE_KEY,
+      replies: []
     };
     
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(payload));
@@ -112,17 +113,21 @@ const reservationService = {
   getReservationsByUserId: (UserID) => {
     // No need to create an object, just pass UserID in the URL
     const LOCAL_STORAGE_KEY = uuidv4(); 
-    
+
     const payload = {
       UserID: UserID,
-      msg_id: LOCAL_STORAGE_KEY
+      msg_id: LOCAL_STORAGE_KEY,
+      replies: []
     };
 
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(payload));
     
-    return axios.get(`${API_BASE_URL}/reservation/${UserID}`, payload, {
+    return axios.get(`${API_BASE_URL}/reservation/${UserID}`, {
       headers: {
         'Content-Type': 'application/json'
+      },
+      params: {
+        msg_id: LOCAL_STORAGE_KEY // Assuming you want to send the LOCAL_STORAGE_KEY as a msg_id
       }
     })
     .then(response => response.data) // Return the data directly

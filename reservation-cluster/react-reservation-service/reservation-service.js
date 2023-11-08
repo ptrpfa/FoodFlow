@@ -156,12 +156,12 @@ app.delete("/reservation/delete/:ReservationID", (req, res) => {
 //Get Reservation Request
 app.get("/reservation/:UserID", (req,res) => {
   const UserID = req.params.UserID;
-  const msg_id = req.body.msg_id;
-  
+  const msg_id = req.query.msg_id;
+
   // Payload for Kafka message
   const reservationData = {
     action: "get",
-    msg_id: msg_id,
+    msg_id,
     UserID,
   };
 

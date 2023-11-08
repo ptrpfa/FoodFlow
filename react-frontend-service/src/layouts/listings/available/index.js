@@ -59,14 +59,22 @@ function FoodListingsTable({ onUserUpdate }) {
   const [openDialog, setOpenDialog] = useState(false);
   const webSocketService = useMemo(() => new WebSocketService(), []);
 
+  // Open dialog
   const handleReport = () => {
     setOpenDialog(true);
   };
 
+  // Close dialog
   const handleClose = () => {
     setOpenDialog(false);
   };
 
+  // Close snackbar
+  const closeMessageSnackbar = () => {
+    setMessageSnackbar({ open: false, message: "" });
+  }
+
+  // Get user data (role, firstname, lastname)
   const getUserData = async (UserID) => {
     try {
       const response = await AuthService.getProfile({ UserID: UserID });
@@ -92,97 +100,12 @@ function FoodListingsTable({ onUserUpdate }) {
     }
   };
 
-  function socketCleanup(){
-    if (webSocketService.socket && webSocketService.socket.readyState === WebSocket.OPEN) {
-      webSocketService.socket.close();
-    }
-  }
-
-  useEffect(() => {
-    const formattedListings = [];
-    const showListings = listings.filter (listing => !reservedListings.includes(listing.listingID));
-    for (let i = 0; i < showListings.length; i += 3) {
-      formattedListings.push(showListings.slice(i, i + 3));
-    }
-    setGroupedListings(formattedListings);
-  }, [listings, reservedListings])
-
-  useEffect(() => {
-    if (!reserved || reservingListingID === 0) {
-      return;
-    }
-
-    const currentReserved = [...reservedListings, reservingListingID];
-    currentReserved.push(reservingListingID);
-    setReservedListings(currentReserved);
-
-    setReservingListingID(0);
-    setReserved(false);
-  }, [reserved, reservingListingID])
-
-  useEffect(() => {
-    async function connectWebSocket() {
-      await webSocketService.setupWebSocket();
-      
-      webSocketService.onmessage = (message) => {
-        console.log(message);
-        // Update the state to open the MDSnackbar with the received message
-        setMessageSnackbar({ open: true, message: message });
-        setReserved(true);
-      };
-    }
-    
-    connectWebSocket();
-      
-    return () => {
-      // Cleanup function
-      socketCleanup();
-    }
-  }, []);
-
-  useEffect(() => {
-    getUserData(authContext.userID);
-  }, []);
-
-  useEffect(() => {
-    setIsLoading(true);
-    const fetchImageForListing = async (listing) => {
-      const imageData = await AWSS3Service.getImage({ imageId: listing.image });
-      const imageBlob = convertUint8ArrayToBlob(imageData.imageData);
-      const imageUrl = URL.createObjectURL(imageBlob);
-      return { ...listing, image: imageUrl };
-    };
-
-    if (user.role === "patron") {
-      ListingService.getAvailableListingsExcludeUser({ Userid: authContext.userID })
-        .then(async (allListings) => {
-          const listingsWithImages = await Promise.all(
-            allListings.map(fetchImageForListing)
-          );
-          setListings(listingsWithImages);
-        })
-        .catch((error) => {
-          console.error("Error fetching listings:", error);
-        });
-    } 
-    else if (user.role === "donor") {
-      ListingService.getAvailableListingsExcludeUser({ Userid: authContext.userID })
-        .then(async (allListings) => {
-          const listingsWithImages = await Promise.all(
-            allListings.map(fetchImageForListing)
-          );
-          setListings(listingsWithImages);
-        })
-        .catch((error) => {
-          console.error("Error fetching listings for donors:", error);
-        });
-    }
-  }, [user.role, authContext.userID]);
-
+  // Converts s3 return value to blob
   const convertUint8ArrayToBlob = (uint8Array) => {
     return new Blob([uint8Array], { type: 'image/jpeg' });
   };
 
+  // Trains model on freshness report
   const handleReportConfirmation = async (imageData, listingID) => {
     setOpenDialog(false);
     setTrainingModel(listingID);
@@ -203,33 +126,11 @@ function FoodListingsTable({ onUserUpdate }) {
     setTrainingModel(-1);
   };
 
+  // Check if user already reported the listing with listingID
   const isListingReported = (listingID) => {
     const reportedListings = JSON.parse(localStorage.getItem('reportedListings') || '[]');
     return reportedListings.includes(listingID);
   };
-
-  useEffect(() => {
-    async function prepareModel(){
-      try {
-        await ImageClassifierService.prepare_ml();
-      } catch (error) {
-          console.error('Error loading models', error);
-      } finally {
-        setIsLoading(false);
-      }
-    }
-    prepareModel();
-
-    return () => {
-      ImageClassifierService.dispose_models();
-    };
-  }, []); // Empty dependency array means this effect runs once on mount
-
-
-  /* Rerservation Button Calls*/
-  const closeMessageSnackbar = () => {
-    setMessageSnackbar({ open: false, message: "" });
-  }
 
   // User click 'reserve' button 
   const handleReservation = (listingID) => {
@@ -274,12 +175,117 @@ function FoodListingsTable({ onUserUpdate }) {
 
       });
   };
- 
 
+  // Clean up socket
+  function socketCleanup(){
+    if (webSocketService.socket && webSocketService.socket.readyState === WebSocket.OPEN) {
+      webSocketService.socket.close();
+    }
+  }
 
-  // const renderServerSB = ();
+  // Set up web socket
+  useEffect(() => {
+    async function connectWebSocket() {
+      await webSocketService.setupWebSocket();
+      
+      webSocketService.onmessage = (message) => {
+        console.log(message);
+        // Update the state to open the MDSnackbar with the received message
+        setMessageSnackbar({ open: true, message: message });
+        setReserved(true);
+      };
+    }
+    
+    connectWebSocket();
+      
+    return () => {
+      // Cleanup function
+      socketCleanup();
+    }
+  }, []);
 
-  /* End of Reservation Button Call */ 
+  // Prepare federated model
+  useEffect(() => {
+    async function prepareModel(){
+      try {
+        await ImageClassifierService.prepare_ml();
+      } catch (error) {
+          console.error('Error loading models', error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    prepareModel();
+
+    return () => {
+      ImageClassifierService.dispose_models();
+    };
+  }, []);
+
+  // Prepare listings, and set loading to true
+  useEffect(() => {
+    setIsLoading(true);
+    const fetchImageForListing = async (listing) => {
+      const imageData = await AWSS3Service.getImage({ imageId: listing.image });
+      const imageBlob = convertUint8ArrayToBlob(imageData.imageData);
+      const imageUrl = URL.createObjectURL(imageBlob);
+      return { ...listing, image: imageUrl };
+    };
+
+    if (user.role === "patron") {
+      ListingService.getAvailableListingsExcludeUser({ Userid: authContext.userID })
+        .then(async (allListings) => {
+          const listingsWithImages = await Promise.all(
+            allListings.map(fetchImageForListing)
+          );
+          setListings(listingsWithImages);
+        })
+        .catch((error) => {
+          console.error("Error fetching listings:", error);
+        });
+    } 
+    else if (user.role === "donor") {
+      ListingService.getAvailableListingsExcludeUser({ Userid: authContext.userID })
+        .then(async (allListings) => {
+          const listingsWithImages = await Promise.all(
+            allListings.map(fetchImageForListing)
+          );
+          setListings(listingsWithImages);
+        })
+        .catch((error) => {
+          console.error("Error fetching listings for donors:", error);
+        });
+    }
+  }, [user.role, authContext.userID]);
+
+  // Get user data
+  useEffect(() => {
+    getUserData(authContext.userID);
+  }, []);
+
+  // Format listing for viewing
+  useEffect(() => {
+    const formattedListings = [];
+    const showListings = listings.filter (listing => !reservedListings.includes(listing.listingID));
+    for (let i = 0; i < showListings.length; i += 3) {
+      formattedListings.push(showListings.slice(i, i + 3));
+    }
+    setGroupedListings(formattedListings);
+  }, [listings, reservedListings])
+
+  // Update when reserved item
+  useEffect(() => {
+    if (!reserved || reservingListingID === 0) {
+      return;
+    }
+
+    const currentReserved = [...reservedListings, reservingListingID];
+    currentReserved.push(reservingListingID);
+    setReservedListings(currentReserved);
+
+    setReservingListingID(0);
+    setReserved(false);
+  }, [reserved, reservingListingID])
 
   return (
     <div>

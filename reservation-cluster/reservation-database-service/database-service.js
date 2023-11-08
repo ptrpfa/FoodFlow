@@ -145,7 +145,7 @@ checkTopicAvailability().then(() => {
               // Send a WebSocket message to the client to inform of success
               const deleteSuccessMessage = {
                 action: 'delete',
-                msg_id: payload.msg_id,
+                msg_id: msg_id,
                 status: 200,
                 payload: `Reservation ID ${payload.ReservationID} successfully deleted.`,
                 sender: 'database-controller'
@@ -157,7 +157,7 @@ checkTopicAvailability().then(() => {
               console.error("Error processing reservation deletion:", error);
               // Send a WebSocket message to the client to inform of the error
               const deleteErrorMessage = {
-                msg_id: payload.msg_id,
+                msg_id: msg_id,
                 status: 500,
                 payload: `Error processing reservation deletion: ${error.message}`,
                 sender: 'database-controller'
@@ -174,7 +174,7 @@ checkTopicAvailability().then(() => {
                  // Package the reservations in a message object
                const getReservation = {
                   action: 'get',
-                  msg_id: payload.msg_id,
+                  msg_id: msg_id,
                   status: 200, 
                   data: reservations,
                   payload: `Reservations successfully fetched for UserID  ${payload.UserID} .`,
