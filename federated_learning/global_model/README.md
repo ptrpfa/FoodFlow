@@ -21,9 +21,9 @@ subset.js (Supplementary program used for training and testing models over a sub
 
 ### Program Usage
 ---
-| Note: Tensorflow and TensorflowJS are best suited to run on Windows or Linux based devices. It is unable to run properly on Silicon-based Mac devices. Running the program on a **Linux-based server** with `Python` and `NodeJS` installed is preferred.
+| Note: Running the program on a **Linux-based server** with `Python` and `NodeJS` installed is preferred.
 
-1. Install all necessary programs and libraries (`Python` and `NodeJS`)
+1. Install all necessary programs and libraries (`NodeJS`)
     ```
     # Debian-based Linux Installation (perform your own form of installations if installing on another type of device)
     sudo apt update

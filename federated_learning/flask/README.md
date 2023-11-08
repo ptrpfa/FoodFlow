@@ -26,7 +26,7 @@ These endpoints are listed below:
     ```
 3. Install the necessary project dependencies
     ```
-    # Python
+    # Python (preferred due to interdependencies required by Tensorflow)
     pip3 install -U flask flask-cors tensorflow tensorflowjs
 
     OR
@@ -53,4 +53,6 @@ These endpoints are listed below:
     ```
     sudo python3 app.py
     ```
-6. If you are just testing the Flask server, navigate to the the `/` endpoint on a web browser to view the testing page. A demo is available [here](https://www.youtube.com/watch?v=m28YuqPx-1c). Otherwise, configure your client Tensorflow.js devices to link to the Flask server to communicate with it!
+6. If you are just testing the Flask server, navigate to the the `/` endpoint on a web browser to view the testing page. A demo is available [here](https://www.youtube.com/watch?v=m28YuqPx-1c). Otherwise, configure your client Tensorflow.js devices to link to the Flask server to communicate with it! 
+
+If you are running the Flask server on a Docker container, make sure to configure the `host`:`port` address on your client devices correctly so that they can fetch the global model and send their local models to the server!
