@@ -9,7 +9,7 @@
 */
 
 import { useState, useEffect, useContext, useMemo } from "react";
-import { Link, unstable_useViewTransitionState } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
@@ -26,6 +26,8 @@ import { AuthContext } from "context";
 import AuthService from "../../../services/auth-service";
 import reservationService from "services/reservation-service";
 import AWSS3Service from "services/aws-s3-service";
+import ListingService from "services/listing-service";
+import WebSocketService from "services/web-listener";
 
 function FoodListingsTable({ onUserUpdate }) {
   const authContext = useContext(AuthContext);
@@ -38,6 +40,7 @@ function FoodListingsTable({ onUserUpdate }) {
     lastName: "",
     role: "",
   });
+  const webSocketService = useMemo(() => new WebSocketService(), []);
 
 
   const getUserData = async (UserID) => {
@@ -69,46 +72,63 @@ function FoodListingsTable({ onUserUpdate }) {
     getUserData(authContext.userID);
   }, []);
 
-  function socketCleanup(webSocket){
-    if (webSocket && webSocket.readyState === WebSocket.OPEN) {
-      webSocket.close();
+  function socketCleanup(){
+    if (webSocketService.socket && webSocketService.socket.readyState === WebSocket.OPEN) {
+      webSocketService.socket.close();
     }
   }
 
   useEffect(() => {
-    const webSocket = new WebSocket('ws://localhost:8282');
-    
-    webSocket.onopen = () => {
-      console.log("Websocket is Connected");
+    async function connectWebSocket() {
+      await webSocketService.setupWebSocket();
       setSocketConnected(true);
-    };
 
-    webSocket.onmessage = (event) => {
-      const message = JSON.parse(event.data);
-      // GET
-      if (message.type === 'RESERVATION_DATA') {
+      webSocketService.onmessage = (message) => {
         console.log(message);
-        setListings(message.data);
-      }
-      // DELETE
-      // Check if the message is a delete confirmation
-      if (message.status === 200 && message.action === 'delete') {
-        setDeleteSnackbar({ open: true, message: "Reservation deleted successfully" });
-        // Also remove the reservation from the list
-        setListings(currentReservations => 
-          currentReservations.filter(reservation => reservation.ReservationID.toString() !== message.msg_id)
-        );
-      } else if (message.status === 500 && message.action === 'delete') {
-        setDeleteSnackbar({ open: true, message: message.payload });
-      }
-    };
-
+      // GET
+        if (message.action === 'get') {
+          const listingIDs = message.data.map(reservation => reservation.ListingID)
+          const listingDetails = [];
+          listingIDs.forEach(listingID => {
+            listingDetails.push(ListingService.getListing({ListingID: listingID}));
+          }); 
+          setListings(listingDetails);
+        }
+        // DELETE
+        // Check if the message is a delete confirmation
+        if (message.status === 200 && message.action === 'delete') {
+          setDeleteSnackbar({ open: true, message: "Reservation deleted successfully" });
+          // Also remove the reservation from the list
+          setListings(currentReservations => 
+            currentReservations.filter(reservation => reservation.ReservationID.toString() !== message.msg_id)
+          );
+        } else if (message.status === 500 && message.action === 'delete') {
+          setDeleteSnackbar({ open: true, message: message.payload });
+        }
+      };
+    }
+    
+    connectWebSocket();
       
     return () => {
       // Cleanup function
-      socketCleanup(webSocket);
+      socketCleanup();
     }
   }, []);
+
+  useEffect(() => {
+    if (!socketConnected) {
+      return; // If socket is not connected, exit the effect early
+    }
+
+    const fetchReservations = async () => {
+      await reservationService.getReservationsByUserId(authContext.userID);
+    }
+
+    if (authContext.userID) {
+      fetchReservations();
+    }
+  },[authContext.userID, socketConnected])
 
   useEffect(() => {
     if (!socketConnected) {
@@ -123,8 +143,6 @@ function FoodListingsTable({ onUserUpdate }) {
 
     const fetchReservations = async () => {
       try {
-        const response = await reservationService.getReservationsByUserId(authContext.userID);
-        const listings = Array.isArray(response.data) ? response.data : [];
         const listingsWithImages = await Promise.all(
           listings.map(fetchImageForListing)
         );
@@ -139,7 +157,7 @@ function FoodListingsTable({ onUserUpdate }) {
     if (authContext.userID) {
       fetchReservations();
     }
-  }, [socketConnected]);
+  }, [socketConnected, listings]);
 
   const convertUint8ArrayToBlob = (uint8Array) => {
     return new Blob([uint8Array], { type: 'image/jpeg' });

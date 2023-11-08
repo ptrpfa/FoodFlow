@@ -87,7 +87,16 @@ const reservationService = {
 
   },
   deleteReservation: (ReservationID) => {
-    return axios.delete(`${API_BASE_URL}/reservation/delete/${ReservationID}`, {
+    const LOCAL_STORAGE_KEY = uuidv4(); 
+    
+    const payload = {
+      ReservationID: ReservationID,
+      msg_id: LOCAL_STORAGE_KEY
+    };
+    
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(payload));
+
+    return axios.delete(`${API_BASE_URL}/reservation/delete/${ReservationID}`, payload,  {
       headers: {
         'Content-Type': 'application/json'
       }
@@ -102,7 +111,16 @@ const reservationService = {
 
   getReservationsByUserId: (UserID) => {
     // No need to create an object, just pass UserID in the URL
-    return axios.get(`${API_BASE_URL}/reservation/${UserID}`, {
+    const LOCAL_STORAGE_KEY = uuidv4(); 
+    
+    const payload = {
+      UserID: UserID,
+      msg_id: LOCAL_STORAGE_KEY
+    };
+
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(payload));
+    
+    return axios.get(`${API_BASE_URL}/reservation/${UserID}`, payload, {
       headers: {
         'Content-Type': 'application/json'
       }

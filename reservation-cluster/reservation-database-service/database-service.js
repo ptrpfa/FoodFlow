@@ -80,12 +80,13 @@ checkTopicAvailability().then(() => {
 
                // Commit the transaction
                await transaction.commit();
-               console.log(`Reservation ID ${reservation.id} created for Listing ID ${payload.ListingID}`);
+               console.log(`Reservation ID ${reservation.ReservationID} created for Listing ID ${payload.ListingID}`);
                const newReservation = {
                   action:'create',
                   msg_id: msg_id,
                   status: 200,
-                  sender: 'database-controller'
+                  sender: 'database-controller',
+                  payload: `Reservation ID ${reservation.ReservationID} created for Listing ID ${payload.ListingID}`,
                };
                // Convert the reservation to a JSON string
                const reservationMessage = JSON.stringify(newReservation);
@@ -168,13 +169,16 @@ checkTopicAvailability().then(() => {
             try {
                // Fetch all reservations for the given UserID
                const reservations = await Reservation.findAll({
-               where: { UserID: payload.UserID },
+                where: { UserID: payload.UserID },
                });
                  // Package the reservations in a message object
                const getReservation = {
-                  type: 'RESERVATION_DATA', 
-                  data: reservations 
-               };
+                  action: 'get',
+                  msg_id: payload.msg_id,
+                  status: 200, 
+                  data: reservations,
+                  payload: `Reservations successfully fetched for UserID  ${payload.UserID} .`,
+              };
                 //Send the reservation message to the WebSocket server
                const reservationMessage = JSON.stringify(getReservation);
                databaseServerSocket.send(reservationMessage);               

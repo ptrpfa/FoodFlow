@@ -17,7 +17,6 @@ class WebSocketService {
 
       this.socket.onerror = (error) => {
         console.error('WebSocket encountered an error:', error);
-        reject(error);
       };
 
       this.socket.onclose = () => {
@@ -32,10 +31,11 @@ class WebSocketService {
       const server_message = (event.data).toString();
       const reservationMessage = JSON.parse(server_message);
       var payload = '';
-
+      
       if (this.onmessage) {
         //Get from localstorage   
         const msg_id  = reservationMessage.msg_id;
+        console.log(reservationMessage);
         const convo = localStorage.getItem(msg_id);
         const sender = reservationMessage.sender;
 
@@ -49,9 +49,7 @@ class WebSocketService {
               if (convo_dict.replies.length === 1) {
                 // Mark the conversation as successful
                 console.log(`Conversation with msg_id ${msg_id} is successful.`);
-                payload="Reservation Successful";
-                localStorage.removeItem(msg_id);
-                this.onmessage(payload);
+                this.handlePayload(reservationMessage, msg_id);
               }
             }
           } else if(status == 500){
@@ -62,6 +60,20 @@ class WebSocketService {
         }
       }
     }
+  }
+
+  handlePayload (reservationMessage, msg_id) {
+    let payload = undefined;
+    if (reservationMessage.action === "create") {
+      payload = "Reservation Successful";
+    } else if (reservationMessage.action === "get") {
+      payload = {action: "get",data: reservationMessage.data};
+    } else if (reservationMessage.action === "delete") {
+      payload = {action: "delete", payload: reservationMessage.payload};
+    }
+
+    localStorage.removeItem(msg_id);
+    this.onmessage(payload);
   }
 
   getSocketOpenPromise() {

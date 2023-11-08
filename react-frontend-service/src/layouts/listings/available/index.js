@@ -125,6 +125,7 @@ function FoodListingsTable({ onUserUpdate }) {
       await webSocketService.setupWebSocket();
       
       webSocketService.onmessage = (message) => {
+        console.log(message);
         // Update the state to open the MDSnackbar with the received message
         setMessageSnackbar({ open: true, message: message });
         setReserved(true);
