@@ -56,16 +56,16 @@ Model saved!
 Testing model..
 
 False Prediction: Rotten with 99.99735355377197% confidence (Actual: Fresh)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/cucumber/test/fresh/c_f075.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/cucumber/test/fresh/c_f075.png
 
 False Prediction: Fresh with 99.30877089500427% confidence (Actual: Rotten)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/cucumber/test/rotten/c_r126.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/cucumber/test/rotten/c_r126.png
 
 False Prediction: Fresh with 98.48982691764832% confidence (Actual: Rotten)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/cucumber/test/rotten/c_r337.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/cucumber/test/rotten/c_r337.png
 
 False Prediction: Fresh with 99.71104860305786% confidence (Actual: Rotten)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/cucumber/test/rotten/c_r373.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/cucumber/test/rotten/c_r373.png
 
 ~Model Performance~
 Confusion Matrix:

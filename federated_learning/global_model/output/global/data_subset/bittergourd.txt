@@ -2,13 +2,13 @@
 Testing model..
 
 False Prediction: Rotten with 99.99600648880005% confidence (Actual: Fresh)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/bittergourd/test/fresh/IMG_20200823_131903.jpg_0_866.jpg
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/bittergourd/test/fresh/IMG_20200823_131903.jpg_0_866.jpg
 
 False Prediction: Rotten with 99.91986155509949% confidence (Actual: Fresh)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/bittergourd/test/fresh/IMG_20200823_131904.jpg_0_5999.jpg
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/bittergourd/test/fresh/IMG_20200823_131904.jpg_0_5999.jpg
 
 False Prediction: Fresh with 99.99451637268066% confidence (Actual: Rotten)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/bittergourd/test/rotten/IMG_20200824_182248.jpg_0_2275.jpg
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/bittergourd/test/rotten/IMG_20200824_182248.jpg_0_2275.jpg
 
 
 ~Model Performance~

@@ -1,2 +1,6 @@
-dataset
 archived
+# Ignore all files in the "dataset" directory
+dataset/*
+
+# Allow files with the ".gitinclude" extension
+!dataset/*.gitinclude

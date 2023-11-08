@@ -56,67 +56,67 @@ Model saved!
 Testing model..
 
 False Prediction: Rotten with 95.60129046440125% confidence (Actual: Fresh)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/tomato/test/fresh/DSCN4069.jpg_0_5057.jpg
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/tomato/test/fresh/DSCN4069.jpg_0_5057.jpg
 
 False Prediction: Rotten with 78.35683822631836% confidence (Actual: Fresh)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/tomato/test/fresh/DSCN4101.jpg_0_163.jpg
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/tomato/test/fresh/DSCN4101.jpg_0_163.jpg
 
 False Prediction: Rotten with 73.73037934303284% confidence (Actual: Fresh)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/tomato/test/fresh/DSCN4102.jpg_0_2342.jpg
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/tomato/test/fresh/DSCN4102.jpg_0_2342.jpg
 
 False Prediction: Rotten with 92.22162365913391% confidence (Actual: Fresh)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/tomato/test/fresh/DSCN4102.jpg_0_277.jpg
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/tomato/test/fresh/DSCN4102.jpg_0_277.jpg
 
 False Prediction: Rotten with 83.04246068000793% confidence (Actual: Fresh)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/tomato/test/fresh/DSCN4142.jpg_0_181.jpg
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/tomato/test/fresh/DSCN4142.jpg_0_181.jpg
 
 False Prediction: Rotten with 72.12459444999695% confidence (Actual: Fresh)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/tomato/test/fresh/DSCN4142.jpg_0_677.jpg
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/tomato/test/fresh/DSCN4142.jpg_0_677.jpg
 
 False Prediction: Rotten with 59.06461477279663% confidence (Actual: Fresh)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/tomato/test/fresh/DSCN4157.jpg_0_4638.jpg
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/tomato/test/fresh/DSCN4157.jpg_0_4638.jpg
 
 False Prediction: Rotten with 79.30726408958435% confidence (Actual: Fresh)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/tomato/test/fresh/DSCN4172.jpg_0_3869.jpg
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/tomato/test/fresh/DSCN4172.jpg_0_3869.jpg
 
 False Prediction: Rotten with 70.51966190338135% confidence (Actual: Fresh)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/tomato/test/fresh/DSCN4172.jpg_0_8783.jpg
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/tomato/test/fresh/DSCN4172.jpg_0_8783.jpg
 
 False Prediction: Rotten with 82.42346048355103% confidence (Actual: Fresh)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/tomato/test/fresh/IMG_20200725_095418.jpg_0_3105.jpg
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/tomato/test/fresh/IMG_20200725_095418.jpg_0_3105.jpg
 
 False Prediction: Fresh with 83.87009501457214% confidence (Actual: Rotten)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/tomato/test/rotten/DSCN4171.jpg_0_2236.jpg
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/tomato/test/rotten/DSCN4171.jpg_0_2236.jpg
 
 False Prediction: Fresh with 99.81666803359985% confidence (Actual: Rotten)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/tomato/test/rotten/DSCN4171.jpg_0_3483.jpg
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/tomato/test/rotten/DSCN4171.jpg_0_3483.jpg
 
 False Prediction: Fresh with 65.22334218025208% confidence (Actual: Rotten)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/tomato/test/rotten/DSCN4171.jpg_0_5788.jpg
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/tomato/test/rotten/DSCN4171.jpg_0_5788.jpg
 
 False Prediction: Fresh with 78.18548083305359% confidence (Actual: Rotten)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/tomato/test/rotten/DSCN4171.jpg_0_6765.jpg
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/tomato/test/rotten/DSCN4171.jpg_0_6765.jpg
 
 False Prediction: Fresh with 99.90537762641907% confidence (Actual: Rotten)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/tomato/test/rotten/DSCN4171.jpg_0_7727.jpg
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/tomato/test/rotten/DSCN4171.jpg_0_7727.jpg
 
 False Prediction: Fresh with 75.49682259559631% confidence (Actual: Rotten)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/tomato/test/rotten/DSCN4171.jpg_0_9665.jpg
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/tomato/test/rotten/DSCN4171.jpg_0_9665.jpg
 
 False Prediction: Fresh with 98.13876152038574% confidence (Actual: Rotten)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/tomato/test/rotten/DSCN4221.jpg_0_3825.jpg
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/tomato/test/rotten/DSCN4221.jpg_0_3825.jpg
 
 False Prediction: Fresh with 62.57415413856506% confidence (Actual: Rotten)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/tomato/test/rotten/DSCN4222.jpg_0_4445.jpg
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/tomato/test/rotten/DSCN4222.jpg_0_4445.jpg
 
 False Prediction: Fresh with 85.28115153312683% confidence (Actual: Rotten)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/tomato/test/rotten/DSCN4223.jpg_0_3397.jpg
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/tomato/test/rotten/DSCN4223.jpg_0_3397.jpg
 
 False Prediction: Fresh with 69.85896825790405% confidence (Actual: Rotten)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/tomato/test/rotten/DSCN4223.jpg_0_3649.jpg
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/tomato/test/rotten/DSCN4223.jpg_0_3649.jpg
 
 False Prediction: Fresh with 96.45171165466309% confidence (Actual: Rotten)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/tomato/test/rotten/DSCN4223.jpg_0_5551.jpg
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/tomato/test/rotten/DSCN4223.jpg_0_5551.jpg
 
 
 ~Model Performance~

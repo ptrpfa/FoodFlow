@@ -56,7 +56,7 @@ Model saved!
 Testing model..
 
 False Prediction: Fresh with 99.40540194511414% confidence (Actual: Rotten)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/capsicum/test/rotten/IMG_20200901_181736.jpg_0_4478.jpg
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/capsicum/test/rotten/IMG_20200901_181736.jpg_0_4478.jpg
 
 ~Model Performance~
 Confusion Matrix:

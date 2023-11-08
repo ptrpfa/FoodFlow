@@ -69,25 +69,25 @@ Model saved!
 Testing model..
 
 False Prediction: Rotten with 75.54952502250671% confidence (Actual: Fresh)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/apples/test/fresh/rotated_by_45_Screen Shot 2018-06-08 at 5.12.14 PM.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/apples/test/fresh/rotated_by_45_Screen Shot 2018-06-08 at 5.12.14 PM.png
 
 False Prediction: Rotten with 98.3957052230835% confidence (Actual: Fresh)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/apples/test/fresh/vertical_flip_Screen Shot 2018-06-08 at 5.26.58 PM.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/apples/test/fresh/vertical_flip_Screen Shot 2018-06-08 at 5.26.58 PM.png
 
 False Prediction: Fresh with 90.53628444671631% confidence (Actual: Rotten)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/apples/test/rotten/Screen Shot 2018-06-08 at 2.26.55 PM.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/apples/test/rotten/Screen Shot 2018-06-08 at 2.26.55 PM.png
 
 False Prediction: Fresh with 99.83866214752197% confidence (Actual: Rotten)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/apples/test/rotten/a_r504.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/apples/test/rotten/a_r504.png
 
 False Prediction: Fresh with 99.83866214752197% confidence (Actual: Rotten)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/apples/test/rotten/saltandpepper_Screen Shot 2018-06-07 at 2.24.35 PM.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/apples/test/rotten/saltandpepper_Screen Shot 2018-06-07 at 2.24.35 PM.png
 
 False Prediction: Fresh with 62.3843252658844% confidence (Actual: Rotten)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/apples/test/rotten/saltandpepper_Screen Shot 2018-06-07 at 2.47.20 PM.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/apples/test/rotten/saltandpepper_Screen Shot 2018-06-07 at 2.47.20 PM.png
 
 False Prediction: Fresh with 97.89968729019165% confidence (Actual: Rotten)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/apples/test/rotten/translation_Screen Shot 2018-06-07 at 2.20.46 PM.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/apples/test/rotten/translation_Screen Shot 2018-06-07 at 2.20.46 PM.png
 
 ~Model Performance~
 Confusion Matrix:

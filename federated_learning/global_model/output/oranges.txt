@@ -56,34 +56,34 @@ Model saved!
 Testing model..
 
 False Prediction: Rotten with 76.31407380104065% confidence (Actual: Fresh)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/oranges/test/fresh/rotated_by_15_Screen Shot 2018-06-13 at 12.18.34 AM.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/oranges/test/fresh/rotated_by_15_Screen Shot 2018-06-13 at 12.18.34 AM.png
 
 False Prediction: Rotten with 80.728018283844% confidence (Actual: Fresh)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/oranges/test/fresh/saltandpepper_Screen Shot 2018-06-12 at 11.54.55 PM.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/oranges/test/fresh/saltandpepper_Screen Shot 2018-06-12 at 11.54.55 PM.png
 
 False Prediction: Rotten with 73.7582802772522% confidence (Actual: Fresh)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/oranges/test/fresh/saltandpepper_Screen Shot 2018-06-13 at 12.07.39 AM.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/oranges/test/fresh/saltandpepper_Screen Shot 2018-06-13 at 12.07.39 AM.png
 
 False Prediction: Rotten with 96.84518575668335% confidence (Actual: Fresh)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/oranges/test/fresh/translation_Screen Shot 2018-06-13 at 12.04.51 AM.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/oranges/test/fresh/translation_Screen Shot 2018-06-13 at 12.04.51 AM.png
 
 False Prediction: Rotten with 99.74918365478516% confidence (Actual: Fresh)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/oranges/test/fresh/translation_Screen Shot 2018-06-13 at 12.07.10 AM.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/oranges/test/fresh/translation_Screen Shot 2018-06-13 at 12.07.10 AM.png
 
 False Prediction: Fresh with 56.233978271484375% confidence (Actual: Rotten)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/oranges/test/rotten/rotated_by_60_Screen Shot 2018-06-12 at 11.29.58 PM.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/oranges/test/rotten/rotated_by_60_Screen Shot 2018-06-12 at 11.29.58 PM.png
 
 False Prediction: Fresh with 99.79442954063416% confidence (Actual: Rotten)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/oranges/test/rotten/saltandpepper_Screen Shot 2018-06-12 at 11.20.30 PM.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/oranges/test/rotten/saltandpepper_Screen Shot 2018-06-12 at 11.20.30 PM.png
 
 False Prediction: Fresh with 97.20503687858582% confidence (Actual: Rotten)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/oranges/test/rotten/translation_Screen Shot 2018-06-12 at 11.20.30 PM.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/oranges/test/rotten/translation_Screen Shot 2018-06-12 at 11.20.30 PM.png
 
 False Prediction: Fresh with 96.98306918144226% confidence (Actual: Rotten)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/oranges/test/rotten/translation_Screen Shot 2018-06-12 at 11.28.00 PM.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/oranges/test/rotten/translation_Screen Shot 2018-06-12 at 11.28.00 PM.png
 
 False Prediction: Fresh with 58.68048071861267% confidence (Actual: Rotten)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/oranges/test/rotten/translation_Screen Shot 2018-06-12 at 11.32.41 PM.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/oranges/test/rotten/translation_Screen Shot 2018-06-12 at 11.32.41 PM.png
 
 ~Model Performance~
 Confusion Matrix:

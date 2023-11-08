@@ -2,163 +2,163 @@
 Testing model..
 
 False Prediction: Rotten with 70.44129967689514% confidence (Actual: Fresh)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/b_f087.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/b_f087.png
 
 False Prediction: Rotten with 70.75862884521484% confidence (Actual: Fresh)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/b_f157.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/b_f157.png
 
 False Prediction: Rotten with 59.57746505737305% confidence (Actual: Fresh)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/b_f229.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/b_f229.png
 
 False Prediction: Rotten with 55.07262349128723% confidence (Actual: Fresh)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/b_f240.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/b_f240.png
 
 False Prediction: Rotten with 64.73670601844788% confidence (Actual: Fresh)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/b_f258.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/b_f258.png
 
 False Prediction: Rotten with 57.129091024398804% confidence (Actual: Fresh)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/b_f271.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/b_f271.png
 
 False Prediction: Rotten with 68.81698369979858% confidence (Actual: Fresh)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/b_f438.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/b_f438.png
 
 False Prediction: Rotten with 95.9937334060669% confidence (Actual: Fresh)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/b_f520.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/b_f520.png
 
 False Prediction: Rotten with 71.17348909378052% confidence (Actual: Fresh)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/rotated_by_15_Screen Shot 2018-06-12 at 10.00.54 PM.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/rotated_by_15_Screen Shot 2018-06-12 at 10.00.54 PM.png
 
 False Prediction: Rotten with 73.67892861366272% confidence (Actual: Fresh)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/rotated_by_15_Screen Shot 2018-06-12 at 9.46.24 PM.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/rotated_by_15_Screen Shot 2018-06-12 at 9.46.24 PM.png
 
 False Prediction: Rotten with 53.69465351104736% confidence (Actual: Fresh)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/rotated_by_30_Screen Shot 2018-06-12 at 9.38.04 PM.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/rotated_by_30_Screen Shot 2018-06-12 at 9.38.04 PM.png
 
 False Prediction: Rotten with 53.6760687828064% confidence (Actual: Fresh)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/rotated_by_30_Screen Shot 2018-06-12 at 9.47.55 PM.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/rotated_by_30_Screen Shot 2018-06-12 at 9.47.55 PM.png
 
 False Prediction: Rotten with 53.10523509979248% confidence (Actual: Fresh)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/rotated_by_30_Screen Shot 2018-06-12 at 9.49.23 PM.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/rotated_by_30_Screen Shot 2018-06-12 at 9.49.23 PM.png
 
 False Prediction: Rotten with 55.689412355422974% confidence (Actual: Fresh)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/rotated_by_45_Screen Shot 2018-06-12 at 10.00.54 PM.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/rotated_by_45_Screen Shot 2018-06-12 at 10.00.54 PM.png
 
 False Prediction: Rotten with 58.98212790489197% confidence (Actual: Fresh)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/rotated_by_45_Screen Shot 2018-06-12 at 9.39.08 PM.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/rotated_by_45_Screen Shot 2018-06-12 at 9.39.08 PM.png
 
 False Prediction: Rotten with 59.3156635761261% confidence (Actual: Fresh)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/rotated_by_45_Screen Shot 2018-06-12 at 9.43.53 PM.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/rotated_by_45_Screen Shot 2018-06-12 at 9.43.53 PM.png
 
 False Prediction: Rotten with 56.30425810813904% confidence (Actual: Fresh)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/rotated_by_45_Screen Shot 2018-06-12 at 9.46.48 PM.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/rotated_by_45_Screen Shot 2018-06-12 at 9.46.48 PM.png
 
 False Prediction: Rotten with 64.73670601844788% confidence (Actual: Fresh)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/rotated_by_45_Screen Shot 2018-06-12 at 9.47.46 PM.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/rotated_by_45_Screen Shot 2018-06-12 at 9.47.46 PM.png
 
 False Prediction: Rotten with 54.209548234939575% confidence (Actual: Fresh)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/rotated_by_45_Screen Shot 2018-06-12 at 9.47.51 PM.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/rotated_by_45_Screen Shot 2018-06-12 at 9.47.51 PM.png
 
 False Prediction: Rotten with 58.210110664367676% confidence (Actual: Fresh)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/rotated_by_45_Screen Shot 2018-06-12 at 9.52.50 PM.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/rotated_by_45_Screen Shot 2018-06-12 at 9.52.50 PM.png
 
 False Prediction: Rotten with 52.70017385482788% confidence (Actual: Fresh)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/rotated_by_60_Screen Shot 2018-06-12 at 10.00.37 PM.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/rotated_by_60_Screen Shot 2018-06-12 at 10.00.37 PM.png
 
 False Prediction: Rotten with 56.25157356262207% confidence (Actual: Fresh)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/rotated_by_60_Screen Shot 2018-06-12 at 10.01.52 PM.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/rotated_by_60_Screen Shot 2018-06-12 at 10.01.52 PM.png
 
 False Prediction: Rotten with 54.97521162033081% confidence (Actual: Fresh)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/rotated_by_60_Screen Shot 2018-06-12 at 10.02.36 PM.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/rotated_by_60_Screen Shot 2018-06-12 at 10.02.36 PM.png
 
 False Prediction: Rotten with 56.52472972869873% confidence (Actual: Fresh)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/rotated_by_60_Screen Shot 2018-06-12 at 10.05.29 PM.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/rotated_by_60_Screen Shot 2018-06-12 at 10.05.29 PM.png
 
 False Prediction: Rotten with 56.48561120033264% confidence (Actual: Fresh)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/rotated_by_60_Screen Shot 2018-06-12 at 9.43.11 PM.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/rotated_by_60_Screen Shot 2018-06-12 at 9.43.11 PM.png
 
 False Prediction: Rotten with 56.42443299293518% confidence (Actual: Fresh)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/rotated_by_60_Screen Shot 2018-06-12 at 9.45.22 PM.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/rotated_by_60_Screen Shot 2018-06-12 at 9.45.22 PM.png
 
 False Prediction: Rotten with 55.50529360771179% confidence (Actual: Fresh)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/rotated_by_60_Screen Shot 2018-06-12 at 9.47.00 PM.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/rotated_by_60_Screen Shot 2018-06-12 at 9.47.00 PM.png
 
 False Prediction: Rotten with 54.225707054138184% confidence (Actual: Fresh)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/rotated_by_60_Screen Shot 2018-06-12 at 9.51.58 PM.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/rotated_by_60_Screen Shot 2018-06-12 at 9.51.58 PM.png
 
 False Prediction: Rotten with 56.213659048080444% confidence (Actual: Fresh)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/rotated_by_60_Screen Shot 2018-06-12 at 9.55.13 PM.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/rotated_by_60_Screen Shot 2018-06-12 at 9.55.13 PM.png
 
 False Prediction: Rotten with 56.692516803741455% confidence (Actual: Fresh)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/rotated_by_60_Screen Shot 2018-06-12 at 9.56.23 PM.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/rotated_by_60_Screen Shot 2018-06-12 at 9.56.23 PM.png
 
 False Prediction: Rotten with 55.845052003860474% confidence (Actual: Fresh)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/rotated_by_60_Screen Shot 2018-06-12 at 9.57.25 PM.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/rotated_by_60_Screen Shot 2018-06-12 at 9.57.25 PM.png
 
 False Prediction: Rotten with 52.238595485687256% confidence (Actual: Fresh)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/rotated_by_75_Screen Shot 2018-06-12 at 10.00.30 PM.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/rotated_by_75_Screen Shot 2018-06-12 at 10.00.30 PM.png
 
 False Prediction: Rotten with 53.681015968322754% confidence (Actual: Fresh)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/rotated_by_75_Screen Shot 2018-06-12 at 10.00.54 PM.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/rotated_by_75_Screen Shot 2018-06-12 at 10.00.54 PM.png
 
 False Prediction: Rotten with 54.145556688308716% confidence (Actual: Fresh)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/rotated_by_75_Screen Shot 2018-06-12 at 10.07.21 PM.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/rotated_by_75_Screen Shot 2018-06-12 at 10.07.21 PM.png
 
 False Prediction: Rotten with 53.5831093788147% confidence (Actual: Fresh)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/rotated_by_75_Screen Shot 2018-06-12 at 9.46.19 PM.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/rotated_by_75_Screen Shot 2018-06-12 at 9.46.19 PM.png
 
 False Prediction: Rotten with 52.89891958236694% confidence (Actual: Fresh)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/rotated_by_75_Screen Shot 2018-06-12 at 9.51.29 PM.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/rotated_by_75_Screen Shot 2018-06-12 at 9.51.29 PM.png
 
 False Prediction: Rotten with 51.69719457626343% confidence (Actual: Fresh)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/rotated_by_75_Screen Shot 2018-06-12 at 9.51.54 PM.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/rotated_by_75_Screen Shot 2018-06-12 at 9.51.54 PM.png
 
 False Prediction: Rotten with 54.43847179412842% confidence (Actual: Fresh)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/rotated_by_75_Screen Shot 2018-06-12 at 9.53.36 PM.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/rotated_by_75_Screen Shot 2018-06-12 at 9.53.36 PM.png
 
 False Prediction: Rotten with 54.189932346343994% confidence (Actual: Fresh)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/rotated_by_75_Screen Shot 2018-06-12 at 9.54.56 PM.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/rotated_by_75_Screen Shot 2018-06-12 at 9.54.56 PM.png
 
 False Prediction: Rotten with 54.17723059654236% confidence (Actual: Fresh)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/rotated_by_75_Screen Shot 2018-06-12 at 9.56.23 PM.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/rotated_by_75_Screen Shot 2018-06-12 at 9.56.23 PM.png
 
 False Prediction: Rotten with 98.99035692214966% confidence (Actual: Fresh)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/saltandpepper_Screen Shot 2018-06-12 at 9.38.51 PM.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/saltandpepper_Screen Shot 2018-06-12 at 9.38.51 PM.png
 
 False Prediction: Rotten with 99.86729621887207% confidence (Actual: Fresh)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/saltandpepper_Screen Shot 2018-06-12 at 9.45.28 PM.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/saltandpepper_Screen Shot 2018-06-12 at 9.45.28 PM.png
 
 False Prediction: Rotten with 65.2963399887085% confidence (Actual: Fresh)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/translation_Screen Shot 2018-06-12 at 9.40.26 PM.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/translation_Screen Shot 2018-06-12 at 9.40.26 PM.png
 
 False Prediction: Rotten with 68.81698369979858% confidence (Actual: Fresh)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/translation_Screen Shot 2018-06-12 at 9.47.55 PM.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/translation_Screen Shot 2018-06-12 at 9.47.55 PM.png
 
 False Prediction: Rotten with 68.81698369979858% confidence (Actual: Fresh)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/translation_Screen Shot 2018-06-12 at 9.49.23 PM.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/fresh/translation_Screen Shot 2018-06-12 at 9.49.23 PM.png
 
 False Prediction: Fresh with 82.48404264450073% confidence (Actual: Rotten)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/rotten/rotated_by_15_Screen Shot 2018-06-12 at 9.09.16 PM.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/rotten/rotated_by_15_Screen Shot 2018-06-12 at 9.09.16 PM.png
 
 False Prediction: Fresh with 50.19194483757019% confidence (Actual: Rotten)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/rotten/rotated_by_30_Screen Shot 2018-06-12 at 9.09.16 PM.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/rotten/rotated_by_30_Screen Shot 2018-06-12 at 9.09.16 PM.png
 
 False Prediction: Fresh with 68.52023005485535% confidence (Actual: Rotten)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/rotten/rotated_by_45_Screen Shot 2018-06-12 at 8.48.46 PM.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/rotten/rotated_by_45_Screen Shot 2018-06-12 at 8.48.46 PM.png
 
 False Prediction: Fresh with 55.491238832473755% confidence (Actual: Rotten)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/rotten/rotated_by_45_Screen Shot 2018-06-12 at 8.50.40 PM.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/rotten/rotated_by_45_Screen Shot 2018-06-12 at 8.50.40 PM.png
 
 False Prediction: Fresh with 54.67445254325867% confidence (Actual: Rotten)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/rotten/rotated_by_45_Screen Shot 2018-06-12 at 9.12.27 PM.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/rotten/rotated_by_45_Screen Shot 2018-06-12 at 9.12.27 PM.png
 
 False Prediction: Fresh with 58.913248777389526% confidence (Actual: Rotten)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/rotten/rotated_by_60_Screen Shot 2018-06-12 at 9.17.19 PM.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/rotten/rotated_by_60_Screen Shot 2018-06-12 at 9.17.19 PM.png
 
 False Prediction: Fresh with 60.76059341430664% confidence (Actual: Rotten)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/rotten/rotated_by_75_Screen Shot 2018-06-12 at 8.56.37 PM.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/rotten/rotated_by_75_Screen Shot 2018-06-12 at 8.56.37 PM.png
 
 False Prediction: Fresh with 72.17220067977905% confidence (Actual: Rotten)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/rotten/rotated_by_75_Screen Shot 2018-06-12 at 9.03.01 PM.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/banana/test/rotten/rotated_by_75_Screen Shot 2018-06-12 at 9.03.01 PM.png
 
 
 ~Model Performance~

@@ -56,70 +56,70 @@ Model saved!
 Testing model..
 
 False Prediction: Rotten with 99.97931122779846% confidence (Actual: Fresh)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/potato/test/fresh/p_f457.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/potato/test/fresh/p_f457.png
 
 False Prediction: Fresh with 99.29401874542236% confidence (Actual: Rotten)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/potato/test/rotten/p_r019.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/potato/test/rotten/p_r019.png
 
 False Prediction: Fresh with 82.2064757347107% confidence (Actual: Rotten)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/potato/test/rotten/p_r029.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/potato/test/rotten/p_r029.png
 
 False Prediction: Fresh with 74.67978000640869% confidence (Actual: Rotten)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/potato/test/rotten/p_r105.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/potato/test/rotten/p_r105.png
 
 False Prediction: Fresh with 89.62777853012085% confidence (Actual: Rotten)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/potato/test/rotten/p_r110.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/potato/test/rotten/p_r110.png
 
 False Prediction: Fresh with 99.44591522216797% confidence (Actual: Rotten)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/potato/test/rotten/p_r120.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/potato/test/rotten/p_r120.png
 
 False Prediction: Fresh with 96.2146520614624% confidence (Actual: Rotten)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/potato/test/rotten/p_r123.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/potato/test/rotten/p_r123.png
 
 False Prediction: Fresh with 62.53301501274109% confidence (Actual: Rotten)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/potato/test/rotten/p_r137.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/potato/test/rotten/p_r137.png
 
 False Prediction: Fresh with 57.97658562660217% confidence (Actual: Rotten)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/potato/test/rotten/p_r141.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/potato/test/rotten/p_r141.png
 
 False Prediction: Fresh with 71.29155993461609% confidence (Actual: Rotten)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/potato/test/rotten/p_r164.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/potato/test/rotten/p_r164.png
 
 False Prediction: Fresh with 99.95107650756836% confidence (Actual: Rotten)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/potato/test/rotten/p_r177.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/potato/test/rotten/p_r177.png
 
 False Prediction: Fresh with 96.0357129573822% confidence (Actual: Rotten)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/potato/test/rotten/p_r226.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/potato/test/rotten/p_r226.png
 
 False Prediction: Fresh with 97.86816239356995% confidence (Actual: Rotten)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/potato/test/rotten/p_r291.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/potato/test/rotten/p_r291.png
 
 False Prediction: Fresh with 99.33815002441406% confidence (Actual: Rotten)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/potato/test/rotten/p_r672.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/potato/test/rotten/p_r672.png
 
 False Prediction: Fresh with 77.29325890541077% confidence (Actual: Rotten)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/potato/test/rotten/p_r691.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/potato/test/rotten/p_r691.png
 
 False Prediction: Fresh with 60.37120819091797% confidence (Actual: Rotten)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/potato/test/rotten/p_r703.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/potato/test/rotten/p_r703.png
 
 False Prediction: Fresh with 87.68113255500793% confidence (Actual: Rotten)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/potato/test/rotten/p_r710.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/potato/test/rotten/p_r710.png
 
 False Prediction: Fresh with 53.09080481529236% confidence (Actual: Rotten)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/potato/test/rotten/p_r736.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/potato/test/rotten/p_r736.png
 
 False Prediction: Fresh with 78.84134650230408% confidence (Actual: Rotten)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/potato/test/rotten/p_r748.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/potato/test/rotten/p_r748.png
 
 False Prediction: Fresh with 87.71124482154846% confidence (Actual: Rotten)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/potato/test/rotten/p_r757.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/potato/test/rotten/p_r757.png
 
 False Prediction: Fresh with 99.99958276748657% confidence (Actual: Rotten)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/potato/test/rotten/p_r779.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/potato/test/rotten/p_r779.png
 
 False Prediction: Fresh with 98.92521500587463% confidence (Actual: Rotten)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/potato/test/rotten/p_r792.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/potato/test/rotten/p_r792.png
 
 ~Model Performance~
 Confusion Matrix:

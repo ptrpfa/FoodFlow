@@ -2,16 +2,16 @@
 Testing model..
 
 False Prediction: Rotten with 87.17405796051025% confidence (Actual: Fresh)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/capsicum/test/fresh/IMG_20200822_223846.jpg_0_1947.jpg
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/capsicum/test/fresh/IMG_20200822_223846.jpg_0_1947.jpg
 
 False Prediction: Rotten with 74.81399774551392% confidence (Actual: Fresh)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/capsicum/test/fresh/IMG_20200823_131808.jpg_0_9621.jpg
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/capsicum/test/fresh/IMG_20200823_131808.jpg_0_9621.jpg
 
 False Prediction: Rotten with 73.20405840873718% confidence (Actual: Fresh)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/capsicum/test/fresh/IMG_20200824_182336.jpg_0_8911.jpg
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/capsicum/test/fresh/IMG_20200824_182336.jpg_0_8911.jpg
 
 False Prediction: Rotten with 55.078768730163574% confidence (Actual: Fresh)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/capsicum/test/fresh/IMG_20200826_172333.jpg_0_131.jpg
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/capsicum/test/fresh/IMG_20200826_172333.jpg_0_131.jpg
 
 
 ~Model Performance~

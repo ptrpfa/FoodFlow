@@ -2,16 +2,16 @@
 Testing model..
 
 False Prediction: Rotten with 95.02390027046204% confidence (Actual: Fresh)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/okra/test/fresh/o_f034.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/okra/test/fresh/o_f034.png
 
 False Prediction: Rotten with 91.86195731163025% confidence (Actual: Fresh)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/okra/test/fresh/o_f207.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/okra/test/fresh/o_f207.png
 
 False Prediction: Fresh with 64.63176012039185% confidence (Actual: Rotten)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/okra/test/rotten/o_r138.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/okra/test/rotten/o_r138.png
 
 False Prediction: Fresh with 64.63176012039185% confidence (Actual: Rotten)
-File: /home/londa437/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/okra/test/rotten/o_r247.png
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/okra/test/rotten/o_r247.png
 
 
 ~Model Performance~
