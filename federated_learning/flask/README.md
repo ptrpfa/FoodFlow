@@ -11,6 +11,28 @@ These endpoints are listed below:
 
 ### Program Usage
 ---
+To run the federated learning Flask server, you can install and execute the program either locally or on a Docker container (preferred):
+1. [Docker Installation](#docker-installation-preferred)
+2. [Local Installation](#local-installation)
+
+#### Docker Installation (Preferred)
+---
+1. Ensure you have Docker installed on your machine. Click [here](https://docs.docker.com/engine/install/) for installation instructions.
+2. Build the `federated-server` Docker image by running the following command:
+    ```
+    sudo docker build -t federated-server .
+    ```
+3. Run the `federated-server` container using the following command:
+    ```
+    # For interactive terminal
+    sudo docker run -it --name federated --rm -p 80:80 federated-server
+
+    # Detached mode
+    sudo docker run -d --name federated --rm -p 80:80 federated-server
+    ```
+
+#### Local Installation
+---
 | Note: Running the program on a **Linux-based server** with `Python` and `NodeJS` installed is preferred.
 
 1. Install all necessary programs and libraries (`Python` and `Pip`)
