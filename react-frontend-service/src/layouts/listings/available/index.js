@@ -8,7 +8,7 @@
 =========================================================
 */
 
-import { useState, useEffect, useContext, useMemo, useRef } from "react";
+import { useState, useEffect, useContext, useRef } from "react";
 import { Link } from "react-router-dom";
 
 import Grid from "@mui/material/Grid";
@@ -244,16 +244,6 @@ function FoodListingsTable({ onUserUpdate }) {
 
   // Set up web socket
   useEffect(() => {
-    // async function connectWebSocket() {
-      // 
-
-      // webSocketService.onmessage = (message) => {
-      //   console.log(message);
-      //   // Update the state to open the MDSnackbar with the received message
-      //   clearInterval(checkLocalStorageInterval.current);
-      //   setMessageSnackbar({ open: true, message: message });
-      //   setReserved(true);
-      // };
     async function connectWebSocket() {
         await webSocketService.getSocketOpenPromise();
         setIsLoading(true);
@@ -268,9 +258,6 @@ function FoodListingsTable({ onUserUpdate }) {
     connectWebSocket();
 
     prepareModel();
-  
-    
-    // connectWebSocket();
     return () => {
       // Cleanup function
       socketCleanup();

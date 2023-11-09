@@ -8,7 +8,7 @@
 =========================================================
 */
 
-import { useState, useEffect, useContext, useMemo, useRef } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 
 import Grid from "@mui/material/Grid";
@@ -42,13 +42,8 @@ function FoodListingsTable({ onUserUpdate }) {
   const authContext = useContext(AuthContext);
   const [message, setMessage] = useState('');
   const [isLoading, setIsLoading] = useState(true);
-  const [retry, setRetry] = useState(0);
-  const [receivedReply, setReceivedReply] = useState(false);
-  const [listings, setListings] = useState([]);
   const [groupedListings, setGroupedListings] = useState([]);
-  const [deletedListings, setDeletedListings] = useState([]);
   const [listingsWithImages, setListingsWithImages] = useState([]);
-  const [socketConnected, setSocketConnected] = useState(false);
   const [deleteSnackbar, setDeleteSnackbar] = useState({ open: false, message: "" });
   const [openDialog, setOpenDialog] = useState(false);
   const [forceRender, setForceRender] = useState(0);
@@ -103,21 +98,6 @@ function FoodListingsTable({ onUserUpdate }) {
     });
   }
 
-  // useEffect(() => {
-  //   clearInterval(checkLocalStorageIntervalGet);
-  //   if(receivedReply) {
-  //     clearInterval(retryIntervalID.current);
-  //     return;
-  //   }
-
-  //   retryIntervalID.current = setInterval(() => {
-  //     setRetry((prevRetry) => prevRetry + 1);
-  //     fetchReservations();
-  //   }, 4000);
-  
-  //   // Clear the interval when the component is unmounted or the effect is re-run
-  //   return () => clearInterval(retryIntervalID.current);
-  // }, [receivedReply]); 
 
   // Get user data (role, firstname, lastname)
   const getUserData = async (UserID) => {
@@ -163,11 +143,11 @@ function FoodListingsTable({ onUserUpdate }) {
         listingDetails.map(listing => fetchImage(listing))
       );
 
-    //setListingsWithImages(formattedListings);
+    setListingsWithImages(formattedListings);
     formatListings(formattedListings);
   } catch (error) {
       console.error('Failed to fetch reservations:', error);
-      // setListingsWithImages([]);
+      setListingsWithImages([]);
     }
   };
 
@@ -176,7 +156,6 @@ function FoodListingsTable({ onUserUpdate }) {
     console.log(listingsWithImages);
 
     const formattedListings = [];
-    //const showListings = rawListings.filter (listing => !deletedListings.includes(listing.listingID) && listing.status === 0);
     for (let i = 0; i < rawListings.length; i += 3) {
       formattedListings.push(rawListings.slice(i, i + 3));
     }
@@ -210,7 +189,7 @@ function FoodListingsTable({ onUserUpdate }) {
   // Set up web socket
   useEffect(() => {
 
-    async function meow(message){
+    async function messageHandler(message){
    
       // GET
       if (message.action === 'get') {
@@ -221,11 +200,9 @@ function FoodListingsTable({ onUserUpdate }) {
               .then(listingDetails => ({ ...listingDetails, reservationID: reservation.ReservationID }))
           ) 
         );
-        setListings(listingDetails);
-        setReceivedReply(true);
 
         if (authContext.userID) {
-          fetchListingWithImages(listingDetails);
+          fetchListingWithImages(listingDetails.filter(listing => listing.status === 0));
         }
       }
       // DELETE
@@ -233,8 +210,10 @@ function FoodListingsTable({ onUserUpdate }) {
       if (message.action === 'delete') {
         clearInterval(checkLocalStorageIntervalDelete);
         setDeleteSnackbar({ open: true, message: "Reservation deleted successfully" });
-        // Also remove the reservation from the list
-        formatListings(listingsWithImages.filter(listing => listing.ListingID !== message.listingID && listing.status === 0));
+        setIsLoading(true);
+
+        fetchReservations();
+        // formatListings(listingsWithImages.filter(listing => listing.ListingID !== message.listingID && listing.status === 0));
       } else if (message.status === 500 && message.action === 'delete') {
         setDeleteSnackbar({ open: true, message: message.payload });
       }
@@ -245,10 +224,8 @@ function FoodListingsTable({ onUserUpdate }) {
       setIsLoading(true);
 
       webSocketService.onmessage = (message) => {
-
-        meow(message);
+        messageHandler(message);
       };
-      setSocketConnected(true);
     }
     
     connectWebSocket();
