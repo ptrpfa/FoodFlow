@@ -45,7 +45,7 @@ const UserProfile = () => {
   const getUserData = async (UserID) => {
     try {
       const response = await AuthService.getProfile({ UserID: UserID });
-      console.log("Response:", response);
+      // console.log("Response:", response);
 
       if (response) {
         const firstName = response.firstName;
@@ -188,7 +188,7 @@ const UserProfile = () => {
 
     // call api for update
     const response = await AuthService.updateProfile(JSON.stringify(userData));
-    console.log("RESPONSE: ", response)
+    console.log("RESPONSE: ", response);  
 
     // reset errors
     setErrors({

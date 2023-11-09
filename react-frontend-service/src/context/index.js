@@ -8,7 +8,6 @@
 =========================================================
 */
 
-
 import {
   createContext,
   useContext,
@@ -31,6 +30,7 @@ export const AuthContext = createContext({
   login: () => {},
   register: () => {},
   logout: () => {},
+  userID: null,
 });
 
 const UploadImageContext = createContext();
@@ -64,7 +64,7 @@ const AuthContextProvider = ({ children }) => {
 
     setIsAuthenticated(true);
     setUserID(storedUserID);
-    navigate(location.pathname);
+    navigate("location.pathname");
   }, [token]);
 
   useEffect(() => {
@@ -92,7 +92,7 @@ const AuthContextProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, userID, login, logout }}>
+    <AuthContext.Provider value={{ isAuthenticated, login, logout, userID }}>
       {children}
     </AuthContext.Provider>
   );

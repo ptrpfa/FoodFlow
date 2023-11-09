@@ -10,7 +10,7 @@ const checkLocalStorage = (msg_id) => {
 
             if (!reservationData.replies.includes("reservation-controller") ){
                 console.log("Reservation service is down");
-            } else {
+            } else if(!reservationData.replies.includes("database-controller") ){
                 console.log("Database service is down");
             }
             return "Reservation is unsuccessful";

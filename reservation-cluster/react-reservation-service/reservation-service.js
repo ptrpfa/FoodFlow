@@ -120,7 +120,7 @@ app.delete("/reservation/delete/:ReservationID", (req, res) => {
   const kafkaTimeout = setTimeout(() => {
     if (!isResponseSent) {
       console.error("Kafka producer readiness timeout");
-      res.status(500).json({ msg_id: msg_id, message: "Delete reservation failed due to server timeout" });
+      res.status(500).json({ msg_id: msg_id, message: "Delete reservation failed due to server timeout", sender: "reservation-controller", });
       isResponseSent = true;
     }
   }, 90000); 
@@ -131,13 +131,12 @@ app.delete("/reservation/delete/:ReservationID", (req, res) => {
       if (!isResponseSent) {
         if (error) {
           console.error("Error sending message to Kafka:", error);
-          res.status(500).json({msg_id: msg_id, message: "Delete reservation failed" });
+          res.status(500).json({msg_id: msg_id, message: "Delete reservation failed", sender: "reservation-controller", });
         } else {
           console.log("Delete reservation request sent successfully:", data);
           res.status(200).json({
             msg_id: msg_id,
             message: "Delete reservation request sent",
-            reservation: reservationData,
             sender: "reservation-controller",
           });
         }
@@ -150,7 +149,7 @@ app.delete("/reservation/delete/:ReservationID", (req, res) => {
     sendToKafka();
   } else {
     console.error("Kafka producer not ready, cannot send message");
-    res.status(500).json({ msg_id: msg_id, message: "Kafka producer not ready" });
+    res.status(500).json({ msg_id: msg_id, message: "Kafka producer not ready",   sender: "reservation-controller", });
   }
 });
 
@@ -188,13 +187,12 @@ app.get("/reservation/:UserID", (req,res) => {
       if (!isResponseSent) {
         if (error) {
           console.error("Error sending message to Kafka:", error);
-          res.status(500).json({ msg_id: msg_id, message: "Get reservation failed" });
+          res.status(500).json({ msg_id: msg_id, message: "Get reservation failed", sender: "reservation-controller", });
         } else {
           console.log("Get reservation request sent successfully:", data);
           res.status(200).json({
             msg_id: msg_id,
             message: "Get reservation request sent",
-            reservation: reservationData,
             sender: "reservation-controller",
           });
         }
@@ -207,7 +205,7 @@ app.get("/reservation/:UserID", (req,res) => {
     sendToKafka();
   } else {
     console.error("Kafka producer not ready, cannot send message");
-    res.status(500).json({ msg_id: msg_id, message: "Kafka producer not ready" });
+    res.status(500).json({ msg_id: msg_id, message: "Kafka producer not ready", sender: "reservation-controller",});
   }
 
 
@@ -216,4 +214,3 @@ app.get("/reservation/:UserID", (req,res) => {
 app.listen(port, () => {
   console.log(`Reservation Microservice listening at http://localhost:${port}`);
 });
-

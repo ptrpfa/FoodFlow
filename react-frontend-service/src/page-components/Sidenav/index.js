@@ -12,7 +12,7 @@
 import { useEffect, useContext, useState } from "react";
 
 // react-router-dom components
-import { useLocation, NavLink } from "react-router-dom";
+import { useLocation, NavLink, useNavigate } from "react-router-dom";
 
 // prop-types is a library for typechecking of props.
 import PropTypes from "prop-types";
@@ -45,9 +45,8 @@ import {
   AuthContext,
 } from "context";
 
-
-
 function Sidenav({ color, brand, brandName, routes, ...rest }) {
+  const navigate = useNavigate();
   const authContext = useContext(AuthContext);
   const location = useLocation();
   const collapseName = location.pathname.replace("/", "");
@@ -92,22 +91,23 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
 
   // Get user data (role)
   const getUserData = async (UserID) => {
+
     try {
       const response = await AuthService.getProfile({ UserID: UserID });
-
       if (response) {;
         const role = response.role;
-        
         setUser((prevUser) => ({
           ...prevUser,
           role,
         }));
+
       } 
       else {
         console.error("User data not found.");
       }
     } catch (error) {
       console.error("An error occurred while fetching user data:", error);
+      navigate("/auth/login");
     }
   };
 

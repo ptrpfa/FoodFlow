@@ -22,7 +22,7 @@ kubectl apply -f ./utils/metric-server.yaml
 echo ""
 kubectl apply -f ./utils/zoo-deployment.yaml --namespace "$namespace_name"
 echo ""
-kubectl apply -f ./utils/metric-server.yaml --namespace "$namespace_name"
+kubectl apply -f ./utils/kafka-deployment.yaml --namespace "$namespace_name"
 echo ""
 
 
