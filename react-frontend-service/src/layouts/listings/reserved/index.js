@@ -42,6 +42,7 @@ function FoodListingsTable({ onUserUpdate }) {
   const authContext = useContext(AuthContext);
   const [message, setMessage] = useState('');
   const [isLoading, setIsLoading] = useState(true);
+  const [retry, setRetry] = useState(0);
   const [receivedReply, setReceivedReply] = useState(false);
   const [listings, setListings] = useState([]);
   const [groupedListings, setGroupedListings] = useState([]);
@@ -50,15 +51,16 @@ function FoodListingsTable({ onUserUpdate }) {
   const [socketConnected, setSocketConnected] = useState(false);
   const [deleteSnackbar, setDeleteSnackbar] = useState({ open: false, message: "" });
   const [openDialog, setOpenDialog] = useState(false);
+  const [forceRender, setForceRender] = useState(0);
   const [user, setUser] = useState({
     firstName: "",
     lastName: "",
     role: "",
   });
-  const webSocketService = useMemo(() => new WebSocketService(), []);
 
   const checkLocalStorageIntervalGet = useRef(null);
   const checkLocalStorageIntervalDelete = useRef(null);
+  const webSocketService = useMemo(() => new WebSocketService(), []);
 
   // Open dialog
   const deleteReservation = () => {
@@ -75,7 +77,7 @@ function FoodListingsTable({ onUserUpdate }) {
   }
 
   // Delete the reservation
-  const handleDeleteConfirmation = (ReservationID, listingID) => {
+  const handleDeleteConfirmation = (ReservationID) => {
     const LOCAL_STORAGE_KEY = uuidv4(); 
 
     // Start the timer
@@ -86,11 +88,6 @@ function FoodListingsTable({ onUserUpdate }) {
       .then(data => {
         clearInterval(checkLocalStorageIntervalDelete.current);
         if(data) {
-          // const currentDeleted = [...deletedListings, listingID];
-          // currentDeleted.push(listingID);
-          // setDeletedListings(currentDeleted);
-          // console.log(currentDeleted);
-          // setMessage(data.message);
         }
       })
       .catch(error => {
@@ -101,10 +98,26 @@ function FoodListingsTable({ onUserUpdate }) {
     promise.then(data => {
       
       if(data){
-        setMessageSnackbar({ open: true, message: data });
+        setDeleteSnackbar({ open: true, message: data });
       }
     });
   }
+
+  // useEffect(() => {
+  //   clearInterval(checkLocalStorageIntervalGet.current);
+  //   if(receivedReply) {
+  //     clearInterval(retryIntervalID.current);
+  //     return;
+  //   }
+
+  //   retryIntervalID.current = setInterval(() => {
+  //     setRetry((prevRetry) => prevRetry + 1);
+  //     fetchReservations();
+  //   }, 4000);
+  
+  //   // Clear the interval when the component is unmounted or the effect is re-run
+  //   return () => clearInterval(retryIntervalID.current);
+  // }, [receivedReply]); 
 
   // Get user data (role, firstname, lastname)
   const getUserData = async (UserID) => {
@@ -137,13 +150,57 @@ function FoodListingsTable({ onUserUpdate }) {
     return new Blob([uint8Array], { type: 'image/jpeg' });
   };
 
-  // Clean up socket
-  function socketCleanup(){
-    if (webSocketService.socket && webSocketService.socket.readyState === WebSocket.OPEN) {
-      webSocketService.socket.close();
+  const fetchImage = async (listing) => {
+    const imageData = await AWSS3Service.getImage({ imageId: listing.image });
+    const imageBlob = convertUint8ArrayToBlob(imageData.imageData);
+    const imageUrl = URL.createObjectURL(imageBlob);
+    return { ...listing, image: imageUrl };
+  };
+
+  const fetchListingWithImages = async (listingDetails) => {
+    try {
+      const formattedListings = await Promise.all(
+        listingDetails.map(listing => fetchImage(listing))
+      );
+
+    setListingsWithImages(formattedListings);
+    formatListings(formattedListings, []);
+  } catch (error) {
+      console.error('Failed to fetch reservations:', error);
+      setListingsWithImages([]);
     }
-    clearInterval(checkLocalStorageIntervalDelete.current);
-    clearInterval(checkLocalStorageIntervalGet.current);
+  };
+
+  const formatListings = (rawListings) => {
+    setListingsWithImages(rawListings);
+    setReceivedReply(true);
+    const formattedListings = [];
+    const showListings = rawListings.filter (listing => !deletedListings.includes(listing.listingID) && listing.status === 0);
+    for (let i = 0; i < showListings.length; i += 3) {
+      formattedListings.push(showListings.slice(i, i + 3));
+    }
+    setGroupedListings(formattedListings);
+    setIsLoading(false);
+  }
+
+  const fetchReservations = async () => {
+    const LOCAL_STORAGE_KEY = uuidv4(); 
+    const {promise, intervalId} = startInterval(LOCAL_STORAGE_KEY);
+    // Start the timer
+    checkLocalStorageIntervalGet.current = intervalId;
+    reservationService.getReservationsByUserId(authContext.userID, LOCAL_STORAGE_KEY)
+      .then(data => {
+        if(data){
+            console.log(`data: ${data}`);
+        }
+      });
+  
+    promise.then(data => {
+      if(data === "Reservation is unsuccessful") {
+        socketCleanup();
+        setForceRender(prev => prev + 1);
+      }
+    });
   }
 
   // Set up web socket
@@ -153,6 +210,7 @@ function FoodListingsTable({ onUserUpdate }) {
       console.log(message);
       // GET
       if (message.action === 'get') {
+        console.log(checkLocalStorageIntervalGet.current);
         clearInterval(checkLocalStorageIntervalGet.current);
         const listingDetails = await Promise.all(
           message.data.map(reservation =>
@@ -160,10 +218,12 @@ function FoodListingsTable({ onUserUpdate }) {
               .then(listingDetails => ({ ...listingDetails, reservationID: reservation.ReservationID }))
           )
         );
-        console.log("listingDetails");
-        console.log(listingDetails);
         setListings(listingDetails);
         setReceivedReply(true);
+
+        if (authContext.userID) {
+          fetchListingWithImages(listingDetails);
+        }
       }
       // DELETE
       // Check if the message is a delete confirmation
@@ -171,12 +231,7 @@ function FoodListingsTable({ onUserUpdate }) {
         clearInterval(checkLocalStorageIntervalDelete.current);
         setDeleteSnackbar({ open: true, message: "Reservation deleted successfully" });
         // Also remove the reservation from the list
-        setListingsWithImages(listingsWithImages => 
-          listingsWithImages.filter(listing => listing.ListingID !== message.listingID)
-        );
-        const currentDeleted = [...deletedListings,  message.listingID];
-        currentDeleted.push(message.listingID);
-        setDeletedListings(currentDeleted);
+        formatListings(listingsWithImages.filter(listing => listing.ListingID !== message.listingID));
       } else if (message.status === 500 && message.action === 'delete') {
         setDeleteSnackbar({ open: true, message: message.payload });
       }
@@ -184,102 +239,34 @@ function FoodListingsTable({ onUserUpdate }) {
 
     async function connectWebSocket() {
       setIsLoading(true);
-      webSocketService.setMessageHandler(handleMessage);
+      console.log("setting message handler");
       await webSocketService.setupWebSocket();
+      webSocketService.setMessageHandler(handleMessage);
+      console.log("socket connected");
       setSocketConnected(true);
     }
     
     connectWebSocket();
+    fetchReservations();
     return () => {
       // Cleanup function
       socketCleanup();
     }
-  }, []);
+  }, [forceRender]);
 
-  // Get reservation data by user id
-  useEffect(() => {
-    if (!socketConnected) {
-      return; // If socket is not connected, exit the effect early
+  // Clean up socket
+  function socketCleanup(){
+    if (webSocketService.socket && webSocketService.socket.readyState === WebSocket.OPEN) {
+      webSocketService.socket.close();
     }
-
-    const fetchReservations = async () => {
-      const LOCAL_STORAGE_KEY = uuidv4(); 
-      const {promise, intervalId} = startInterval(LOCAL_STORAGE_KEY);
-      // Start the timer
-      checkLocalStorageIntervalGet.current = intervalId;
-      console.log("fetching listings");
-      reservationService.getReservationsByUserId(authContext.userID, LOCAL_STORAGE_KEY)
-        .then(data => {
-          if(data){
-              console.log(`data: ${data}`);
-          }
-        });
-    
-      promise.then(data => {
-        if(data){
-          console.log(`promise data: ${data}`);
-        }
-      });
-    }
-
-    if (authContext.userID) {
-      fetchReservations();
-    }
-  },[socketConnected])
+    clearInterval(checkLocalStorageIntervalDelete.current);
+    clearInterval(checkLocalStorageIntervalGet.current);
+  }
 
   // Get user data
   useEffect(() => {
     getUserData(authContext.userID);
   }, []);
-
-
-
-  // Fetch listing details based on reservation details
-  useEffect(() => {
-    if (!socketConnected && !receivedReply) {
-      return; // If socket is not connected, exit the effect early
-    }
-    
-    const fetchImage = async (listing) => {
-      const imageData = await AWSS3Service.getImage({ imageId: listing.image });
-      const imageBlob = convertUint8ArrayToBlob(imageData.imageData);
-      const imageUrl = URL.createObjectURL(imageBlob);
-      return { ...listing, image: imageUrl };
-    };
-
-    const fetchListingWithImages = async () => {
-      try {
-        const formattedListings = await Promise.all(
-          listings.map(listing => fetchImage(listing))
-        );
-      console.log("formattedListings");
-      console.log(formattedListings);
-
-      setListingsWithImages(formattedListings);
-    } catch (error) {
-        console.error('Failed to fetch reservations:', error);
-        setListingsWithImages([]);
-      }
-    };
-
-    if (authContext.userID) {
-      fetchListingWithImages();
-    }
-  }, [socketConnected,  authContext.userID, listings, receivedReply]);
-
-  // Format listing for viewing
-  useEffect(() => {
-    if (!receivedReply) {
-      return;
-    }
-    const formattedListings = [];
-    const showListings = listingsWithImages.filter (listing => !deletedListings.includes(listing.listingID));
-    for (let i = 0; i < showListings.length; i += 3) {
-      formattedListings.push(showListings.slice(i, i + 3));
-    }
-    setGroupedListings(formattedListings);
-    setIsLoading(false);
-  }, [listingsWithImages, deletedListings])  
 
   return (
     <div>

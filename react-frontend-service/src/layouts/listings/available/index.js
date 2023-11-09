@@ -8,7 +8,7 @@
 =========================================================
 */
 
-import { useState, useEffect, useContext, useMemo } from "react";
+import { useState, useEffect, useContext, useMemo, useRef } from "react";
 import { Link } from "react-router-dom";
 
 import Grid from "@mui/material/Grid";
@@ -63,6 +63,7 @@ function FoodListingsTable({ onUserUpdate }) {
   const [messageSnackbar, setMessageSnackbar] = useState({ open: false, message: "" });
   const [openDialog, setOpenDialog] = useState(false);
   const webSocketService = useMemo(() => new WebSocketService(), []);
+  const checkLocalStorageInterval = useRef(null);
 
   // Open dialog
   const handleReport = () => {
@@ -140,18 +141,18 @@ function FoodListingsTable({ onUserUpdate }) {
   };
 
   // User click 'reserve' button 
-  var checkLocalStorageInterval = null;
   const handleReservation = (listingID) => {
+    console.log("making reservation");
     const LOCAL_STORAGE_KEY = uuidv4(); 
     // Calls reservation-service.js
     setReservingListingID(listingID);
     // Start the timer
     const {promise, interval} = startInterval(LOCAL_STORAGE_KEY);
-    checkLocalStorageInterval = interval;
+    checkLocalStorageInterval.current = interval;
 
     reservationService.makeReservation(authContext.userID, listingID, LOCAL_STORAGE_KEY)
     .then(data => {
-      clearInterval(checkLocalStorageInterval);
+      clearInterval(checkLocalStorageInterval.current);
       if(data){
           setMessageSnackbar({ open: true, message: data });
       }
@@ -169,9 +170,8 @@ function FoodListingsTable({ onUserUpdate }) {
     if (webSocketService.socket && webSocketService.socket.readyState === WebSocket.OPEN) {
       webSocketService.socket.close();
     }
-    if (checkLocalStorageInterval) {
-      clearInterval(checkLocalStorageInterval);
-    }
+
+    clearInterval(checkLocalStorageInterval.current);
   }
 
   // Set up web socket
@@ -182,7 +182,7 @@ function FoodListingsTable({ onUserUpdate }) {
       webSocketService.onmessage = (message) => {
         console.log(message);
         // Update the state to open the MDSnackbar with the received message
-        clearInterval(checkLocalStorageInterval);
+        clearInterval(checkLocalStorageInterval.current);
         setMessageSnackbar({ open: true, message: message });
         setReserved(true);
       };

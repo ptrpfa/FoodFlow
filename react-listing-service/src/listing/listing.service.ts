@@ -140,59 +140,50 @@ export class ListingService {
   }
 
   async update(
-    ListingID: Prisma.ListingWhereUniqueInput,
+    listingID: Prisma.ListingWhereUniqueInput,
     UpdateListingDto: UpdateListingDto,
   ): Promise<ProtoListing> {
-    let data = {...UpdateListingDto};
+    const { ListingID, ...rest } = UpdateListingDto;
 
-    let formattedDatetime = null
-    let formattedExpiryDate = null
-    let formattedPickUpStartDate = null
-    let formattedPickUpEndDate = null
-    let formattedPickUpStartTime = null
-    let formattedPickUpEndTime = null
+    let data: { [key: string]: any } = Object.fromEntries(
+      Object.entries(rest).filter(([key, value]) => value !== null)
+    );
 
-    // Check if 'ExpiryDate' exists and is not null/undefined.
+    // Check if 'Datetime' exists and is not null/undefined.
     if ('Datetime' in UpdateListingDto && UpdateListingDto.Datetime != null) {
-      formattedDatetime = this.parseDate(UpdateListingDto.Datetime);
+      data.Datetime = this.parseDate(UpdateListingDto.Datetime);
     }
     
     // Check if 'ExpiryDate' exists and is not null/undefined.
     if ('ExpiryDate' in UpdateListingDto && UpdateListingDto.ExpiryDate != null) {
-      formattedExpiryDate = this.parseDate(UpdateListingDto.ExpiryDate);
+      data.ExpiryDate = this.parseDate(UpdateListingDto.ExpiryDate);
     }
 
     // Check if 'PickUpStartDate' exists and is not null/undefined.
     if ('PickUpStartDate' in UpdateListingDto && UpdateListingDto.PickUpStartDate != null) {
-      formattedPickUpStartDate = this.parseDate(UpdateListingDto.PickUpStartDate);
+      data.PickUpStartDate = this.parseDate(UpdateListingDto.PickUpStartDate);
     }
 
     // Check if 'PickUpEndDate' exists and is not null/undefined.
     if ('PickUpEndDate' in UpdateListingDto && UpdateListingDto.PickUpEndDate != null) {
-      formattedPickUpEndDate = this.parseDate(UpdateListingDto.PickUpEndDate);
+      data.PickUpEndDate = this.parseDate(UpdateListingDto.PickUpEndDate);
     }
 
     // Check if 'PickUpStartTime' exists and is not null/undefined.
     if ('PickUpStartTime' in UpdateListingDto && UpdateListingDto.PickUpStartTime != null) {
-      formattedPickUpStartTime = this.convertTimeToDate(UpdateListingDto.PickUpStartTime);
+      data.PickUpStartTime = this.convertTimeToDate(UpdateListingDto.PickUpStartTime);
     }
 
     // Check if 'PickUpEndTime' exists and is not null/undefined.
     if ('PickUpEndTime' in UpdateListingDto && UpdateListingDto.PickUpEndTime != null) {
-      formattedPickUpEndTime = this.convertTimeToDate(UpdateListingDto.PickUpEndTime);
+      data.PickUpEndTime = this.convertTimeToDate(UpdateListingDto.PickUpEndTime);
     }
 
     return this.parseProtolisting(
       await this.prisma.listing.update({
-        where: ListingID,
+        where: listingID,
         data: {
           ...data,
-          Datetime: formattedDatetime,
-          ExpiryDate: formattedExpiryDate,
-          PickUpStartDate: formattedPickUpStartDate,
-          PickUpEndDate: formattedPickUpEndDate,
-          PickUpStartTime: formattedPickUpStartTime,
-          PickUpEndTime: formattedPickUpEndTime,
         },
       }),
     );

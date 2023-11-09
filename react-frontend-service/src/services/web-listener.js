@@ -11,6 +11,11 @@ class WebSocketService {
   }
 
   async setupWebSocket() {
+    if (this.socket && this.socket.readyState < WebSocket.CLOSING) {
+      console.log('WebSocket is already open or opening');
+      return;
+    }
+
     this.socket = new WebSocket('ws://localhost:8282');
 
     this.socketOpenPromise = new Promise((resolve) => {
@@ -33,8 +38,6 @@ class WebSocketService {
               const status = reservationMessage.status;
               if (status == 200) {
                 const convo_dict = JSON.parse(convo);
-                console.log("convo_dict");
-                console.log(convo_dict);
                 if (!convo_dict.replies.includes(sender)) {
                   convo_dict.replies.push(sender);
                 }
@@ -67,8 +70,6 @@ class WebSocketService {
     });
 
     await this.socketOpenPromise;
-
-
   }
 
   handlePayload (reservationMessage, msg_id) {
@@ -80,8 +81,6 @@ class WebSocketService {
     } else if (reservationMessage.action === "delete") {
       payload = {action: "delete", payload: reservationMessage.payload, listingID: reservationMessage.listingID};
     }
-    console.log("payload");
-    console.log(payload);
 
     this.onmessage(payload);
   }

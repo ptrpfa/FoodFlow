@@ -79,7 +79,7 @@ const AuthContextProvider = ({ children }) => {
     localStorage.setItem("userid", userid);
     setIsAuthenticated(true);
     setUserID(userid);
-    navigate("/listings");
+    navigate("/user-profile");
   };
 
   const logout = () => {
