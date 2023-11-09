@@ -45,8 +45,9 @@ class WebSocketService {
             const convo_dict = JSON.parse(convo);
             if (!convo_dict.replies.includes(sender)) {
               convo_dict.replies.push(sender);
+              localStorage.setItem(msg_id, JSON.stringify(convo_dict));
 
-              if (convo_dict.replies.length === 1) {
+              if (convo_dict.replies.length === 2) {
                 // Mark the conversation as successful
                 console.log(`Conversation with msg_id ${msg_id} is successful.`);
                 this.handlePayload(reservationMessage, msg_id);

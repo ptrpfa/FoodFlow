@@ -1,71 +1,23 @@
 import axios from "axios";
-import { v4 as uuidv4 } from "uuid"; 
 
 const API_BASE_URL = "http://localhost:9900"; 
 
-//adrian's code
-// const reservationService = {
-//   makeReservation: (product_id, quantity) => {
-//     //Prep the payload with the uuid key 
-//     const newReservation = {
-//       uuid: LOCAL_STORAGE_KEY,
-//       product_id: product_id,
-//       quantity: quantity,
-//       timestamp: new Date().toISOString()
-//     };
-
-//     //Store the payload into local storage
-//     localStorage.setItem(LOCAL_STORAGE_KEY, newReservation);
-
-//     return axios.post(`${API_BASE_URL}/reservation/create`, {JSON.stringify(newReservation)})
-//       .catch(error => {
-//         throw error;
-//       });
-//   }
-// };
-
-const checkLocalStorage = (msg_id) => {
-  const reservationData = JSON.parse(localStorage.getItem(msg_id));
-
-  if (reservationData) {
-    // Data is found in local storage, so return the data
-    var payload = "Reservation is successful";
-    Promise.resolve(payload);
-  }else{
-     // Data is found in local storage, so return the data
-     var payload = "Reservation is unsuccessfull";
-    Promise.resolve(payload);
-  }
-};
 
 const reservationService = {
   
-  makeReservation: (UserID,ListingID) => {
-    const LOCAL_STORAGE_KEY = uuidv4(); 
+  makeReservation: (UserID,ListingID, msg_id) => {
+
     //Prep the payload with the uuid key 
     const newReservation = {
-      msg_id: LOCAL_STORAGE_KEY,
+      msg_id: msg_id,
       UserID: UserID,
       ListingID: ListingID,
       replies: []
     };
 
     //Store the payload into local storage
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newReservation));
+    localStorage.setItem(msg_id, JSON.stringify(newReservation));
       
-    // Set up a timer to check local storage after 5 seconds
-    const checkLocalStorageInterval = setInterval(() => {
-      checkLocalStorage(LOCAL_STORAGE_KEY).then(payload => {
-        console.log(payload);
-        // Data found in local storage, clear the interval
-        clearInterval(checkLocalStorageInterval);
-        if (payload) {
-          // Data is available, resolve the main promise with the data
-          return(payload);
-        }
-      });
-    }, 5000);
-
     return new Promise((resolve, reject) => {
       axios
         .post(`${API_BASE_URL}/reservation/create`, newReservation, {
@@ -74,17 +26,44 @@ const reservationService = {
           },
         })
         .then(response => {
-          // Reservation data received, clear the interval
-          clearInterval(checkLocalStorageInterval);
-          resolve(response.data);
+          const msg_id = response.data.msg_id;
+          const convo = localStorage.getItem(msg_id);
+          const sender = response.data.sender;
+
+          if(convo != null){
+            // Reply is for this client
+            const convo_dict = JSON.parse(convo);
+            if(!convo_dict.replies.includes(sender)){
+              convo_dict.replies.push(sender);
+              localStorage.setItem(msg_id, JSON.stringify(convo_dict));
+      
+              // Check in the event database has already sent back the success message
+              if (convo_dict.replies.length === 2) {
+                // Mark the conversation as successful
+                console.log(`Conversation with msg_id ${reservation.msg_id} is successful.`);
+    
+                // Remove from localstorage
+                localStorage.removeItem(msg_id);
+
+                resolve(response.data.message);
+              }
+            }
+          }
         })
         .catch(error => {
-          // Handle the error here
-          clearInterval(checkLocalStorageInterval);
-          resolve(error);
+            const msg_id = error.msg_id;
+            const convo = localStorage.getItem(msg_id);
+            
+            if(convo != null){
+              // Server url error
+              console.error("Reservation failed:", error);
+              // Remove the reservation request from localstorage
+              localStorage.removeItem(msg_id);
+              
+              resolve(error.message);
+            }
         });
     });
-
   },
   deleteReservation: (ReservationID) => {
     const LOCAL_STORAGE_KEY = uuidv4(); 

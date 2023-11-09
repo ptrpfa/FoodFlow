@@ -54,7 +54,7 @@ checkTopicAvailability().then(() => {
                   msg_id: msg_id,
                   status: 500,
                   payload: 'Listing is not available',
-                  sender: 'reservation-controller'
+                  sender: 'database-controller'
                   };
                   // Convert the reservation to a JSON string
                   const reservationMessage = JSON.stringify(newReservation);

@@ -35,8 +35,12 @@ import AuthService from "../../../services/auth-service";
 import ListingService from "services/listing-service"; 
 import ImageClassifierService from "services/image-classification-service";
 import AWSS3Service from "services/aws-s3-service";
+
+import { v4 as uuidv4 } from "uuid"; 
 import reservationService from "services/reservation-service";
 import WebSocketService from "services/web-listener";
+import { startInterval } from "services/interval";
+
 
 
 function FoodListingsTable({ onUserUpdate }) {
@@ -133,47 +137,28 @@ function FoodListingsTable({ onUserUpdate }) {
   };
 
   // User click 'reserve' button 
+  var checkLocalStorageInterval = null;
   const handleReservation = (listingID) => {
+    const LOCAL_STORAGE_KEY = uuidv4(); 
     // Calls reservation-service.js
     setReservingListingID(listingID);
-    reservationService.makeReservation(authContext.userID, listingID)
-      .then(data => {
-        const msg_id = data.msg_id;
-        const convo = localStorage.getItem(msg_id);
-        const sender = data.sender;
+    // Start the timer
+    const {promise, interval} = startInterval(LOCAL_STORAGE_KEY);
+    checkLocalStorageInterval = interval;
 
-        if(convo != null){
-          console.log("Index received message");
-          // Reply is for this client
-          const convo_dict = JSON.parse(convo);
-          if(!convo_dict.replies.includes(sender)){
-            convo_dict.replies.push(sender);
-            
-            // Check in the event database has already sent back the success message
-            if (convo_dict.replies.length === 2) {
-              // Mark the conversation as successful
-              console.log(`Conversation with msg_id ${reservation.msg_id} is successful.`);
-              // Message from Kafka Service
-              setMessageSnackbar({ open: true, message: data.message });
-              // Remove from localstorage
-              localStorage.removeItem(msg_id);
-            }
-          }
-        }          
-      })
-      .catch(error => {
-        const msg_id = error.msg_id;
-        const convo = localStorage.getItem(msg_id);
-        
-        if(convo != null){
-          // Server url error
-          console.error("Reservation failed:", error);
-          // Remove the reservation request from localstorage
-          localStorage.removeItem(msg_id);
-          setMessageSnackbar({ open: true, message: `Reservation failed: ${error.message}`});
-        }
+    reservationService.makeReservation(authContext.userID, listingID, LOCAL_STORAGE_KEY)
+    .then(data => {
+      clearInterval(checkLocalStorageInterval);
+      if(data){
+          setMessageSnackbar({ open: true, message: data });
+      }
+    });
 
-      });
+    promise.then(data => {
+      if(data){
+        setMessageSnackbar({ open: true, message: data });
+      }
+    });
   };
 
   // Clean up socket
@@ -191,6 +176,7 @@ function FoodListingsTable({ onUserUpdate }) {
       webSocketService.onmessage = (message) => {
         console.log(message);
         // Update the state to open the MDSnackbar with the received message
+        clearInterval(checkLocalStorageInterval);
         setMessageSnackbar({ open: true, message: message });
         setReserved(true);
       };
