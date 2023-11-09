@@ -45,12 +45,13 @@ import { startInterval } from "services/interval";
 
 function FoodListingsTable({ onUserUpdate }) {
   const authContext = useContext(AuthContext);
-  // const [message, setMessage] = useState(''); 
-  const [listings, setListings] = useState([]);
+
   const [groupedListings, setGroupedListings] = useState([]);
+
   const [reservedListings, setReservedListings] = useState([]);
   const [reservingListingID, setReservingListingID] = useState(0);  
   const [reserved, setReserved] = useState(false);  
+  
   const [fetchError, setFetchError] = useState(false);  
   const [isLoading, setIsLoading] = useState(false);
   const [trainingModel, setTrainingModel] = useState(-1);
@@ -170,13 +171,80 @@ function FoodListingsTable({ onUserUpdate }) {
     if (webSocketService.socket && webSocketService.socket.readyState === WebSocket.OPEN) {
       webSocketService.socket.close();
     }
-
+    ImageClassifierService.dispose_models();
     clearInterval(checkLocalStorageInterval.current);
+  }
+
+  const formatListings = (rawListings) => {
+    const formattedListings = [];
+    const showListings = rawListings.filter (listing => !reservedListings.includes(listing.listingID));
+    for (let i = 0; i < showListings.length; i += 3) {
+      formattedListings.push(showListings.slice(i, i + 3));
+    }
+    setIsLoading(false);
+    setGroupedListings(formattedListings);
+  }
+
+  const fetchImageForListing = async (listing) => {
+    try {
+      const imageData = await AWSS3Service.getImage({ imageId: listing.image });
+      const imageBlob = convertUint8ArrayToBlob(imageData.imageData);
+      const imageUrl = URL.createObjectURL(imageBlob);
+      return { ...listing, image: imageUrl };
+    } catch (error) {  
+      setFetchError(true);
+      console.error("Error fetching images:", error);
+      return { ...listing, image: null };
+    }
+  };
+  
+  const fetchListings = () => {
+    console.log("fetching listings");
+    console.log(user.role);
+    if (user.role === "patron") {
+      ListingService.getAvailableListingsExcludeUser({ Userid: authContext.userID })
+        .then(async (allListings) => {
+          console.log(allListings);
+          const listingsWithImages = await Promise.all(
+            allListings.map(fetchImageForListing)
+          );
+          formatListings(listingsWithImages);
+          // setListings(listingsWithImages);
+        })
+        .catch((error) => {
+          setFetchError(true);
+          console.error("Error fetching listings:", error);
+        });
+    } 
+    else if (user.role === "donor") {
+      ListingService.getAvailableListingsExcludeUser({ Userid: authContext.userID })
+        .then(async (allListings) => {
+          const listingsWithImages = await Promise.all(
+            allListings.map(fetchImageForListing)
+          );
+          formatListings(listingsWithImages);
+          // setListings(listingsWithImages);
+        })
+        .catch((error) => {
+          setFetchError(true);
+          console.error("Error fetching listings for donors:", error);
+        });
+    }
+  }
+
+  // Prepare federated model
+  const prepareModel = async () =>{
+    try {
+      await ImageClassifierService.prepare_ml();
+    } catch (error) {
+      console.error('Error loading models', error);
+    } 
   }
 
   // Set up web socket
   useEffect(() => {
     async function connectWebSocket() {
+      setIsLoading(true);
       await webSocketService.setupWebSocket();
       
       webSocketService.onmessage = (message) => {
@@ -186,97 +254,24 @@ function FoodListingsTable({ onUserUpdate }) {
         setMessageSnackbar({ open: true, message: message });
         setReserved(true);
       };
+      prepareModel();
     }
     
     connectWebSocket();
-      
     return () => {
       // Cleanup function
       socketCleanup();
     }
   }, []);
 
-  // Prepare federated model
   useEffect(() => {
-    async function prepareModel(){
-      try {
-        await ImageClassifierService.prepare_ml();
-      } catch (error) {
-        console.error('Error loading models', error);
-      } finally {
-        setIsLoading(false);
-      }
-    }
-    prepareModel();
-
-    return () => {
-      ImageClassifierService.dispose_models();
-    };
-  }, []);
-
-  // Prepare listings, and set loading to true
-  useEffect(() => {
-    setIsLoading(true);
-    const fetchImageForListing = async (listing) => {
-
-      try {
-        const imageData = await AWSS3Service.getImage({ imageId: listing.image });
-        const imageBlob = convertUint8ArrayToBlob(imageData.imageData);
-        const imageUrl = URL.createObjectURL(imageBlob);
-        return { ...listing, image: imageUrl };
-      } catch (error) {  
-        setFetchError(true);
-        console.error("Error fetching images:", error);
-        return { ...listing, image: null };
-      }
-
-    };
-
-    const fetchListings = () => {
-      if (user.role === "patron") {
-        ListingService.getAvailableListingsExcludeUser({ Userid: authContext.userID })
-          .then(async (allListings) => {
-            const listingsWithImages = await Promise.all(
-              allListings.map(fetchImageForListing)
-            );
-            setListings(listingsWithImages);
-          })
-          .catch((error) => {
-            setFetchError(true);
-            console.error("Error fetching listings:", error);
-          });
-      } 
-      else if (user.role === "donor") {
-        ListingService.getAvailableListingsExcludeUser({ Userid: authContext.userID })
-          .then(async (allListings) => {
-            const listingsWithImages = await Promise.all(
-              allListings.map(fetchImageForListing)
-            );
-            setListings(listingsWithImages);
-          })
-          .catch((error) => {
-            setFetchError(true);
-            console.error("Error fetching listings for donors:", error);
-          });
-      }
-    }
-
+    fetchListings();
   }, [user.role, authContext.userID]);
 
   // Get user data
   useEffect(() => {
     getUserData(authContext.userID);
   }, []);
-
-  // Format listing for viewing
-  useEffect(() => {
-    const formattedListings = [];
-    const showListings = listings.filter (listing => !reservedListings.includes(listing.listingID));
-    for (let i = 0; i < showListings.length; i += 3) {
-      formattedListings.push(showListings.slice(i, i + 3));
-    }
-    setGroupedListings(formattedListings);
-  }, [listings, reservedListings])
 
   // Update when reserved item
   useEffect(() => {
