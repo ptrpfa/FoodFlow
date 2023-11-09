@@ -3,7 +3,7 @@ let checkLocalStorageInterval;
 const checkLocalStorage = (msg_id) => {
     const reservationData = JSON.parse(localStorage.getItem(msg_id));
     if (reservationData) {
-        console.log(reservationData);
+        console.log("id: ", checkLocalStorageInterval);
         if (reservationData.replies.length == 2) {
             return "Reservation is successful";
         } else {
