@@ -27,8 +27,7 @@ function Login() {
   const authContext = useContext(AuthContext);
 
   const [user, setUser] = useState({});
-  const [credentialsErros, setCredentialsError] = useState(null);
-  const [rememberMe, setRememberMe] = useState(false);
+  const [credentialsErrors, setCredentialsError] = useState(null);
 
   const [inputs, setInputs] = useState({
     username: "exampleUser",
@@ -42,7 +41,6 @@ function Login() {
 
   const addUserHandler = (newUser) => setUser(newUser);
 
-  const handleSetRememberMe = () => setRememberMe(!rememberMe);
 
   const changeHandler = (e) => {
     setInputs({
@@ -52,7 +50,7 @@ function Login() {
   };
 
   const submitHandler = async (e) => {
-    // check rememeber me?
+    
     e.preventDefault();
 
     if (inputs.username.trim().length < 6) {
@@ -73,9 +71,17 @@ function Login() {
       Password: inputs.password,
     };
 
-    const response = await AuthService.login(myData);
+    let response = null;
+    try {
+      response = await AuthService.login(myData);
+    } catch (error) {
+      console.log(error);
+      setCredentialsError("An error has occured. Please try again later.");
+      return;
+    }
     
     if (response.validated) {
+      setCredentialsError("");
       authContext.login(response.token, response.userid);
     } 
     else {
@@ -84,14 +90,14 @@ function Login() {
 
     return () => {
       setInputs({
-        email: "",
+        username: "",
         password: "",
       });
 
       setErrors({
-        emailError: false,
+        usernameError: false,
         passwordError: false,
-      });
+      }); 
     };
   };
 
@@ -149,43 +155,16 @@ function Login() {
                 error={errors.passwordError}
               />
             </MDBox>
-            <MDBox display="flex" alignItems="center" ml={-1}>
-              <Switch checked={rememberMe} onChange={handleSetRememberMe} />
-              <MDTypography
-                variant="button"
-                fontWeight="regular"
-                color="text"
-                onClick={handleSetRememberMe}
-                sx={{ cursor: "pointer", userSelect: "none", ml: -1 }}
-              >
-                &nbsp;&nbsp;Remember me
-              </MDTypography>
-            </MDBox>
             <MDBox mt={4} mb={1}>
               <MDButton variant="gradient" color="info" fullWidth type="submit">
                 sign in
               </MDButton>
             </MDBox>
-            {credentialsErros && (
+            {credentialsErrors && (
               <MDTypography variant="caption" color="error" fontWeight="light">
-                {credentialsErros}
+                {credentialsErrors}
               </MDTypography>
             )}
-            <MDBox mt={3} mb={1} textAlign="center">
-              <MDTypography variant="button" color="text">
-                Forgot your password? Reset it{" "}
-                <MDTypography
-                  component={Link}
-                  to="/auth/forgot-password"
-                  variant="button"
-                  color="info"
-                  fontWeight="medium"
-                  textGradient
-                >
-                  here
-                </MDTypography>
-              </MDTypography>
-            </MDBox>
             <MDBox mb={1} textAlign="center">
               <MDTypography variant="button" color="text">
                 Don&apos;t have an account?{" "}

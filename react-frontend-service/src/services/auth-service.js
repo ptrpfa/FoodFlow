@@ -21,11 +21,16 @@ class AuthService {
     return new Promise((resolve, reject) => {
       // gRPC
       auth_client.login(message, null, (err, response) => {
-        resolve({
-          validated: response.getValidated(),
-          token: response.getAccesstoken(),
-          userid: response.getUserid(),
-        });
+        if (err) {
+          // If an error occurs, reject the promise and pass the error to the `.catch()` handler.
+          reject(err);
+        } else {
+          resolve({
+            validated: response.getValidated(),
+            token: response.getAccesstoken(),
+            userid: response.getUserid(),
+          });
+        }
       });
     });
   };
@@ -47,23 +52,17 @@ class AuthService {
     return new Promise((resolve, reject) => {
       // gRPC
       auth_client.createUser(message, null, (err, response) => {
-        resolve({
-          userid: response.getUserid(),
-        });
+        if (err) {
+          // If an error occurs, reject the promise and pass the error to the `.catch()` handler.
+          reject(err);
+        } else {
+          resolve({
+            userid: response.getUserid(),
+          });
+        }
       });
     });
   };
-
-  // Future implementation
-  // forgotPassword = async (payload) => {
-  //   const forgotPassword = "password-forgot";
-  //   return await HttpService.post(forgotPassword, payload);
-  // };
-
-  // resetPassword = async (credentials) => {
-  //   const resetPassword = "password-reset";
-  //   return await HttpService.post(resetPassword, credentials);
-  // };
 
   getProfile = async (payload) => {
     let message = new FindOneUserDto();
@@ -72,18 +71,23 @@ class AuthService {
     return new Promise((resolve, reject) => {
       // gRPC
       auth_client.findOneUser(message, null, (err, response) => {
-        resolve({
-          username: response.getUsername(),
-          firstName: response.getFirstname(),
-          LastName: response.getLastname(),
-          dob: response.getDob(),
-          role: response.getRole(),
-          addressFirst: response.getAddressfirst(),
-          addressSecond: response.getAddresssecond(),
-          addressThird: response.getAddressthird(),
-          postalCode: response.getPostalcode(),
-          email: response.getEmail(),
-        });
+        if (err) {
+          // If an error occurs, reject the promise and pass the error to the `.catch()` handler.
+          reject(err);
+        } else {
+          resolve({
+            username: response.getUsername(),
+            firstName: response.getFirstname(),
+            LastName: response.getLastname(),
+            dob: response.getDob(),
+            role: response.getRole(),
+            addressFirst: response.getAddressfirst(),
+            addressSecond: response.getAddresssecond(),
+            addressThird: response.getAddressthird(),
+            postalCode: response.getPostalcode(),
+            email: response.getEmail(),
+          });
+        }
       });
     });
   };
@@ -95,17 +99,22 @@ class AuthService {
     return new Promise((resolve, reject) => {
       // gRPC
       auth_client.removeUser(message, null, (err, response) => {
-        resolve({
-          username: response.getUsername(),
-          firstName: response.getFirstname(),
-          LastName: response.getLastname(),
-          role: response.getRole(),
-          addressFirst: response.getAddressfirst(),
-          addressSecond: response.getAddresssecond(),
-          addressThird: response.getAddressthird(),
-          postalCode: response.getPostalcode(),
-          email: response.getEmail(),
-        });
+        if (err) {
+          // If an error occurs, reject the promise and pass the error to the `.catch()` handler.
+          reject(err);
+        } else {
+          resolve({
+            username: response.getUsername(),
+            firstName: response.getFirstname(),
+            LastName: response.getLastname(),
+            role: response.getRole(),
+            addressFirst: response.getAddressfirst(),
+            addressSecond: response.getAddresssecond(),
+            addressThird: response.getAddressthird(),
+            postalCode: response.getPostalcode(),
+            email: response.getEmail(),
+          });
+        }
       });
     });
   };
@@ -125,17 +134,22 @@ class AuthService {
     return new Promise((resolve, reject) => {
       // gRPC
       auth_client.updateUser(message, null, (err, response) => {
-        resolve({
-          username: response.getUsername(),
-          firstName: response.getFirstname(),
-          LastName: response.getLastname(),
-          role: response.getRole(),
-          addressFirst: response.getAddressfirst(),
-          addressSecond: response.getAddresssecond(),
-          addressThird: response.getAddressthird(),
-          postalCode: response.getPostalcode(),
-          email: response.getEmail(),
-        });
+        if (err) {
+          // If an error occurs, reject the promise and pass the error to the `.catch()` handler.
+          reject(err);
+        } else {
+          resolve({
+            username: response.getUsername(),
+            firstName: response.getFirstname(),
+            LastName: response.getLastname(),
+            role: response.getRole(),
+            addressFirst: response.getAddressfirst(),
+            addressSecond: response.getAddresssecond(),
+            addressThird: response.getAddressthird(),
+            postalCode: response.getPostalcode(),
+            email: response.getEmail(),
+          });
+        }
       });
     });
   };

@@ -44,7 +44,8 @@ function DetailedListing(onUserUpdate) {
   });
 
   const [openDialog, setOpenDialog] = useState(false);
-  const [deleteSuccess, setDeleteSuccess] = useState(false);
+  const [fetchError, setFetchError] = useState(false);
+  const [deleteSuccess, setDeleteSuccess] = useState({open: false, message: ""});
 
   const handleClose = () => {
     setOpenDialog(false);
@@ -52,7 +53,7 @@ function DetailedListing(onUserUpdate) {
 
   const navigate = useNavigate();
   const closeDeleteSuccess = () => {
-    setDeleteSuccess(false);
+    setDeleteSuccess({open: false, message: ""});
     navigate('/mylistings');
   }
 
@@ -82,9 +83,9 @@ function DetailedListing(onUserUpdate) {
 
       // Display success message.
       setOpenDialog(false);
-      setDeleteSuccess(true);
+      setDeleteSuccess({open: true, message: "Your listing has been deleted."});
     } catch (error) {
-      console.error('Error deleting listing:', error);
+      setDeleteSuccess({open: true, message: `Error deleting listing: ${error.message}`});
     }
   };
 
@@ -129,6 +130,7 @@ function DetailedListing(onUserUpdate) {
         const updatedListing = { ...response, image: imageUrl };
         setListing(updatedListing);
       } catch (error) {
+        setFetchError(true);
         console.error('Error fetching listing details:', error);
       }
     };
@@ -254,7 +256,11 @@ function DetailedListing(onUserUpdate) {
           </Card>
         </div>
       ) : (
-        <div>Loading...</div>
+        fetchError ? (
+          <div>An error has occured, please try again later</div>
+        ) : (
+          <div>Loading...</div>
+        )
       )}
       <Dialog
         open={openDialog}
@@ -278,17 +284,17 @@ function DetailedListing(onUserUpdate) {
         </DialogActions>
       </Dialog>
       <Dialog
-        open={deleteSuccess}
+        open={deleteSuccess.open}
         onClose={closeDeleteSuccess}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          Success
+          Server Message
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Your listing has been deleted.
+            {deleteSuccess.message}
           </DialogContentText>
         </DialogContent>
         <DialogActions>

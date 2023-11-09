@@ -85,6 +85,7 @@ function DonorForm() {
         setUploadImageId(imageIdWithExtension);
         setUploadResponse(uploadResponse);
       } catch (error) {
+        setUploadResponse(false);
         console.error("Error converting image to Uint8Array:", error);
       }
     }

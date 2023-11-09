@@ -37,9 +37,14 @@ class ListingService {
     return new Promise((resolve, reject) => {
       // gRPC
       listing_client.createListing(message, null, (err, response) => {
-        resolve({
-          listingID: response.getListingid(),
-        });
+        if (err) {
+          // If an error occurs, reject the promise and pass the error to the `.catch()` handler.
+          reject(err);
+        } else {
+          resolve({
+            listingID: response.getListingid(),
+          });
+        }
       });
     });
   };
@@ -51,27 +56,32 @@ class ListingService {
     return new Promise((resolve, reject) => {
       // gRPC
       listing_client.findOneListing(message, null, (err, response) => {
-        resolve({
-          listingID: response.getListingid(),
-          userID: response.getUserid(),
-          name: response.getName(),
-          datetime: response.getDatetime(),
-          expiryDate: response.getExpirydate(),
-          category: response.getCategory(),
-          status: response.getStatus(),
-          description: response.getDescription(),
-          image: response.getImage(),
-          pickUpAddressFirst: response.getPickupaddressfirst(),
-          pickUpAddressSecond: response.getPickupaddresssecond(),
-          pickUpAddressThird: response.getPickupaddressthird(),
-          pickUpPostalCode: response.getPickuppostalcode(),
-          pickUpStartDate: response.getPickupstartdate(),
-          pickUpEndDate: response.getPickupenddate(),
-          pickUpStartTime: response.getPickupstarttime(),
-          pickUpEndTime: response.getPickupendtime(),
-          contactPhone: response.getContactphone(),
-          contactEmail: response.getContactemail(),
-        });
+        if (err) {
+          // If an error occurs, reject the promise and pass the error to the `.catch()` handler.
+          reject(err);
+        } else {
+          resolve({
+            listingID: response.getListingid(),
+            userID: response.getUserid(),
+            name: response.getName(),
+            datetime: response.getDatetime(),
+            expiryDate: response.getExpirydate(),
+            category: response.getCategory(),
+            status: response.getStatus(),
+            description: response.getDescription(),
+            image: response.getImage(),
+            pickUpAddressFirst: response.getPickupaddressfirst(),
+            pickUpAddressSecond: response.getPickupaddresssecond(),
+            pickUpAddressThird: response.getPickupaddressthird(),
+            pickUpPostalCode: response.getPickuppostalcode(),
+            pickUpStartDate: response.getPickupstartdate(),
+            pickUpEndDate: response.getPickupenddate(),
+            pickUpStartTime: response.getPickupstarttime(),
+            pickUpEndTime: response.getPickupendtime(),
+            contactPhone: response.getContactphone(),
+            contactEmail: response.getContactemail(),
+          });
+        }
       });
     });
   };
@@ -86,6 +96,53 @@ class ListingService {
         message,
         null,
         (err, response) => {
+          if (err) {
+            // If an error occurs, reject the promise and pass the error to the `.catch()` handler.
+            reject(err);
+          } else {
+            const listings = response.getListingsList();
+
+            const processedListings = listings.map((listing) => {
+              return {
+                listingID: listing.getListingid(),
+                userID: listing.getUserid(),
+                name: listing.getName(),
+                datetime: listing.getDatetime(),
+                expiryDate: listing.getExpirydate(),
+                category: listing.getCategory(),
+                status: listing.getStatus(),
+                description: listing.getDescription(),
+                image: listing.getImage(),
+                pickUpAddressFirst: listing.getPickupaddressfirst(),
+                pickUpAddressSecond: listing.getPickupaddresssecond(),
+                pickUpAddressThird: listing.getPickupaddressthird(),
+                pickUpPostalCode: listing.getPickuppostalcode(),
+                pickUpStartDate: listing.getPickupstartdate(),
+                pickUpEndDate: listing.getPickupenddate(),
+                pickUpStartTime: listing.getPickupstarttime(),
+                pickUpEndTime: listing.getPickupendtime(),
+                contactPhone: listing.getContactphone(),
+                contactEmail: listing.getContactemail(),
+              };
+            });
+            resolve(processedListings);
+          }
+        }
+      );
+    });
+  };
+
+  getReservedListings = async (payload) => {
+    let message = new UserDto();
+    message.setUserid(payload.Userid);
+
+    return new Promise((resolve, reject) => {
+      // gRPC
+      listing_client.findReservedListings(message, null, (err, response) => {
+        if (err) {
+          // If an error occurs, reject the promise and pass the error to the `.catch()` handler.
+          reject(err);
+        } else {
           const listings = response.getListingsList();
 
           const processedListings = listings.map((listing) => {
@@ -113,43 +170,6 @@ class ListingService {
           });
           resolve(processedListings);
         }
-      );
-    });
-  };
-
-  getReservedListings = async (payload) => {
-    let message = new UserDto();
-    message.setUserid(payload.Userid);
-
-    return new Promise((resolve, reject) => {
-      // gRPC
-      listing_client.findReservedListings(message, null, (err, response) => {
-        const listings = response.getListingsList();
-
-        const processedListings = listings.map((listing) => {
-          return {
-            listingID: listing.getListingid(),
-            userID: listing.getUserid(),
-            name: listing.getName(),
-            datetime: listing.getDatetime(),
-            expiryDate: listing.getExpirydate(),
-            category: listing.getCategory(),
-            status: listing.getStatus(),
-            description: listing.getDescription(),
-            image: listing.getImage(),
-            pickUpAddressFirst: listing.getPickupaddressfirst(),
-            pickUpAddressSecond: listing.getPickupaddresssecond(),
-            pickUpAddressThird: listing.getPickupaddressthird(),
-            pickUpPostalCode: listing.getPickuppostalcode(),
-            pickUpStartDate: listing.getPickupstartdate(),
-            pickUpEndDate: listing.getPickupenddate(),
-            pickUpStartTime: listing.getPickupstarttime(),
-            pickUpEndTime: listing.getPickupendtime(),
-            contactPhone: listing.getContactphone(),
-            contactEmail: listing.getContactemail(),
-          };
-        });
-        resolve(processedListings);
       });
     });
   };
@@ -161,32 +181,37 @@ class ListingService {
     return new Promise((resolve, reject) => {
       // gRPC
       listing_client.findCollectedListings(message, null, (err, response) => {
-        const listings = response.getListingsList();
+        if (err) {
+          // If an error occurs, reject the promise and pass the error to the `.catch()` handler.
+          reject(err);
+        } else {
+          const listings = response.getListingsList();
 
-        const processedListings = listings.map((listing) => {
-          return {
-            listingID: listing.getListingid(),
-            userID: listing.getUserid(),
-            name: listing.getName(),
-            datetime: listing.getDatetime(),
-            expiryDate: listing.getExpirydate(),
-            category: listing.getCategory(),
-            status: listing.getStatus(),
-            description: listing.getDescription(),
-            image: listing.getImage(),
-            pickUpAddressFirst: listing.getPickupaddressfirst(),
-            pickUpAddressSecond: listing.getPickupaddresssecond(),
-            pickUpAddressThird: listing.getPickupaddressthird(),
-            pickUpPostalCode: listing.getPickuppostalcode(),
-            pickUpStartDate: listing.getPickupstartdate(),
-            pickUpEndDate: listing.getPickupenddate(),
-            pickUpStartTime: listing.getPickupstarttime(),
-            pickUpEndTime: listing.getPickupendtime(),
-            contactPhone: listing.getContactphone(),
-            contactEmail: listing.getContactemail(),
-          };
-        });
-        resolve(processedListings);
+          const processedListings = listings.map((listing) => {
+            return {
+              listingID: listing.getListingid(),
+              userID: listing.getUserid(),
+              name: listing.getName(),
+              datetime: listing.getDatetime(),
+              expiryDate: listing.getExpirydate(),
+              category: listing.getCategory(),
+              status: listing.getStatus(),
+              description: listing.getDescription(),
+              image: listing.getImage(),
+              pickUpAddressFirst: listing.getPickupaddressfirst(),
+              pickUpAddressSecond: listing.getPickupaddresssecond(),
+              pickUpAddressThird: listing.getPickupaddressthird(),
+              pickUpPostalCode: listing.getPickuppostalcode(),
+              pickUpStartDate: listing.getPickupstartdate(),
+              pickUpEndDate: listing.getPickupenddate(),
+              pickUpStartTime: listing.getPickupstarttime(),
+              pickUpEndTime: listing.getPickupendtime(),
+              contactPhone: listing.getContactphone(),
+              contactEmail: listing.getContactemail(),
+            };
+          });
+          resolve(processedListings);
+        }
       });
     });
   };
@@ -198,32 +223,37 @@ class ListingService {
     return new Promise((resolve, reject) => {
       // gRPC
       listing_client.findAvailableListings(message, null, (err, response) => {
-        const listings = response.getListingsList();
+        if (err) {
+          // If an error occurs, reject the promise and pass the error to the `.catch()` handler.
+          reject(err);
+        } else {
+          const listings = response.getListingsList();
 
-        const processedListings = listings.map((listing) => {
-          return {
-            listingID: listing.getListingid(),
-            userID: listing.getUserid(),
-            name: listing.getName(),
-            datetime: listing.getDatetime(),
-            expiryDate: listing.getExpirydate(),
-            category: listing.getCategory(),
-            status: listing.getStatus(),
-            description: listing.getDescription(),
-            image: listing.getImage(),
-            pickUpAddressFirst: listing.getPickupaddressfirst(),
-            pickUpAddressSecond: listing.getPickupaddresssecond(),
-            pickUpAddressThird: listing.getPickupaddressthird(),
-            pickUpPostalCode: listing.getPickuppostalcode(),
-            pickUpStartDate: listing.getPickupstartdate(),
-            pickUpEndDate: listing.getPickupenddate(),
-            pickUpStartTime: listing.getPickupstarttime(),
-            pickUpEndTime: listing.getPickupendtime(),
-            contactPhone: listing.getContactphone(),
-            contactEmail: listing.getContactemail(),
-          };
-        });
-        resolve(processedListings);
+          const processedListings = listings.map((listing) => {
+            return {
+              listingID: listing.getListingid(),
+              userID: listing.getUserid(),
+              name: listing.getName(),
+              datetime: listing.getDatetime(),
+              expiryDate: listing.getExpirydate(),
+              category: listing.getCategory(),
+              status: listing.getStatus(),
+              description: listing.getDescription(),
+              image: listing.getImage(),
+              pickUpAddressFirst: listing.getPickupaddressfirst(),
+              pickUpAddressSecond: listing.getPickupaddresssecond(),
+              pickUpAddressThird: listing.getPickupaddressthird(),
+              pickUpPostalCode: listing.getPickuppostalcode(),
+              pickUpStartDate: listing.getPickupstartdate(),
+              pickUpEndDate: listing.getPickupenddate(),
+              pickUpStartTime: listing.getPickupstarttime(),
+              pickUpEndTime: listing.getPickupendtime(),
+              contactPhone: listing.getContactphone(),
+              contactEmail: listing.getContactemail(),
+            };
+          });
+          resolve(processedListings);
+        }
       });
     });
   };
@@ -234,32 +264,37 @@ class ListingService {
     return new Promise((resolve, reject) => {
       // gRPC
       listing_client.findAllListings(message, null, (err, response) => {
-        const listings = response.getListingsList();
+        if (err) {
+          // If an error occurs, reject the promise and pass the error to the `.catch()` handler.
+          reject(err);
+        } else {
+          const listings = response.getListingsList();
 
-        const processedListings = listings.map((listing) => {
-          return {
-            listingID: listing.getListingid(),
-            userID: listing.getUserid(),
-            name: listing.getName(),
-            datetime: listing.getDatetime(),
-            expiryDate: listing.getExpirydate(),
-            category: listing.getCategory(),
-            status: listing.getStatus(),
-            description: listing.getDescription(),
-            image: listing.getImage(),
-            pickUpAddressFirst: listing.getPickupaddressfirst(),
-            pickUpAddressSecond: listing.getPickupaddresssecond(),
-            pickUpAddressThird: listing.getPickupaddressthird(),
-            pickUpPostalCode: listing.getPickuppostalcode(),
-            pickUpStartDate: listing.getPickupstartdate(),
-            pickUpEndDate: listing.getPickupenddate(),
-            pickUpStartTime: listing.getPickupstarttime(),
-            pickUpEndTime: listing.getPickupendtime(),
-            contactPhone: listing.getContactphone(),
-            contactEmail: listing.getContactemail(),
-          };
-        });
-        resolve(processedListings);
+          const processedListings = listings.map((listing) => {
+            return {
+              listingID: listing.getListingid(),
+              userID: listing.getUserid(),
+              name: listing.getName(),
+              datetime: listing.getDatetime(),
+              expiryDate: listing.getExpirydate(),
+              category: listing.getCategory(),
+              status: listing.getStatus(),
+              description: listing.getDescription(),
+              image: listing.getImage(),
+              pickUpAddressFirst: listing.getPickupaddressfirst(),
+              pickUpAddressSecond: listing.getPickupaddresssecond(),
+              pickUpAddressThird: listing.getPickupaddressthird(),
+              pickUpPostalCode: listing.getPickuppostalcode(),
+              pickUpStartDate: listing.getPickupstartdate(),
+              pickUpEndDate: listing.getPickupenddate(),
+              pickUpStartTime: listing.getPickupstarttime(),
+              pickUpEndTime: listing.getPickupendtime(),
+              contactPhone: listing.getContactphone(),
+              contactEmail: listing.getContactemail(),
+            };
+          });
+          resolve(processedListings);
+        }
       });
     });
   };
@@ -271,27 +306,32 @@ class ListingService {
     return new Promise((resolve, reject) => {
       // gRPC
       listing_client.removeListing(message, null, (err, response) => {
-        resolve({
-          listingID: response.getListingid(),
-          userID: response.getUserid(),
-          name: response.getName(),
-          datetime: response.getDatetime(),
-          expiryDate: response.getExpirydate(),
-          category: response.getCategory(),
-          status: response.getStatus(),
-          description: response.getDescription(),
-          image: response.getImage(),
-          pickUpAddressFirst: response.getPickupaddressfirst(),
-          pickUpAddressSecond: response.getPickupaddresssecond(),
-          pickUpAddressThird: response.getPickupaddressthird(),
-          pickUpPostalCode: response.getPickuppostalcode(),
-          pickUpStartDate: response.getPickupstartdate(),
-          pickUpEndDate: response.getPickupenddate(),
-          pickUpStartTime: response.getPickupstarttime(),
-          pickUpEndTime: response.getPickupendtime(),
-          contactPhone: response.getContactphone(),
-          contactEmail: response.getContactemail(),
-        });
+        if (err) {
+          // If an error occurs, reject the promise and pass the error to the `.catch()` handler.
+          reject(err);
+        } else {
+          resolve({
+            listingID: response.getListingid(),
+            userID: response.getUserid(),
+            name: response.getName(),
+            datetime: response.getDatetime(),
+            expiryDate: response.getExpirydate(),
+            category: response.getCategory(),
+            status: response.getStatus(),
+            description: response.getDescription(),
+            image: response.getImage(),
+            pickUpAddressFirst: response.getPickupaddressfirst(),
+            pickUpAddressSecond: response.getPickupaddresssecond(),
+            pickUpAddressThird: response.getPickupaddressthird(),
+            pickUpPostalCode: response.getPickuppostalcode(),
+            pickUpStartDate: response.getPickupstartdate(),
+            pickUpEndDate: response.getPickupenddate(),
+            pickUpStartTime: response.getPickupstarttime(),
+            pickUpEndTime: response.getPickupendtime(),
+            contactPhone: response.getContactphone(),
+            contactEmail: response.getContactemail(),
+          });
+        }
       });
     });
   };

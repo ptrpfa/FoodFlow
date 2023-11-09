@@ -19,11 +19,16 @@ class UploadService {
     return new Promise((resolve, reject) => {
       // gRPC
       image_client.uploadImage(message, null, (err, response) => {
-        resolve({
-          status: response.getStatus(),
-          valid: response.getValid(),
-          imageId: response.getImageid(),
-        });
+        if (err) {
+          // If an error occurs, reject the promise and pass the error to the `.catch()` handler.
+          reject(err);
+        } else {
+          resolve({
+            status: response.getStatus(),
+            valid: response.getValid(),
+            imageId: response.getImageid(),
+          });
+        }
       });
     });
   };
@@ -36,6 +41,7 @@ class UploadService {
       return new Promise((resolve, reject) => {
         image_client.getImage(message, null, (err, response) => {
           if (err) {
+            // If an error occurs, reject the promise and pass the error to the `.catch()` handler.
             reject(err);
           } else {
             resolve({
@@ -104,9 +110,14 @@ class UploadService {
     return new Promise((resolve, reject) => {
       // gRPC
       image_client.deleteImage(message, null, (err, response) => {
-        resolve({
-          status: response.getStatus(),
-        });
+        if (err) {
+          // If an error occurs, reject the promise and pass the error to the `.catch()` handler.
+          reject(err);
+        } else {
+          resolve({
+            status: response.getStatus(),
+          });
+        }
       });
     });
   };
