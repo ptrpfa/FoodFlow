@@ -51,6 +51,7 @@ function FoodListingsTable({ onUserUpdate }) {
   const [reservedListings, setReservedListings] = useState([]);
   const [reservingListingID, setReservingListingID] = useState(0);  
   const [reserved, setReserved] = useState(false);  
+  const [fetchError, setFetchError] = useState(false);  
   const [isLoading, setIsLoading] = useState(false);
   const [trainingModel, setTrainingModel] = useState(-1);
   const [user, setUser] = useState({
@@ -97,9 +98,11 @@ function FoodListingsTable({ onUserUpdate }) {
         
         onUserUpdate({ firstName, lastName });
       } else {
+        setFetchError(true);
         console.error("User data not found.");
       }
     } catch (error) {
+      setFetchError(true);
       console.error("An error occurred while fetching user data:", error);
     }
   };
@@ -196,7 +199,7 @@ function FoodListingsTable({ onUserUpdate }) {
       try {
         await ImageClassifierService.prepare_ml();
       } catch (error) {
-          console.error('Error loading models', error);
+        console.error('Error loading models', error);
       } finally {
         setIsLoading(false);
       }
@@ -212,10 +215,18 @@ function FoodListingsTable({ onUserUpdate }) {
   useEffect(() => {
     setIsLoading(true);
     const fetchImageForListing = async (listing) => {
-      const imageData = await AWSS3Service.getImage({ imageId: listing.image });
-      const imageBlob = convertUint8ArrayToBlob(imageData.imageData);
-      const imageUrl = URL.createObjectURL(imageBlob);
-      return { ...listing, image: imageUrl };
+
+      try {
+        const imageData = await AWSS3Service.getImage({ imageId: listing.image });
+        const imageBlob = convertUint8ArrayToBlob(imageData.imageData);
+        const imageUrl = URL.createObjectURL(imageBlob);
+        return { ...listing, image: imageUrl };
+      } catch (error) {  
+        setFetchError(true);
+        console.error("Error fetching images:", error);
+        return { ...listing, image: null };
+      }
+
     };
 
     if (user.role === "patron") {
@@ -227,6 +238,7 @@ function FoodListingsTable({ onUserUpdate }) {
           setListings(listingsWithImages);
         })
         .catch((error) => {
+          setFetchError(true);
           console.error("Error fetching listings:", error);
         });
     } 
@@ -239,6 +251,7 @@ function FoodListingsTable({ onUserUpdate }) {
           setListings(listingsWithImages);
         })
         .catch((error) => {
+          setFetchError(true);
           console.error("Error fetching listings for donors:", error);
         });
     }
@@ -298,101 +311,107 @@ function FoodListingsTable({ onUserUpdate }) {
                 <br />
                 <CircularProgress />
               </MDBox>
-            ) : groupedListings.length > 0 ? (
-              groupedListings.map((rowListings, rowIndex) => (
-                <Grid container spacing={2} key={rowIndex}>
-                  {rowListings.map((listing, index) => {
-                      // Determine the button's disabled state and text
-                    const isReported = isListingReported(listing.listingID);
-                    const isTraining = trainingModel === listing.listingID;
-                    const buttonDisabled = isReported || isTraining;
-                    const buttonText = isTraining ? "Please wait" : isReported ? "Reported" : "Not Fresh";
-                  
-                    return (
-                      <Grid item xs={4} key={listing.listingID || index}>
-                        <Card style={{ margin: "8px"}}>
-                          <MDBox p={2}>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                              <MDTypography variant="h6">{listing.name}</MDTypography>
+            ) : fetchError ? (
+              <MDTypography variant="h6" style={{ textAlign: 'center', margin: '1.5rem' }}>
+                An error occured, please try again later.
+              </MDTypography>
+            ) : (
+              groupedListings.length > 0 ? (
+                groupedListings.map((rowListings, rowIndex) => (
+                  <Grid container spacing={2} key={rowIndex}>
+                    {rowListings.map((listing, index) => {
+                        // Determine the button's disabled state and text
+                      const isReported = isListingReported(listing.listingID);
+                      const isTraining = trainingModel === listing.listingID;
+                      const buttonDisabled = isReported || isTraining;
+                      const buttonText = isTraining ? "Please wait" : isReported ? "Reported" : "Not Fresh";
+                    
+                      return (
+                        <Grid item xs={4} key={listing.listingID || index}>
+                          <Card style={{ margin: "8px"}}>
+                            <MDBox p={2}>
+                              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                <MDTypography variant="h6">{listing.name}</MDTypography>
+                                <MDButton
+                                  variant="gradient"
+                                  color="error"
+                                  onClick={handleReport}
+                                  disabled={buttonDisabled}
+                                >
+                                  {buttonText}
+                                </MDButton>
+                              </div>
+                              <div style={{ display: 'flex', justifyContent: 'center', margin: "0.5rem", height:"12rem"}}>
+                                <img 
+                                  src={listing.image}
+                                  style={{ maxWidth: "70%", maxHeight: "70%", margin:"auto"}}
+                                  alt={listing.name}
+                                />
+                              </div>
+                              <div style={{height:"3rem", }}>
+                                <MDTypography style={{ fontStyle: 'italic', fontSize:"1rem" }}>{listing.description}</MDTypography>
+                              </div>
                               <MDButton
                                 variant="gradient"
-                                color="error"
-                                onClick={handleReport}
-                                disabled={buttonDisabled}
+                                color="info"
+                                component={Link}
+                                to={`/listings/${listing.listingID}`}
+                                style={{ marginBottom: "1rem", marginTop: "1rem"}}
+                                fullWidth
                               >
-                                {buttonText}
+                                View Details
                               </MDButton>
-                            </div>
-                            <div style={{ display: 'flex', justifyContent: 'center', margin: "0.5rem", height:"12rem"}}>
-                              <img 
-                                src={listing.image}
-                                style={{ maxWidth: "70%", maxHeight: "70%", margin:"auto"}}
-                                alt={listing.name}
+                              {}
+                              <MDButton
+                                variant="gradient"
+                                color="warning"
+                                onClick={() => handleReservation(listing.listingID)}
+                                fullWidth
+                              >
+                                Reserve
+                              </MDButton>
+                              <MDSnackbar
+                                icon="info"
+                                title="Server Message:"
+                                content={messageSnackbar.message}
+                                dateTime="5 seconds ago"
+                                open={messageSnackbar.open}
+                                onClose={closeMessageSnackbar}
+                                close={closeMessageSnackbar}
                               />
-                            </div>
-                            <div style={{height:"3rem", }}>
-                              <MDTypography style={{ fontStyle: 'italic', fontSize:"1rem" }}>{listing.description}</MDTypography>
-                            </div>
-                            <MDButton
-                              variant="gradient"
-                              color="info"
-                              component={Link}
-                              to={`/listings/${listing.listingID}`}
-                              style={{ marginBottom: "1rem", marginTop: "1rem"}}
-                              fullWidth
+                            </MDBox>
+                          </Card>
+                          <Dialog
+                              open={openDialog}
+                              onClose={handleClose}
+                              aria-labelledby="alert-dialog-title"
+                              aria-describedby="alert-dialog-description"
                             >
-                              View Details
-                            </MDButton>
-                            {}
-                            <MDButton
-                              variant="gradient"
-                              color="warning"
-                              onClick={() => handleReservation(listing.listingID)}
-                              fullWidth
-                            >
-                              Reserve
-                            </MDButton>
-                            <MDSnackbar
-                              icon="info"
-                              title="Server Message:"
-                              content={messageSnackbar.message}
-                              dateTime="5 seconds ago"
-                              open={messageSnackbar.open}
-                              onClose={closeMessageSnackbar}
-                              close={closeMessageSnackbar}
-                            />
-                          </MDBox>
-                        </Card>
-                        <Dialog
-                            open={openDialog}
-                            onClose={handleClose}
-                            aria-labelledby="alert-dialog-title"
-                            aria-describedby="alert-dialog-description"
-                          >
-                          <DialogTitle id="alert-dialog-title">
-                            {`Report ${listing.name} as not fresh?`}
-                          </DialogTitle>
-                          <DialogContent>
-                            <DialogContentText id="alert-dialog-description">
-                              Are you sure you want to report this item as not fresh? This action may result in the item being potentially removed from listings if found to be inaccurate or in violation of our freshness standards.
-                            </DialogContentText>
-                          </DialogContent>
-                          <DialogActions>
-                            <MDButton variant="gradient" color="info" onClick={handleClose}>Close</MDButton>
-                            <MDButton  variant="gradient" color="error" onClick={() => handleReportConfirmation(listing.image, listing.listingID)} autoFocus>
-                              Report as not fresh
-                            </MDButton>
-                          </DialogActions>
-                        </Dialog>
-                      </Grid>
-                    )
-                  })}
-                </Grid>
-              ))
-            ) : (
-              <MDTypography variant="h6" style={{ textAlign: 'center', margin: '1.5rem' }}>
-                No listings available.
-              </MDTypography>
+                            <DialogTitle id="alert-dialog-title">
+                              {`Report ${listing.name} as not fresh?`}
+                            </DialogTitle>
+                            <DialogContent>
+                              <DialogContentText id="alert-dialog-description">
+                                Are you sure you want to report this item as not fresh? This action may result in the item being potentially removed from listings if found to be inaccurate or in violation of our freshness standards.
+                              </DialogContentText>
+                            </DialogContent>
+                            <DialogActions>
+                              <MDButton variant="gradient" color="info" onClick={handleClose}>Close</MDButton>
+                              <MDButton  variant="gradient" color="error" onClick={() => handleReportConfirmation(listing.image, listing.listingID)} autoFocus>
+                                Report as not fresh
+                              </MDButton>
+                            </DialogActions>
+                          </Dialog>
+                        </Grid>
+                      )
+                    })}
+                  </Grid>
+                ))
+              ) : (
+                <MDTypography variant="h6" style={{ textAlign: 'center', margin: '1.5rem' }}>
+                  No listings available.
+                </MDTypography>
+              )
             )
           }
         </MDBox>

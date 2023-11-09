@@ -30,6 +30,7 @@ import ListingService from "services/listing-service";
 function UpdateListing() {
   const { listingID } = useParams();
   const [listing, setListing] = useState({});
+  const [fetchError, setFetchError] = useState(false);
   const authContext = useContext(AuthContext);
   const [user, setUser] = useState({
     firstName: "",
@@ -125,6 +126,7 @@ function UpdateListing() {
           contactemail: response.contactEmail,
         });
       } catch (error) {
+        setFetchError(true)
         console.error('Error fetching listing details:', error);
       }
     };
@@ -229,174 +231,181 @@ function UpdateListing() {
             Update Food item - {listing.name}
           </MDTypography>
         </MDBox>
+       {
+        fetchError ? (
+          <MDTypography variant="h6" style={{ textAlign: 'center', margin: '1.5rem' }}>
+            An error has occured, please try again later.
+          </MDTypography>
+        ) : (
+          <form onSubmit={handleFormUpdate}>
+            <MDBox px={2} pt={3} variant="gradient">
+              <MDBox pt={1}>
+                <TextField
+                  name="name"
+                  label="Name"
+                  variant="outlined"
+                  fullWidth
+                  value={formData.name || listing.name}
+                  onChange={handleInputChange}
+                  required
+                  sx={{ pt: 1, pb: 2 }}
+                />
+                <TextField
+                  name="expirydate"
+                  label="Expiry Date"
+                  variant="outlined"
+                  type="date"
+                  fullWidth
+                  value={formatDateForInput(formData.expirydate || listing.expiryDate)}
+                  onChange={handleInputChange}
+                  required
+                  sx={{ pt: 1, pb: 2 }}
+                  shrink
+                />
+                <TextField
+                  name="category"
+                  label="Category"
+                  variant="outlined"
+                  fullWidth
+                  value={formData.category || listing.category}
+                  onChange={handleInputChange}
+                  required
+                  sx={{ pt: 1, pb: 2 }}
+                />
+                <TextField
+                  name="description"
+                  label="Description"
+                  variant="outlined"
+                  multiline
+                  rows={4}
+                  fullWidth
+                  value={formData.description || listing.description}
+                  onChange={handleInputChange}
+                  required
+                  sx={{ pt: 1, pb: 2 }}
+                />
+                <TextField
+                  name="pickupaddressfirst"
+                  label="Pick-Up Address (Line 1)"
+                  variant="outlined"
+                  fullWidth
+                  value={formData.pickupaddressfirst || listing.pickUpAddressFirst}
+                  onChange={handleInputChange}
+                  placeholder={listing.pickUpAddressFirst}
+                  required
+                  sx={{ pt: 1, pb: 2 }}
+                />
+                <TextField
+                  name="pickupaddresssecond"
+                  label="Pick-Up Address (Line 2)"
+                  variant="outlined"
+                  fullWidth
+                  value={formData.pickupaddresssecond || listing.pickUpAddressSecond}
+                  onChange={handleInputChange}
+                  required
+                  sx={{ pt: 1, pb: 2 }}
+                />
+                <TextField
+                  name="pickupaddressthird"
+                  label="Pick-Up Address (Line 3)"
+                  variant="outlined"
+                  fullWidth
+                  value={formData.pickupaddressthird || listing.pickUpAddressThird}
+                  onChange={handleInputChange}
+                  required
+                  sx={{ pt: 1, pb: 2 }}
+                />
+                <TextField
+                  name="pickuppostalcode"
+                  label="Pick-Up Postal Code"
+                  variant="outlined"
+                  fullWidth
+                  value={formData.pickuppostalcode || listing.pickUpPostalCode}
+                  onChange={handleInputChange}
+                  required
+                  sx={{ pt: 1, pb: 2 }}
+                />
+                <TextField
+                  name="pickupstartdate"
+                  label="Pick-Up Start Date"
+                  variant="outlined"
+                  type="date"
+                  fullWidth
+                  value={formatDateForInput(formData.pickupstartdate || listing.pickUpStartDate)}
+                  onChange={handleInputChange}
+                  required
+                  sx={{ pt: 1, pb: 2 }}
+                />
+                <TextField
+                  name="pickupenddate"
+                  label="Pick-Up End Date"
+                  variant="outlined"
+                  type="date"
+                  fullWidth
+                  value={formatDateForInput(formData.pickupenddate || listing.pickUpEndDate)}
+                  onChange={handleInputChange}
+                  required
+                  sx={{ pt: 1, pb: 2 }}
+                />
+                <TextField
+                  name="pickupstarttime"
+                  label="Pick-Up Start Time"
+                  variant="outlined"
+                  type="time"
+                  fullWidth
+                  value={formatTimeTo24Hours(formData.pickupstarttime || listing.pickUpStartTime)}
+                  onChange={handleInputChange}
+                  required
+                  sx={{ pt: 1, pb: 2 }}
+                />
 
-        <form onSubmit={handleFormUpdate}>
-          <MDBox px={2} pt={3} variant="gradient">
-            <MDBox pt={1}>
-              <TextField
-                name="name"
-                label="Name"
-                variant="outlined"
-                fullWidth
-                value={formData.name || listing.name}
-                onChange={handleInputChange}
-                required
-                sx={{ pt: 1, pb: 2 }}
-              />
-              <TextField
-                name="expirydate"
-                label="Expiry Date"
-                variant="outlined"
-                type="date"
-                fullWidth
-                value={formatDateForInput(formData.expirydate || listing.expiryDate)}
-                onChange={handleInputChange}
-                required
-                sx={{ pt: 1, pb: 2 }}
-                shrink
-              />
-              <TextField
-                name="category"
-                label="Category"
-                variant="outlined"
-                fullWidth
-                value={formData.category || listing.category}
-                onChange={handleInputChange}
-                required
-                sx={{ pt: 1, pb: 2 }}
-              />
-              <TextField
-                name="description"
-                label="Description"
-                variant="outlined"
-                multiline
-                rows={4}
-                fullWidth
-                value={formData.description || listing.description}
-                onChange={handleInputChange}
-                required
-                sx={{ pt: 1, pb: 2 }}
-              />
-              <TextField
-                name="pickupaddressfirst"
-                label="Pick-Up Address (Line 1)"
-                variant="outlined"
-                fullWidth
-                value={formData.pickupaddressfirst || listing.pickUpAddressFirst}
-                onChange={handleInputChange}
-                placeholder={listing.pickUpAddressFirst}
-                required
-                sx={{ pt: 1, pb: 2 }}
-              />
-              <TextField
-                name="pickupaddresssecond"
-                label="Pick-Up Address (Line 2)"
-                variant="outlined"
-                fullWidth
-                value={formData.pickupaddresssecond || listing.pickUpAddressSecond}
-                onChange={handleInputChange}
-                required
-                sx={{ pt: 1, pb: 2 }}
-              />
-              <TextField
-                name="pickupaddressthird"
-                label="Pick-Up Address (Line 3)"
-                variant="outlined"
-                fullWidth
-                value={formData.pickupaddressthird || listing.pickUpAddressThird}
-                onChange={handleInputChange}
-                required
-                sx={{ pt: 1, pb: 2 }}
-              />
-              <TextField
-                name="pickuppostalcode"
-                label="Pick-Up Postal Code"
-                variant="outlined"
-                fullWidth
-                value={formData.pickuppostalcode || listing.pickUpPostalCode}
-                onChange={handleInputChange}
-                required
-                sx={{ pt: 1, pb: 2 }}
-              />
-              <TextField
-                name="pickupstartdate"
-                label="Pick-Up Start Date"
-                variant="outlined"
-                type="date"
-                fullWidth
-                value={formatDateForInput(formData.pickupstartdate || listing.pickUpStartDate)}
-                onChange={handleInputChange}
-                required
-                sx={{ pt: 1, pb: 2 }}
-              />
-              <TextField
-                name="pickupenddate"
-                label="Pick-Up End Date"
-                variant="outlined"
-                type="date"
-                fullWidth
-                value={formatDateForInput(formData.pickupenddate || listing.pickUpEndDate)}
-                onChange={handleInputChange}
-                required
-                sx={{ pt: 1, pb: 2 }}
-              />
-              <TextField
-                name="pickupstarttime"
-                label="Pick-Up Start Time"
-                variant="outlined"
-                type="time"
-                fullWidth
-                value={formatTimeTo24Hours(formData.pickupstarttime || listing.pickUpStartTime)}
-                onChange={handleInputChange}
-                required
-                sx={{ pt: 1, pb: 2 }}
-              />
+                <TextField
+                  name="pickupendtime"
+                  label="Pick-Up End Time"
+                  variant="outlined"
+                  type="time"
+                  fullWidth
+                  value={formatTimeTo24Hours(formData.pickupendtime || listing.pickUpEndTime)}
+                  onChange={handleInputChange}
+                  required
+                  sx={{ pt: 1, pb: 2 }}
+                />
 
-              <TextField
-                name="pickupendtime"
-                label="Pick-Up End Time"
-                variant="outlined"
-                type="time"
-                fullWidth
-                value={formatTimeTo24Hours(formData.pickupendtime || listing.pickUpEndTime)}
-                onChange={handleInputChange}
-                required
-                sx={{ pt: 1, pb: 2 }}
-              />
-
-              <TextField
-                name="contactphone"
-                label="Contact Phone"
-                variant="outlined"
-                fullWidth
-                value={formData.contactphone || listing.contactPhone}
-                onChange={handleInputChange}
-                required
-                sx={{ pt: 1, pb: 2 }}
-              />
-              <TextField
-                name="contactemail"
-                label="Contact Email"
-                variant="outlined"
-                fullWidth
-                value={formData.contactemail || listing.contactEmail}
-                onChange={handleInputChange}
-                required
-                sx={{ pt: 1, pb: 2 }}
-              />
+                <TextField
+                  name="contactphone"
+                  label="Contact Phone"
+                  variant="outlined"
+                  fullWidth
+                  value={formData.contactphone || listing.contactPhone}
+                  onChange={handleInputChange}
+                  required
+                  sx={{ pt: 1, pb: 2 }}
+                />
+                <TextField
+                  name="contactemail"
+                  label="Contact Email"
+                  variant="outlined"
+                  fullWidth
+                  value={formData.contactemail || listing.contactEmail}
+                  onChange={handleInputChange}
+                  required
+                  sx={{ pt: 1, pb: 2 }}
+                />
+              </MDBox>
             </MDBox>
-          </MDBox>
-          <Grid item xs={12} style={{ display: "flex", justifyContent: "flex-end", margin: "20px 14px 20px 14px" }}>
-            <MDButton
-              variant="gradient"
-              color="success"
-              type="submit"
-              fullWidth
-            >
-              Update!
-            </MDButton>
-          </Grid>
-        </form>
+            <Grid item xs={12} style={{ display: "flex", justifyContent: "flex-end", margin: "20px 14px 20px 14px" }}>
+              <MDButton
+                variant="gradient"
+                color="success"
+                type="submit"
+                fullWidth
+              >
+                Update!
+              </MDButton>
+            </Grid>
+          </form>
+        )
+       }
       </Card>
     </div>
   );

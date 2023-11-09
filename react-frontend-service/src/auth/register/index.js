@@ -34,7 +34,7 @@ import { InputLabel } from "@mui/material";
 function Register() {
   const authContext = useContext(AuthContext);
 
-  const [terms, setTerms] = useState();
+  const [terms, setTerms] = useState(false);
 
   const [inputs, setInputs] = useState({
     username: "",
@@ -93,9 +93,6 @@ function Register() {
     e.preventDefault();
 
     const mailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-
-    console.log(errors);
-    console.log(inputs);
 
     const newErrors = {};
     newErrors.usernameError = inputs.username.trim().length === 0;
