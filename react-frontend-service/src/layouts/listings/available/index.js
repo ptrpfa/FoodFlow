@@ -62,7 +62,7 @@ function FoodListingsTable({ onUserUpdate }) {
 
   const [messageSnackbar, setMessageSnackbar] = useState({ open: false, message: "" });
   const [openDialog, setOpenDialog] = useState(false);
-  const webSocketService = useMemo(() => new WebSocketService(), []);
+  const webSocketService = new WebSocketService();
   const checkLocalStorageInterval = useRef(null);
 
   // Open dialog
@@ -232,32 +232,35 @@ function FoodListingsTable({ onUserUpdate }) {
 
     };
 
-    if (user.role === "patron") {
-      ListingService.getAvailableListingsExcludeUser({ Userid: authContext.userID })
-        .then(async (allListings) => {
-          const listingsWithImages = await Promise.all(
-            allListings.map(fetchImageForListing)
-          );
-          setListings(listingsWithImages);
-        })
-        .catch((error) => {
-          setFetchError(true);
-          console.error("Error fetching listings:", error);
-        });
-    } 
-    else if (user.role === "donor") {
-      ListingService.getAvailableListingsExcludeUser({ Userid: authContext.userID })
-        .then(async (allListings) => {
-          const listingsWithImages = await Promise.all(
-            allListings.map(fetchImageForListing)
-          );
-          setListings(listingsWithImages);
-        })
-        .catch((error) => {
-          setFetchError(true);
-          console.error("Error fetching listings for donors:", error);
-        });
+    const fetchListings = () => {
+      if (user.role === "patron") {
+        ListingService.getAvailableListingsExcludeUser({ Userid: authContext.userID })
+          .then(async (allListings) => {
+            const listingsWithImages = await Promise.all(
+              allListings.map(fetchImageForListing)
+            );
+            setListings(listingsWithImages);
+          })
+          .catch((error) => {
+            setFetchError(true);
+            console.error("Error fetching listings:", error);
+          });
+      } 
+      else if (user.role === "donor") {
+        ListingService.getAvailableListingsExcludeUser({ Userid: authContext.userID })
+          .then(async (allListings) => {
+            const listingsWithImages = await Promise.all(
+              allListings.map(fetchImageForListing)
+            );
+            setListings(listingsWithImages);
+          })
+          .catch((error) => {
+            setFetchError(true);
+            console.error("Error fetching listings for donors:", error);
+          });
+      }
     }
+
   }, [user.role, authContext.userID]);
 
   // Get user data

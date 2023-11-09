@@ -58,8 +58,8 @@ function FoodListingsTable({ onUserUpdate }) {
     role: "",
   });
 
-  const checkLocalStorageIntervalGet = useRef(null);
-  const checkLocalStorageIntervalDelete = useRef(null);
+  var checkLocalStorageIntervalGet = null;
+  var checkLocalStorageIntervalDelete = null;
   const webSocketService = useMemo(() => new WebSocketService(), []);
 
   // Open dialog
@@ -82,11 +82,11 @@ function FoodListingsTable({ onUserUpdate }) {
 
     // Start the timer
     const {promise, intervalId} = startInterval(LOCAL_STORAGE_KEY);
-    checkLocalStorageIntervalDelete.current = intervalId;
+    checkLocalStorageIntervalDelete = intervalId;
     setOpenDialog(false);
     reservationService.deleteReservation(ReservationID)
       .then(data => {
-        clearInterval(checkLocalStorageIntervalDelete.current);
+        clearInterval(checkLocalStorageIntervalDelete);
         if(data) {
         }
       })
@@ -104,7 +104,7 @@ function FoodListingsTable({ onUserUpdate }) {
   }
 
   // useEffect(() => {
-  //   clearInterval(checkLocalStorageIntervalGet.current);
+  //   clearInterval(checkLocalStorageIntervalGet);
   //   if(receivedReply) {
   //     clearInterval(retryIntervalID.current);
   //     return;
@@ -187,7 +187,7 @@ function FoodListingsTable({ onUserUpdate }) {
     const LOCAL_STORAGE_KEY = uuidv4(); 
     const {promise, intervalId} = startInterval(LOCAL_STORAGE_KEY);
     // Start the timer
-    checkLocalStorageIntervalGet.current = intervalId;
+    checkLocalStorageIntervalGet = intervalId;
     reservationService.getReservationsByUserId(authContext.userID, LOCAL_STORAGE_KEY)
       .then(data => {
         if(data){
@@ -210,8 +210,7 @@ function FoodListingsTable({ onUserUpdate }) {
       console.log(message);
       // GET
       if (message.action === 'get') {
-        console.log(checkLocalStorageIntervalGet.current);
-        clearInterval(checkLocalStorageIntervalGet.current);
+        clearInterval(checkLocalStorageIntervalGet);
         const listingDetails = await Promise.all(
           message.data.map(reservation =>
             ListingService.getListing({ ListingID: reservation.ListingID })
@@ -228,7 +227,7 @@ function FoodListingsTable({ onUserUpdate }) {
       // DELETE
       // Check if the message is a delete confirmation
       if (message.action === 'delete') {
-        clearInterval(checkLocalStorageIntervalDelete.current);
+        clearInterval(checkLocalStorageIntervalDelete);
         setDeleteSnackbar({ open: true, message: "Reservation deleted successfully" });
         // Also remove the reservation from the list
         formatListings(listingsWithImages.filter(listing => listing.ListingID !== message.listingID));
@@ -256,11 +255,12 @@ function FoodListingsTable({ onUserUpdate }) {
 
   // Clean up socket
   function socketCleanup(){
+    console.log("leaving page");
     if (webSocketService.socket && webSocketService.socket.readyState === WebSocket.OPEN) {
       webSocketService.socket.close();
     }
-    clearInterval(checkLocalStorageIntervalDelete.current);
-    clearInterval(checkLocalStorageIntervalGet.current);
+    clearInterval(checkLocalStorageIntervalDelete);
+    clearInterval(checkLocalStorageIntervalGet);
   }
 
   // Get user data
