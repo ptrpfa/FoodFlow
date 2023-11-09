@@ -40,7 +40,7 @@ const reservationService = {
               // Check in the event database has already sent back the success message
               if (convo_dict.replies.length === 2) {
                 // Mark the conversation as successful
-                console.log(`Conversation with msg_id ${reservation.msg_id} is successful.`);
+                console.log(`Conversation with msg_id ${msg_id} is successful.`);
     
                 // Remove from localstorage
                 localStorage.removeItem(msg_id);

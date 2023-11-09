@@ -147,6 +147,7 @@ checkTopicAvailability().then(() => {
                 action: 'delete',
                 msg_id: msg_id,
                 status: 200,
+                listingID: ListingID,
                 payload: `Reservation ID ${payload.ReservationID} successfully deleted.`,
                 sender: 'database-controller'
               };

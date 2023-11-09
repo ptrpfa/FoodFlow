@@ -8,7 +8,7 @@
 =========================================================
 */
 
-import { useState, useEffect, useContext, useMemo } from "react";
+import { useState, useEffect, useContext, useMemo, useRef } from "react";
 import { Link } from "react-router-dom";
 
 import Grid from "@mui/material/Grid";
@@ -22,6 +22,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
+import MDSnackbar from "components/MDSnackbar";
 import MDButton from "components/MDButton";
 
 import DashboardLayout from "page-components/LayoutContainers/DashboardLayout";
@@ -41,6 +42,7 @@ function FoodListingsTable({ onUserUpdate }) {
   const authContext = useContext(AuthContext);
   const [message, setMessage] = useState('');
   const [isLoading, setIsLoading] = useState(true);
+  const [receivedReply, setReceivedReply] = useState(false);
   const [listings, setListings] = useState([]);
   const [groupedListings, setGroupedListings] = useState([]);
   const [deletedListings, setDeletedListings] = useState([]);
@@ -55,8 +57,8 @@ function FoodListingsTable({ onUserUpdate }) {
   });
   const webSocketService = useMemo(() => new WebSocketService(), []);
 
-  var checkLocalStorageIntervalDelete = null;
-  var checkLocalStorageIntervalGet = null;
+  const checkLocalStorageIntervalGet = useRef(null);
+  const checkLocalStorageIntervalDelete = useRef(null);
 
   // Open dialog
   const deleteReservation = () => {
@@ -68,23 +70,27 @@ function FoodListingsTable({ onUserUpdate }) {
     setOpenDialog(false);
   };
 
+  const closeMessageSnackbar = () => {
+    setDeleteSnackbar({ open: false, message: "" });
+  }
+
   // Delete the reservation
-  const handleDeleteConfirmation = (ReservationID) => {
+  const handleDeleteConfirmation = (ReservationID, listingID) => {
     const LOCAL_STORAGE_KEY = uuidv4(); 
 
     // Start the timer
-    const {promise, interval} = startInterval(LOCAL_STORAGE_KEY);
-    checkLocalStorageIntervalDelete = interval;
-
+    const {promise, intervalId} = startInterval(LOCAL_STORAGE_KEY);
+    checkLocalStorageIntervalDelete.current = intervalId;
+    setOpenDialog(false);
     reservationService.deleteReservation(ReservationID)
       .then(data => {
-        clearInterval(checkLocalStorageIntervalDelete);
+        clearInterval(checkLocalStorageIntervalDelete.current);
         if(data) {
-          const currentDeleted = [...deletedListings, ReservationID];
-          currentDeleted.push(ReservationID);
-          setDeletedListings(currentDeleted);
-
-          setMessage(data.message);
+          // const currentDeleted = [...deletedListings, listingID];
+          // currentDeleted.push(listingID);
+          // setDeletedListings(currentDeleted);
+          // console.log(currentDeleted);
+          // setMessage(data.message);
         }
       })
       .catch(error => {
@@ -93,6 +99,7 @@ function FoodListingsTable({ onUserUpdate }) {
       });
     
     promise.then(data => {
+      
       if(data){
         setMessageSnackbar({ open: true, message: data });
       }
@@ -135,60 +142,58 @@ function FoodListingsTable({ onUserUpdate }) {
     if (webSocketService.socket && webSocketService.socket.readyState === WebSocket.OPEN) {
       webSocketService.socket.close();
     }
-
-    if (checkLocalStorageIntervalDelete) {
-      clearInterval(checkLocalStorageIntervalDelete);
-    }
-
-    if (checkLocalStorageIntervalGet) {
-      clearInterval(checkLocalStorageIntervalGet);
-    }
+    clearInterval(checkLocalStorageIntervalDelete.current);
+    clearInterval(checkLocalStorageIntervalGet.current);
   }
 
   // Set up web socket
   useEffect(() => {
+    async function handleMessage(message) {
+      console.log("message");
+      console.log(message);
+      // GET
+      if (message.action === 'get') {
+        clearInterval(checkLocalStorageIntervalGet.current);
+        const listingDetails = await Promise.all(
+          message.data.map(reservation =>
+            ListingService.getListing({ ListingID: reservation.ListingID })
+              .then(listingDetails => ({ ...listingDetails, reservationID: reservation.ReservationID }))
+          )
+        );
+        console.log("listingDetails");
+        console.log(listingDetails);
+        setListings(listingDetails);
+        setReceivedReply(true);
+      }
+      // DELETE
+      // Check if the message is a delete confirmation
+      if (message.action === 'delete') {
+        clearInterval(checkLocalStorageIntervalDelete.current);
+        setDeleteSnackbar({ open: true, message: "Reservation deleted successfully" });
+        // Also remove the reservation from the list
+        setListingsWithImages(listingsWithImages => 
+          listingsWithImages.filter(listing => listing.ListingID !== message.listingID)
+        );
+        const currentDeleted = [...deletedListings,  message.listingID];
+        currentDeleted.push(message.listingID);
+        setDeletedListings(currentDeleted);
+      } else if (message.status === 500 && message.action === 'delete') {
+        setDeleteSnackbar({ open: true, message: message.payload });
+      }
+    }
+
     async function connectWebSocket() {
       setIsLoading(true);
+      webSocketService.setMessageHandler(handleMessage);
       await webSocketService.setupWebSocket();
       setSocketConnected(true);
-      webSocketService.onmessage = async (message) => {
-        // GET
-        if (message.action === 'get') {
-          console.log(message);
-          clearInterval(checkLocalStorageIntervalGet);
-          const listingDetails = await Promise.all(
-            message.data.map(reservation =>
-              ListingService.getListing({ ListingID: reservation.ListingID })
-            )
-          );
-          setListings(listingDetails);
-        }
-        // DELETE
-        // Check if the message is a delete confirmation
-        if (message.status === 200 && message.action === 'delete') {
-          clearInterval(checkLocalStorageIntervalDelete);
-          setDeleteSnackbar({ open: true, message: "Reservation deleted successfully" });
-          // Also remove the reservation from the list
-          setListings(currentReservations => 
-            currentReservations.filter(reservation => reservation.ReservationID.toString() !== message.msg_id)
-          );
-        } else if (message.status === 500 && message.action === 'delete') {
-          setDeleteSnackbar({ open: true, message: message.payload });
-        }
-      };
     }
     
     connectWebSocket();
-      
     return () => {
       // Cleanup function
       socketCleanup();
     }
-  }, []);
-
-  // Get user data
-  useEffect(() => {
-    getUserData(authContext.userID);
   }, []);
 
   // Get reservation data by user id
@@ -199,10 +204,10 @@ function FoodListingsTable({ onUserUpdate }) {
 
     const fetchReservations = async () => {
       const LOCAL_STORAGE_KEY = uuidv4(); 
-      const {promise, interval} = startInterval(LOCAL_STORAGE_KEY);
+      const {promise, intervalId} = startInterval(LOCAL_STORAGE_KEY);
       // Start the timer
-      checkLocalStorageIntervalGet = interval;
-
+      checkLocalStorageIntervalGet.current = intervalId;
+      console.log("fetching listings");
       reservationService.getReservationsByUserId(authContext.userID, LOCAL_STORAGE_KEY)
         .then(data => {
           if(data){
@@ -220,14 +225,21 @@ function FoodListingsTable({ onUserUpdate }) {
     if (authContext.userID) {
       fetchReservations();
     }
-  },[authContext.userID, socketConnected])
+  },[socketConnected])
+
+  // Get user data
+  useEffect(() => {
+    getUserData(authContext.userID);
+  }, []);
+
+
 
   // Fetch listing details based on reservation details
   useEffect(() => {
-    if (!socketConnected) {
+    if (!socketConnected && !receivedReply) {
       return; // If socket is not connected, exit the effect early
     }
-
+    
     const fetchImage = async (listing) => {
       const imageData = await AWSS3Service.getImage({ imageId: listing.image });
       const imageBlob = convertUint8ArrayToBlob(imageData.imageData);
@@ -240,7 +252,10 @@ function FoodListingsTable({ onUserUpdate }) {
         const formattedListings = await Promise.all(
           listings.map(listing => fetchImage(listing))
         );
-        setListingsWithImages(formattedListings);
+      console.log("formattedListings");
+      console.log(formattedListings);
+
+      setListingsWithImages(formattedListings);
     } catch (error) {
         console.error('Failed to fetch reservations:', error);
         setListingsWithImages([]);
@@ -250,11 +265,11 @@ function FoodListingsTable({ onUserUpdate }) {
     if (authContext.userID) {
       fetchListingWithImages();
     }
-  }, [socketConnected,  authContext.userID, listings]);
+  }, [socketConnected,  authContext.userID, listings, receivedReply]);
 
   // Format listing for viewing
   useEffect(() => {
-    if (isLoading) {
+    if (!receivedReply) {
       return;
     }
     const formattedListings = [];
@@ -348,7 +363,7 @@ function FoodListingsTable({ onUserUpdate }) {
                           </DialogContent>
                           <DialogActions>
                             <MDButton variant="gradient" color="info" onClick={handleClose}>Close</MDButton>
-                            <MDButton  variant="gradient" color="error" onClick={() => handleDeleteConfirmation(listing.listingID)} autoFocus>
+                            <MDButton  variant="gradient" color="error" onClick={() => handleDeleteConfirmation(listing.reservationID, listing.listingID)} autoFocus>
                               Cancel
                             </MDButton>
                           </DialogActions>
@@ -364,6 +379,15 @@ function FoodListingsTable({ onUserUpdate }) {
               )
             )
           }
+          <MDSnackbar
+            icon="info"
+            title="Server Message:"
+            content={deleteSnackbar.message}
+            dateTime="5 seconds ago"
+            open={deleteSnackbar.open}
+            onClose={closeMessageSnackbar}
+            close={closeMessageSnackbar}
+          />
         </MDBox>
       </Card>
     </div>

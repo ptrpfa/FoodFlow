@@ -3,8 +3,12 @@ class WebSocketService {
   constructor() {
     this.socket = null;
     this.socketOpenPromise = null;
+    this.onmessage = null;
   }
-  
+
+  setMessageHandler(handler) {
+    this.onmessage = handler; 
+  }
 
   async setupWebSocket() {
     this.socket = new WebSocket('ws://localhost:8282');
@@ -12,6 +16,44 @@ class WebSocketService {
     this.socketOpenPromise = new Promise((resolve) => {
       this.socket.onopen = () => {
         console.log('WebSocket connection is open');
+        this.socket.onmessage = (event) => {
+          console.log("Socket received message");
+          console.log(event);
+          const server_message = (event.data).toString();
+          const reservationMessage = JSON.parse(server_message);
+          var payload = '';
+          
+          if (this.onmessage) {
+            //Get from localstorage   
+            const msg_id  = reservationMessage.msg_id;
+            const convo = localStorage.getItem(msg_id);
+            const sender = reservationMessage.sender;
+    
+            if (convo != null) { // Message for the client
+              const status = reservationMessage.status;
+              if (status == 200) {
+                const convo_dict = JSON.parse(convo);
+                console.log("convo_dict");
+                console.log(convo_dict);
+                if (!convo_dict.replies.includes(sender)) {
+                  convo_dict.replies.push(sender);
+                }
+    
+                localStorage.setItem(msg_id, JSON.stringify(convo_dict));
+                if (convo_dict.replies.length === 2) {
+                  // Mark the conversation as successful
+                  console.log(`Conversation with msg_id ${msg_id} is successful.`);
+                  this.handlePayload(reservationMessage, msg_id);
+                }
+              } else if(status == 500){
+                payload = reservationMessage.payload;
+                localStorage.removeItem(msg_id);
+                this.onmessage(payload);
+              }
+            }
+          } else {
+          }
+        }
         resolve();
       };
 
@@ -26,39 +68,7 @@ class WebSocketService {
 
     await this.socketOpenPromise;
 
-    this.socket.onmessage = (event) => {
-      console.log("Socket received message");
-      const server_message = (event.data).toString();
-      const reservationMessage = JSON.parse(server_message);
-      var payload = '';
-      
-      if (this.onmessage) {
-        //Get from localstorage   
-        const msg_id  = reservationMessage.msg_id;
-        const convo = localStorage.getItem(msg_id);
-        const sender = reservationMessage.sender;
 
-        if (convo != null) { // Message for the client
-          const status = reservationMessage.status;
-          if (status == 200) {
-            const convo_dict = JSON.parse(convo);
-            if (!convo_dict.replies.includes(sender)) {
-              convo_dict.replies.push(sender);
-              localStorage.setItem(msg_id, JSON.stringify(convo_dict));
-              if (convo_dict.replies.length === 2) {
-                // Mark the conversation as successful
-                console.log(`Conversation with msg_id ${msg_id} is successful.`);
-                this.handlePayload(reservationMessage, msg_id);
-              }
-            }
-          } else if(status == 500){
-            payload = reservationMessage.payload;
-            localStorage.removeItem(msg_id);
-            this.onmessage(payload);
-          }
-        }
-      }
-    }
   }
 
   handlePayload (reservationMessage, msg_id) {
@@ -68,8 +78,10 @@ class WebSocketService {
     } else if (reservationMessage.action === "get") {
       payload = {action: "get",data: reservationMessage.data};
     } else if (reservationMessage.action === "delete") {
-      payload = {action: "delete", payload: reservationMessage.payload};
+      payload = {action: "delete", payload: reservationMessage.payload, listingID: reservationMessage.listingID};
     }
+    console.log("payload");
+    console.log(payload);
 
     this.onmessage(payload);
   }
