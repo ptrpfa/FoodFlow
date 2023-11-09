@@ -160,6 +160,7 @@ function FoodListingsTable({ onUserUpdate }) {
     });
 
     promise.then(data => {
+      clearInterval(checkLocalStorageInterval.current);
       if(data){
         setMessageSnackbar({ open: true, message: data });
       }
@@ -243,21 +244,33 @@ function FoodListingsTable({ onUserUpdate }) {
 
   // Set up web socket
   useEffect(() => {
+    // async function connectWebSocket() {
+      // 
+
+      // webSocketService.onmessage = (message) => {
+      //   console.log(message);
+      //   // Update the state to open the MDSnackbar with the received message
+      //   clearInterval(checkLocalStorageInterval.current);
+      //   setMessageSnackbar({ open: true, message: message });
+      //   setReserved(true);
+      // };
     async function connectWebSocket() {
-      setIsLoading(true);
-      await webSocketService.setupWebSocket();
-      
-      webSocketService.onmessage = (message) => {
-        console.log(message);
-        // Update the state to open the MDSnackbar with the received message
-        clearInterval(checkLocalStorageInterval.current);
-        setMessageSnackbar({ open: true, message: message });
-        setReserved(true);
-      };
-      prepareModel();
+        await webSocketService.getSocketOpenPromise();
+        setIsLoading(true);
+        webSocketService.onmessage = (message) => {
+          // Update the state to open the MDSnackbar with the received message
+          clearInterval(checkLocalStorageInterval.current);
+          setMessageSnackbar({ open: true, message: message });
+          setReserved(true);
+        };
     }
-    
+      
     connectWebSocket();
+
+    prepareModel();
+  
+    
+    // connectWebSocket();
     return () => {
       // Cleanup function
       socketCleanup();
@@ -285,6 +298,7 @@ function FoodListingsTable({ onUserUpdate }) {
 
     setReservingListingID(0);
     setReserved(false);
+    fetchListings();
   }, [reserved, reservingListingID])
 
   return (

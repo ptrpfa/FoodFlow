@@ -60,7 +60,7 @@ function FoodListingsTable({ onUserUpdate }) {
 
   var checkLocalStorageIntervalGet = null;
   var checkLocalStorageIntervalDelete = null;
-  const webSocketService = useMemo(() => new WebSocketService(), []);
+  const webSocketService =  new WebSocketService();
 
   // Open dialog
   const deleteReservation = () => {
@@ -163,21 +163,22 @@ function FoodListingsTable({ onUserUpdate }) {
         listingDetails.map(listing => fetchImage(listing))
       );
 
-    setListingsWithImages(formattedListings);
-    formatListings(formattedListings, []);
+    //setListingsWithImages(formattedListings);
+    formatListings(formattedListings);
   } catch (error) {
       console.error('Failed to fetch reservations:', error);
-      setListingsWithImages([]);
+      // setListingsWithImages([]);
     }
   };
 
   const formatListings = (rawListings) => {
     setListingsWithImages(rawListings);
-    setReceivedReply(true);
+    console.log(listingsWithImages);
+
     const formattedListings = [];
-    const showListings = rawListings.filter (listing => !deletedListings.includes(listing.listingID) && listing.status === 0);
-    for (let i = 0; i < showListings.length; i += 3) {
-      formattedListings.push(showListings.slice(i, i + 3));
+    //const showListings = rawListings.filter (listing => !deletedListings.includes(listing.listingID) && listing.status === 0);
+    for (let i = 0; i < rawListings.length; i += 3) {
+      formattedListings.push(rawListings.slice(i, i + 3));
     }
     setGroupedListings(formattedListings);
     setIsLoading(false);
@@ -190,12 +191,15 @@ function FoodListingsTable({ onUserUpdate }) {
     checkLocalStorageIntervalGet = intervalId;
     reservationService.getReservationsByUserId(authContext.userID, LOCAL_STORAGE_KEY)
       .then(data => {
+        clearInterval(checkLocalStorageIntervalGet);
         if(data){
             console.log(`data: ${data}`);
         }
       });
   
     promise.then(data => {
+      console.log(checkLocalStorageIntervalGet);
+      clearInterval(checkLocalStorageIntervalGet);
       if(data === "Reservation is unsuccessful") {
         socketCleanup();
         setForceRender(prev => prev + 1);
@@ -205,9 +209,9 @@ function FoodListingsTable({ onUserUpdate }) {
 
   // Set up web socket
   useEffect(() => {
-    async function handleMessage(message) {
-      console.log("message");
-      console.log(message);
+
+    async function meow(message){
+   
       // GET
       if (message.action === 'get') {
         clearInterval(checkLocalStorageIntervalGet);
@@ -215,7 +219,7 @@ function FoodListingsTable({ onUserUpdate }) {
           message.data.map(reservation =>
             ListingService.getListing({ ListingID: reservation.ListingID })
               .then(listingDetails => ({ ...listingDetails, reservationID: reservation.ReservationID }))
-          )
+          ) 
         );
         setListings(listingDetails);
         setReceivedReply(true);
@@ -230,22 +234,25 @@ function FoodListingsTable({ onUserUpdate }) {
         clearInterval(checkLocalStorageIntervalDelete);
         setDeleteSnackbar({ open: true, message: "Reservation deleted successfully" });
         // Also remove the reservation from the list
-        formatListings(listingsWithImages.filter(listing => listing.ListingID !== message.listingID));
+        formatListings(listingsWithImages.filter(listing => listing.ListingID !== message.listingID && listing.status === 0));
       } else if (message.status === 500 && message.action === 'delete') {
         setDeleteSnackbar({ open: true, message: message.payload });
       }
     }
 
     async function connectWebSocket() {
+      await webSocketService.getSocketOpenPromise();
       setIsLoading(true);
-      console.log("setting message handler");
-      await webSocketService.setupWebSocket();
-      webSocketService.setMessageHandler(handleMessage);
-      console.log("socket connected");
+
+      webSocketService.onmessage = (message) => {
+
+        meow(message);
+      };
       setSocketConnected(true);
     }
     
     connectWebSocket();
+
     fetchReservations();
     return () => {
       // Cleanup function
@@ -255,7 +262,7 @@ function FoodListingsTable({ onUserUpdate }) {
 
   // Clean up socket
   function socketCleanup(){
-    console.log("leaving page");
+
     if (webSocketService.socket && webSocketService.socket.readyState === WebSocket.OPEN) {
       webSocketService.socket.close();
     }
