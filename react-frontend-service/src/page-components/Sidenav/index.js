@@ -9,7 +9,7 @@
 */
 
 
-import { useEffect } from "react";
+import { useEffect, useContext, useState } from "react";
 
 // react-router-dom components
 import { useLocation, NavLink } from "react-router-dom";
@@ -34,6 +34,9 @@ import SidenavCollapse from "page-components/Sidenav/SidenavCollapse";
 import SidenavRoot from "page-components/Sidenav/SidenavRoot";
 import sidenavLogoLabel from "page-components/Sidenav/styles/sidenav";
 
+import { AuthContext } from "context";
+import AuthService from "../../services/auth-service";
+
 // Material Dashboard 2 React context
 import {
   useMaterialUIController,
@@ -47,6 +50,10 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
   const { miniSidenav, transparentSidenav, whiteSidenav, darkMode } = controller;
   const location = useLocation();
   const collapseName = location.pathname.replace("/", "");
+  const authContext = useContext(AuthContext);
+  const [user, setUser] = useState({
+    role: "",
+  });
 
   let textColor = "white";
 
@@ -78,32 +85,85 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
     return () => window.removeEventListener("resize", handleMiniSidenav);
   }, [dispatch, location]);
 
+  // Get user data
+  useEffect(() => {
+      getUserData(authContext.userID);
+  }, []);
+
+  // Get user data (role, firstname, lastname)
+  const getUserData = async (UserID) => {
+    try {
+      const response = await AuthService.getProfile({ UserID: UserID });
+
+      if (response) {;
+        const role = response.role;
+        
+        setUser((prevUser) => ({
+          ...prevUser,
+          role,
+        }));
+      } 
+      else {
+        console.error("User data not found.");
+      }
+    } catch (error) {
+      console.error("An error occurred while fetching user data:", error);
+    }
+  };
+
   // Render all the routes from the routes.js (All the visible items on the Sidenav)
   const renderRoutes = routes.map(({ type, name, icon, title, noCollapse, key, href, route }) => {
     let returnValue;
 
+    console.log(user.role);
     if (type === "collapse") {
-      returnValue = href ? (
-        <Link
-          href={href}
-          key={key}
-          target="_blank"
-          rel="noreferrer"
-          sx={{ textDecoration: "none" }}
-        >
-          <SidenavCollapse
-            name={name}
-            icon={icon}
-            active={key === collapseName}
-            noCollapse={noCollapse}
-          />
-        </Link>
-      ) : (
-        <NavLink key={key} to={route}>
-          <SidenavCollapse name={name} icon={icon} active={key === collapseName} />
-        </NavLink>
-      );
-    } else if (type === "title") {
+      if ((user.role === "patron" && (key === "listings" || key === "reserved")) ||
+        (user.role === "donor" && (key === "mylistings" || key === "upload"))) {
+        returnValue = href ? (
+          <Link
+            href={href}
+            key={key}
+            target="_blank"
+            rel="noreferrer"
+            sx={{ textDecoration: "none" }}
+          >
+            <SidenavCollapse
+              name={name}
+              icon={icon}
+              active={key === collapseName}
+              noCollapse={noCollapse}
+            />
+          </Link>
+        ) : (
+          <NavLink key={key} to={route}>
+            <SidenavCollapse name={name} icon={icon} active={key === collapseName} />
+          </NavLink>
+        );
+      }
+      // else {
+      //   returnValue = href ? (
+      //     <Link
+      //       href={href}
+      //       key={key}
+      //       target="_blank"
+      //       rel="noreferrer"
+      //       sx={{ textDecoration: "none" }}
+      //     >
+      //       <SidenavCollapse
+      //         name={name}
+      //         icon={icon}
+      //         active={key === collapseName}
+      //         noCollapse={noCollapse}
+      //       />
+      //     </Link>
+      //   ) : (
+      //     <NavLink key={key} to={route}>
+      //       <SidenavCollapse name={name} icon={icon} active={key === collapseName} />
+      //     </NavLink>
+      //   );
+      // }
+    }
+    else if (type === "title") {
       returnValue = (
         <MDTypography
           key={key}
@@ -120,7 +180,8 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
           {title}
         </MDTypography>
       );
-    } else if (type === "divider") {
+    } 
+    else if (type === "divider") {
       returnValue = (
         <Divider
           key={key}
