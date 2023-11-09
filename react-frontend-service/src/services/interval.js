@@ -3,13 +3,14 @@ let checkLocalStorageInterval;
 const checkLocalStorage = (msg_id) => {
     const reservationData = JSON.parse(localStorage.getItem(msg_id));
     if (reservationData) {
-        if(reservationData.replies.length == 2){
+        console.log(reservationData);
+        if (reservationData.replies.length == 2) {
             return "Reservation is successful";
-        }else{
+        } else {
 
-            if(!reservationData.replies.includes("reservation-controller")){
+            if (!reservationData.replies.includes("reservation-controller") ){
                 console.log("Reservation service is down");
-            }else{
+            } else {
                 console.log("Database service is down");
             }
             return "Reservation is unsuccessful";

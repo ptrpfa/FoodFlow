@@ -138,6 +138,7 @@ app.delete("/reservation/delete/:ReservationID", (req, res) => {
             msg_id: msg_id,
             message: "Delete reservation request sent",
             reservation: reservationData,
+            sender: "reservation-controller",
           });
         }
         isResponseSent = true;
@@ -194,6 +195,7 @@ app.get("/reservation/:UserID", (req,res) => {
             msg_id: msg_id,
             message: "Get reservation request sent",
             reservation: reservationData,
+            sender: "reservation-controller",
           });
         }
         isResponseSent = true;

@@ -27,6 +27,7 @@ import MDButton from "components/MDButton";
 import DashboardLayout from "page-components/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "page-components/Navbars/DashboardNavbar";
 import Footer from "page-components/Footer";
+import { v4 as uuidv4 } from "uuid"; 
 
 import { AuthContext } from "context";
 import AuthService from "../../../services/auth-service";
@@ -34,6 +35,7 @@ import reservationService from "services/reservation-service";
 import AWSS3Service from "services/aws-s3-service";
 import ListingService from "services/listing-service";
 import WebSocketService from "services/web-listener";
+import { startInterval } from "services/interval";
 
 function FoodListingsTable({ onUserUpdate }) {
   const authContext = useContext(AuthContext);
@@ -53,7 +55,9 @@ function FoodListingsTable({ onUserUpdate }) {
   });
   const webSocketService = useMemo(() => new WebSocketService(), []);
 
-  
+  var checkLocalStorageIntervalDelete = null;
+  var checkLocalStorageIntervalGet = null;
+
   // Open dialog
   const deleteReservation = () => {
     setOpenDialog(true);
@@ -66,18 +70,33 @@ function FoodListingsTable({ onUserUpdate }) {
 
   // Delete the reservation
   const handleDeleteConfirmation = (ReservationID) => {
+    const LOCAL_STORAGE_KEY = uuidv4(); 
+
+    // Start the timer
+    const {promise, interval} = startInterval(LOCAL_STORAGE_KEY);
+    checkLocalStorageIntervalDelete = interval;
+
     reservationService.deleteReservation(ReservationID)
       .then(data => {
-        const currentDeleted = [...deletedListings, ReservationID];
-        currentDeleted.push(ReservationID);
-        setDeletedListings(currentDeleted);
+        clearInterval(checkLocalStorageIntervalDelete);
+        if(data) {
+          const currentDeleted = [...deletedListings, ReservationID];
+          currentDeleted.push(ReservationID);
+          setDeletedListings(currentDeleted);
 
-        setMessage(data.message);
+          setMessage(data.message);
+        }
       })
       .catch(error => {
         console.error("Delete failed:", error);
         setMessage("Delete failed");
       });
+    
+    promise.then(data => {
+      if(data){
+        setMessageSnackbar({ open: true, message: data });
+      }
+    });
   }
 
   // Get user data (role, firstname, lastname)
@@ -116,17 +135,27 @@ function FoodListingsTable({ onUserUpdate }) {
     if (webSocketService.socket && webSocketService.socket.readyState === WebSocket.OPEN) {
       webSocketService.socket.close();
     }
+
+    if (checkLocalStorageIntervalDelete) {
+      clearInterval(checkLocalStorageIntervalDelete);
+    }
+
+    if (checkLocalStorageIntervalGet) {
+      clearInterval(checkLocalStorageIntervalGet);
+    }
   }
 
   // Set up web socket
   useEffect(() => {
     async function connectWebSocket() {
+      setIsLoading(true);
       await webSocketService.setupWebSocket();
       setSocketConnected(true);
-
       webSocketService.onmessage = async (message) => {
         // GET
         if (message.action === 'get') {
+          console.log(message);
+          clearInterval(checkLocalStorageIntervalGet);
           const listingDetails = await Promise.all(
             message.data.map(reservation =>
               ListingService.getListing({ ListingID: reservation.ListingID })
@@ -137,6 +166,7 @@ function FoodListingsTable({ onUserUpdate }) {
         // DELETE
         // Check if the message is a delete confirmation
         if (message.status === 200 && message.action === 'delete') {
+          clearInterval(checkLocalStorageIntervalDelete);
           setDeleteSnackbar({ open: true, message: "Reservation deleted successfully" });
           // Also remove the reservation from the list
           setListings(currentReservations => 
@@ -168,7 +198,23 @@ function FoodListingsTable({ onUserUpdate }) {
     }
 
     const fetchReservations = async () => {
-      await reservationService.getReservationsByUserId(authContext.userID);
+      const LOCAL_STORAGE_KEY = uuidv4(); 
+      const {promise, interval} = startInterval(LOCAL_STORAGE_KEY);
+      // Start the timer
+      checkLocalStorageIntervalGet = interval;
+
+      reservationService.getReservationsByUserId(authContext.userID, LOCAL_STORAGE_KEY)
+        .then(data => {
+          if(data){
+              console.log(`data: ${data}`);
+          }
+        });
+    
+      promise.then(data => {
+        if(data){
+          console.log(`promise data: ${data}`);
+        }
+      });
     }
 
     if (authContext.userID) {
@@ -184,22 +230,18 @@ function FoodListingsTable({ onUserUpdate }) {
 
     const fetchImage = async (listing) => {
       const imageData = await AWSS3Service.getImage({ imageId: listing.image });
-      console.log(imageData);
       const imageBlob = convertUint8ArrayToBlob(imageData.imageData);
       const imageUrl = URL.createObjectURL(imageBlob);
-      setIsLoading(false);
       return { ...listing, image: imageUrl };
     };
 
     const fetchListingWithImages = async () => {
       try {
-        console.log(listings);
         const formattedListings = await Promise.all(
           listings.map(listing => fetchImage(listing))
         );
-        console.log(formattedListings);
         setListingsWithImages(formattedListings);
-      } catch (error) {
+    } catch (error) {
         console.error('Failed to fetch reservations:', error);
         setListingsWithImages([]);
       }
@@ -221,7 +263,8 @@ function FoodListingsTable({ onUserUpdate }) {
       formattedListings.push(showListings.slice(i, i + 3));
     }
     setGroupedListings(formattedListings);
-  }, [isLoading, deletedListings])  
+    setIsLoading(false);
+  }, [listingsWithImages, deletedListings])  
 
   return (
     <div>

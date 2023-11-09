@@ -65,55 +65,126 @@ const reservationService = {
         });
     });
   },
-  deleteReservation: (ReservationID) => {
-    const LOCAL_STORAGE_KEY = uuidv4(); 
+
+  deleteReservation: (ReservationID, msg_id) => {
+    // const LOCAL_STORAGE_KEY = uuidv4(); 
     
     const payload = {
       ReservationID: ReservationID,
-      msg_id: LOCAL_STORAGE_KEY,
+      msg_id: msg_id,
       replies: []
     };
     
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(payload));
+    localStorage.setItem(msg_id, JSON.stringify(payload));
 
-    return axios.delete(`${API_BASE_URL}/reservation/delete/${ReservationID}`, payload,  {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
+    return new Promise((resolve, reject) => {
+    axios
+      .delete(`${API_BASE_URL}/reservation/delete/${ReservationID}`, payload,  {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
       .then(response => {
-        resolve(response.data);
+        const msg_id = response.data.msg_id;
+        const convo = localStorage.getItem(msg_id);
+        const sender = response.data.sender;
+        if(convo != null){
+          // Reply is for this client
+          const convo_dict = JSON.parse(convo);
+          if(!convo_dict.replies.includes(sender)){
+            convo_dict.replies.push(sender);
+            localStorage.setItem(msg_id, JSON.stringify(convo_dict));
+    
+            // Check in the event database has already sent back the success message
+            if (convo_dict.replies.length === 2) {
+              // Mark the conversation as successful
+              console.log(`Conversation with msg_id ${reservation.msg_id} is successful.`);
+  
+              // Remove from localstorage
+              localStorage.removeItem(msg_id);
+
+              resolve(response.data);
+            }
+          }
+        }
       })
       .catch(error => {
-        resolve(error);
+          const msg_id = error.msg_id;
+          const convo = localStorage.getItem(msg_id);
+          
+          if(convo != null){
+            // Server url error
+            console.error("Reservation failed:", error);
+            // Remove the reservation request from localstorage
+            localStorage.removeItem(msg_id);
+            
+            resolve(error.message);
+          }
       });
+    })
   },
 
-  getReservationsByUserId: (UserID) => {
+  getReservationsByUserId: (UserID, msg_id) => {
     // No need to create an object, just pass UserID in the URL
-    const LOCAL_STORAGE_KEY = uuidv4(); 
+    // const LOCAL_STORAGE_KEY = uuidv4(); 
 
     const payload = {
       UserID: UserID,
-      msg_id: LOCAL_STORAGE_KEY,
+      msg_id: msg_id,
       replies: []
     };
 
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(payload));
+    localStorage.setItem(msg_id, JSON.stringify(payload));
     
-    return axios.get(`${API_BASE_URL}/reservation/${UserID}`, {
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      params: {
-        msg_id: LOCAL_STORAGE_KEY // Assuming you want to send the LOCAL_STORAGE_KEY as a msg_id
-      }
+    return new Promise((resolve, reject) => {
+      axios
+        .get(`${API_BASE_URL}/reservation/${UserID}`, {
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          params: {
+            msg_id: msg_id // Send msg_id
+          }
+        })
+      .then(response => {
+        const msg_id = response.data.msg_id;
+        const convo = localStorage.getItem(msg_id);
+        const sender = response.data.sender;
+        if(convo != null){
+          // Reply is for this client
+          const convo_dict = JSON.parse(convo);
+          if(!convo_dict.replies.includes(sender)){
+            convo_dict.replies.push(sender);
+            localStorage.setItem(msg_id, JSON.stringify(convo_dict));
+    
+            // Check in the event database has already sent back the success message
+            if (convo_dict.replies.length === 2) {
+              // Mark the conversation as successful
+              console.log(`Conversation with msg_id ${reservation.msg_id} is successful.`);
+  
+              // Remove from localstorage
+              localStorage.removeItem(msg_id);
+
+              resolve(response.data);
+            }
+          }
+        }
+      }) 
+      //return response
+      .catch(error => {
+        const msg_id = error.msg_id;
+        const convo = localStorage.getItem(msg_id);
+        
+        if(convo != null){
+          // Server url error
+          console.error("Reservation failed:", error);
+          // Remove the reservation request from localstorage
+          localStorage.removeItem(msg_id);
+          
+          resolve(error.message);
+        }
+      });
     })
-    .then(response => response.data) // Return the data directly
-    //return response
-    .catch(error => {
-      throw error;
-    });
   }
   
 }

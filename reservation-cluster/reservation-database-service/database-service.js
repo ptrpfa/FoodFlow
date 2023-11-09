@@ -177,6 +177,7 @@ checkTopicAvailability().then(() => {
                   msg_id: msg_id,
                   status: 200, 
                   data: reservations,
+                  sender: 'database-controller',
                   payload: `Reservations successfully fetched for UserID  ${payload.UserID} .`,
               };
                 //Send the reservation message to the WebSocket server

@@ -169,6 +169,9 @@ function FoodListingsTable({ onUserUpdate }) {
     if (webSocketService.socket && webSocketService.socket.readyState === WebSocket.OPEN) {
       webSocketService.socket.close();
     }
+    if (checkLocalStorageInterval) {
+      clearInterval(checkLocalStorageInterval);
+    }
   }
 
   // Set up web socket
@@ -370,15 +373,6 @@ function FoodListingsTable({ onUserUpdate }) {
                               >
                                 Reserve
                               </MDButton>
-                              <MDSnackbar
-                                icon="info"
-                                title="Server Message:"
-                                content={messageSnackbar.message}
-                                dateTime="5 seconds ago"
-                                open={messageSnackbar.open}
-                                onClose={closeMessageSnackbar}
-                                close={closeMessageSnackbar}
-                              />
                             </MDBox>
                           </Card>
                           <Dialog
@@ -412,8 +406,18 @@ function FoodListingsTable({ onUserUpdate }) {
                   No listings available.
                 </MDTypography>
               )
+
             )
           }
+          <MDSnackbar
+            icon="info"
+            title="Server Message:"
+            content={messageSnackbar.message}
+            dateTime="5 seconds ago"
+            open={messageSnackbar.open}
+            onClose={closeMessageSnackbar}
+            close={closeMessageSnackbar}
+          />
         </MDBox>
       </Card>
     </div>

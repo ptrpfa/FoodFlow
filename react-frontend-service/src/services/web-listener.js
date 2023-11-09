@@ -35,7 +35,6 @@ class WebSocketService {
       if (this.onmessage) {
         //Get from localstorage   
         const msg_id  = reservationMessage.msg_id;
-        console.log(reservationMessage);
         const convo = localStorage.getItem(msg_id);
         const sender = reservationMessage.sender;
 
@@ -46,7 +45,6 @@ class WebSocketService {
             if (!convo_dict.replies.includes(sender)) {
               convo_dict.replies.push(sender);
               localStorage.setItem(msg_id, JSON.stringify(convo_dict));
-
               if (convo_dict.replies.length === 2) {
                 // Mark the conversation as successful
                 console.log(`Conversation with msg_id ${msg_id} is successful.`);
@@ -73,7 +71,6 @@ class WebSocketService {
       payload = {action: "delete", payload: reservationMessage.payload};
     }
 
-    localStorage.removeItem(msg_id);
     this.onmessage(payload);
   }
 
