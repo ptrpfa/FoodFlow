@@ -34,7 +34,6 @@ import SidenavCollapse from "page-components/Sidenav/SidenavCollapse";
 import SidenavRoot from "page-components/Sidenav/SidenavRoot";
 import sidenavLogoLabel from "page-components/Sidenav/styles/sidenav";
 
-import { AuthContext } from "context";
 import AuthService from "../../services/auth-service";
 
 // Material Dashboard 2 React context
@@ -43,14 +42,17 @@ import {
   setMiniSidenav,
   setTransparentSidenav,
   setWhiteSidenav,
+  AuthContext,
 } from "context";
 
+
+
 function Sidenav({ color, brand, brandName, routes, ...rest }) {
-  const [controller, dispatch] = useMaterialUIController();
-  const { miniSidenav, transparentSidenav, whiteSidenav, darkMode } = controller;
+  const authContext = useContext(AuthContext);
   const location = useLocation();
   const collapseName = location.pathname.replace("/", "");
-  const authContext = useContext(AuthContext);
+  const [controller, dispatch] = useMaterialUIController();
+  const { miniSidenav, transparentSidenav, whiteSidenav, darkMode } = controller;
   const [user, setUser] = useState({
     role: "",
   });
@@ -81,16 +83,14 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
     // Call the handleMiniSidenav function to set the state with the initial value.
     handleMiniSidenav();
 
+    // Get user data
+    getUserData(authContext.userID);
+
     // Remove event listener on cleanup
     return () => window.removeEventListener("resize", handleMiniSidenav);
   }, [dispatch, location]);
 
-  // Get user data
-  useEffect(() => {
-      getUserData(authContext.userID);
-  }, []);
-
-  // Get user data (role, firstname, lastname)
+  // Get user data (role)
   const getUserData = async (UserID) => {
     try {
       const response = await AuthService.getProfile({ UserID: UserID });
@@ -115,7 +115,6 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
   const renderRoutes = routes.map(({ type, name, icon, title, noCollapse, key, href, route }) => {
     let returnValue;
 
-    console.log(user.role);
     if (type === "collapse") {
       if ((user.role === "patron" && (key === "listings" || key === "reserved")) ||
         (user.role === "donor" && (key === "mylistings" || key === "upload"))) {
@@ -140,28 +139,6 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
           </NavLink>
         );
       }
-      // else {
-      //   returnValue = href ? (
-      //     <Link
-      //       href={href}
-      //       key={key}
-      //       target="_blank"
-      //       rel="noreferrer"
-      //       sx={{ textDecoration: "none" }}
-      //     >
-      //       <SidenavCollapse
-      //         name={name}
-      //         icon={icon}
-      //         active={key === collapseName}
-      //         noCollapse={noCollapse}
-      //       />
-      //     </Link>
-      //   ) : (
-      //     <NavLink key={key} to={route}>
-      //       <SidenavCollapse name={name} icon={icon} active={key === collapseName} />
-      //     </NavLink>
-      //   );
-      // }
     }
     else if (type === "title") {
       returnValue = (
