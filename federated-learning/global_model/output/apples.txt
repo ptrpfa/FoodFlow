@@ -1,0 +1,106 @@
+2023-11-03 07:56:05.675825: I tensorflow/core/util/util.cc:169] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2023-11-03 07:56:05.695163: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 AVX512F AVX512_VNNI AVX512_BF16 FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+
+
+Preparing training data image features..
+
+Training data image features loaded!
+
+__________________________________________________________________________________________
+Layer (type)                Input Shape               Output shape              Param #   
+==========================================================================================
+dense_Dense1 (Dense)        [[null,1024]]             [null,128]                131200    
+__________________________________________________________________________________________
+dense_Dense2 (Dense)        [[null,128]]              [null,2]                  258       
+==========================================================================================
+Total params: 131458
+Trainable params: 131458
+Non-trainable params: 0
+__________________________________________________________________________________________
+
+Training model..
+
+Epoch 1 / 10
+eta=0.0 =============================================================================> 
+5250ms 984us/step - acc=0.971 loss=0.0782 
+0 { loss: 0.0781550258398056, acc: 0.9707536101341248 }
+Epoch 2 / 10
+eta=0.0 =============================================================================> 
+4827ms 905us/step - acc=0.992 loss=0.0247 
+1 { loss: 0.024678125977516174, acc: 0.9917510151863098 }
+Epoch 3 / 10
+eta=0.0 =============================================================================> 
+4730ms 887us/step - acc=0.993 loss=0.0173 
+2 { loss: 0.01730676181614399, acc: 0.9926883578300476 }
+Epoch 4 / 10
+eta=0.0 =============================================================================> 
+4628ms 868us/step - acc=0.998 loss=5.64e-3 
+3 { loss: 0.005642455071210861, acc: 0.9983126521110535 }
+Epoch 5 / 10
+eta=0.0 =============================================================================> 
+4550ms 853us/step - acc=0.995 loss=0.0159 
+4 { loss: 0.015855852514505386, acc: 0.9947506189346313 }
+Epoch 6 / 10
+eta=0.0 =============================================================================> 
+4572ms 857us/step - acc=0.997 loss=7.94e-3 
+5 { loss: 0.007941540330648422, acc: 0.9970003366470337 }
+Epoch 7 / 10
+eta=0.0 =============================================================================> 
+4575ms 858us/step - acc=0.997 loss=6.28e-3 
+6 { loss: 0.006275728810578585, acc: 0.9973753094673157 }
+Epoch 8 / 10
+eta=0.0 =============================================================================> 
+4562ms 855us/step - acc=0.997 loss=0.0113 
+7 { loss: 0.011283408850431442, acc: 0.9970003366470337 }
+Epoch 9 / 10
+eta=0.0 =============================================================================> 
+4556ms 854us/step - acc=0.999 loss=1.09e-3 
+8 { loss: 0.0010919964406639338, acc: 0.9994375109672546 }
+Epoch 10 / 10
+eta=0.0 =============================================================================> 
+4548ms 853us/step - acc=1.000 loss=3.93e-5 
+9 { loss: 0.000039261656638700515, acc: 0.9999999403953552 }
+
+Model trained!
+
+Model saved!
+
+Testing model..
+
+False Prediction: Rotten with 75.54952502250671% confidence (Actual: Fresh)
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/apples/test/fresh/rotated_by_45_Screen Shot 2018-06-08 at 5.12.14 PM.png
+
+False Prediction: Rotten with 98.3957052230835% confidence (Actual: Fresh)
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/apples/test/fresh/vertical_flip_Screen Shot 2018-06-08 at 5.26.58 PM.png
+
+False Prediction: Fresh with 90.53628444671631% confidence (Actual: Rotten)
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/apples/test/rotten/Screen Shot 2018-06-08 at 2.26.55 PM.png
+
+False Prediction: Fresh with 99.83866214752197% confidence (Actual: Rotten)
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/apples/test/rotten/a_r504.png
+
+False Prediction: Fresh with 99.83866214752197% confidence (Actual: Rotten)
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/apples/test/rotten/saltandpepper_Screen Shot 2018-06-07 at 2.24.35 PM.png
+
+False Prediction: Fresh with 62.3843252658844% confidence (Actual: Rotten)
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/apples/test/rotten/saltandpepper_Screen Shot 2018-06-07 at 2.47.20 PM.png
+
+False Prediction: Fresh with 97.89968729019165% confidence (Actual: Rotten)
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/fruits/apples/test/rotten/translation_Screen Shot 2018-06-07 at 2.20.46 PM.png
+
+~Model Performance~
+Confusion Matrix:
+True Fresh: 562 (42.13%)
+False Fresh: 2 (0.15%)
+True Rotten: 765 (57.35%)
+False Rotten: 5 (0.37%)
+
+Test Size: 1334
+Accuracy: 99.48%
+Miss: 0.52%
+
+Precision: 1.00
+Recall: 0.99
+Specificity: 1.00
+F1 Score: 0.99
