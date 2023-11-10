@@ -167,7 +167,7 @@ function DetailedListing(onUserUpdate) {
                     >
                       Collected
                     </MDButton>
-                  ) : (authContext.userID === listing?.userID.toString() ? (
+                  ) : (authContext.userID === listing?.userID.toString() && (
                       <div>
                         <MDButton
                           variant="gradient"
@@ -186,26 +186,7 @@ function DetailedListing(onUserUpdate) {
                           Delete Listing
                         </MDButton>
                       </div>
-                    ) : (
-                      // Listing status is available
-                      listing.status === 1 ? (
-                        <MDButton
-                          variant="gradient"
-                          color="warning"
-                          onClick={handleReservation}
-                        >
-                          Reserve
-                        </MDButton>
-                      ) : (
-                        <MDButton
-                          variant="gradient"
-                          color="warning"
-                          disabled={true} // the button will appear disabled if status is not 1 (0 or 2)
-                        >
-                          Reserve
-                        </MDButton>
-                      )
-                    )
+                    ) 
                   )
                 }
               </div>
