@@ -17,10 +17,10 @@ spec:
           image: skyish/react-frontend:latest
           resources:
             requests:
-              memory: "2Gi"  
+              memory: "1Gi"  
               cpu: "3"        
             limits:
-              memory: "4Gi"   # Limit the federated learning
+              memory: "2Gi"   # Limit the federated learning
               cpu: "3"        
           ports:
             - containerPort: 3000

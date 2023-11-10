@@ -143,7 +143,7 @@ function FoodListingsTable({ onUserUpdate }) {
 
   // User click 'reserve' button 
   const handleReservation = (listingID) => {
-    console.log("Making reservation");
+    console.log("making reservation");
     const LOCAL_STORAGE_KEY = uuidv4(); 
     // Calls reservation-service.js
     setReservingListingID(listingID);
@@ -200,10 +200,12 @@ function FoodListingsTable({ onUserUpdate }) {
   };
   
   const fetchListings = () => {
-    console.log("Fetching listings");
+    console.log("fetching listings");
+    console.log(user.role);
     if (user.role === "patron") {
       ListingService.getAvailableListingsExcludeUser({ Userid: authContext.userID })
         .then(async (allListings) => {
+          console.log(allListings);
           const listingsWithImages = await Promise.all(
             allListings.map(fetchImageForListing)
           );
@@ -245,14 +247,15 @@ function FoodListingsTable({ onUserUpdate }) {
     async function connectWebSocket() {
         await webSocketService.getSocketOpenPromise();
         setIsLoading(true);
-        webSocketService.onmessage = (message) => {
-          // Update the state to open the MDSnackbar with the received message
-          clearInterval(checkLocalStorageInterval.current);
-          setMessageSnackbar({ open: true, message: message });
-          setReserved(true);
-        };
     }
       
+      webSocketService.onmessage = (message) => {
+    // Update the state to open the MDSnackbar with the received message
+    clearInterval(checkLocalStorageInterval.current);
+    setMessageSnackbar({ open: true, message: message });
+    setReserved(true);
+    };
+        
     connectWebSocket();
 
     prepareModel();

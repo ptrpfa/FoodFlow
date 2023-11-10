@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: aws-s3-listing-deployment
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: aws-s3-listing

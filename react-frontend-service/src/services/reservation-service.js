@@ -150,7 +150,7 @@ const reservationService = {
         const msg_id = response.data.msg_id;
         const convo = localStorage.getItem(msg_id);
         const sender = response.data.sender;
-
+        console.log(msg_id);
         if(convo != null){
           // Reply is for this client
           const convo_dict = JSON.parse(convo);
