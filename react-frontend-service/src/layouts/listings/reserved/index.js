@@ -182,6 +182,7 @@ function FoodListingsTable({ onUserUpdate }) {
       if(data === "Reservation is unsuccessful") {
         socketCleanup();
         setForceRender(prev => prev + 1);
+        setIsLoading(false);
       }
     });
   }

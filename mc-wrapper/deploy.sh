@@ -26,8 +26,6 @@ kubectl apply -f ./utils/kafka-deployment.yaml --namespace "$namespace_name"
 echo ""
 
 
-kubectl config set-context --current --namespace=food-flow
-
 echo "All YAML files in the current directory applied successfully"
 echo "Kubernetes banzai!"
 

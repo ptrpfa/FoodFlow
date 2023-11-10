@@ -12,11 +12,13 @@ class WebSocketService {
       };
     });
 
+
     this.socket.onmessage = (event) => {
       const server_message = (event.data).toString();
       const reservationMessage = JSON.parse(server_message);
       var payload = '';
       if(this.onmessage){
+        console.log(reservationMessage);
         //Get from localstorage   
         const msg_id  = reservationMessage.msg_id;
         const convo = localStorage.getItem(msg_id);
