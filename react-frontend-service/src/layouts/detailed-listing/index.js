@@ -57,17 +57,6 @@ function DetailedListing(onUserUpdate) {
     navigate('/mylistings');
   }
 
-  const handleReservation = () => {
-    // reservationService.makeReservation("This is a test reservation.")
-    //   .then(data => {
-    //     setMessage(data.message);
-    //   })
-    //   .catch(error => {
-    //     console.error("Reservation failed:", error);
-    //     setMessage("Reservation failed");
-    //   });
-  }
-
   const convertUint8ArrayToBlob = (uint8Array) => {
     return new Blob([uint8Array], { type: 'image/jpeg' });
   };
@@ -167,7 +156,7 @@ function DetailedListing(onUserUpdate) {
                     >
                       Collected
                     </MDButton>
-                  ) : (authContext.userID === listing?.userID.toString() ? (
+                  ) : (authContext.userID === listing?.userID.toString() && (
                       <div>
                         <MDButton
                           variant="gradient"
@@ -186,26 +175,7 @@ function DetailedListing(onUserUpdate) {
                           Delete Listing
                         </MDButton>
                       </div>
-                    ) : (
-                      // Listing status is available
-                      listing.status === 1 ? (
-                        <MDButton
-                          variant="gradient"
-                          color="warning"
-                          onClick={handleReservation}
-                        >
-                          Reserve
-                        </MDButton>
-                      ) : (
-                        <MDButton
-                          variant="gradient"
-                          color="warning"
-                          disabled={true} // the button will appear disabled if status is not 1 (0 or 2)
-                        >
-                          Reserve
-                        </MDButton>
-                      )
-                    )
+                    ) 
                   )
                 }
               </div>
