@@ -57,17 +57,6 @@ function DetailedListing(onUserUpdate) {
     navigate('/mylistings');
   }
 
-  const handleReservation = () => {
-    // reservationService.makeReservation("This is a test reservation.")
-    //   .then(data => {
-    //     setMessage(data.message);
-    //   })
-    //   .catch(error => {
-    //     console.error("Reservation failed:", error);
-    //     setMessage("Reservation failed");
-    //   });
-  }
-
   const convertUint8ArrayToBlob = (uint8Array) => {
     return new Blob([uint8Array], { type: 'image/jpeg' });
   };
