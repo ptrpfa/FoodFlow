@@ -91,8 +91,8 @@ function BasicLayout({ image, children }) {
                                 style={{ color: "white" }}
                               >
                                 <Typography variant="span" fontWeight="700">
-                                  exampleUser, password123<br />
-                                  exampleUser2, password123
+                                  donorExample, password123<br />
+                                  patronExample, password123
                                 </Typography>
                               </Typography>
                             }

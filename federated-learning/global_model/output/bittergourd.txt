@@ -1,0 +1,81 @@
+
+
+Preparing training data image features..
+
+Training data image features loaded!
+
+__________________________________________________________________________________________
+Layer (type)                Input Shape               Output shape              Param #   
+==========================================================================================
+dense_Dense1 (Dense)        [[null,1024]]             [null,128]                131200    
+__________________________________________________________________________________________
+dense_Dense2 (Dense)        [[null,128]]              [null,2]                  258       
+==========================================================================================
+Total params: 131458
+Trainable params: 131458
+Non-trainable params: 0
+__________________________________________________________________________________________
+
+Training model..
+
+Epoch 1 / 10
+642ms 1177us/step - acc=0.954 loss=0.113 
+0 { loss: 0.11264575272798538, acc: 0.954212486743927 }
+Epoch 2 / 10
+531ms 972us/step - acc=0.987 loss=0.0389 
+1 { loss: 0.0389140360057354, acc: 0.9871795177459717 }
+Epoch 3 / 10
+496ms 909us/step - acc=0.991 loss=0.0227 
+2 { loss: 0.022655781358480453, acc: 0.9908425211906433 }
+Epoch 4 / 10
+500ms 915us/step - acc=0.984 loss=0.0428 
+3 { loss: 0.04278308525681496, acc: 0.9835165143013 }
+Epoch 5 / 10
+482ms 882us/step - acc=0.996 loss=0.0103 
+4 { loss: 0.010279728099703789, acc: 0.9963369965553284 }
+Epoch 6 / 10
+479ms 877us/step - acc=1.00 loss=1.90e-3 
+5 { loss: 0.0019039895851165056, acc: 1 }
+Epoch 7 / 10
+495ms 906us/step - acc=1.00 loss=1.05e-3 
+6 { loss: 0.0010477903997525573, acc: 1 }
+Epoch 8 / 10
+471ms 863us/step - acc=1.00 loss=6.38e-4 
+7 { loss: 0.0006381827988661826, acc: 1 }
+Epoch 9 / 10
+472ms 865us/step - acc=1.00 loss=4.60e-4 
+8 { loss: 0.00046031008241698146, acc: 1 }
+Epoch 10 / 10
+464ms 850us/step - acc=1.00 loss=3.97e-4 
+9 { loss: 0.0003970779071096331, acc: 1 }
+
+Model trained!
+
+Model saved!
+
+Testing model..
+
+False Prediction: Rotten with 85.49339175224304% confidence (Actual: Fresh)
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/bittergourd/test/fresh/IMG_20200822_223831.jpg_0_1873.jpg
+
+False Prediction: Rotten with 63.37243318557739% confidence (Actual: Fresh)
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/bittergourd/test/fresh/IMG_20200823_131903.jpg_0_866.jpg
+
+False Prediction: Fresh with 62.02702522277832% confidence (Actual: Rotten)
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/bittergourd/test/rotten/IMG_20200824_182248.jpg_0_2275.jpg
+
+~Model Performance~
+Confusion Matrix:
+True Fresh: 64 (46.38%)
+False Fresh: 2 (1.45%)
+True Rotten: 71 (51.45%)
+False Rotten: 1 (0.72%)
+
+Test Size: 138
+Accuracy: 97.83%
+Miss: 2.17%
+
+Precision: 0.97
+Recall: 0.98
+Specificity: 0.97
+F1 Score: 0.98

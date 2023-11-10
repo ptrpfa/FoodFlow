@@ -1,0 +1,31 @@
+
+Testing model..
+
+False Prediction: Rotten with 95.02390027046204% confidence (Actual: Fresh)
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/okra/test/fresh/o_f034.png
+
+False Prediction: Rotten with 91.86195731163025% confidence (Actual: Fresh)
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/okra/test/fresh/o_f207.png
+
+False Prediction: Fresh with 64.63176012039185% confidence (Actual: Rotten)
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/okra/test/rotten/o_r138.png
+
+False Prediction: Fresh with 64.63176012039185% confidence (Actual: Rotten)
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/okra/test/rotten/o_r247.png
+
+
+~Model Performance~
+Confusion Matrix:
+True Fresh: 125 (64.10%)
+False Fresh: 2 (1.03%)
+True Rotten: 66 (33.85%)
+False Rotten: 2 (1.03%)
+
+Test Size: 195
+Accuracy: 97.95%
+Miss: 2.05%
+
+Precision: 0.98
+Recall: 0.98
+Specificity: 0.97
+F1 Score: 0.98
