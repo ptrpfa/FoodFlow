@@ -177,7 +177,7 @@ function FoodListingsTable({ onUserUpdate }) {
       });
   
     promise.then(data => {
-      console.log(checkLocalStorageIntervalGet);
+      console.log("LINE 190", checkLocalStorageIntervalGet);
       clearInterval(checkLocalStorageIntervalGet);
       if(data === "Reservation is unsuccessful") {
         socketCleanup();

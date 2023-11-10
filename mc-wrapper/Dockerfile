@@ -2,7 +2,7 @@
 # MAC
 FROM arm64v8/alpine:latest
 # Windows
-FROM alpine:latest
+# FROM alpine:latest
 
 # Install required dependencies
 RUN apk update && apk add --no-cache docker curl
@@ -18,7 +18,5 @@ WORKDIR /app
 # Copy your application files into the container (if needed)
 COPY . .
 
-RUN ./deploy.sh
-
 # Command to run when the container starts
-CMD ["sh"]
+CMD ["sh", "-c", "./deploy.sh && sh"]
