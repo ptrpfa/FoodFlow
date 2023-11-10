@@ -159,48 +159,56 @@ function DetailedListing(onUserUpdate) {
                 <MDTypography variant="h5" color="white">
                   {listing.name}
                 </MDTypography>
-                {authContext.userID === listing?.userID.toString() ? (
-                  <div>
+                {listing.status === 2 ? (
                     <MDButton
                       variant="gradient"
-                      color="light"
-                      component={Link}
-                      to={`/listings/${listing.listingID}/update`}
-                      style={{ marginRight: '10px' }}
-                    >
-                      Update Listing
-                    </MDButton>
-                    <MDButton
-                      variant="gradient"
-                      color="error"
-                      onClick={handleDeleteListing}
-                    >
-                      Delete Listing
-                    </MDButton>
-                  </div>
-                ) : (
-                  // Listing status is available
-                  listing.status === 1 ? (
-                    <MDButton
-                      variant="gradient"
-                      color="warning"
-                      onClick={handleReservation}
-                    >
-                      Reserve
-                    </MDButton>
-                  ) : (
-                    <MDButton
-                      variant="gradient"
-                      color="warning"
-                      onClick={handleReservation}
+                      color="success"
                       disabled={true} // the button will appear disabled if status is not 1 (0 or 2)
                     >
-                      Reserve
+                      Collected
                     </MDButton>
+                  ) : (authContext.userID === listing?.userID.toString() ? (
+                      <div>
+                        <MDButton
+                          variant="gradient"
+                          color="light"
+                          component={Link}
+                          to={`/listings/${listing.listingID}/update`}
+                          style={{ marginRight: '10px' }}
+                        >
+                          Update Listing
+                        </MDButton>
+                        <MDButton
+                          variant="gradient"
+                          color="error"
+                          onClick={handleDeleteListing}
+                        >
+                          Delete Listing
+                        </MDButton>
+                      </div>
+                    ) : (
+                      // Listing status is available
+                      listing.status === 1 ? (
+                        <MDButton
+                          variant="gradient"
+                          color="warning"
+                          onClick={handleReservation}
+                        >
+                          Reserve
+                        </MDButton>
+                      ) : (
+                        <MDButton
+                          variant="gradient"
+                          color="warning"
+                          disabled={true} // the button will appear disabled if status is not 1 (0 or 2)
+                        >
+                          Reserve
+                        </MDButton>
+                      )
+                    )
                   )
-                )}
+                }
               </div>
-
             </MDBox>
             <MDBox pt={3} ml={2}>
               <div style={{ display: 'flex' }}>

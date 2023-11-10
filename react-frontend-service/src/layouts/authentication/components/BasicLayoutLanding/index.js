@@ -31,14 +31,7 @@ function BasicLayout({ image, children }) {
   const { pathname } = useLocation();
   return (
     <PageLayout>
-      <DefaultNavbar
-        action={{
-          type: "external",
-          route: "https://creative-tim.com/product/material-dashboard-react-nodejs",
-          label: "free download",
-          color: "dark",
-        }}
-      />
+      <DefaultNavbar/>
       <MDBox
         sx={{ height: "auto", minHeight: "100vh" }}
         display="flex"

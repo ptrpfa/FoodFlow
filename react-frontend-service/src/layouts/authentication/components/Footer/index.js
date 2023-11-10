@@ -67,8 +67,8 @@ function Footer({ light }) {
               },
             })}
           >
-            <MDBox component="li" pl={2} lineHeight={1}>
-              <Link href="https://www.creative-tim.com/license" target="_blank">
+            {/* <MDBox component="li" pl={2} lineHeight={1}>
+              <Link href="https://www.linkedin.com/in/ptrfeb/" target="_blank">
                 <MDTypography
                   variant="button"
                   fontWeight="regular"
@@ -77,7 +77,7 @@ function Footer({ light }) {
                   License
                 </MDTypography>
               </Link>
-            </MDBox>
+            </MDBox> */}
           </MDBox>
         </MDBox>
       </Container>

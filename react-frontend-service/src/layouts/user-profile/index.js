@@ -35,7 +35,11 @@ const UserProfile = () => {
   });
 
   const [errors, setErrors] = useState({
-    nameError: false,
+    firstNameError: false,
+    lastNameError: false,
+    addressFirstError: false,
+    addressSecondError: false,
+    addressThirdError: false,
     emailError: false,
     newPassError: false,
     confirmPassError: false,
@@ -104,23 +108,36 @@ const UserProfile = () => {
     // validation
     const mailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
-    if (
-      !user.firstName?.trim() ||
-      !user.lastName?.trim() ||
-      !user.addressFirst?.trim() ||
-      !user.addressSecond?.trim() ||
-      !user.addressThird?.trim()
-    ) {
-      setErrors({ ...errors, nameError: true });
+    if (user.firstName.trim().length === 0) {
+      setErrors({ ...errors, firstNameError: true });
       return;
     }
 
-    if (user.postalCode.length === 0) {
+    if (user.lastName.trim().length === 0) {
+      setErrors({ ...errors, lastNameError: true });
+      return;
+    }
+
+    if (user.addressFirst.trim().length === 0) {
+      setErrors({ ...errors, addressFirstError: true });
+      return;
+    }
+    if (user.addressSecond.trim().length === 0) {
+      setErrors({ ...errors, addressSecondError: true });
+      return;
+    }
+
+    if (user.addressThird.trim().length === 0) {
+      setErrors({ ...errors, addressThirdError: true });
+      return;
+    }
+
+    if (user.postalCode.trim().length === 0) {
       setErrors({ ...errors, postalError: true });
       return;
     }
 
-    if (user.email.trim().length === 0 || !user.email.trim().match(mailFormat)) {
+    if (user.email.trim().trim().length === 0 || !user.email.trim().match(mailFormat)) {
       setErrors({ ...errors, emailError: true });
       return;
     }
@@ -141,6 +158,7 @@ const UserProfile = () => {
       data: {
         type: "profile",
         attributes: {
+          userid: authContext.userID,
           firstName: user.firstName,
           lastName: user.lastName,
           email: user.email,
@@ -149,7 +167,6 @@ const UserProfile = () => {
           addressSecond: user.addressSecond,
           addressThird: user.addressThird,
           postalCode: user.postalCode,
-          profile_image: null,
         },
       },
     };
@@ -184,17 +201,20 @@ const UserProfile = () => {
       userData.data.attributes.password_new = user.newPassword;
       userData.data.attributes.password_confirmation = user.confirmPassword;
     }
-    userData.data.attributes.profile_image = null;
 
     // call api for update
-    const response = await AuthService.updateProfile(JSON.stringify(userData));
+    console.log(userData.data.attributes);
+    const response = await AuthService.updateProfile(userData.data.attributes);
     console.log("RESPONSE: ", response);  
 
     // reset errors
     setErrors({
-      nameError: false,
+      firstNameError: false,
+      lastNameError: false,
+      addressFirstError: false,
+      addressSecondError: false,
+      addressThirdError: false,
       emailError: false,
-      passwordError: false,
       newPassError: false,
       confirmPassError: false,
       postalError: false,
@@ -239,11 +259,11 @@ const UserProfile = () => {
                   name="firstName"
                   value={user.firstName}
                   onChange={changeHandler}
-                  error={errors.nameError}
+                  error={errors.firstNameError}
                 />
-                {errors.nameError && (
+                {errors.firstNameError && (
                   <MDTypography variant="caption" color="error" fontWeight="light">
-                    The first name cannot be null
+                    The first name cannot be empty
                   </MDTypography>
                 )}
               </MDBox>
@@ -265,11 +285,11 @@ const UserProfile = () => {
                   name="lastName"
                   value={user.lastName}
                   onChange={changeHandler}
-                  error={errors.nameError}
+                  error={errors.lastNameError}
                 />
-                {errors.nameError && (
+                {errors.lastNameError && (
                   <MDTypography variant="caption" color="error" fontWeight="light">
-                    The last name cannot be null
+                    The last name cannot be empty
                   </MDTypography>
                 )}
               </MDBox>
@@ -297,7 +317,7 @@ const UserProfile = () => {
                 />
                 {errors.emailError && (
                   <MDTypography variant="caption" color="error" fontWeight="light">
-                    The email cannot be null
+                    The email cannot be empty
                   </MDTypography>
                 )}
               </MDBox>
@@ -321,11 +341,11 @@ const UserProfile = () => {
                   name="addressFirst"
                   value={user.addressFirst}
                   onChange={changeHandler}
-                  error={errors.nameError}
+                  error={errors.addressFirstError}
                 />
-                {errors.nameError && (
+                {errors.addressFirstError && (
                   <MDTypography variant="caption" color="error" fontWeight="light">
-                    The address first cannot be null
+                    The first address line cannot be empty
                   </MDTypography>
                 )}
               </MDBox>
@@ -347,11 +367,11 @@ const UserProfile = () => {
                   name="addressSecond"
                   value={user.addressSecond}
                   onChange={changeHandler}
-                  error={errors.nameError}
+                  error={errors.addressSecondError}
                 />
-                {errors.nameError && (
+                {errors.addressSecondError && (
                   <MDTypography variant="caption" color="error" fontWeight="light">
-                    The address second cannot be null
+                    The second address line cannot be empty
                   </MDTypography>
                 )}
               </MDBox>
@@ -375,11 +395,11 @@ const UserProfile = () => {
                   name="addressThird"
                   value={user.addressThird}
                   onChange={changeHandler}
-                  error={errors.nameError}
+                  error={errors.addressThirdError}
                 />
-                {errors.nameError && (
+                {errors.addressThirdError && (
                   <MDTypography variant="caption" color="error" fontWeight="light">
-                    The address third cannot be null
+                    The third address line cannot be empty
                   </MDTypography>
                 )}
               </MDBox>
@@ -406,7 +426,7 @@ const UserProfile = () => {
                 />
                 {errors.postalError && (
                   <MDTypography variant="caption" color="error" fontWeight="light">
-                    The postal code cannot be null
+                    The postal code cannot be empty
                   </MDTypography>
                 )}
               </MDBox>

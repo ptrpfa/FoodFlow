@@ -121,15 +121,17 @@ class AuthService {
   
   updateProfile = async (newInfo) => {
     let message = new UpdateUserDto();
-    message.setUsername(newInfo.username);
-    message.setFirstname(newInfo.firstname);
-    message.setLastname(newInfo.lastname);
-    message.setRole(newInfo.role);
-    message.setAddressfirst(newInfo.addressfirst);
-    message.setAddresssecond(newInfo.addresssecond);
-    message.setAddressthird(newInfo.addressthird);
-    message.setPostalcode(newInfo.postalcode);
-    message.setEmail(newInfo.email);
+    message.setUserid(newInfo.userid);
+    if ('firstName' in newInfo) message.setFirstname(newInfo.firstName);
+    if ('lastName' in newInfo) message.setLastname(newInfo.lastName);
+    if ('role' in newInfo) message.setRole(newInfo.role);
+    if ('dob' in newInfo) message.setDob(newInfo.dob);
+    if ('password' in newInfo) message.setPassword(newInfo.password);
+    if ('addressFirst' in newInfo) message.setAddressfirst(newInfo.addressFirst);
+    if ('addressSecond' in newInfo) message.setAddresssecond(newInfo.addressSecond);
+    if ('addressThird' in newInfo) message.setAddressthird(newInfo.addressThird);
+    if ('postalCode' in newInfo) message.setPostalcode(newInfo.postalCode);
+    if ('email' in newInfo) message.setEmail(newInfo.email);
 
     return new Promise((resolve, reject) => {
       // gRPC

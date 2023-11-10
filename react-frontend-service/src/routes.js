@@ -30,16 +30,11 @@ import Reserved from "layouts/listings/reserved";
 import DetailedListing from "layouts/detailed-listing";
 import UserListings from "layouts/user-listings";
 
-import Notifications from "layouts/notifications";
 import Reservation  from "layouts/reservation";
-import SignIn from "layouts/authentication/sign-in";
-import SignUp from "layouts/authentication/sign-up";
 import UserProfile from "layouts/user-profile";
 
 import Login from "auth/login";
 import Register from "auth/register";
-import ForgotPassword from "auth/forgot-password";
-import ResetPassword from "auth/reset-password";
 
 import UploadFood from "layouts/donor/upload";
 import DonateFood from "layouts/donor/create";
@@ -110,27 +105,11 @@ const routes = [
   },
   {
     type: "collapse",
-    name: "Notifications",
-    key: "notifications",
-    icon: <Icon fontSize="small">notifications</Icon>,
-    route: "/notifications",
-    component: <Notifications />,
-  },
-  {
-    type: "collapse",
     name: "Reservations",
     key: "reservations",
     icon: <FoodBankIcon fontSize="small" />,
     route: "/reservations",
     component: <Reservation />,
-  },
-  {
-    type: "route",
-    name: "Sign In",
-    key: "sign-in",
-    icon: <Icon fontSize="small">login</Icon>,
-    route: "/authentication/sign-in",
-    component: <SignIn />,
   },
   {
     type: "examples",
@@ -139,14 +118,6 @@ const routes = [
     icon: <Icon fontSize="small">person</Icon>,
     route: "/user-profile",
     component: <UserProfile />,
-  },
-  {
-    type: "route",
-    name: "Sign Up",
-    key: "sign-up",
-    icon: <Icon fontSize="small">assignment</Icon>,
-    route: "/authentication/sign-up",
-    component: <SignUp />,
   },
   {
     type: "auth",
@@ -163,22 +134,6 @@ const routes = [
     icon: <Icon fontSize="small">register</Icon>,
     route: "/auth/register",
     component: <Register />,
-  },
-  {
-    type: "auth",
-    name: "Forgot Password",
-    key: "forgot-password",
-    icon: <Icon fontSize="small">assignment</Icon>,
-    route: "/auth/forgot-password",
-    component: <ForgotPassword />,
-  },
-  {
-    type: "auth",
-    name: "Reset Password",
-    key: "reset-password",
-    icon: <Icon fontSize="small">assignment</Icon>,
-    route: "/auth/reset-password",
-    component: <ResetPassword />,
   },
 ];
 
