@@ -1,6 +1,6 @@
 # Use Alpine Linux as a base image
 # MAC
-FROM arm64v8/alpine:latest
+# FROM arm64v8/alpine:latest
 # Windows
 FROM alpine:latest
 
@@ -18,7 +18,5 @@ WORKDIR /app
 # Copy your application files into the container (if needed)
 COPY . .
 
-RUN ./deploy.sh
-
 # Command to run when the container starts
-CMD ["sh"]
+CMD ["sh", "-c", "./deploy.sh && sh"]
