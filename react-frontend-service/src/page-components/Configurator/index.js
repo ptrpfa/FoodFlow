@@ -131,7 +131,7 @@ function Configurator() {
         px={3}
       >
         <MDBox>
-          <MDTypography variant="h5">Material UI Configurator</MDTypography>
+          <MDTypography variant="h5">Sidenav Settings</MDTypography>
         </MDBox>
 
         <Icon

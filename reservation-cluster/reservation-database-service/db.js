@@ -2,8 +2,8 @@ const { Sequelize, DataTypes } = require('sequelize');
 const ReservationModel = require('./reservation'); 
 const ListingModel = require('./listing');
 
-const sequelize = new Sequelize('foodflow', 'root', 'sikeloong', {
-  host: '34.124.250.62',
+const sequelize = new Sequelize('foodflow', 'root', process.env.DATABASE_PASSWORD, {
+  host: process.env.DATABASE_HOST,
   port: 3306,
   dialect: 'mysql',
 });

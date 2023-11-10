@@ -143,7 +143,7 @@ function FoodListingsTable({ onUserUpdate }) {
 
   // User click 'reserve' button 
   const handleReservation = (listingID) => {
-    console.log("making reservation");
+    console.log("Making reservation");
     const LOCAL_STORAGE_KEY = uuidv4(); 
     // Calls reservation-service.js
     setReservingListingID(listingID);
@@ -200,12 +200,10 @@ function FoodListingsTable({ onUserUpdate }) {
   };
   
   const fetchListings = () => {
-    console.log("fetching listings");
-    console.log(user.role);
+    console.log("Fetching listings");
     if (user.role === "patron") {
       ListingService.getAvailableListingsExcludeUser({ Userid: authContext.userID })
         .then(async (allListings) => {
-          console.log(allListings);
           const listingsWithImages = await Promise.all(
             allListings.map(fetchImageForListing)
           );
