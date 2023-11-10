@@ -29,7 +29,7 @@ function Login() {
   const [credentialsErrors, setCredentialsError] = useState(null);
 
   const [inputs, setInputs] = useState({
-    username: "exampleUser",
+    username: "donorExample",
     password: "password123",
   });
 
