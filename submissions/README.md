@@ -7,7 +7,7 @@
 2201159 Ryan Lai Wei Shao <br>
 
 ### Overview
-![Food Flow](docs/food_flow.png)
+![Food Flow](img/food_flow.png)
 
 Food-Flow is a web-based platform designed to address the challenges of food waste and insecurity in Singapore, by facilitating the responsible redistribution of surplus food. It enables organizations to donate typically discarded excess food items to users in need for free, through listings and reservations.  
 
@@ -33,16 +33,20 @@ These microservices include:
     - Reservation Database Microservice (Kafka consumer, backbone of food reservation system)
     - Reservation Socket Microservice (To enable real-time communications)
 
-![System Architecture](docs/arch.png)
+![System Architecture](img/arch.png)
 
 ### Presentation and Demo
 To see a walkthrough of the Food-Flow system and our presentation, click [here](https://youtu.be/9H4AzImgLTo), or scan the QR code below!
 
-[![Food-Flow](docs/qr.jpg)](http://www.youtube.com/watch?v=9H4AzImgLTo)
+[![Food-Flow](img/qr.jpg)](http://www.youtube.com/watch?v=9H4AzImgLTo)
 
 ### Directory Structure
 ```
-docs/ (Documentation images)
+docs/ (documentation files)
+    GROUP15.pdf (article report)
+    GROUP15_INSTRUCTIONS.pdf (testing instructions)
+
+img/ (images for this file)
 
 source/ (contains source code for Food-Flow)
     mc-wrapper/ (Docker and Kubernetes files)
@@ -116,7 +120,7 @@ Running the entire Food-Flow project is recommended to ensure that everything wo
     ```
     docker run -it --rm -v /var/run/docker.sock:/var/run/docker.sock -v $HOME/.kube/config:/root/.kube/config skyish/food-flow:mac
     ```
-7. Once an interactive terminal within the Docker container has been obtained, ensure that all the containers in the `food-flow` namespace are running. This process may take a while as the project consists of 11 different microservices that need to be executred togehter with other load-balancing and scaling operations!
+7. Once an interactive terminal within the Docker container has been obtained, ensure that all the containers in the `food-flow` namespace are running. This process may take a while as the project consists of 11 different microservices that need to be executed together with other load-balancing and scaling operations!
     ```
     # Within Docker container
     kubectl get all -n food-flow
