@@ -30,7 +30,6 @@ import Reserved from "layouts/listings/reserved";
 import DetailedListing from "layouts/detailed-listing";
 import UserListings from "layouts/user-listings";
 
-import Reservation  from "layouts/reservation";
 import UserProfile from "layouts/user-profile";
 
 import Login from "auth/login";
