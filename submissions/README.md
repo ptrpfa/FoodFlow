@@ -39,14 +39,9 @@ These microservices include:
 
 ### Presentation and Demo
 To see a walkthrough of the Food-Flow system and our presentation, click [here](https://youtu.be/9H4AzImgLTo), or scan the QR code below!
-<<<<<<< HEAD
-
-[![Food-Flow](img/qr.jpg)](http://www.youtube.com/watch?v=9H4AzImgLTo)
-=======
 <p align="center">
-  <a href="http://www.youtube.com/watch?v=9H4AzImgLTo"><img alt="food-flow-video" src="docs/qr.jpg"></a>
+  <a href="http://www.youtube.com/watch?v=9H4AzImgLTo"><img alt="food-flow-video" src="img/qr.jpg"></a>
 </p>
->>>>>>> b2a8bca19e71deba8a6c3ac94c3fc55ce7fa4cdf
 
 ### Directory Structure
 ```
