@@ -7,7 +7,7 @@
 2201159 Ryan Lai Wei Shao <br>
 
 ### Overview
-![Food Flow](/docs/food_flow.png)
+![Food Flow](docs/food_flow.png)
 
 Food-Flow is a web-based platform designed to address the challenges of food waste and insecurity in Singapore, by facilitating the responsible redistribution of surplus food. It enables organizations to donate typically discarded excess food items to users in need for free, through listings and reservations.  
 
@@ -23,7 +23,7 @@ These microservices include:
     - Front-End Microservice (Main UI for Food-Flow platform)
     - Envoy Microservice (For inter-microservice communications)
     - Authentication Microservice (For user authentication and CRUD operations)
-    - Listing Service (To support food listing operations)
+    - Listing Microservice (To support food listing operations)
     - Amazon Web Services Microservice (Calls AWS API to access cloud services)
     - Federated Learning Microservice (For distributed machine learning service)
 - Reservation Microservices:
@@ -33,12 +33,43 @@ These microservices include:
     - Reservation Database Microservice (Kafka consumer, backbone of food reservation system)
     - Reservation Socket Microservice (To enable real-time communications)
 
-![System Architecture](/docs/arch.png)
+![System Architecture](docs/arch.png)
 
 ### Presentation and Demo
 To see a walkthrough of the Food-Flow system and our presentation, click [here](https://youtu.be/9H4AzImgLTo), or scan the QR code below!
 
-[![Food-Flow](/docs/qr.jpg)](http://www.youtube.com/watch?v=9H4AzImgLTo)
+[![Food-Flow](docs/qr.jpg)](http://www.youtube.com/watch?v=9H4AzImgLTo)
+
+### Directory Structure
+```
+docs/ (Documentation images)
+
+source/ (contains source code for Food-Flow)
+    mc-wrapper/ (Docker and Kubernetes files)
+
+    aws-s3-listing-service/ (code for AWS Microservice)
+
+    federated-learning/ (code for Federated Learning Microservice)
+
+    react-auth-service/ (code for Auth Microservice)
+
+    react-envoy-service/ (code for Envoy Microservice)
+
+    react-frontend-service/ (code for Front End Microservice)
+
+    react-listing-service/ (code for Listing Microservice)
+
+    reservation-cluster/ (code for Reservation Microservices)
+        react-reservation-service/ (code for React Reservation Microservice)
+
+        reservation-database-service/ (code for Reservation Database Microservice)
+
+        reservation-socket/ (code for Reservation Socket Microservice)
+
+foodflow.sql (SQL migration file for Food-Flow's database)
+
+README.md (this file)
+```
 
 ### Project Usage
 NOTE: This project requires a significant amount of CPU and RAM to run, ensure that your device has at least 8GB of free RAM with a multi-core CPU (at least 3 cores)
@@ -50,10 +81,10 @@ The entire Food-Flow system has been containerized into a Docker image. To run t
 Running the entire Food-Flow project is recommended to ensure that everything works as intended. To run Food-Flow, following the instructions below!
 
 1. Ensure that you have the following software installed on the machine you are using:
-    - [Docker](https://docs.docker.com/engine/install/)
-    - [Docker Desktop](https://docs.docker.com/desktop/install/)
-    - [Kubernetes](https://kubernetes.io/docs/tasks/tools/)
-    - [Minikube](https://minikube.sigs.k8s.io/docs/start/)
+    - [Docker](https:/docs.docker.com/engine/install/)
+    - [Docker Desktop](https:/docs.docker.com/desktop/install/)
+    - [Kubernetes](https://kubernetes.iodocs/tasks/tools/)
+    - [Minikube](https://minikube.sigs.k8s.iodocs/start/)
 2. Food-Flow requires the use of the following local ports to run, ensure that they are kept free and exposed in your machine's firewall settings:
     ```
     Port 3000 (for Front-End Microservice)
