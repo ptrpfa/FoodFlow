@@ -1,8 +1,8 @@
 # Use Alpine Linux as a base image
 # MAC
-# FROM arm64v8/alpine:latest
+FROM arm64v8/alpine:latest
 # Windows
-FROM alpine:latest
+#FROM alpine:latest
 
 # Install required dependencies
 RUN apk update && apk add --no-cache docker curl

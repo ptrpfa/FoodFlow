@@ -126,7 +126,7 @@ function Reservation() {
       console.log('WebSocket for Delete Reservation is Connected');
     };
   
-    webSocket.onmessage = (event) => {
+    webSocket.webmessage = (event) => {
       const data = JSON.parse(event.data);
   
       // Check if the message is a delete confirmation

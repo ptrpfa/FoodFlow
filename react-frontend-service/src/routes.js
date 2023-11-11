@@ -104,14 +104,6 @@ const routes = [
     component: <DonateFood />,
   },
   {
-    type: "collapse",
-    name: "Reservations",
-    key: "reservations",
-    icon: <FoodBankIcon fontSize="small" />,
-    route: "/reservations",
-    component: <Reservation />,
-  },
-  {
     type: "examples",
     name: "User Profile",
     key: "user-profile",

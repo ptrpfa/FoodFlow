@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: react-frontend-deployment
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: react-frontend
