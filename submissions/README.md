@@ -7,7 +7,10 @@
 2201159 Ryan Lai Wei Shao <br>
 
 ### Overview
-![Food Flow](docs/food_flow.png)
+
+<p align="center">
+  <img src="docs/food_flow.png">
+</p>
 
 Food-Flow is a web-based platform designed to address the challenges of food waste and insecurity in Singapore, by facilitating the responsible redistribution of surplus food. It enables organizations to donate typically discarded excess food items to users in need for free, through listings and reservations.  
 
