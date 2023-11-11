@@ -7,8 +7,10 @@
 2201159 Ryan Lai Wei Shao <br>
 
 ### Overview
-![Food Flow](img/food_flow.png)
 
+<p align="center">
+  <img alt="food-flow" src="img/food_flow.png">
+</p>
 Food-Flow is a web-based platform designed to address the challenges of food waste and insecurity in Singapore, by facilitating the responsible redistribution of surplus food. It enables organizations to donate typically discarded excess food items to users in need for free, through listings and reservations.  
 
 It is designed with users at its core, providing real-time notifications of food listings, efficient reservation management, and safeguarding the quality and safety of donated food items, through the employment of AWS cloud services and advanced technologies including browser-based federated learning and Apache Kafka. By leveraging a cloud-native and microservices-based infrastructure using Kubernetes and Docker, and robust data exchange through gRPC and web-sockets, Food-Flow provides a scalable and reliable system, ensuring accessibility and usability for a wide user base.  
@@ -37,8 +39,14 @@ These microservices include:
 
 ### Presentation and Demo
 To see a walkthrough of the Food-Flow system and our presentation, click [here](https://youtu.be/9H4AzImgLTo), or scan the QR code below!
+<<<<<<< HEAD
 
 [![Food-Flow](img/qr.jpg)](http://www.youtube.com/watch?v=9H4AzImgLTo)
+=======
+<p align="center">
+  <a href="http://www.youtube.com/watch?v=9H4AzImgLTo"><img alt="food-flow-video" src="docs/qr.jpg"></a>
+</p>
+>>>>>>> b2a8bca19e71deba8a6c3ac94c3fc55ce7fa4cdf
 
 ### Directory Structure
 ```
