@@ -17,8 +17,9 @@ class WebSocketService {
       const server_message = (event.data).toString();
       const reservationMessage = JSON.parse(server_message);
       var payload = '';
-      if(this.onmessage){
-        console.log(reservationMessage);
+
+      if(this.webmessage){
+
         //Get from localstorage   
         const msg_id  = reservationMessage.msg_id;
         const convo = localStorage.getItem(msg_id);
@@ -31,8 +32,7 @@ class WebSocketService {
             if(!convo_dict.replies.includes(sender)){
               convo_dict.replies.push(sender);
               localStorage.setItem(msg_id, JSON.stringify(convo_dict));
-              
-              console.log(convo_dict.replies);
+
               if (convo_dict.replies.length === 2) {
                 // Mark the conversation as successful
                 // console.log(`Conversation with msg_id ${msg_id} is successful.`);
@@ -44,7 +44,7 @@ class WebSocketService {
           }else if(status == 500){
             payload= reservationMessage.payload;
             localStorage.removeItem(msg_id);
-            this.onmessage(payload);
+            this.webmessage(payload);
           }
         }
       }
@@ -65,7 +65,7 @@ class WebSocketService {
         payload = {action: "delete", payload: reservationMessage.payload, listingID: reservationMessage.listingID};
       }
 
-      this.onmessage(payload);
+      this.webmessage(payload);
   }
 }
 

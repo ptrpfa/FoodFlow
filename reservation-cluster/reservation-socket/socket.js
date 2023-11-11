@@ -1,9 +1,9 @@
 const WebSocket = require('ws');
 const http = require('http');
 
-const server = http.createServer((req, res) => {
-  // Handle HTTP requests if needed
-});
+// const server = http.createServer((req, res) => {
+//   // Handle HTTP requests if needed
+// });
 
 const wss = new WebSocket.Server({ server });
 
@@ -16,7 +16,12 @@ wss.on('connection', (ws) => {
     // Broadcast the received message to all connected clients
     wss.clients.forEach((client) => {
       if (client !== ws && client.readyState === WebSocket.OPEN) {
-        client.send(msg_relay);
+        // client.send(msg_relay);
+        client.send(msg_relay, (error) => {
+          if (error) {
+            console.error('Error broadcasting message:', error);
+          }
+        });
       }
     });
   });

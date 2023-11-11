@@ -153,7 +153,6 @@ function FoodListingsTable({ onUserUpdate }) {
 
   const formatListings = (rawListings) => {
     setListingsWithImages(rawListings);
-    console.log(listingsWithImages);
 
     const formattedListings = [];
     for (let i = 0; i < rawListings.length; i += 3) {
@@ -177,7 +176,6 @@ function FoodListingsTable({ onUserUpdate }) {
       });
   
     promise.then(data => {
-      console.log("LINE 190", checkLocalStorageIntervalGet);
       clearInterval(checkLocalStorageIntervalGet);
       if(data === "Reservation is unsuccessful") {
         socketCleanup();
@@ -221,16 +219,18 @@ function FoodListingsTable({ onUserUpdate }) {
     }
 
     async function connectWebSocket() {
-      await webSocketService.getSocketOpenPromise();
-      setIsLoading(true);
-
-      webSocketService.onmessage = (message) => {
-        messageHandler(message);
-      };
+      try{
+        await webSocketService.getSocketOpenPromise();
+        setIsLoading(true);
+         webSocketService.webmessage = (message) => {
+          messageHandler(message);
+        };
+      }catch (error) {
+        console.error('Error connecting to WebSocket:', error);
+      } 
     }
     
     connectWebSocket();
-
     fetchReservations();
     return () => {
       // Cleanup function
