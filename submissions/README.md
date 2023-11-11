@@ -42,6 +42,7 @@ To see a walkthrough of the Food-Flow system and our presentation, click [here](
 <p align="center">
   <a href="http://www.youtube.com/watch?v=9H4AzImgLTo"><img alt="food-flow-video" src="docs/qr.jpg"></a>
 </p>
+
 ### Directory Structure
 ```
 docs/ (Documentation images)
