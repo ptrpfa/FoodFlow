@@ -67,7 +67,14 @@ Running the entire Food-Flow project is recommended to ensure that everything wo
     ```
     minikube delete
     ```
-5. Run the `food-flow` Docker image!
+5. To handle its storage needs, a database has been pre-configured and is running on the cloud. However, if you intend to use your own database, follow the following instructions:
+    - Create a SQL database
+    - Import Food-Flow's database into your new database!
+        ```
+        mysql -u<username> -p <your database> < foodflow.sql
+        ```
+    - Modify the `food-flow` Docker image's `secrets.yaml` file with your database connection details (URL, host and password), ensuring that they are all base64 encoded.
+6. Run the `food-flow` Docker image!
 
     For Windows-based devices
     ```
@@ -78,7 +85,7 @@ Running the entire Food-Flow project is recommended to ensure that everything wo
     ```
     docker run -it --rm -v /var/run/docker.sock:/var/run/docker.sock -v $HOME/.kube/config:/root/.kube/config skyish/food-flow:mac
     ```
-6. Once an interactive terminal within the Docker container has been obtained, ensure that all the containers in the `food-flow` namespace are running. This process may take a while as the project consists of 11 different microservices that need to be executred togehter with other load-balancing and scaling operations!
+7. Once an interactive terminal within the Docker container has been obtained, ensure that all the containers in the `food-flow` namespace are running. This process may take a while as the project consists of 11 different microservices that need to be executred togehter with other load-balancing and scaling operations!
     ```
     # Within Docker container
     kubectl get all -n food-flow
@@ -183,5 +190,5 @@ Running the entire Food-Flow project is recommended to ensure that everything wo
         ```
         kubectl get all -n food-flow
         ```
-7. Enter the Food-Flow web application by opening up [http://localhost:3000](http://localhost:3000) in your browser.
-8. Enjoy making a food listing and reserving food listings on Food-Flow!
+8. Enter the Food-Flow web application by opening up [http://localhost:3000](http://localhost:3000) in your browser.
+9. Enjoy making a food listing and reserving food listings on Food-Flow!
