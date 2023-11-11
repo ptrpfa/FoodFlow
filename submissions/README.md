@@ -9,9 +9,8 @@
 ### Overview
 
 <p align="center">
-  <img src="docs/food_flow.png">
+  <img alt="food-flow" src="docs/food_flow.png">
 </p>
-
 Food-Flow is a web-based platform designed to address the challenges of food waste and insecurity in Singapore, by facilitating the responsible redistribution of surplus food. It enables organizations to donate typically discarded excess food items to users in need for free, through listings and reservations.  
 
 It is designed with users at its core, providing real-time notifications of food listings, efficient reservation management, and safeguarding the quality and safety of donated food items, through the employment of AWS cloud services and advanced technologies including browser-based federated learning and Apache Kafka. By leveraging a cloud-native and microservices-based infrastructure using Kubernetes and Docker, and robust data exchange through gRPC and web-sockets, Food-Flow provides a scalable and reliable system, ensuring accessibility and usability for a wide user base.  
