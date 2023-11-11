@@ -23,6 +23,10 @@ Food-Flow consists of 11 microservices that are orchestrated together using Dock
     # Mac 
     docker run -it --rm -v /var/run/docker.sock:/var/run/docker.sock -v $HOME/.kube/config:/root/.kube/config skyish/food-flow:mac
     ```
+    ```
+    # Windows 
+    docker run -it --rm -v /var/run/docker.sock:/var/run/docker.sock -v $HOME/.kube/config:/root/.kube/config skyish/food-flow:windows
+    ```
 
 
 ### Kubernetes
