@@ -1,0 +1,77 @@
+syntax = "proto3";
+
+package auth;
+
+service UsersService {
+    rpc CreateUser (CreateUserDto) returns (ProtoUser) {}
+    rpc FindAllUsers (Empty) returns (Users) {}
+    rpc FindOneUser (FindOneUserDto) returns (ProtoUser) {}
+    rpc UpdateUser (UpdateUserDto) returns (ProtoUser) {}
+    rpc RemoveUser (FindOneUserDto) returns (ProtoUser) {}
+    rpc Login (LoginRequest) returns (LoginResponse) {}
+}
+
+message UpdateUserDto {
+    int32 UserID = 1;
+    optional string FirstName = 2;
+    optional string LastName = 3;
+    optional string DOB = 4;
+    optional string Role = 5;
+    optional string Password = 6;
+    optional string AddressFirst = 7;
+    optional string AddressSecond = 8;
+    optional string AddressThird = 9;
+    optional string PostalCode = 10;
+    optional string Email = 11;
+}
+
+message FindOneUserDto {
+    int32 UserID = 1;
+}
+
+message Empty {
+
+};
+
+message LoginRequest {
+    string Username = 1;    
+    string Password = 2; 
+}
+
+message LoginResponse {
+    bool Validated =  1;
+    string AccessToken = 2;
+    int32 UserID = 3;    
+}
+
+message Users {
+    repeated ProtoUser users = 1;
+}
+
+message CreateUserDto {
+    string Username = 1;
+    string FirstName = 2;
+    string LastName = 3;
+    string DOB = 4;
+    string Role = 5;
+    string Password = 6;
+    string AddressFirst = 7;
+    string AddressSecond = 8;
+    string AddressThird = 9;
+    string PostalCode = 10;
+    string Email = 11;
+}
+
+message ProtoUser {
+    int32 UserID = 1;
+    string Username = 2;
+    string FirstName = 3;
+    string LastName = 4;
+    string DOB = 5;
+    string Role = 6;
+    string AddressFirst = 7;
+    string AddressSecond = 8;
+    string AddressThird = 9;
+    string PostalCode = 10;
+    string Email = 11;
+}

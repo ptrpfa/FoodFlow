@@ -1,8 +1,0 @@
-{
-  "dependencies": {
-    "kafka-node": "^5.0.0",
-    "mysql2": "^3.6.2",
-    "sequelize": "^6.33.0",
-    "ws": "^8.14.2"
-  }
-}

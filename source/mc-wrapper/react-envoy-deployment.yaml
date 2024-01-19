@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: react-envoy-deployment
+spec:
+  selector:
+    matchLabels:
+      app: react-envoy
+  template:
+    metadata:
+      labels:
+        app: react-envoy
+    spec:
+      containers:
+        - name: react-envoy
+          image: skyish/react-envoy:latest
+          ports:
+            - containerPort: 9900
+            - containerPort: 9901
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: react-envoy-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: react-envoy
+  ports:
+    - name: port-ingress
+      port: 9900
+      targetPort: 9900
+      protocol: TCP
+    - name: port-egress
+      port: 9901
+      targetPort: 9901
+      protocol: TCP

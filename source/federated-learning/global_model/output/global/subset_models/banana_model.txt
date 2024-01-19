@@ -1,0 +1,3421 @@
+Preparing training and testing files for /dataset/fruits/apples folder..
+/dataset/fruits/apples files prepared!
+
+Size of training dataset: 5334
+Size of test dataset: 1334
+
+Preparing training and testing files for /dataset/fruits/banana folder..
+/dataset/fruits/banana files prepared!
+
+Size of training dataset: 10382
+Size of test dataset: 2597
+
+Preparing training and testing files for /dataset/fruits/oranges folder..
+/dataset/fruits/oranges files prepared!
+
+Size of training dataset: 13463
+Size of test dataset: 3368
+
+Preparing training and testing files for /dataset/vegetables/bittergourd folder..
+/dataset/vegetables/bittergourd files prepared!
+
+Size of training dataset: 14009
+Size of test dataset: 3506
+
+Preparing training and testing files for /dataset/vegetables/capsicum folder..
+/dataset/vegetables/capsicum files prepared!
+
+Size of training dataset: 15521
+Size of test dataset: 3885
+
+Preparing training and testing files for /dataset/vegetables/cucumber folder..
+/dataset/vegetables/cucumber files prepared!
+
+Size of training dataset: 16253
+Size of test dataset: 4070
+
+Preparing training and testing files for /dataset/vegetables/okra folder..
+/dataset/vegetables/okra files prepared!
+
+Size of training dataset: 17031
+Size of test dataset: 4265
+
+Preparing training and testing files for /dataset/vegetables/potato folder..
+/dataset/vegetables/potato files prepared!
+
+Size of training dataset: 18100
+Size of test dataset: 4534
+
+Preparing training and testing files for /dataset/vegetables/tomato folder..
+/dataset/vegetables/tomato files prepared!
+
+Size of training dataset: 21046
+Size of test dataset: 5271
+
+
+Testing model..
+
+False Prediction: Rotten with 60.39965748786926% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/Screen Shot 2018-06-08 at 5.00.18 PM.png
+
+False Prediction: Rotten with 99.98366832733154% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/Screen Shot 2018-06-08 at 5.11.52 PM.png
+
+False Prediction: Rotten with 85.42248010635376% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/Screen Shot 2018-06-08 at 5.13.54 PM.png
+
+False Prediction: Rotten with 69.79023218154907% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/Screen Shot 2018-06-08 at 5.14.48 PM.png
+
+False Prediction: Rotten with 55.109816789627075% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/Screen Shot 2018-06-08 at 5.15.45 PM.png
+
+False Prediction: Rotten with 72.23341464996338% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/Screen Shot 2018-06-08 at 5.22.27 PM.png
+
+False Prediction: Rotten with 75.97709894180298% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/Screen Shot 2018-06-08 at 5.26.52 PM.png
+
+False Prediction: Rotten with 60.884904861450195% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/a_f005.png
+
+False Prediction: Rotten with 95.64264416694641% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/a_f032.png
+
+False Prediction: Rotten with 99.48911666870117% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/a_f049.png
+
+False Prediction: Rotten with 65.59252142906189% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/a_f072.png
+
+False Prediction: Rotten with 77.59011387825012% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/a_f081.png
+
+False Prediction: Rotten with 65.22905826568604% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/a_f145.png
+
+False Prediction: Rotten with 99.71022009849548% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/a_f158.png
+
+False Prediction: Rotten with 91.43010377883911% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/a_f181.png
+
+False Prediction: Rotten with 99.43922162055969% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/a_f186.png
+
+False Prediction: Rotten with 89.28301334381104% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/a_f189.png
+
+False Prediction: Rotten with 99.94516968727112% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/a_f193.png
+
+False Prediction: Rotten with 51.41667127609253% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/a_f196.png
+
+False Prediction: Rotten with 98.94734025001526% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/a_f198.png
+
+False Prediction: Rotten with 99.70647692680359% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/a_f203.png
+
+False Prediction: Rotten with 99.98469352722168% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/a_f284.png
+
+False Prediction: Rotten with 74.73852634429932% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/a_f304.png
+
+False Prediction: Rotten with 82.39085078239441% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/a_f315.png
+
+False Prediction: Rotten with 68.2086706161499% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/a_f369.png
+
+False Prediction: Rotten with 92.67671704292297% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/a_f377.png
+
+False Prediction: Rotten with 75.55242776870728% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/a_f422.png
+
+False Prediction: Rotten with 95.85738182067871% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/a_f423.png
+
+False Prediction: Rotten with 74.73852634429932% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/a_f432.png
+
+False Prediction: Rotten with 68.65316033363342% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/a_f435.png
+
+False Prediction: Rotten with 85.40082573890686% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/a_f452.png
+
+False Prediction: Rotten with 99.97311234474182% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/a_f459.png
+
+False Prediction: Rotten with 78.92232537269592% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/a_f469.png
+
+False Prediction: Rotten with 81.73878788948059% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/a_f476.png
+
+False Prediction: Rotten with 97.70102500915527% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/a_f523.png
+
+False Prediction: Rotten with 65.59847593307495% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/a_f533.png
+
+False Prediction: Rotten with 68.9778745174408% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/a_f552.png
+
+False Prediction: Rotten with 99.89822506904602% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/a_f624.png
+
+False Prediction: Rotten with 90.55487513542175% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/a_f698.png
+
+False Prediction: Rotten with 75.92629790306091% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/a_f728.png
+
+False Prediction: Rotten with 99.99372959136963% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/rotated_by_15_Screen Shot 2018-06-08 at 4.59.57 PM.png
+
+False Prediction: Rotten with 53.640371561050415% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/rotated_by_15_Screen Shot 2018-06-08 at 5.09.17 PM.png
+
+False Prediction: Rotten with 85.39540767669678% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/rotated_by_15_Screen Shot 2018-06-08 at 5.10.11 PM.png
+
+False Prediction: Rotten with 96.88076376914978% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/rotated_by_15_Screen Shot 2018-06-08 at 5.11.41 PM.png
+
+False Prediction: Rotten with 99.99891519546509% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/rotated_by_15_Screen Shot 2018-06-08 at 5.13.10 PM.png
+
+False Prediction: Rotten with 83.79034996032715% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/rotated_by_15_Screen Shot 2018-06-08 at 5.15.45 PM.png
+
+False Prediction: Rotten with 98.79788160324097% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/rotated_by_15_Screen Shot 2018-06-08 at 5.17.04 PM.png
+
+False Prediction: Rotten with 99.99996423721313% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/rotated_by_15_Screen Shot 2018-06-08 at 5.19.15 PM.png
+
+False Prediction: Rotten with 90.11498093605042% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/rotated_by_15_Screen Shot 2018-06-08 at 5.19.28 PM.png
+
+False Prediction: Rotten with 82.86306858062744% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/rotated_by_15_Screen Shot 2018-06-08 at 5.20.42 PM.png
+
+False Prediction: Rotten with 91.4534330368042% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/rotated_by_15_Screen Shot 2018-06-08 at 5.20.56 PM.png
+
+False Prediction: Rotten with 95.64264416694641% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/rotated_by_15_Screen Shot 2018-06-08 at 5.22.15 PM.png
+
+False Prediction: Rotten with 86.02340817451477% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/rotated_by_15_Screen Shot 2018-06-08 at 5.26.05 PM.png
+
+False Prediction: Rotten with 54.71726655960083% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/rotated_by_15_Screen Shot 2018-06-08 at 5.33.27 PM.png
+
+False Prediction: Rotten with 86.40184998512268% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/rotated_by_30_Screen Shot 2018-06-08 at 4.59.49 PM.png
+
+False Prediction: Rotten with 93.60889792442322% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/rotated_by_30_Screen Shot 2018-06-08 at 5.00.12 PM.png
+
+False Prediction: Rotten with 95.7470715045929% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/rotated_by_30_Screen Shot 2018-06-08 at 5.01.08 PM.png
+
+False Prediction: Rotten with 99.94643330574036% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/rotated_by_30_Screen Shot 2018-06-08 at 5.05.27 PM.png
+
+False Prediction: Rotten with 99.98868703842163% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/rotated_by_30_Screen Shot 2018-06-08 at 5.10.03 PM.png
+
+False Prediction: Rotten with 99.87057447433472% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/rotated_by_30_Screen Shot 2018-06-08 at 5.11.52 PM.png
+
+False Prediction: Rotten with 99.12885427474976% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/rotated_by_30_Screen Shot 2018-06-08 at 5.14.07 PM.png
+
+False Prediction: Rotten with 99.99963045120239% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/rotated_by_30_Screen Shot 2018-06-08 at 5.14.44 PM.png
+
+False Prediction: Rotten with 61.6003155708313% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/rotated_by_30_Screen Shot 2018-06-08 at 5.15.39 PM.png
+
+False Prediction: Rotten with 83.92349481582642% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/rotated_by_30_Screen Shot 2018-06-08 at 5.15.45 PM.png
+
+False Prediction: Rotten with 51.39959454536438% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/rotated_by_30_Screen Shot 2018-06-08 at 5.19.47 PM.png
+
+False Prediction: Rotten with 99.89795088768005% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/rotated_by_30_Screen Shot 2018-06-08 at 5.20.56 PM.png
+
+False Prediction: Rotten with 63.16319704055786% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/rotated_by_30_Screen Shot 2018-06-08 at 5.21.44 PM.png
+
+False Prediction: Rotten with 99.5753288269043% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/rotated_by_30_Screen Shot 2018-06-08 at 5.21.51 PM.png
+
+False Prediction: Rotten with 99.31067824363708% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/rotated_by_30_Screen Shot 2018-06-08 at 5.24.26 PM.png
+
+False Prediction: Rotten with 93.73975992202759% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/rotated_by_30_Screen Shot 2018-06-08 at 5.27.13 PM.png
+
+False Prediction: Rotten with 90.79774022102356% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/rotated_by_30_Screen Shot 2018-06-08 at 5.27.34 PM.png
+
+False Prediction: Rotten with 96.77535891532898% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/rotated_by_45_Screen Shot 2018-06-08 at 5.10.11 PM.png
+
+False Prediction: Rotten with 55.01754879951477% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/rotated_by_45_Screen Shot 2018-06-08 at 5.10.29 PM.png
+
+False Prediction: Rotten with 100% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/rotated_by_45_Screen Shot 2018-06-08 at 5.15.21 PM.png
+
+False Prediction: Rotten with 99.98291730880737% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/rotated_by_45_Screen Shot 2018-06-08 at 5.15.45 PM.png
+
+False Prediction: Rotten with 60.527223348617554% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/rotated_by_45_Screen Shot 2018-06-08 at 5.22.53 PM.png
+
+False Prediction: Rotten with 98.99086952209473% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/rotated_by_45_Screen Shot 2018-06-08 at 5.26.36 PM.png
+
+False Prediction: Rotten with 99.71022009849548% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/rotated_by_45_Screen Shot 2018-06-08 at 5.32.38 PM.png
+
+False Prediction: Rotten with 77.75408029556274% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/rotated_by_60_Screen Shot 2018-06-08 at 5.05.27 PM.png
+
+False Prediction: Rotten with 99.99222755432129% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/rotated_by_60_Screen Shot 2018-06-08 at 5.06.47 PM.png
+
+False Prediction: Rotten with 76.46056413650513% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/rotated_by_60_Screen Shot 2018-06-08 at 5.09.54 PM.png
+
+False Prediction: Rotten with 96.47340774536133% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/rotated_by_60_Screen Shot 2018-06-08 at 5.10.11 PM.png
+
+False Prediction: Rotten with 85.8815610408783% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/rotated_by_60_Screen Shot 2018-06-08 at 5.10.37 PM.png
+
+False Prediction: Rotten with 99.99932050704956% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/rotated_by_60_Screen Shot 2018-06-08 at 5.15.45 PM.png
+
+False Prediction: Rotten with 98.94734025001526% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/rotated_by_60_Screen Shot 2018-06-08 at 5.19.28 PM.png
+
+False Prediction: Rotten with 86.76479458808899% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/rotated_by_60_Screen Shot 2018-06-08 at 5.26.05 PM.png
+
+False Prediction: Rotten with 62.67048120498657% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/rotated_by_60_Screen Shot 2018-06-08 at 5.26.47 PM.png
+
+False Prediction: Rotten with 100% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/rotated_by_75_Screen Shot 2018-06-08 at 4.59.57 PM.png
+
+False Prediction: Rotten with 88.0739688873291% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/rotated_by_75_Screen Shot 2018-06-08 at 5.01.41 PM.png
+
+False Prediction: Rotten with 99.95583891868591% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/rotated_by_75_Screen Shot 2018-06-08 at 5.06.47 PM.png
+
+False Prediction: Rotten with 92.78017282485962% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/rotated_by_75_Screen Shot 2018-06-08 at 5.07.52 PM.png
+
+False Prediction: Rotten with 100% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/rotated_by_75_Screen Shot 2018-06-08 at 5.09.25 PM.png
+
+False Prediction: Rotten with 53.10198664665222% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/rotated_by_75_Screen Shot 2018-06-08 at 5.09.54 PM.png
+
+False Prediction: Rotten with 100% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/rotated_by_75_Screen Shot 2018-06-08 at 5.10.03 PM.png
+
+False Prediction: Rotten with 53.41216325759888% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/rotated_by_75_Screen Shot 2018-06-08 at 5.10.21 PM.png
+
+False Prediction: Rotten with 77.82537341117859% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/rotated_by_75_Screen Shot 2018-06-08 at 5.14.48 PM.png
+
+False Prediction: Rotten with 99.99984502792358% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/rotated_by_75_Screen Shot 2018-06-08 at 5.15.01 PM.png
+
+False Prediction: Rotten with 99.98469352722168% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/rotated_by_75_Screen Shot 2018-06-08 at 5.18.12 PM.png
+
+False Prediction: Rotten with 96.00040912628174% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/rotated_by_75_Screen Shot 2018-06-08 at 5.18.16 PM.png
+
+False Prediction: Rotten with 98.06203842163086% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/rotated_by_75_Screen Shot 2018-06-08 at 5.26.47 PM.png
+
+False Prediction: Rotten with 99.73602890968323% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/rotated_by_75_Screen Shot 2018-06-08 at 5.27.34 PM.png
+
+False Prediction: Rotten with 75.98105669021606% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/rotated_by_75_Screen Shot 2018-06-08 at 5.28.10 PM.png
+
+False Prediction: Rotten with 94.00283694267273% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/rotated_by_75_Screen Shot 2018-06-08 at 5.33.11 PM.png
+
+False Prediction: Rotten with 95.18665671348572% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/rotated_by_75_Screen Shot 2018-06-08 at 5.33.27 PM.png
+
+False Prediction: Rotten with 89.07360434532166% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/saltandpepper_Screen Shot 2018-06-08 at 5.00.35 PM.png
+
+False Prediction: Rotten with 83.62900614738464% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/saltandpepper_Screen Shot 2018-06-08 at 5.04.48 PM.png
+
+False Prediction: Rotten with 66.79257154464722% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/saltandpepper_Screen Shot 2018-06-08 at 5.05.12 PM.png
+
+False Prediction: Rotten with 75.55242776870728% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/saltandpepper_Screen Shot 2018-06-08 at 5.05.18 PM.png
+
+False Prediction: Rotten with 71.89980149269104% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/saltandpepper_Screen Shot 2018-06-08 at 5.06.40 PM.png
+
+False Prediction: Rotten with 74.73852634429932% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/saltandpepper_Screen Shot 2018-06-08 at 5.09.31 PM.png
+
+False Prediction: Rotten with 85.1508617401123% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/saltandpepper_Screen Shot 2018-06-08 at 5.09.54 PM.png
+
+False Prediction: Rotten with 57.07114934921265% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/saltandpepper_Screen Shot 2018-06-08 at 5.10.37 PM.png
+
+False Prediction: Rotten with 98.61905574798584% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/saltandpepper_Screen Shot 2018-06-08 at 5.15.14 PM.png
+
+False Prediction: Rotten with 97.20867276191711% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/saltandpepper_Screen Shot 2018-06-08 at 5.16.28 PM.png
+
+False Prediction: Rotten with 99.78612065315247% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/saltandpepper_Screen Shot 2018-06-08 at 5.17.34 PM.png
+
+False Prediction: Rotten with 99.86761212348938% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/saltandpepper_Screen Shot 2018-06-08 at 5.19.15 PM.png
+
+False Prediction: Rotten with 99.7232735157013% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/saltandpepper_Screen Shot 2018-06-08 at 5.20.56 PM.png
+
+False Prediction: Rotten with 99.07474517822266% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/saltandpepper_Screen Shot 2018-06-08 at 5.24.04 PM.png
+
+False Prediction: Rotten with 93.60054135322571% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/saltandpepper_Screen Shot 2018-06-08 at 5.24.19 PM.png
+
+False Prediction: Rotten with 96.3180422782898% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/saltandpepper_Screen Shot 2018-06-08 at 5.26.52 PM.png
+
+False Prediction: Rotten with 84.06956791877747% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/saltandpepper_Screen Shot 2018-06-08 at 5.28.24 PM.png
+
+False Prediction: Rotten with 97.08985090255737% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/saltandpepper_Screen Shot 2018-06-08 at 5.29.31 PM.png
+
+False Prediction: Rotten with 98.42494130134583% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/saltandpepper_Screen Shot 2018-06-08 at 5.33.18 PM.png
+
+False Prediction: Rotten with 87.47766017913818% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/translation_Screen Shot 2018-06-08 at 4.59.57 PM.png
+
+False Prediction: Rotten with 99.99319314956665% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/translation_Screen Shot 2018-06-08 at 5.00.35 PM.png
+
+False Prediction: Rotten with 65.85901975631714% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/translation_Screen Shot 2018-06-08 at 5.01.22 PM.png
+
+False Prediction: Rotten with 99.9850869178772% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/translation_Screen Shot 2018-06-08 at 5.08.05 PM.png
+
+False Prediction: Rotten with 99.54173564910889% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/translation_Screen Shot 2018-06-08 at 5.08.37 PM.png
+
+False Prediction: Rotten with 97.52091765403748% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/translation_Screen Shot 2018-06-08 at 5.11.02 PM.png
+
+False Prediction: Rotten with 99.9910831451416% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/translation_Screen Shot 2018-06-08 at 5.13.02 PM.png
+
+False Prediction: Rotten with 99.95611310005188% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/translation_Screen Shot 2018-06-08 at 5.15.52 PM.png
+
+False Prediction: Rotten with 99.99995231628418% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/translation_Screen Shot 2018-06-08 at 5.16.49 PM.png
+
+False Prediction: Rotten with 99.23954010009766% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/translation_Screen Shot 2018-06-08 at 5.17.04 PM.png
+
+False Prediction: Rotten with 99.14605617523193% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/translation_Screen Shot 2018-06-08 at 5.18.26 PM.png
+
+False Prediction: Rotten with 99.99884366989136% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/translation_Screen Shot 2018-06-08 at 5.19.15 PM.png
+
+False Prediction: Rotten with 99.65919256210327% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/translation_Screen Shot 2018-06-08 at 5.19.28 PM.png
+
+False Prediction: Rotten with 87.00605630874634% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/translation_Screen Shot 2018-06-08 at 5.20.56 PM.png
+
+False Prediction: Rotten with 81.14559054374695% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/translation_Screen Shot 2018-06-08 at 5.22.35 PM.png
+
+False Prediction: Rotten with 74.15276169776917% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/vertical_flip_Screen Shot 2018-06-08 at 5.09.17 PM.png
+
+False Prediction: Rotten with 52.130818367004395% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/vertical_flip_Screen Shot 2018-06-08 at 5.13.31 PM.png
+
+False Prediction: Rotten with 97.46916890144348% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/vertical_flip_Screen Shot 2018-06-08 at 5.16.49 PM.png
+
+False Prediction: Rotten with 99.99245405197144% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/vertical_flip_Screen Shot 2018-06-08 at 5.19.15 PM.png
+
+False Prediction: Rotten with 99.75449442863464% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/vertical_flip_Screen Shot 2018-06-08 at 5.19.47 PM.png
+
+False Prediction: Rotten with 83.69981646537781% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/vertical_flip_Screen Shot 2018-06-08 at 5.20.32 PM.png
+
+False Prediction: Rotten with 85.05698442459106% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/vertical_flip_Screen Shot 2018-06-08 at 5.21.22 PM.png
+
+False Prediction: Rotten with 99.97779726982117% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/vertical_flip_Screen Shot 2018-06-08 at 5.22.35 PM.png
+
+False Prediction: Rotten with 61.387717723846436% confidence (Actual: Fresh)
+File: dataset/fruits/apples/test/fresh/vertical_flip_Screen Shot 2018-06-08 at 5.22.58 PM.png
+
+False Prediction: Fresh with 99.30678606033325% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/Screen Shot 2018-06-07 at 2.38.38 PM.png
+
+False Prediction: Fresh with 99.69358444213867% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/Screen Shot 2018-06-07 at 2.39.20 PM.png
+
+False Prediction: Fresh with 87.74738907814026% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/Screen Shot 2018-06-07 at 2.54.41 PM.png
+
+False Prediction: Fresh with 68.9419686794281% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/Screen Shot 2018-06-07 at 2.56.16 PM.png
+
+False Prediction: Fresh with 99.99614953994751% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/Screen Shot 2018-06-07 at 3.02.51 PM.png
+
+False Prediction: Fresh with 77.1912932395935% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/Screen Shot 2018-06-08 at 2.26.55 PM.png
+
+False Prediction: Fresh with 93.27273964881897% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/Screen Shot 2018-06-08 at 2.30.31 PM.png
+
+False Prediction: Fresh with 99.9997615814209% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/Screen Shot 2018-06-08 at 2.34.51 PM.png
+
+False Prediction: Fresh with 54.23860549926758% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/Screen Shot 2018-06-08 at 2.35.03 PM.png
+
+False Prediction: Fresh with 99.99996423721313% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/Screen Shot 2018-06-08 at 2.42.30 PM.png
+
+False Prediction: Fresh with 96.41033411026001% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/a_r059.png
+
+False Prediction: Fresh with 85.95144152641296% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/a_r068.png
+
+False Prediction: Fresh with 99.98319149017334% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/a_r113.png
+
+False Prediction: Fresh with 78.80879044532776% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/a_r117.png
+
+False Prediction: Fresh with 79.66363430023193% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/a_r124.png
+
+False Prediction: Fresh with 98.65276217460632% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/a_r169.png
+
+False Prediction: Fresh with 99.92478489875793% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/a_r175.png
+
+False Prediction: Fresh with 99.83680844306946% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/a_r208.png
+
+False Prediction: Fresh with 99.99992847442627% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/a_r334.png
+
+False Prediction: Fresh with 62.75855302810669% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/a_r337.png
+
+False Prediction: Fresh with 73.94953966140747% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/a_r339.png
+
+False Prediction: Fresh with 98.04797172546387% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/a_r383.png
+
+False Prediction: Fresh with 99.93767142295837% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/a_r419.png
+
+False Prediction: Fresh with 99.87301230430603% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/a_r465.png
+
+False Prediction: Fresh with 86.73183917999268% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/a_r506.png
+
+False Prediction: Fresh with 99.91263747215271% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/a_r524.png
+
+False Prediction: Fresh with 74.70570802688599% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/a_r560.png
+
+False Prediction: Fresh with 98.35357666015625% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/a_r561.png
+
+False Prediction: Fresh with 99.99721050262451% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/a_r562.png
+
+False Prediction: Fresh with 99.99189376831055% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/a_r590.png
+
+False Prediction: Fresh with 84.00741219520569% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/a_r627.png
+
+False Prediction: Fresh with 77.76663303375244% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/a_r635.png
+
+False Prediction: Fresh with 99.99997615814209% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/a_r679.png
+
+False Prediction: Fresh with 99.99998807907104% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/a_r716.png
+
+False Prediction: Fresh with 97.7268397808075% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/a_r767.png
+
+False Prediction: Fresh with 99.99827146530151% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/a_r825.png
+
+False Prediction: Fresh with 99.99979734420776% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/a_r902.png
+
+False Prediction: Fresh with 69.75147724151611% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/rotated_by_15_Screen Shot 2018-06-07 at 2.40.13 PM.png
+
+False Prediction: Fresh with 80.77601194381714% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/rotated_by_15_Screen Shot 2018-06-07 at 2.40.48 PM.png
+
+False Prediction: Fresh with 99.03334975242615% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/rotated_by_15_Screen Shot 2018-06-07 at 2.47.13 PM.png
+
+False Prediction: Fresh with 97.89804220199585% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/rotated_by_15_Screen Shot 2018-06-07 at 2.54.41 PM.png
+
+False Prediction: Fresh with 78.32132577896118% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/rotated_by_15_Screen Shot 2018-06-07 at 3.03.21 PM.png
+
+False Prediction: Fresh with 99.32911396026611% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/rotated_by_15_Screen Shot 2018-06-08 at 2.25.43 PM.png
+
+False Prediction: Fresh with 100% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/rotated_by_15_Screen Shot 2018-06-08 at 2.26.34 PM.png
+
+False Prediction: Fresh with 100% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/rotated_by_15_Screen Shot 2018-06-08 at 2.34.47 PM.png
+
+False Prediction: Fresh with 99.89866614341736% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/rotated_by_15_Screen Shot 2018-06-08 at 2.47.03 PM.png
+
+False Prediction: Fresh with 99.89782571792603% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/rotated_by_15_Screen Shot 2018-06-08 at 2.52.57 PM.png
+
+False Prediction: Fresh with 68.39041709899902% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/rotated_by_30_Screen Shot 2018-06-07 at 2.20.56 PM.png
+
+False Prediction: Fresh with 100% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/rotated_by_30_Screen Shot 2018-06-07 at 2.25.26 PM.png
+
+False Prediction: Fresh with 99.60975050926208% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/rotated_by_30_Screen Shot 2018-06-07 at 2.45.09 PM.png
+
+False Prediction: Fresh with 75.96783638000488% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/rotated_by_30_Screen Shot 2018-06-07 at 2.50.31 PM.png
+
+False Prediction: Fresh with 88.23134899139404% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/rotated_by_30_Screen Shot 2018-06-07 at 3.05.46 PM.png
+
+False Prediction: Fresh with 98.85159730911255% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/rotated_by_30_Screen Shot 2018-06-08 at 2.25.43 PM.png
+
+False Prediction: Fresh with 88.44403624534607% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/rotated_by_30_Screen Shot 2018-06-08 at 2.27.44 PM.png
+
+False Prediction: Fresh with 100% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/rotated_by_30_Screen Shot 2018-06-08 at 2.34.42 PM.png
+
+False Prediction: Fresh with 97.10028171539307% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/rotated_by_30_Screen Shot 2018-06-08 at 2.40.46 PM.png
+
+False Prediction: Fresh with 99.98635053634644% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/rotated_by_30_Screen Shot 2018-06-08 at 2.47.09 PM.png
+
+False Prediction: Fresh with 78.80879044532776% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/rotated_by_30_Screen Shot 2018-06-08 at 2.48.29 PM.png
+
+False Prediction: Fresh with 73.95638227462769% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/rotated_by_30_Screen Shot 2018-06-08 at 2.49.27 PM.png
+
+False Prediction: Fresh with 99.4635283946991% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/rotated_by_30_Screen Shot 2018-06-08 at 2.50.49 PM.png
+
+False Prediction: Fresh with 96.57919406890869% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/rotated_by_45_Screen Shot 2018-06-07 at 2.41.07 PM.png
+
+False Prediction: Fresh with 88.45097422599792% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/rotated_by_45_Screen Shot 2018-06-07 at 2.41.14 PM.png
+
+False Prediction: Fresh with 61.55075430870056% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/rotated_by_45_Screen Shot 2018-06-07 at 2.42.25 PM.png
+
+False Prediction: Fresh with 91.82024002075195% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/rotated_by_45_Screen Shot 2018-06-07 at 2.44.36 PM.png
+
+False Prediction: Fresh with 99.53821301460266% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/rotated_by_45_Screen Shot 2018-06-07 at 2.44.59 PM.png
+
+False Prediction: Fresh with 67.67386794090271% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/rotated_by_45_Screen Shot 2018-06-07 at 2.47.27 PM.png
+
+False Prediction: Fresh with 99.9735414981842% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/rotated_by_45_Screen Shot 2018-06-07 at 2.56.57 PM.png
+
+False Prediction: Fresh with 58.543938398361206% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/rotated_by_45_Screen Shot 2018-06-07 at 2.58.47 PM.png
+
+False Prediction: Fresh with 61.90634369850159% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/rotated_by_45_Screen Shot 2018-06-07 at 3.05.46 PM.png
+
+False Prediction: Fresh with 77.71451473236084% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/rotated_by_45_Screen Shot 2018-06-07 at 3.05.58 PM.png
+
+False Prediction: Fresh with 82.51209855079651% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/rotated_by_45_Screen Shot 2018-06-08 at 2.25.43 PM.png
+
+False Prediction: Fresh with 99.74439144134521% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/rotated_by_45_Screen Shot 2018-06-08 at 2.31.08 PM.png
+
+False Prediction: Fresh with 100% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/rotated_by_45_Screen Shot 2018-06-08 at 2.34.47 PM.png
+
+False Prediction: Fresh with 98.74767661094666% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/rotated_by_45_Screen Shot 2018-06-08 at 2.36.55 PM.png
+
+False Prediction: Fresh with 99.99743700027466% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/rotated_by_45_Screen Shot 2018-06-08 at 2.42.30 PM.png
+
+False Prediction: Fresh with 61.144471168518066% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/rotated_by_45_Screen Shot 2018-06-08 at 2.42.58 PM.png
+
+False Prediction: Fresh with 82.01364278793335% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/rotated_by_45_Screen Shot 2018-06-08 at 2.45.58 PM.png
+
+False Prediction: Fresh with 51.87501311302185% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/rotated_by_45_Screen Shot 2018-06-08 at 2.46.36 PM.png
+
+False Prediction: Fresh with 99.98107552528381% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/rotated_by_45_Screen Shot 2018-06-08 at 2.47.09 PM.png
+
+False Prediction: Fresh with 98.43345284461975% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/rotated_by_45_Screen Shot 2018-06-08 at 2.48.29 PM.png
+
+False Prediction: Fresh with 60.872334241867065% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/rotated_by_60_Screen Shot 2018-06-07 at 2.20.56 PM.png
+
+False Prediction: Fresh with 99.9969482421875% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/rotated_by_60_Screen Shot 2018-06-07 at 2.38.38 PM.png
+
+False Prediction: Fresh with 99.92478489875793% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/rotated_by_60_Screen Shot 2018-06-07 at 2.47.35 PM.png
+
+False Prediction: Fresh with 95.24020552635193% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/rotated_by_60_Screen Shot 2018-06-07 at 2.47.50 PM.png
+
+False Prediction: Fresh with 71.39684557914734% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/rotated_by_60_Screen Shot 2018-06-07 at 3.06.30 PM.png
+
+False Prediction: Fresh with 99.67415928840637% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/rotated_by_60_Screen Shot 2018-06-08 at 2.26.34 PM.png
+
+False Prediction: Fresh with 72.53430485725403% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/rotated_by_60_Screen Shot 2018-06-08 at 2.26.44 PM.png
+
+False Prediction: Fresh with 95.14100551605225% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/rotated_by_60_Screen Shot 2018-06-08 at 2.36.55 PM.png
+
+False Prediction: Fresh with 98.07151556015015% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/rotated_by_60_Screen Shot 2018-06-08 at 2.47.09 PM.png
+
+False Prediction: Fresh with 97.13343977928162% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/rotated_by_60_Screen Shot 2018-06-08 at 2.48.43 PM.png
+
+False Prediction: Fresh with 99.60118532180786% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/rotated_by_60_Screen Shot 2018-06-08 at 2.50.25 PM.png
+
+False Prediction: Fresh with 99.85087513923645% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/rotated_by_60_Screen Shot 2018-06-08 at 2.50.49 PM.png
+
+False Prediction: Fresh with 99.50142502784729% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/rotated_by_75_Screen Shot 2018-06-07 at 2.44.51 PM.png
+
+False Prediction: Fresh with 99.53302145004272% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/rotated_by_75_Screen Shot 2018-06-07 at 2.47.01 PM.png
+
+False Prediction: Fresh with 65.84028601646423% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/rotated_by_75_Screen Shot 2018-06-07 at 2.57.42 PM.png
+
+False Prediction: Fresh with 99.9596893787384% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/rotated_by_75_Screen Shot 2018-06-07 at 3.06.51 PM.png
+
+False Prediction: Fresh with 99.99911785125732% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/rotated_by_75_Screen Shot 2018-06-08 at 2.28.23 PM.png
+
+False Prediction: Fresh with 99.95841383934021% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/rotated_by_75_Screen Shot 2018-06-08 at 2.30.31 PM.png
+
+False Prediction: Fresh with 99.75267052650452% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/rotated_by_75_Screen Shot 2018-06-08 at 2.31.08 PM.png
+
+False Prediction: Fresh with 99.99996423721313% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/rotated_by_75_Screen Shot 2018-06-08 at 2.34.51 PM.png
+
+False Prediction: Fresh with 89.90584015846252% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/rotated_by_75_Screen Shot 2018-06-08 at 2.40.56 PM.png
+
+False Prediction: Fresh with 99.63239431381226% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/rotated_by_75_Screen Shot 2018-06-08 at 2.50.25 PM.png
+
+False Prediction: Fresh with 54.268258810043335% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/saltandpepper_Screen Shot 2018-06-07 at 2.20.29 PM.png
+
+False Prediction: Fresh with 86.73183917999268% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/saltandpepper_Screen Shot 2018-06-07 at 2.34.18 PM.png
+
+False Prediction: Fresh with 80.17900586128235% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/saltandpepper_Screen Shot 2018-06-07 at 2.40.55 PM.png
+
+False Prediction: Fresh with 99.99525547027588% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/saltandpepper_Screen Shot 2018-06-07 at 2.44.51 PM.png
+
+False Prediction: Fresh with 99.84866380691528% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/saltandpepper_Screen Shot 2018-06-07 at 2.47.01 PM.png
+
+False Prediction: Fresh with 99.91263747215271% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/saltandpepper_Screen Shot 2018-06-07 at 2.50.31 PM.png
+
+False Prediction: Fresh with 98.51149916648865% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/saltandpepper_Screen Shot 2018-06-07 at 2.55.52 PM.png
+
+False Prediction: Fresh with 99.99830722808838% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/saltandpepper_Screen Shot 2018-06-07 at 2.57.17 PM.png
+
+False Prediction: Fresh with 99.89216327667236% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/saltandpepper_Screen Shot 2018-06-07 at 2.58.04 PM.png
+
+False Prediction: Fresh with 94.86961960792542% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/saltandpepper_Screen Shot 2018-06-08 at 2.31.08 PM.png
+
+False Prediction: Fresh with 68.25643181800842% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/saltandpepper_Screen Shot 2018-06-08 at 2.31.16 PM.png
+
+False Prediction: Fresh with 78.58808636665344% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/translation_Screen Shot 2018-06-07 at 3.05.05 PM.png
+
+False Prediction: Fresh with 89.39156532287598% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/translation_Screen Shot 2018-06-08 at 2.40.46 PM.png
+
+False Prediction: Fresh with 75.03487467765808% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/translation_Screen Shot 2018-06-08 at 2.50.38 PM.png
+
+False Prediction: Fresh with 99.9463140964508% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/translation_Screen Shot 2018-06-08 at 2.52.57 PM.png
+
+False Prediction: Fresh with 92.95291900634766% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/vertical_flip_Screen Shot 2018-06-07 at 2.20.29 PM.png
+
+False Prediction: Fresh with 99.84904527664185% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/vertical_flip_Screen Shot 2018-06-07 at 3.03.21 PM.png
+
+False Prediction: Fresh with 58.548933267593384% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/vertical_flip_Screen Shot 2018-06-08 at 2.37.24 PM.png
+
+False Prediction: Fresh with 57.11464285850525% confidence (Actual: Rotten)
+File: dataset/fruits/apples/test/rotten/vertical_flip_Screen Shot 2018-06-08 at 2.47.03 PM.png
+
+False Prediction: Rotten with 80.03390431404114% confidence (Actual: Fresh)
+File: dataset/fruits/banana/test/fresh/b_f087.png
+
+False Prediction: Rotten with 76.01750493049622% confidence (Actual: Fresh)
+File: dataset/fruits/banana/test/fresh/b_f157.png
+
+False Prediction: Rotten with 55.716484785079956% confidence (Actual: Fresh)
+File: dataset/fruits/banana/test/fresh/b_f229.png
+
+False Prediction: Rotten with 55.38373589515686% confidence (Actual: Fresh)
+File: dataset/fruits/banana/test/fresh/b_f258.png
+
+False Prediction: Rotten with 50.3587007522583% confidence (Actual: Fresh)
+File: dataset/fruits/banana/test/fresh/b_f271.png
+
+False Prediction: Rotten with 62.8567636013031% confidence (Actual: Fresh)
+File: dataset/fruits/banana/test/fresh/b_f438.png
+
+False Prediction: Rotten with 96.74936532974243% confidence (Actual: Fresh)
+File: dataset/fruits/banana/test/fresh/b_f520.png
+
+False Prediction: Rotten with 77.37300395965576% confidence (Actual: Fresh)
+File: dataset/fruits/banana/test/fresh/rotated_by_15_Screen Shot 2018-06-12 at 10.00.54 PM.png
+
+False Prediction: Rotten with 76.61463022232056% confidence (Actual: Fresh)
+File: dataset/fruits/banana/test/fresh/rotated_by_15_Screen Shot 2018-06-12 at 9.46.24 PM.png
+
+False Prediction: Rotten with 60.75982451438904% confidence (Actual: Fresh)
+File: dataset/fruits/banana/test/fresh/rotated_by_30_Screen Shot 2018-06-12 at 9.38.04 PM.png
+
+False Prediction: Rotten with 58.776313066482544% confidence (Actual: Fresh)
+File: dataset/fruits/banana/test/fresh/rotated_by_30_Screen Shot 2018-06-12 at 9.47.55 PM.png
+
+False Prediction: Rotten with 53.973597288131714% confidence (Actual: Fresh)
+File: dataset/fruits/banana/test/fresh/rotated_by_45_Screen Shot 2018-06-12 at 10.00.54 PM.png
+
+False Prediction: Rotten with 56.01566433906555% confidence (Actual: Fresh)
+File: dataset/fruits/banana/test/fresh/rotated_by_45_Screen Shot 2018-06-12 at 9.39.08 PM.png
+
+False Prediction: Rotten with 55.88233470916748% confidence (Actual: Fresh)
+File: dataset/fruits/banana/test/fresh/rotated_by_45_Screen Shot 2018-06-12 at 9.43.53 PM.png
+
+False Prediction: Rotten with 54.35539484024048% confidence (Actual: Fresh)
+File: dataset/fruits/banana/test/fresh/rotated_by_45_Screen Shot 2018-06-12 at 9.46.48 PM.png
+
+False Prediction: Rotten with 55.38373589515686% confidence (Actual: Fresh)
+File: dataset/fruits/banana/test/fresh/rotated_by_45_Screen Shot 2018-06-12 at 9.47.46 PM.png
+
+False Prediction: Rotten with 55.09960055351257% confidence (Actual: Fresh)
+File: dataset/fruits/banana/test/fresh/rotated_by_45_Screen Shot 2018-06-12 at 9.52.50 PM.png
+
+False Prediction: Rotten with 51.091790199279785% confidence (Actual: Fresh)
+File: dataset/fruits/banana/test/fresh/rotated_by_60_Screen Shot 2018-06-12 at 10.00.49 PM.png
+
+False Prediction: Rotten with 52.5199830532074% confidence (Actual: Fresh)
+File: dataset/fruits/banana/test/fresh/rotated_by_60_Screen Shot 2018-06-12 at 10.01.52 PM.png
+
+False Prediction: Rotten with 52.67654061317444% confidence (Actual: Fresh)
+File: dataset/fruits/banana/test/fresh/rotated_by_60_Screen Shot 2018-06-12 at 10.05.29 PM.png
+
+False Prediction: Rotten with 52.643316984176636% confidence (Actual: Fresh)
+File: dataset/fruits/banana/test/fresh/rotated_by_60_Screen Shot 2018-06-12 at 9.43.11 PM.png
+
+False Prediction: Rotten with 52.62969732284546% confidence (Actual: Fresh)
+File: dataset/fruits/banana/test/fresh/rotated_by_60_Screen Shot 2018-06-12 at 9.45.22 PM.png
+
+False Prediction: Rotten with 50.111931562423706% confidence (Actual: Fresh)
+File: dataset/fruits/banana/test/fresh/rotated_by_60_Screen Shot 2018-06-12 at 9.47.00 PM.png
+
+False Prediction: Rotten with 52.47347950935364% confidence (Actual: Fresh)
+File: dataset/fruits/banana/test/fresh/rotated_by_60_Screen Shot 2018-06-12 at 9.55.13 PM.png
+
+False Prediction: Rotten with 52.589261531829834% confidence (Actual: Fresh)
+File: dataset/fruits/banana/test/fresh/rotated_by_60_Screen Shot 2018-06-12 at 9.56.23 PM.png
+
+False Prediction: Rotten with 52.52500772476196% confidence (Actual: Fresh)
+File: dataset/fruits/banana/test/fresh/rotated_by_60_Screen Shot 2018-06-12 at 9.57.25 PM.png
+
+False Prediction: Rotten with 97.27050065994263% confidence (Actual: Fresh)
+File: dataset/fruits/banana/test/fresh/saltandpepper_Screen Shot 2018-06-12 at 9.38.51 PM.png
+
+False Prediction: Rotten with 98.19720387458801% confidence (Actual: Fresh)
+File: dataset/fruits/banana/test/fresh/saltandpepper_Screen Shot 2018-06-12 at 9.45.28 PM.png
+
+False Prediction: Rotten with 56.98394179344177% confidence (Actual: Fresh)
+File: dataset/fruits/banana/test/fresh/translation_Screen Shot 2018-06-12 at 9.40.26 PM.png
+
+False Prediction: Rotten with 62.8567636013031% confidence (Actual: Fresh)
+File: dataset/fruits/banana/test/fresh/translation_Screen Shot 2018-06-12 at 9.47.55 PM.png
+
+False Prediction: Rotten with 62.8567636013031% confidence (Actual: Fresh)
+File: dataset/fruits/banana/test/fresh/translation_Screen Shot 2018-06-12 at 9.49.23 PM.png
+
+False Prediction: Fresh with 77.5141179561615% confidence (Actual: Rotten)
+File: dataset/fruits/banana/test/rotten/rotated_by_45_Screen Shot 2018-06-12 at 8.48.46 PM.png
+
+False Prediction: Fresh with 69.46304440498352% confidence (Actual: Rotten)
+File: dataset/fruits/banana/test/rotten/rotated_by_45_Screen Shot 2018-06-12 at 8.50.40 PM.png
+
+False Prediction: Fresh with 55.34188151359558% confidence (Actual: Rotten)
+File: dataset/fruits/banana/test/rotten/rotated_by_45_Screen Shot 2018-06-12 at 9.12.27 PM.png
+
+False Prediction: Fresh with 50.11758208274841% confidence (Actual: Rotten)
+File: dataset/fruits/banana/test/rotten/rotated_by_45_Screen Shot 2018-06-12 at 9.13.21 PM.png
+
+False Prediction: Fresh with 62.02276349067688% confidence (Actual: Rotten)
+File: dataset/fruits/banana/test/rotten/rotated_by_45_Screen Shot 2018-06-12 at 9.25.09 PM.png
+
+False Prediction: Fresh with 55.71988821029663% confidence (Actual: Rotten)
+File: dataset/fruits/banana/test/rotten/rotated_by_75_Screen Shot 2018-06-12 at 8.47.41 PM.png
+
+False Prediction: Fresh with 63.86235952377319% confidence (Actual: Rotten)
+File: dataset/fruits/banana/test/rotten/rotated_by_75_Screen Shot 2018-06-12 at 8.47.51 PM.png
+
+False Prediction: Fresh with 57.92568922042847% confidence (Actual: Rotten)
+File: dataset/fruits/banana/test/rotten/rotated_by_75_Screen Shot 2018-06-12 at 8.48.24 PM.png
+
+False Prediction: Fresh with 65.61842560768127% confidence (Actual: Rotten)
+File: dataset/fruits/banana/test/rotten/rotated_by_75_Screen Shot 2018-06-12 at 8.49.15 PM.png
+
+False Prediction: Fresh with 60.0335955619812% confidence (Actual: Rotten)
+File: dataset/fruits/banana/test/rotten/rotated_by_75_Screen Shot 2018-06-12 at 8.49.52 PM.png
+
+False Prediction: Fresh with 58.62095355987549% confidence (Actual: Rotten)
+File: dataset/fruits/banana/test/rotten/rotated_by_75_Screen Shot 2018-06-12 at 8.50.47 PM.png
+
+False Prediction: Fresh with 55.70895075798035% confidence (Actual: Rotten)
+File: dataset/fruits/banana/test/rotten/rotated_by_75_Screen Shot 2018-06-12 at 9.03.01 PM.png
+
+False Prediction: Fresh with 51.79443955421448% confidence (Actual: Rotten)
+File: dataset/fruits/banana/test/rotten/rotated_by_75_Screen Shot 2018-06-12 at 9.06.05 PM.png
+
+False Prediction: Fresh with 61.31366491317749% confidence (Actual: Rotten)
+File: dataset/fruits/banana/test/rotten/rotated_by_75_Screen Shot 2018-06-12 at 9.06.40 PM.png
+
+False Prediction: Fresh with 54.8834502696991% confidence (Actual: Rotten)
+File: dataset/fruits/banana/test/rotten/rotated_by_75_Screen Shot 2018-06-12 at 9.07.19 PM.png
+
+False Prediction: Fresh with 50.233274698257446% confidence (Actual: Rotten)
+File: dataset/fruits/banana/test/rotten/rotated_by_75_Screen Shot 2018-06-12 at 9.16.53 PM.png
+
+False Prediction: Fresh with 63.896483182907104% confidence (Actual: Rotten)
+File: dataset/fruits/banana/test/rotten/rotated_by_75_Screen Shot 2018-06-12 at 9.27.31 PM.png
+
+False Prediction: Rotten with 87.5719964504242% confidence (Actual: Fresh)
+File: dataset/fruits/oranges/test/fresh/Screen Shot 2018-06-12 at 11.55.28 PM.png
+
+False Prediction: Rotten with 89.52166438102722% confidence (Actual: Fresh)
+File: dataset/fruits/oranges/test/fresh/Screen Shot 2018-06-12 at 11.58.18 PM.png
+
+False Prediction: Rotten with 76.89258456230164% confidence (Actual: Fresh)
+File: dataset/fruits/oranges/test/fresh/Screen Shot 2018-06-13 at 12.03.44 AM.png
+
+False Prediction: Rotten with 97.51338958740234% confidence (Actual: Fresh)
+File: dataset/fruits/oranges/test/fresh/Screen Shot 2018-06-13 at 12.10.21 AM.png
+
+False Prediction: Rotten with 66.44050478935242% confidence (Actual: Fresh)
+File: dataset/fruits/oranges/test/fresh/rotated_by_15_Screen Shot 2018-06-12 at 11.58.18 PM.png
+
+False Prediction: Rotten with 87.57675886154175% confidence (Actual: Fresh)
+File: dataset/fruits/oranges/test/fresh/rotated_by_15_Screen Shot 2018-06-13 at 12.07.32 AM.png
+
+False Prediction: Rotten with 99.96659755706787% confidence (Actual: Fresh)
+File: dataset/fruits/oranges/test/fresh/rotated_by_30_Screen Shot 2018-06-12 at 11.50.14 PM.png
+
+False Prediction: Rotten with 83.01701545715332% confidence (Actual: Fresh)
+File: dataset/fruits/oranges/test/fresh/rotated_by_30_Screen Shot 2018-06-12 at 11.52.51 PM.png
+
+False Prediction: Rotten with 95.21554112434387% confidence (Actual: Fresh)
+File: dataset/fruits/oranges/test/fresh/rotated_by_30_Screen Shot 2018-06-12 at 11.56.48 PM.png
+
+False Prediction: Rotten with 99.29775595664978% confidence (Actual: Fresh)
+File: dataset/fruits/oranges/test/fresh/rotated_by_30_Screen Shot 2018-06-13 at 12.10.27 AM.png
+
+False Prediction: Rotten with 85.4540765285492% confidence (Actual: Fresh)
+File: dataset/fruits/oranges/test/fresh/rotated_by_30_Screen Shot 2018-06-13 at 12.19.08 AM.png
+
+False Prediction: Rotten with 50.62039494514465% confidence (Actual: Fresh)
+File: dataset/fruits/oranges/test/fresh/rotated_by_45_Screen Shot 2018-06-13 at 12.02.11 AM.png
+
+False Prediction: Rotten with 88.02109956741333% confidence (Actual: Fresh)
+File: dataset/fruits/oranges/test/fresh/rotated_by_45_Screen Shot 2018-06-13 at 12.03.44 AM.png
+
+False Prediction: Rotten with 82.92979001998901% confidence (Actual: Fresh)
+File: dataset/fruits/oranges/test/fresh/rotated_by_60_Screen Shot 2018-06-12 at 11.52.16 PM.png
+
+False Prediction: Rotten with 98.54108095169067% confidence (Actual: Fresh)
+File: dataset/fruits/oranges/test/fresh/rotated_by_60_Screen Shot 2018-06-12 at 11.52.21 PM.png
+
+False Prediction: Rotten with 75.55294036865234% confidence (Actual: Fresh)
+File: dataset/fruits/oranges/test/fresh/rotated_by_60_Screen Shot 2018-06-12 at 11.52.32 PM.png
+
+False Prediction: Rotten with 51.131075620651245% confidence (Actual: Fresh)
+File: dataset/fruits/oranges/test/fresh/rotated_by_60_Screen Shot 2018-06-12 at 11.52.51 PM.png
+
+False Prediction: Rotten with 57.41089582443237% confidence (Actual: Fresh)
+File: dataset/fruits/oranges/test/fresh/rotated_by_60_Screen Shot 2018-06-12 at 11.55.28 PM.png
+
+False Prediction: Rotten with 92.94313788414001% confidence (Actual: Fresh)
+File: dataset/fruits/oranges/test/fresh/rotated_by_60_Screen Shot 2018-06-13 at 12.19.08 AM.png
+
+False Prediction: Rotten with 99.99996423721313% confidence (Actual: Fresh)
+File: dataset/fruits/oranges/test/fresh/rotated_by_60_Screen Shot 2018-06-13 at 12.20.06 AM.png
+
+False Prediction: Rotten with 81.09050393104553% confidence (Actual: Fresh)
+File: dataset/fruits/oranges/test/fresh/rotated_by_75_Screen Shot 2018-06-12 at 11.51.13 PM.png
+
+False Prediction: Rotten with 53.674107789993286% confidence (Actual: Fresh)
+File: dataset/fruits/oranges/test/fresh/rotated_by_75_Screen Shot 2018-06-12 at 11.52.16 PM.png
+
+False Prediction: Rotten with 79.8609733581543% confidence (Actual: Fresh)
+File: dataset/fruits/oranges/test/fresh/rotated_by_75_Screen Shot 2018-06-12 at 11.54.10 PM.png
+
+False Prediction: Rotten with 98.28593134880066% confidence (Actual: Fresh)
+File: dataset/fruits/oranges/test/fresh/saltandpepper_Screen Shot 2018-06-12 at 11.51.47 PM.png
+
+False Prediction: Rotten with 65.35131931304932% confidence (Actual: Fresh)
+File: dataset/fruits/oranges/test/fresh/saltandpepper_Screen Shot 2018-06-12 at 11.55.00 PM.png
+
+False Prediction: Rotten with 89.64148759841919% confidence (Actual: Fresh)
+File: dataset/fruits/oranges/test/fresh/saltandpepper_Screen Shot 2018-06-13 at 12.07.39 AM.png
+
+False Prediction: Rotten with 58.04898142814636% confidence (Actual: Fresh)
+File: dataset/fruits/oranges/test/fresh/saltandpepper_Screen Shot 2018-06-13 at 12.08.09 AM.png
+
+False Prediction: Rotten with 97.23799228668213% confidence (Actual: Fresh)
+File: dataset/fruits/oranges/test/fresh/saltandpepper_Screen Shot 2018-06-13 at 12.11.57 AM.png
+
+False Prediction: Rotten with 77.86592245101929% confidence (Actual: Fresh)
+File: dataset/fruits/oranges/test/fresh/saltandpepper_Screen Shot 2018-06-13 at 12.20.06 AM.png
+
+False Prediction: Rotten with 99.99006986618042% confidence (Actual: Fresh)
+File: dataset/fruits/oranges/test/fresh/translation_Screen Shot 2018-06-12 at 11.50.14 PM.png
+
+False Prediction: Rotten with 99.99648332595825% confidence (Actual: Fresh)
+File: dataset/fruits/oranges/test/fresh/translation_Screen Shot 2018-06-12 at 11.50.41 PM.png
+
+False Prediction: Rotten with 99.99231100082397% confidence (Actual: Fresh)
+File: dataset/fruits/oranges/test/fresh/translation_Screen Shot 2018-06-12 at 11.58.28 PM.png
+
+False Prediction: Rotten with 85.94841957092285% confidence (Actual: Fresh)
+File: dataset/fruits/oranges/test/fresh/translation_Screen Shot 2018-06-12 at 11.59.54 PM.png
+
+False Prediction: Rotten with 96.74701690673828% confidence (Actual: Fresh)
+File: dataset/fruits/oranges/test/fresh/translation_Screen Shot 2018-06-13 at 12.04.51 AM.png
+
+False Prediction: Rotten with 99.76512789726257% confidence (Actual: Fresh)
+File: dataset/fruits/oranges/test/fresh/translation_Screen Shot 2018-06-13 at 12.07.10 AM.png
+
+False Prediction: Rotten with 58.07000994682312% confidence (Actual: Fresh)
+File: dataset/fruits/oranges/test/fresh/translation_Screen Shot 2018-06-13 at 12.07.39 AM.png
+
+False Prediction: Rotten with 99.99370574951172% confidence (Actual: Fresh)
+File: dataset/fruits/oranges/test/fresh/translation_Screen Shot 2018-06-13 at 12.16.45 AM.png
+
+False Prediction: Rotten with 68.08694005012512% confidence (Actual: Fresh)
+File: dataset/fruits/oranges/test/fresh/vertical_flip_Screen Shot 2018-06-12 at 11.50.41 PM.png
+
+False Prediction: Rotten with 99.76898431777954% confidence (Actual: Fresh)
+File: dataset/fruits/oranges/test/fresh/vertical_flip_Screen Shot 2018-06-13 at 12.19.08 AM.png
+
+False Prediction: Fresh with 99.97082352638245% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/Screen Shot 2018-06-12 at 11.20.30 PM.png
+
+False Prediction: Fresh with 98.85949492454529% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/Screen Shot 2018-06-12 at 11.26.36 PM.png
+
+False Prediction: Fresh with 85.02413630485535% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/Screen Shot 2018-06-12 at 11.26.49 PM.png
+
+False Prediction: Fresh with 99.99995231628418% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/Screen Shot 2018-06-12 at 11.27.26 PM.png
+
+False Prediction: Fresh with 99.99808073043823% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/Screen Shot 2018-06-12 at 11.28.04 PM.png
+
+False Prediction: Fresh with 99.99995231628418% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/Screen Shot 2018-06-12 at 11.28.50 PM.png
+
+False Prediction: Fresh with 99.99139308929443% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/Screen Shot 2018-06-12 at 11.31.24 PM.png
+
+False Prediction: Fresh with 99.99747276306152% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/Screen Shot 2018-06-12 at 11.33.16 PM.png
+
+False Prediction: Fresh with 99.98584985733032% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/Screen Shot 2018-06-12 at 11.33.50 PM.png
+
+False Prediction: Fresh with 96.12318873405457% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/Screen Shot 2018-06-12 at 11.34.00 PM.png
+
+False Prediction: Fresh with 98.73461127281189% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/Screen Shot 2018-06-12 at 11.35.51 PM.png
+
+False Prediction: Fresh with 88.77022862434387% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/Screen Shot 2018-06-12 at 11.37.25 PM.png
+
+False Prediction: Fresh with 99.98618364334106% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/Screen Shot 2018-06-12 at 11.38.13 PM.png
+
+False Prediction: Fresh with 99.99270439147949% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/Screen Shot 2018-06-12 at 11.38.19 PM.png
+
+False Prediction: Fresh with 92.29163527488708% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/Screen Shot 2018-06-12 at 11.39.02 PM.png
+
+False Prediction: Fresh with 98.75103235244751% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/Screen Shot 2018-06-12 at 11.40.23 PM.png
+
+False Prediction: Fresh with 82.10240006446838% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/Screen Shot 2018-06-12 at 11.40.30 PM.png
+
+False Prediction: Fresh with 99.68175888061523% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/Screen Shot 2018-06-12 at 11.43.10 PM.png
+
+False Prediction: Fresh with 98.07984232902527% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/Screen Shot 2018-06-12 at 11.43.31 PM.png
+
+False Prediction: Fresh with 62.8139853477478% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_15_Screen Shot 2018-06-12 at 11.18.53 PM.png
+
+False Prediction: Fresh with 99.21427965164185% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_15_Screen Shot 2018-06-12 at 11.20.40 PM.png
+
+False Prediction: Fresh with 98.2850432395935% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_15_Screen Shot 2018-06-12 at 11.21.35 PM.png
+
+False Prediction: Fresh with 82.43662118911743% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_15_Screen Shot 2018-06-12 at 11.22.21 PM.png
+
+False Prediction: Fresh with 57.47281312942505% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_15_Screen Shot 2018-06-12 at 11.23.13 PM.png
+
+False Prediction: Fresh with 99.93777275085449% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_15_Screen Shot 2018-06-12 at 11.24.12 PM.png
+
+False Prediction: Fresh with 99.68906044960022% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_15_Screen Shot 2018-06-12 at 11.25.20 PM.png
+
+False Prediction: Fresh with 99.86323714256287% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_15_Screen Shot 2018-06-12 at 11.26.49 PM.png
+
+False Prediction: Fresh with 100% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_15_Screen Shot 2018-06-12 at 11.28.50 PM.png
+
+False Prediction: Fresh with 99.30093288421631% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_15_Screen Shot 2018-06-12 at 11.31.11 PM.png
+
+False Prediction: Fresh with 99.97678399085999% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_15_Screen Shot 2018-06-12 at 11.31.48 PM.png
+
+False Prediction: Fresh with 99.99843835830688% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_15_Screen Shot 2018-06-12 at 11.33.16 PM.png
+
+False Prediction: Fresh with 99.9993085861206% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_15_Screen Shot 2018-06-12 at 11.34.13 PM.png
+
+False Prediction: Fresh with 99.81176853179932% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_15_Screen Shot 2018-06-12 at 11.38.19 PM.png
+
+False Prediction: Fresh with 99.93857145309448% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_15_Screen Shot 2018-06-12 at 11.40.18 PM.png
+
+False Prediction: Fresh with 99.94311928749084% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_15_Screen Shot 2018-06-12 at 11.43.22 PM.png
+
+False Prediction: Fresh with 72.81068563461304% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_15_Screen Shot 2018-06-12 at 11.46.26 PM.png
+
+False Prediction: Fresh with 99.91907477378845% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_30_Screen Shot 2018-06-12 at 11.23.09 PM.png
+
+False Prediction: Fresh with 98.32592010498047% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_30_Screen Shot 2018-06-12 at 11.24.37 PM.png
+
+False Prediction: Fresh with 99.07371401786804% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_30_Screen Shot 2018-06-12 at 11.25.07 PM.png
+
+False Prediction: Fresh with 98.19443225860596% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_30_Screen Shot 2018-06-12 at 11.26.12 PM.png
+
+False Prediction: Fresh with 99.99996423721313% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_30_Screen Shot 2018-06-12 at 11.27.07 PM.png
+
+False Prediction: Fresh with 99.9757707118988% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_30_Screen Shot 2018-06-12 at 11.27.38 PM.png
+
+False Prediction: Fresh with 99.58741068840027% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_30_Screen Shot 2018-06-12 at 11.31.48 PM.png
+
+False Prediction: Fresh with 95.53180932998657% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_30_Screen Shot 2018-06-12 at 11.32.04 PM.png
+
+False Prediction: Fresh with 90.04021286964417% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_30_Screen Shot 2018-06-12 at 11.33.06 PM.png
+
+False Prediction: Fresh with 99.99933242797852% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_30_Screen Shot 2018-06-12 at 11.33.16 PM.png
+
+False Prediction: Fresh with 99.2455244064331% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_30_Screen Shot 2018-06-12 at 11.38.34 PM.png
+
+False Prediction: Fresh with 99.97732043266296% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_30_Screen Shot 2018-06-12 at 11.39.29 PM.png
+
+False Prediction: Fresh with 99.97698664665222% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_30_Screen Shot 2018-06-12 at 11.40.18 PM.png
+
+False Prediction: Fresh with 90.28267860412598% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_30_Screen Shot 2018-06-12 at 11.40.42 PM.png
+
+False Prediction: Fresh with 79.25757765769958% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_30_Screen Shot 2018-06-12 at 11.41.44 PM.png
+
+False Prediction: Fresh with 94.11180019378662% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_30_Screen Shot 2018-06-12 at 11.41.48 PM.png
+
+False Prediction: Fresh with 99.85681772232056% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_30_Screen Shot 2018-06-12 at 11.43.31 PM.png
+
+False Prediction: Fresh with 96.84599041938782% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_45_Screen Shot 2018-06-12 at 11.19.01 PM.png
+
+False Prediction: Fresh with 99.97510313987732% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_45_Screen Shot 2018-06-12 at 11.24.12 PM.png
+
+False Prediction: Fresh with 99.481600522995% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_45_Screen Shot 2018-06-12 at 11.25.20 PM.png
+
+False Prediction: Fresh with 97.49544858932495% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_45_Screen Shot 2018-06-12 at 11.25.38 PM.png
+
+False Prediction: Fresh with 100% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_45_Screen Shot 2018-06-12 at 11.27.38 PM.png
+
+False Prediction: Fresh with 99.9834418296814% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_45_Screen Shot 2018-06-12 at 11.28.00 PM.png
+
+False Prediction: Fresh with 100% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_45_Screen Shot 2018-06-12 at 11.28.50 PM.png
+
+False Prediction: Fresh with 99.30756092071533% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_45_Screen Shot 2018-06-12 at 11.29.21 PM.png
+
+False Prediction: Fresh with 99.98148083686829% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_45_Screen Shot 2018-06-12 at 11.30.48 PM.png
+
+False Prediction: Fresh with 99.97207522392273% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_45_Screen Shot 2018-06-12 at 11.31.39 PM.png
+
+False Prediction: Fresh with 99.99496936798096% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_45_Screen Shot 2018-06-12 at 11.31.44 PM.png
+
+False Prediction: Fresh with 99.95880722999573% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_45_Screen Shot 2018-06-12 at 11.32.21 PM.png
+
+False Prediction: Fresh with 99.98134970664978% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_45_Screen Shot 2018-06-12 at 11.33.16 PM.png
+
+False Prediction: Fresh with 99.88301396369934% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_45_Screen Shot 2018-06-12 at 11.36.06 PM.png
+
+False Prediction: Fresh with 99.39475059509277% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_45_Screen Shot 2018-06-12 at 11.40.18 PM.png
+
+False Prediction: Fresh with 70.1899528503418% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_45_Screen Shot 2018-06-12 at 11.41.04 PM.png
+
+False Prediction: Fresh with 99.99641180038452% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_45_Screen Shot 2018-06-12 at 11.45.21 PM.png
+
+False Prediction: Fresh with 99.583899974823% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_60_Screen Shot 2018-06-12 at 11.20.18 PM.png
+
+False Prediction: Fresh with 99.7032642364502% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_60_Screen Shot 2018-06-12 at 11.23.09 PM.png
+
+False Prediction: Fresh with 99.88320469856262% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_60_Screen Shot 2018-06-12 at 11.24.12 PM.png
+
+False Prediction: Fresh with 93.57085824012756% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_60_Screen Shot 2018-06-12 at 11.25.33 PM.png
+
+False Prediction: Fresh with 97.61058688163757% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_60_Screen Shot 2018-06-12 at 11.26.49 PM.png
+
+False Prediction: Fresh with 99.99998807907104% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_60_Screen Shot 2018-06-12 at 11.28.50 PM.png
+
+False Prediction: Fresh with 99.99985694885254% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_60_Screen Shot 2018-06-12 at 11.29.36 PM.png
+
+False Prediction: Fresh with 75.128835439682% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_60_Screen Shot 2018-06-12 at 11.29.58 PM.png
+
+False Prediction: Fresh with 99.99581575393677% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_60_Screen Shot 2018-06-12 at 11.31.44 PM.png
+
+False Prediction: Fresh with 99.94932413101196% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_60_Screen Shot 2018-06-12 at 11.32.04 PM.png
+
+False Prediction: Fresh with 99.08928871154785% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_60_Screen Shot 2018-06-12 at 11.32.21 PM.png
+
+False Prediction: Fresh with 99.93826150894165% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_60_Screen Shot 2018-06-12 at 11.33.16 PM.png
+
+False Prediction: Fresh with 99.88456964492798% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_60_Screen Shot 2018-06-12 at 11.37.00 PM.png
+
+False Prediction: Fresh with 99.8134970664978% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_60_Screen Shot 2018-06-12 at 11.38.52 PM.png
+
+False Prediction: Fresh with 96.25983834266663% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_60_Screen Shot 2018-06-12 at 11.41.22 PM.png
+
+False Prediction: Fresh with 58.99910926818848% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_60_Screen Shot 2018-06-12 at 11.42.05 PM.png
+
+False Prediction: Fresh with 99.97519850730896% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_60_Screen Shot 2018-06-12 at 11.43.03 PM.png
+
+False Prediction: Fresh with 99.86878037452698% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_60_Screen Shot 2018-06-12 at 11.43.54 PM.png
+
+False Prediction: Fresh with 99.74462985992432% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_75_Screen Shot 2018-06-12 at 11.20.18 PM.png
+
+False Prediction: Fresh with 65.55823683738708% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_75_Screen Shot 2018-06-12 at 11.23.09 PM.png
+
+False Prediction: Fresh with 99.99877214431763% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_75_Screen Shot 2018-06-12 at 11.26.49 PM.png
+
+False Prediction: Fresh with 99.99996423721313% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_75_Screen Shot 2018-06-12 at 11.29.36 PM.png
+
+False Prediction: Fresh with 99.9721348285675% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_75_Screen Shot 2018-06-12 at 11.33.50 PM.png
+
+False Prediction: Fresh with 99.78581070899963% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/rotated_by_75_Screen Shot 2018-06-12 at 11.38.19 PM.png
+
+False Prediction: Fresh with 99.86737966537476% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/saltandpepper_Screen Shot 2018-06-12 at 11.20.13 PM.png
+
+False Prediction: Fresh with 99.99785423278809% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/saltandpepper_Screen Shot 2018-06-12 at 11.20.30 PM.png
+
+False Prediction: Fresh with 93.9302921295166% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/saltandpepper_Screen Shot 2018-06-12 at 11.21.35 PM.png
+
+False Prediction: Fresh with 99.21519756317139% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/saltandpepper_Screen Shot 2018-06-12 at 11.24.12 PM.png
+
+False Prediction: Fresh with 99.99977350234985% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/saltandpepper_Screen Shot 2018-06-12 at 11.24.17 PM.png
+
+False Prediction: Fresh with 99.99998807907104% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/saltandpepper_Screen Shot 2018-06-12 at 11.27.07 PM.png
+
+False Prediction: Fresh with 99.96973276138306% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/saltandpepper_Screen Shot 2018-06-12 at 11.31.17 PM.png
+
+False Prediction: Fresh with 99.89008903503418% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/saltandpepper_Screen Shot 2018-06-12 at 11.31.39 PM.png
+
+False Prediction: Fresh with 99.99160766601562% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/saltandpepper_Screen Shot 2018-06-12 at 11.32.09 PM.png
+
+False Prediction: Fresh with 99.433434009552% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/saltandpepper_Screen Shot 2018-06-12 at 11.32.41 PM.png
+
+False Prediction: Fresh with 99.64020252227783% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/saltandpepper_Screen Shot 2018-06-12 at 11.33.00 PM.png
+
+False Prediction: Fresh with 97.64897227287292% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/saltandpepper_Screen Shot 2018-06-12 at 11.34.07 PM.png
+
+False Prediction: Fresh with 96.0844099521637% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/saltandpepper_Screen Shot 2018-06-12 at 11.35.51 PM.png
+
+False Prediction: Fresh with 99.99891519546509% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/saltandpepper_Screen Shot 2018-06-12 at 11.41.22 PM.png
+
+False Prediction: Fresh with 98.14459681510925% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/saltandpepper_Screen Shot 2018-06-12 at 11.42.45 PM.png
+
+False Prediction: Fresh with 69.44034099578857% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/saltandpepper_Screen Shot 2018-06-12 at 11.44.29 PM.png
+
+False Prediction: Fresh with 99.99490976333618% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/saltandpepper_Screen Shot 2018-06-12 at 11.46.26 PM.png
+
+False Prediction: Fresh with 99.86384510993958% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/translation_Screen Shot 2018-06-12 at 11.20.30 PM.png
+
+False Prediction: Fresh with 81.06972575187683% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/translation_Screen Shot 2018-06-12 at 11.20.59 PM.png
+
+False Prediction: Fresh with 80.16668558120728% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/translation_Screen Shot 2018-06-12 at 11.21.35 PM.png
+
+False Prediction: Fresh with 99.55991506576538% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/translation_Screen Shot 2018-06-12 at 11.24.12 PM.png
+
+False Prediction: Fresh with 77.89103984832764% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/translation_Screen Shot 2018-06-12 at 11.25.33 PM.png
+
+False Prediction: Fresh with 97.82235026359558% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/translation_Screen Shot 2018-06-12 at 11.27.01 PM.png
+
+False Prediction: Fresh with 99.99706745147705% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/translation_Screen Shot 2018-06-12 at 11.27.30 PM.png
+
+False Prediction: Fresh with 99.9893069267273% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/translation_Screen Shot 2018-06-12 at 11.28.00 PM.png
+
+False Prediction: Fresh with 100% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/translation_Screen Shot 2018-06-12 at 11.28.50 PM.png
+
+False Prediction: Fresh with 99.62660670280457% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/translation_Screen Shot 2018-06-12 at 11.29.36 PM.png
+
+False Prediction: Fresh with 99.51266050338745% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/translation_Screen Shot 2018-06-12 at 11.30.11 PM.png
+
+False Prediction: Fresh with 99.97673630714417% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/translation_Screen Shot 2018-06-12 at 11.33.06 PM.png
+
+False Prediction: Fresh with 99.77189898490906% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/translation_Screen Shot 2018-06-12 at 11.33.55 PM.png
+
+False Prediction: Fresh with 99.99192953109741% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/translation_Screen Shot 2018-06-12 at 11.38.19 PM.png
+
+False Prediction: Fresh with 99.63753819465637% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/translation_Screen Shot 2018-06-12 at 11.39.29 PM.png
+
+False Prediction: Fresh with 90.14647603034973% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/translation_Screen Shot 2018-06-12 at 11.40.18 PM.png
+
+False Prediction: Fresh with 99.67325925827026% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/vertical_flip_Screen Shot 2018-06-12 at 11.21.48 PM.png
+
+False Prediction: Fresh with 99.98071789741516% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/vertical_flip_Screen Shot 2018-06-12 at 11.23.09 PM.png
+
+False Prediction: Fresh with 84.19963121414185% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/vertical_flip_Screen Shot 2018-06-12 at 11.24.17 PM.png
+
+False Prediction: Fresh with 65.05760550498962% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/vertical_flip_Screen Shot 2018-06-12 at 11.24.51 PM.png
+
+False Prediction: Fresh with 64.00367617607117% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/vertical_flip_Screen Shot 2018-06-12 at 11.25.25 PM.png
+
+False Prediction: Fresh with 82.98383951187134% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/vertical_flip_Screen Shot 2018-06-12 at 11.25.33 PM.png
+
+False Prediction: Fresh with 99.93547797203064% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/vertical_flip_Screen Shot 2018-06-12 at 11.28.00 PM.png
+
+False Prediction: Fresh with 99.47338104248047% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/vertical_flip_Screen Shot 2018-06-12 at 11.29.36 PM.png
+
+False Prediction: Fresh with 96.42906188964844% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/vertical_flip_Screen Shot 2018-06-12 at 11.31.39 PM.png
+
+False Prediction: Fresh with 99.99862909317017% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/vertical_flip_Screen Shot 2018-06-12 at 11.32.21 PM.png
+
+False Prediction: Fresh with 79.79809045791626% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/vertical_flip_Screen Shot 2018-06-12 at 11.32.41 PM.png
+
+False Prediction: Fresh with 85.82598567008972% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/vertical_flip_Screen Shot 2018-06-12 at 11.32.46 PM.png
+
+False Prediction: Fresh with 96.76015377044678% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/vertical_flip_Screen Shot 2018-06-12 at 11.37.00 PM.png
+
+False Prediction: Fresh with 99.91363883018494% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/vertical_flip_Screen Shot 2018-06-12 at 11.43.22 PM.png
+
+False Prediction: Fresh with 99.91293549537659% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/vertical_flip_Screen Shot 2018-06-12 at 11.43.31 PM.png
+
+False Prediction: Fresh with 62.74858117103577% confidence (Actual: Rotten)
+File: dataset/fruits/oranges/test/rotten/vertical_flip_Screen Shot 2018-06-12 at 11.44.48 PM.png
+
+False Prediction: Rotten with 84.7921073436737% confidence (Actual: Fresh)
+File: dataset/vegetables/bittergourd/test/fresh/IMG_20200822_223831.jpg_0_1873.jpg
+
+False Prediction: Rotten with 99.99996423721313% confidence (Actual: Fresh)
+File: dataset/vegetables/bittergourd/test/fresh/IMG_20200822_223831.jpg_0_3908.jpg
+
+False Prediction: Rotten with 98.40124845504761% confidence (Actual: Fresh)
+File: dataset/vegetables/bittergourd/test/fresh/IMG_20200822_223831.jpg_0_3948.jpg
+
+False Prediction: Rotten with 99.85995888710022% confidence (Actual: Fresh)
+File: dataset/vegetables/bittergourd/test/fresh/IMG_20200822_223831.jpg_0_3955.jpg
+
+False Prediction: Rotten with 99.99141693115234% confidence (Actual: Fresh)
+File: dataset/vegetables/bittergourd/test/fresh/IMG_20200822_223831.jpg_0_4397.jpg
+
+False Prediction: Rotten with 99.33837056159973% confidence (Actual: Fresh)
+File: dataset/vegetables/bittergourd/test/fresh/IMG_20200822_223831.jpg_0_4403.jpg
+
+False Prediction: Rotten with 99.9834656715393% confidence (Actual: Fresh)
+File: dataset/vegetables/bittergourd/test/fresh/IMG_20200822_223831.jpg_0_4708.jpg
+
+False Prediction: Rotten with 99.98250603675842% confidence (Actual: Fresh)
+File: dataset/vegetables/bittergourd/test/fresh/IMG_20200822_223831.jpg_0_5330.jpg
+
+False Prediction: Rotten with 54.96212840080261% confidence (Actual: Fresh)
+File: dataset/vegetables/bittergourd/test/fresh/IMG_20200822_223831.jpg_0_5440.jpg
+
+False Prediction: Rotten with 99.7649610042572% confidence (Actual: Fresh)
+File: dataset/vegetables/bittergourd/test/fresh/IMG_20200822_223837.jpg_0_1949.jpg
+
+False Prediction: Rotten with 99.46640729904175% confidence (Actual: Fresh)
+File: dataset/vegetables/bittergourd/test/fresh/IMG_20200822_223837.jpg_0_2192.jpg
+
+False Prediction: Rotten with 99.67166781425476% confidence (Actual: Fresh)
+File: dataset/vegetables/bittergourd/test/fresh/IMG_20200822_223837.jpg_0_3786.jpg
+
+False Prediction: Rotten with 71.32074236869812% confidence (Actual: Fresh)
+File: dataset/vegetables/bittergourd/test/fresh/IMG_20200822_223837.jpg_0_4928.jpg
+
+False Prediction: Rotten with 98.28320145606995% confidence (Actual: Fresh)
+File: dataset/vegetables/bittergourd/test/fresh/IMG_20200822_223837.jpg_0_7738.jpg
+
+False Prediction: Rotten with 97.37493395805359% confidence (Actual: Fresh)
+File: dataset/vegetables/bittergourd/test/fresh/IMG_20200822_223837.jpg_0_9326.jpg
+
+False Prediction: Rotten with 99.6792733669281% confidence (Actual: Fresh)
+File: dataset/vegetables/bittergourd/test/fresh/IMG_20200822_223837.jpg_0_9536.jpg
+
+False Prediction: Rotten with 58.96093249320984% confidence (Actual: Fresh)
+File: dataset/vegetables/bittergourd/test/fresh/IMG_20200822_223840.jpg_0_34.jpg
+
+False Prediction: Rotten with 99.9956727027893% confidence (Actual: Fresh)
+File: dataset/vegetables/bittergourd/test/fresh/IMG_20200822_223840.jpg_0_3858.jpg
+
+False Prediction: Rotten with 100% confidence (Actual: Fresh)
+File: dataset/vegetables/bittergourd/test/fresh/IMG_20200822_223840.jpg_0_4277.jpg
+
+False Prediction: Rotten with 99.99901056289673% confidence (Actual: Fresh)
+File: dataset/vegetables/bittergourd/test/fresh/IMG_20200822_223840.jpg_0_5158.jpg
+
+False Prediction: Rotten with 95.7085907459259% confidence (Actual: Fresh)
+File: dataset/vegetables/bittergourd/test/fresh/IMG_20200822_223840.jpg_0_9188.jpg
+
+False Prediction: Rotten with 69.89714503288269% confidence (Actual: Fresh)
+File: dataset/vegetables/bittergourd/test/fresh/IMG_20200822_223840.jpg_0_9226.jpg
+
+False Prediction: Rotten with 98.40090274810791% confidence (Actual: Fresh)
+File: dataset/vegetables/bittergourd/test/fresh/IMG_20200822_223840.jpg_0_9363.jpg
+
+False Prediction: Rotten with 52.30282545089722% confidence (Actual: Fresh)
+File: dataset/vegetables/bittergourd/test/fresh/IMG_20200823_131855.jpg_0_1740.jpg
+
+False Prediction: Rotten with 99.954754114151% confidence (Actual: Fresh)
+File: dataset/vegetables/bittergourd/test/fresh/IMG_20200823_131855.jpg_0_2029.jpg
+
+False Prediction: Rotten with 99.99964237213135% confidence (Actual: Fresh)
+File: dataset/vegetables/bittergourd/test/fresh/IMG_20200823_131855.jpg_0_48.jpg
+
+False Prediction: Rotten with 89.42232131958008% confidence (Actual: Fresh)
+File: dataset/vegetables/bittergourd/test/fresh/IMG_20200823_131855.jpg_0_6349.jpg
+
+False Prediction: Rotten with 94.60952877998352% confidence (Actual: Fresh)
+File: dataset/vegetables/bittergourd/test/fresh/IMG_20200823_131855.jpg_0_9178.jpg
+
+False Prediction: Rotten with 99.99997615814209% confidence (Actual: Fresh)
+File: dataset/vegetables/bittergourd/test/fresh/IMG_20200823_131855.jpg_0_9830.jpg
+
+False Prediction: Rotten with 96.12029194831848% confidence (Actual: Fresh)
+File: dataset/vegetables/bittergourd/test/fresh/IMG_20200823_131901.jpg_0_4051.jpg
+
+False Prediction: Rotten with 99.68235492706299% confidence (Actual: Fresh)
+File: dataset/vegetables/bittergourd/test/fresh/IMG_20200823_131901.jpg_0_500.jpg
+
+False Prediction: Rotten with 99.99542236328125% confidence (Actual: Fresh)
+File: dataset/vegetables/bittergourd/test/fresh/IMG_20200823_131901.jpg_0_5869.jpg
+
+False Prediction: Rotten with 99.89526271820068% confidence (Actual: Fresh)
+File: dataset/vegetables/bittergourd/test/fresh/IMG_20200823_131901.jpg_0_8008.jpg
+
+False Prediction: Rotten with 79.632967710495% confidence (Actual: Fresh)
+File: dataset/vegetables/bittergourd/test/fresh/IMG_20200823_131903.jpg_0_2413.jpg
+
+False Prediction: Rotten with 98.8628089427948% confidence (Actual: Fresh)
+File: dataset/vegetables/bittergourd/test/fresh/IMG_20200823_131903.jpg_0_2620.jpg
+
+False Prediction: Rotten with 64.11868929862976% confidence (Actual: Fresh)
+File: dataset/vegetables/bittergourd/test/fresh/IMG_20200823_131903.jpg_0_2839.jpg
+
+False Prediction: Rotten with 86.79555654525757% confidence (Actual: Fresh)
+File: dataset/vegetables/bittergourd/test/fresh/IMG_20200823_131903.jpg_0_3441.jpg
+
+False Prediction: Rotten with 99.66160655021667% confidence (Actual: Fresh)
+File: dataset/vegetables/bittergourd/test/fresh/IMG_20200823_131903.jpg_0_480.jpg
+
+False Prediction: Rotten with 61.471027135849% confidence (Actual: Fresh)
+File: dataset/vegetables/bittergourd/test/fresh/IMG_20200823_131903.jpg_0_707.jpg
+
+False Prediction: Rotten with 51.71367526054382% confidence (Actual: Fresh)
+File: dataset/vegetables/bittergourd/test/fresh/IMG_20200823_131903.jpg_0_7693.jpg
+
+False Prediction: Rotten with 71.1290955543518% confidence (Actual: Fresh)
+File: dataset/vegetables/bittergourd/test/fresh/IMG_20200823_131903.jpg_0_866.jpg
+
+False Prediction: Rotten with 100% confidence (Actual: Fresh)
+File: dataset/vegetables/bittergourd/test/fresh/IMG_20200823_131904.jpg_0_1431.jpg
+
+False Prediction: Rotten with 62.81033158302307% confidence (Actual: Fresh)
+File: dataset/vegetables/bittergourd/test/fresh/IMG_20200823_131904.jpg_0_3123.jpg
+
+False Prediction: Rotten with 95.36261558532715% confidence (Actual: Fresh)
+File: dataset/vegetables/bittergourd/test/fresh/IMG_20200823_131904.jpg_0_3658.jpg
+
+False Prediction: Rotten with 100% confidence (Actual: Fresh)
+File: dataset/vegetables/bittergourd/test/fresh/IMG_20200823_131904.jpg_0_5999.jpg
+
+False Prediction: Rotten with 99.38055276870728% confidence (Actual: Fresh)
+File: dataset/vegetables/bittergourd/test/fresh/IMG_20200823_131904.jpg_0_6567.jpg
+
+False Prediction: Rotten with 100% confidence (Actual: Fresh)
+File: dataset/vegetables/bittergourd/test/fresh/IMG_20200823_131904.jpg_0_9390.jpg
+
+False Prediction: Rotten with 99.97467398643494% confidence (Actual: Fresh)
+File: dataset/vegetables/bittergourd/test/fresh/IMG_20200823_131904.jpg_0_998.jpg
+
+False Prediction: Rotten with 82.30602741241455% confidence (Actual: Fresh)
+File: dataset/vegetables/bittergourd/test/fresh/bitter-gourd 1.jpg_0_2046.jpg
+
+False Prediction: Rotten with 94.6825921535492% confidence (Actual: Fresh)
+File: dataset/vegetables/bittergourd/test/fresh/bitter-gourd 1.jpg_0_2075.jpg
+
+False Prediction: Rotten with 99.34779405593872% confidence (Actual: Fresh)
+File: dataset/vegetables/bittergourd/test/fresh/bitter-gourd 1.jpg_0_3869.jpg
+
+False Prediction: Rotten with 95.49499750137329% confidence (Actual: Fresh)
+File: dataset/vegetables/bittergourd/test/fresh/bitter-gourd 1.jpg_0_7902.jpg
+
+False Prediction: Rotten with 93.02265048027039% confidence (Actual: Fresh)
+File: dataset/vegetables/bittergourd/test/fresh/bitter-gourd 1.jpg_0_8215.jpg
+
+False Prediction: Rotten with 93.44434142112732% confidence (Actual: Fresh)
+File: dataset/vegetables/bittergourd/test/fresh/bitter-gourd 1.jpg_0_8843.jpg
+
+False Prediction: Rotten with 76.40249133110046% confidence (Actual: Fresh)
+File: dataset/vegetables/bittergourd/test/fresh/bitter-gourd 1.jpg_0_885.jpg
+
+False Prediction: Fresh with 60.01836061477661% confidence (Actual: Rotten)
+File: dataset/vegetables/bittergourd/test/rotten/IMG_20200825_144547.jpg_0_3207.jpg
+
+False Prediction: Rotten with 56.283336877822876% confidence (Actual: Fresh)
+File: dataset/vegetables/capsicum/test/fresh/Day2.jpg_0_414.jpg
+
+False Prediction: Rotten with 54.3326199054718% confidence (Actual: Fresh)
+File: dataset/vegetables/capsicum/test/fresh/Day2.jpg_0_6519.jpg
+
+False Prediction: Rotten with 59.97469425201416% confidence (Actual: Fresh)
+File: dataset/vegetables/capsicum/test/fresh/Day4A.jpg_0_4842.jpg
+
+False Prediction: Rotten with 97.72271513938904% confidence (Actual: Fresh)
+File: dataset/vegetables/capsicum/test/fresh/IMG_20200822_223846.jpg_0_1947.jpg
+
+False Prediction: Rotten with 65.73504209518433% confidence (Actual: Fresh)
+File: dataset/vegetables/capsicum/test/fresh/IMG_20200822_223854.jpg_0_6312.jpg
+
+False Prediction: Rotten with 76.29808187484741% confidence (Actual: Fresh)
+File: dataset/vegetables/capsicum/test/fresh/IMG_20200823_131808.jpg_0_332.jpg
+
+False Prediction: Rotten with 88.86440396308899% confidence (Actual: Fresh)
+File: dataset/vegetables/capsicum/test/fresh/IMG_20200823_131808.jpg_0_3921.jpg
+
+False Prediction: Rotten with 76.31523013114929% confidence (Actual: Fresh)
+File: dataset/vegetables/capsicum/test/fresh/IMG_20200823_131808.jpg_0_9621.jpg
+
+False Prediction: Rotten with 99.88345503807068% confidence (Actual: Fresh)
+File: dataset/vegetables/capsicum/test/fresh/IMG_20200823_131812.jpg_0_4305.jpg
+
+False Prediction: Rotten with 99.71234202384949% confidence (Actual: Fresh)
+File: dataset/vegetables/capsicum/test/fresh/IMG_20200824_182316.jpg_0_5069.jpg
+
+False Prediction: Rotten with 52.18193531036377% confidence (Actual: Fresh)
+File: dataset/vegetables/capsicum/test/fresh/IMG_20200824_182336.jpg_0_2356.jpg
+
+False Prediction: Rotten with 99.99762773513794% confidence (Actual: Fresh)
+File: dataset/vegetables/capsicum/test/fresh/IMG_20200824_182336.jpg_0_561.jpg
+
+False Prediction: Rotten with 66.18927717208862% confidence (Actual: Fresh)
+File: dataset/vegetables/capsicum/test/fresh/IMG_20200824_182336.jpg_0_7668.jpg
+
+False Prediction: Rotten with 95.60139775276184% confidence (Actual: Fresh)
+File: dataset/vegetables/capsicum/test/fresh/IMG_20200824_182336.jpg_0_8359.jpg
+
+False Prediction: Rotten with 92.73391366004944% confidence (Actual: Fresh)
+File: dataset/vegetables/capsicum/test/fresh/IMG_20200824_182336.jpg_0_8911.jpg
+
+False Prediction: Rotten with 79.29954528808594% confidence (Actual: Fresh)
+File: dataset/vegetables/capsicum/test/fresh/IMG_20200825_144639.jpg_0_3227.jpg
+
+False Prediction: Rotten with 99.87850785255432% confidence (Actual: Fresh)
+File: dataset/vegetables/capsicum/test/fresh/IMG_20200825_144644.jpg_0_2653.jpg
+
+False Prediction: Rotten with 99.99908208847046% confidence (Actual: Fresh)
+File: dataset/vegetables/capsicum/test/fresh/IMG_20200825_144644.jpg_0_7333.jpg
+
+False Prediction: Rotten with 99.98509883880615% confidence (Actual: Fresh)
+File: dataset/vegetables/capsicum/test/fresh/IMG_20200825_144644.jpg_0_8651.jpg
+
+False Prediction: Rotten with 92.38905906677246% confidence (Actual: Fresh)
+File: dataset/vegetables/capsicum/test/fresh/IMG_20200825_144655.jpg_0_5006.jpg
+
+False Prediction: Rotten with 78.31899523735046% confidence (Actual: Fresh)
+File: dataset/vegetables/capsicum/test/fresh/IMG_20200825_144655.jpg_0_5067.jpg
+
+False Prediction: Rotten with 83.55306386947632% confidence (Actual: Fresh)
+File: dataset/vegetables/capsicum/test/fresh/IMG_20200825_144655.jpg_0_850.jpg
+
+False Prediction: Rotten with 84.8209023475647% confidence (Actual: Fresh)
+File: dataset/vegetables/capsicum/test/fresh/IMG_20200826_172325.jpg_0_2098.jpg
+
+False Prediction: Rotten with 96.73385620117188% confidence (Actual: Fresh)
+File: dataset/vegetables/capsicum/test/fresh/IMG_20200826_172325.jpg_0_4189.jpg
+
+False Prediction: Rotten with 59.21478271484375% confidence (Actual: Fresh)
+File: dataset/vegetables/capsicum/test/fresh/IMG_20200826_172325.jpg_0_5659.jpg
+
+False Prediction: Rotten with 85.89025139808655% confidence (Actual: Fresh)
+File: dataset/vegetables/capsicum/test/fresh/IMG_20200826_172325.jpg_0_685.jpg
+
+False Prediction: Rotten with 99.68414306640625% confidence (Actual: Fresh)
+File: dataset/vegetables/capsicum/test/fresh/IMG_20200826_172333.jpg_0_131.jpg
+
+False Prediction: Rotten with 95.61715722084045% confidence (Actual: Fresh)
+File: dataset/vegetables/capsicum/test/fresh/IMG_20200826_172333.jpg_0_1765.jpg
+
+False Prediction: Rotten with 98.47865700721741% confidence (Actual: Fresh)
+File: dataset/vegetables/capsicum/test/fresh/IMG_20200826_172333.jpg_0_7200.jpg
+
+False Prediction: Rotten with 99.56323504447937% confidence (Actual: Fresh)
+File: dataset/vegetables/capsicum/test/fresh/IMG_20200901_181751.jpg_0_5212.jpg
+
+False Prediction: Rotten with 98.50572943687439% confidence (Actual: Fresh)
+File: dataset/vegetables/capsicum/test/fresh/IMG_20200901_181751.jpg_0_6911.jpg
+
+False Prediction: Rotten with 99.98252987861633% confidence (Actual: Fresh)
+File: dataset/vegetables/capsicum/test/fresh/capsicum3_1.jpg_0_5819.jpg
+
+False Prediction: Rotten with 52.1567165851593% confidence (Actual: Fresh)
+File: dataset/vegetables/capsicum/test/fresh/capsicum3_1.jpg_0_6112.jpg
+
+False Prediction: Rotten with 94.04661059379578% confidence (Actual: Fresh)
+File: dataset/vegetables/capsicum/test/fresh/capsicum3_1.jpg_0_8895.jpg
+
+False Prediction: Rotten with 99.99973773956299% confidence (Actual: Fresh)
+File: dataset/vegetables/capsicum/test/fresh/capsicum3_1.jpg_0_8962.jpg
+
+False Prediction: Rotten with 76.50446891784668% confidence (Actual: Fresh)
+File: dataset/vegetables/capsicum/test/fresh/capsicum3_10.jpg_0_2409.jpg
+
+False Prediction: Rotten with 72.04707264900208% confidence (Actual: Fresh)
+File: dataset/vegetables/capsicum/test/fresh/capsicum3_10.jpg_0_9972.jpg
+
+False Prediction: Rotten with 97.11833596229553% confidence (Actual: Fresh)
+File: dataset/vegetables/capsicum/test/fresh/capsicum3_11.jpg_0_3805.jpg
+
+False Prediction: Rotten with 68.49076747894287% confidence (Actual: Fresh)
+File: dataset/vegetables/capsicum/test/fresh/capsicum3_11.jpg_0_4825.jpg
+
+False Prediction: Rotten with 73.92858266830444% confidence (Actual: Fresh)
+File: dataset/vegetables/capsicum/test/fresh/capsicum3_11.jpg_0_6520.jpg
+
+False Prediction: Rotten with 74.6469795703888% confidence (Actual: Fresh)
+File: dataset/vegetables/capsicum/test/fresh/capsicum3_12.jpg_0_2653.jpg
+
+False Prediction: Rotten with 83.28861594200134% confidence (Actual: Fresh)
+File: dataset/vegetables/capsicum/test/fresh/capsicum3_12.jpg_0_2756.jpg
+
+False Prediction: Rotten with 89.94528651237488% confidence (Actual: Fresh)
+File: dataset/vegetables/capsicum/test/fresh/capsicum3_12.jpg_0_4621.jpg
+
+False Prediction: Rotten with 64.10305500030518% confidence (Actual: Fresh)
+File: dataset/vegetables/capsicum/test/fresh/capsicum3_13.jpg_0_3256.jpg
+
+False Prediction: Rotten with 84.57905054092407% confidence (Actual: Fresh)
+File: dataset/vegetables/capsicum/test/fresh/capsicum3_2.jpg_0_123.jpg
+
+False Prediction: Rotten with 73.47415089607239% confidence (Actual: Fresh)
+File: dataset/vegetables/capsicum/test/fresh/capsicum3_2.jpg_0_16.jpg
+
+False Prediction: Rotten with 99.98369216918945% confidence (Actual: Fresh)
+File: dataset/vegetables/capsicum/test/fresh/capsicum3_2.jpg_0_1804.jpg
+
+False Prediction: Rotten with 99.98613595962524% confidence (Actual: Fresh)
+File: dataset/vegetables/capsicum/test/fresh/capsicum3_2.jpg_0_9351.jpg
+
+False Prediction: Rotten with 97.89204001426697% confidence (Actual: Fresh)
+File: dataset/vegetables/capsicum/test/fresh/capsicum3_2.jpg_0_9493.jpg
+
+False Prediction: Rotten with 88.90082240104675% confidence (Actual: Fresh)
+File: dataset/vegetables/capsicum/test/fresh/capsicum3_4.jpg_0_4021.jpg
+
+False Prediction: Rotten with 66.2072479724884% confidence (Actual: Fresh)
+File: dataset/vegetables/capsicum/test/fresh/capsicum3_4.jpg_0_6693.jpg
+
+False Prediction: Rotten with 88.60867619514465% confidence (Actual: Fresh)
+File: dataset/vegetables/capsicum/test/fresh/capsicum3_5.jpg_0_106.jpg
+
+False Prediction: Rotten with 56.67370557785034% confidence (Actual: Fresh)
+File: dataset/vegetables/capsicum/test/fresh/capsicum3_5.jpg_0_1249.jpg
+
+False Prediction: Rotten with 82.86381959915161% confidence (Actual: Fresh)
+File: dataset/vegetables/capsicum/test/fresh/capsicum3_5.jpg_0_1988.jpg
+
+False Prediction: Rotten with 91.12478494644165% confidence (Actual: Fresh)
+File: dataset/vegetables/capsicum/test/fresh/capsicum3_6.jpg_0_4519.jpg
+
+False Prediction: Rotten with 90.74457287788391% confidence (Actual: Fresh)
+File: dataset/vegetables/capsicum/test/fresh/capsicum3_6.jpg_0_740.jpg
+
+False Prediction: Rotten with 61.4759087562561% confidence (Actual: Fresh)
+File: dataset/vegetables/capsicum/test/fresh/capsicum3_6.jpg_0_7545.jpg
+
+False Prediction: Rotten with 51.107943058013916% confidence (Actual: Fresh)
+File: dataset/vegetables/capsicum/test/fresh/capsicum3_7.jpg_0_9600.jpg
+
+False Prediction: Rotten with 90.63313007354736% confidence (Actual: Fresh)
+File: dataset/vegetables/capsicum/test/fresh/capsicum3_8.jpg_0_2537.jpg
+
+False Prediction: Rotten with 89.05242085456848% confidence (Actual: Fresh)
+File: dataset/vegetables/capsicum/test/fresh/capsicum3_8.jpg_0_5282.jpg
+
+False Prediction: Rotten with 54.68776822090149% confidence (Actual: Fresh)
+File: dataset/vegetables/capsicum/test/fresh/capsicum3_8.jpg_0_6807.jpg
+
+False Prediction: Rotten with 85.54043769836426% confidence (Actual: Fresh)
+File: dataset/vegetables/capsicum/test/fresh/capsicum3_8.jpg_0_6827.jpg
+
+False Prediction: Rotten with 54.52740788459778% confidence (Actual: Fresh)
+File: dataset/vegetables/capsicum/test/fresh/capsicum3_9.jpg_0_684.jpg
+
+False Prediction: Rotten with 72.30851650238037% confidence (Actual: Fresh)
+File: dataset/vegetables/capsicum/test/fresh/capsicum3_9.jpg_0_7416.jpg
+
+False Prediction: Rotten with 99.69015121459961% confidence (Actual: Fresh)
+File: dataset/vegetables/capsicum/test/fresh/capsicum3_9.jpg_0_9491.jpg
+
+False Prediction: Fresh with 74.32053685188293% confidence (Actual: Rotten)
+File: dataset/vegetables/capsicum/test/rotten/IMG_20200901_181735.jpg_0_1589.jpg
+
+False Prediction: Fresh with 99.87541437149048% confidence (Actual: Rotten)
+File: dataset/vegetables/capsicum/test/rotten/IMG_20200901_181735.jpg_0_2685.jpg
+
+False Prediction: Fresh with 81.2639057636261% confidence (Actual: Rotten)
+File: dataset/vegetables/capsicum/test/rotten/IMG_20200901_181735.jpg_0_3885.jpg
+
+False Prediction: Fresh with 97.9504406452179% confidence (Actual: Rotten)
+File: dataset/vegetables/capsicum/test/rotten/IMG_20200901_181735.jpg_0_6170.jpg
+
+False Prediction: Fresh with 95.80761194229126% confidence (Actual: Rotten)
+File: dataset/vegetables/capsicum/test/rotten/IMG_20200901_181735.jpg_0_6961.jpg
+
+False Prediction: Fresh with 99.92488026618958% confidence (Actual: Rotten)
+File: dataset/vegetables/capsicum/test/rotten/IMG_20200901_181735.jpg_0_8421.jpg
+
+False Prediction: Fresh with 99.99895095825195% confidence (Actual: Rotten)
+File: dataset/vegetables/capsicum/test/rotten/IMG_20200901_181736.jpg_0_2694.jpg
+
+False Prediction: Fresh with 99.79327917098999% confidence (Actual: Rotten)
+File: dataset/vegetables/capsicum/test/rotten/IMG_20200901_181736.jpg_0_3813.jpg
+
+False Prediction: Fresh with 91.05827808380127% confidence (Actual: Rotten)
+File: dataset/vegetables/capsicum/test/rotten/IMG_20200901_181736.jpg_0_4478.jpg
+
+False Prediction: Fresh with 82.36954808235168% confidence (Actual: Rotten)
+File: dataset/vegetables/capsicum/test/rotten/IMG_20200901_181736.jpg_0_5640.jpg
+
+False Prediction: Fresh with 91.76226258277893% confidence (Actual: Rotten)
+File: dataset/vegetables/capsicum/test/rotten/IMG_20200901_181736.jpg_0_865.jpg
+
+False Prediction: Fresh with 57.261210680007935% confidence (Actual: Rotten)
+File: dataset/vegetables/capsicum/test/rotten/IMG_20200901_181739.jpg_0_3158.jpg
+
+False Prediction: Fresh with 96.21443748474121% confidence (Actual: Rotten)
+File: dataset/vegetables/capsicum/test/rotten/IMG_20200901_181743.jpg_0_3723.jpg
+
+False Prediction: Fresh with 73.64987134933472% confidence (Actual: Rotten)
+File: dataset/vegetables/capsicum/test/rotten/IMG_20200901_181743.jpg_0_4738.jpg
+
+False Prediction: Fresh with 99.50726628303528% confidence (Actual: Rotten)
+File: dataset/vegetables/capsicum/test/rotten/IMG_20200901_181743.jpg_0_5165.jpg
+
+False Prediction: Fresh with 99.99767541885376% confidence (Actual: Rotten)
+File: dataset/vegetables/capsicum/test/rotten/IMG_20200901_181743.jpg_0_9338.jpg
+
+False Prediction: Fresh with 99.98797178268433% confidence (Actual: Rotten)
+File: dataset/vegetables/capsicum/test/rotten/WhatsApp Image 2020-11-07 at 11.30.46 PM.jpeg_0_3443.jpg
+
+False Prediction: Fresh with 99.99983310699463% confidence (Actual: Rotten)
+File: dataset/vegetables/capsicum/test/rotten/WhatsApp Image 2020-11-07 at 11.30.46 PM.jpeg_0_6609.jpg
+
+False Prediction: Fresh with 99.9997615814209% confidence (Actual: Rotten)
+File: dataset/vegetables/capsicum/test/rotten/WhatsApp Image 2020-11-07 at 11.30.46 PM.jpeg_0_8397.jpg
+
+False Prediction: Fresh with 97.52554297447205% confidence (Actual: Rotten)
+File: dataset/vegetables/capsicum/test/rotten/WhatsApp Image 2020-11-07 at 11.30.46 PM.jpeg_0_8596.jpg
+
+False Prediction: Fresh with 99.38568472862244% confidence (Actual: Rotten)
+File: dataset/vegetables/capsicum/test/rotten/WhatsApp Image 2020-11-07 at 11.30.46 PM.jpeg_0_897.jpg
+
+False Prediction: Fresh with 76.77675485610962% confidence (Actual: Rotten)
+File: dataset/vegetables/capsicum/test/rotten/WhatsApp Image 2020-11-07 at 11.30.46 PM.jpg_0_2873.jpg
+
+False Prediction: Fresh with 98.74407052993774% confidence (Actual: Rotten)
+File: dataset/vegetables/capsicum/test/rotten/WhatsApp Image 2020-11-07 at 11.30.46 PM.jpg_0_7058.jpg
+
+False Prediction: Fresh with 95.04803419113159% confidence (Actual: Rotten)
+File: dataset/vegetables/capsicum/test/rotten/WhatsApp Image 2020-11-07 at 11.30.46 PM.jpg_0_7545.jpg
+
+False Prediction: Fresh with 79.0705919265747% confidence (Actual: Rotten)
+File: dataset/vegetables/capsicum/test/rotten/WhatsApp Image 2020-11-07 at 11.30.46 PM.jpg_0_7685.jpg
+
+False Prediction: Fresh with 98.19425940513611% confidence (Actual: Rotten)
+File: dataset/vegetables/capsicum/test/rotten/WhatsApp Image 2020-11-07 at 11.30.46 PM.jpg_0_7694.jpg
+
+False Prediction: Fresh with 53.80234122276306% confidence (Actual: Rotten)
+File: dataset/vegetables/capsicum/test/rotten/WhatsApp Image 2020-11-07 at 11.30.47 PM (1).jpeg_0_1303.jpg
+
+False Prediction: Fresh with 75.59518814086914% confidence (Actual: Rotten)
+File: dataset/vegetables/capsicum/test/rotten/WhatsApp Image 2020-11-07 at 11.30.47 PM (1).jpeg_0_1950.jpg
+
+False Prediction: Fresh with 67.23515391349792% confidence (Actual: Rotten)
+File: dataset/vegetables/capsicum/test/rotten/WhatsApp Image 2020-11-07 at 11.30.47 PM (1).jpeg_0_485.jpg
+
+False Prediction: Fresh with 84.77254509925842% confidence (Actual: Rotten)
+File: dataset/vegetables/capsicum/test/rotten/WhatsApp Image 2020-11-07 at 11.30.47 PM (1).jpg_0_3153.jpg
+
+False Prediction: Fresh with 95.95444202423096% confidence (Actual: Rotten)
+File: dataset/vegetables/capsicum/test/rotten/WhatsApp Image 2020-11-07 at 11.30.47 PM (1).jpg_0_758.jpg
+
+False Prediction: Fresh with 55.03392815589905% confidence (Actual: Rotten)
+File: dataset/vegetables/capsicum/test/rotten/WhatsApp Image 2020-11-07 at 11.30.47 PM.jpeg_0_7299.jpg
+
+False Prediction: Fresh with 99.99476671218872% confidence (Actual: Rotten)
+File: dataset/vegetables/capsicum/test/rotten/WhatsApp Image 2020-11-07 at 11.35.36 PM(1).jpeg_0_1840.jpg
+
+False Prediction: Fresh with 99.9993085861206% confidence (Actual: Rotten)
+File: dataset/vegetables/capsicum/test/rotten/WhatsApp Image 2020-11-07 at 11.35.36 PM(1).jpeg_0_7871.jpg
+
+False Prediction: Fresh with 99.97337460517883% confidence (Actual: Rotten)
+File: dataset/vegetables/capsicum/test/rotten/WhatsApp Image 2020-11-07 at 11.35.36 PM(1).jpeg_0_840.jpg
+
+False Prediction: Fresh with 99.95026588439941% confidence (Actual: Rotten)
+File: dataset/vegetables/capsicum/test/rotten/WhatsApp Image 2020-11-07 at 11.35.36 PM(1).jpg_0_1850.jpg
+
+False Prediction: Fresh with 99.82858300209045% confidence (Actual: Rotten)
+File: dataset/vegetables/capsicum/test/rotten/WhatsApp Image 2020-11-07 at 11.35.36 PM(1).jpg_0_4898.jpg
+
+False Prediction: Fresh with 98.08164238929749% confidence (Actual: Rotten)
+File: dataset/vegetables/capsicum/test/rotten/WhatsApp Image 2020-11-07 at 11.35.36 PM(1).jpg_0_9132.jpg
+
+False Prediction: Fresh with 91.85906052589417% confidence (Actual: Rotten)
+File: dataset/vegetables/capsicum/test/rotten/WhatsApp Image 2020-11-07 at 11.35.36 PM.jpeg_0_3257.jpg
+
+False Prediction: Fresh with 99.99997615814209% confidence (Actual: Rotten)
+File: dataset/vegetables/capsicum/test/rotten/WhatsApp Image 2020-11-07 at 11.35.36 PM.jpg_0_2395.jpg
+
+False Prediction: Fresh with 99.82784986495972% confidence (Actual: Rotten)
+File: dataset/vegetables/capsicum/test/rotten/WhatsApp Image 2020-11-07 at 11.35.36 PM.jpg_0_5598.jpg
+
+False Prediction: Fresh with 50.05454421043396% confidence (Actual: Rotten)
+File: dataset/vegetables/capsicum/test/rotten/WhatsApp Image 2020-11-07 at 11.35.37 PM(1).jpeg_0_4790.jpg
+
+False Prediction: Fresh with 71.87797427177429% confidence (Actual: Rotten)
+File: dataset/vegetables/capsicum/test/rotten/WhatsApp Image 2020-11-07 at 11.35.37 PM(1).jpeg_0_5656.jpg
+
+False Prediction: Fresh with 99.69437718391418% confidence (Actual: Rotten)
+File: dataset/vegetables/capsicum/test/rotten/WhatsApp Image 2020-11-07 at 11.35.37 PM(1).jpeg_0_7146.jpg
+
+False Prediction: Fresh with 87.25200295448303% confidence (Actual: Rotten)
+File: dataset/vegetables/capsicum/test/rotten/WhatsApp Image 2020-11-07 at 11.35.37 PM(1).jpg_0_2442.jpg
+
+False Prediction: Fresh with 97.61190414428711% confidence (Actual: Rotten)
+File: dataset/vegetables/capsicum/test/rotten/WhatsApp Image 2020-11-07 at 11.35.37 PM(1).jpg_0_4613.jpg
+
+False Prediction: Fresh with 77.75775194168091% confidence (Actual: Rotten)
+File: dataset/vegetables/capsicum/test/rotten/WhatsApp Image 2020-11-07 at 11.35.37 PM(1).jpg_0_6623.jpg
+
+False Prediction: Fresh with 60.40981411933899% confidence (Actual: Rotten)
+File: dataset/vegetables/capsicum/test/rotten/WhatsApp Image 2020-11-07 at 11.35.37 PM.jpeg_0_5744.jpg
+
+False Prediction: Fresh with 75.27700066566467% confidence (Actual: Rotten)
+File: dataset/vegetables/capsicum/test/rotten/WhatsApp Image 2020-11-07 at 11.43.16 PM.jpeg_0_1964.jpg
+
+False Prediction: Fresh with 93.38939189910889% confidence (Actual: Rotten)
+File: dataset/vegetables/capsicum/test/rotten/WhatsApp Image 2020-11-07 at 11.43.16 PM.jpeg_0_8240.jpg
+
+False Prediction: Fresh with 98.92491102218628% confidence (Actual: Rotten)
+File: dataset/vegetables/capsicum/test/rotten/WhatsApp Image 2020-11-07 at 11.43.17 PM.jpeg_0_6205.jpg
+
+False Prediction: Rotten with 90.87002277374268% confidence (Actual: Fresh)
+File: dataset/vegetables/cucumber/test/fresh/c_f104.png
+
+False Prediction: Rotten with 81.73885941505432% confidence (Actual: Fresh)
+File: dataset/vegetables/cucumber/test/fresh/c_f159.png
+
+False Prediction: Rotten with 66.8768048286438% confidence (Actual: Fresh)
+File: dataset/vegetables/cucumber/test/fresh/c_f202.png
+
+False Prediction: Rotten with 96.44716382026672% confidence (Actual: Fresh)
+File: dataset/vegetables/cucumber/test/fresh/c_f208.png
+
+False Prediction: Rotten with 96.79685235023499% confidence (Actual: Fresh)
+File: dataset/vegetables/cucumber/test/fresh/c_f242.png
+
+False Prediction: Rotten with 89.82155919075012% confidence (Actual: Fresh)
+File: dataset/vegetables/cucumber/test/fresh/c_f245.png
+
+False Prediction: Rotten with 74.00010228157043% confidence (Actual: Fresh)
+File: dataset/vegetables/cucumber/test/fresh/c_f317.png
+
+False Prediction: Rotten with 93.8798725605011% confidence (Actual: Fresh)
+File: dataset/vegetables/cucumber/test/fresh/c_f353.png
+
+False Prediction: Rotten with 96.44716382026672% confidence (Actual: Fresh)
+File: dataset/vegetables/cucumber/test/fresh/c_f425.png
+
+False Prediction: Rotten with 97.15114831924438% confidence (Actual: Fresh)
+File: dataset/vegetables/cucumber/test/fresh/c_f451.png
+
+False Prediction: Fresh with 87.98289895057678% confidence (Actual: Rotten)
+File: dataset/vegetables/cucumber/test/rotten/c_r003.png
+
+False Prediction: Fresh with 64.65415954589844% confidence (Actual: Rotten)
+File: dataset/vegetables/cucumber/test/rotten/c_r029.png
+
+False Prediction: Fresh with 88.59893083572388% confidence (Actual: Rotten)
+File: dataset/vegetables/cucumber/test/rotten/c_r059.png
+
+False Prediction: Fresh with 58.59276056289673% confidence (Actual: Rotten)
+File: dataset/vegetables/cucumber/test/rotten/c_r065.png
+
+False Prediction: Fresh with 90.33253192901611% confidence (Actual: Rotten)
+File: dataset/vegetables/cucumber/test/rotten/c_r076.png
+
+False Prediction: Fresh with 92.33664870262146% confidence (Actual: Rotten)
+File: dataset/vegetables/cucumber/test/rotten/c_r079.png
+
+False Prediction: Fresh with 99.2045521736145% confidence (Actual: Rotten)
+File: dataset/vegetables/cucumber/test/rotten/c_r126.png
+
+False Prediction: Fresh with 68.40447783470154% confidence (Actual: Rotten)
+File: dataset/vegetables/cucumber/test/rotten/c_r144.png
+
+False Prediction: Fresh with 99.61909055709839% confidence (Actual: Rotten)
+File: dataset/vegetables/cucumber/test/rotten/c_r157.png
+
+False Prediction: Fresh with 99.98828172683716% confidence (Actual: Rotten)
+File: dataset/vegetables/cucumber/test/rotten/c_r163.png
+
+False Prediction: Fresh with 95.69849967956543% confidence (Actual: Rotten)
+File: dataset/vegetables/cucumber/test/rotten/c_r177.png
+
+False Prediction: Fresh with 99.92433786392212% confidence (Actual: Rotten)
+File: dataset/vegetables/cucumber/test/rotten/c_r188.png
+
+False Prediction: Fresh with 96.854567527771% confidence (Actual: Rotten)
+File: dataset/vegetables/cucumber/test/rotten/c_r194.png
+
+False Prediction: Fresh with 99.91304278373718% confidence (Actual: Rotten)
+File: dataset/vegetables/cucumber/test/rotten/c_r262.png
+
+False Prediction: Fresh with 99.9969482421875% confidence (Actual: Rotten)
+File: dataset/vegetables/cucumber/test/rotten/c_r280.png
+
+False Prediction: Fresh with 77.18362212181091% confidence (Actual: Rotten)
+File: dataset/vegetables/cucumber/test/rotten/c_r313.png
+
+False Prediction: Fresh with 95.04796266555786% confidence (Actual: Rotten)
+File: dataset/vegetables/cucumber/test/rotten/c_r317.png
+
+False Prediction: Fresh with 58.40699076652527% confidence (Actual: Rotten)
+File: dataset/vegetables/cucumber/test/rotten/c_r318.png
+
+False Prediction: Fresh with 86.96240782737732% confidence (Actual: Rotten)
+File: dataset/vegetables/cucumber/test/rotten/c_r336.png
+
+False Prediction: Fresh with 85.82314848899841% confidence (Actual: Rotten)
+File: dataset/vegetables/cucumber/test/rotten/c_r337.png
+
+False Prediction: Fresh with 98.51716756820679% confidence (Actual: Rotten)
+File: dataset/vegetables/cucumber/test/rotten/c_r339.png
+
+False Prediction: Fresh with 99.87210631370544% confidence (Actual: Rotten)
+File: dataset/vegetables/cucumber/test/rotten/c_r373.png
+
+False Prediction: Fresh with 56.22144341468811% confidence (Actual: Rotten)
+File: dataset/vegetables/cucumber/test/rotten/c_r383.png
+
+False Prediction: Fresh with 90.56060314178467% confidence (Actual: Rotten)
+File: dataset/vegetables/cucumber/test/rotten/c_r397.png
+
+False Prediction: Fresh with 99.9495267868042% confidence (Actual: Rotten)
+File: dataset/vegetables/cucumber/test/rotten/c_r405.png
+
+False Prediction: Rotten with 99.99372959136963% confidence (Actual: Fresh)
+File: dataset/vegetables/okra/test/fresh/o_f034.png
+
+False Prediction: Rotten with 65.85723757743835% confidence (Actual: Fresh)
+File: dataset/vegetables/okra/test/fresh/o_f042.png
+
+False Prediction: Rotten with 72.14373350143433% confidence (Actual: Fresh)
+File: dataset/vegetables/okra/test/fresh/o_f198.png
+
+False Prediction: Rotten with 99.99184608459473% confidence (Actual: Fresh)
+File: dataset/vegetables/okra/test/fresh/o_f203.png
+
+False Prediction: Rotten with 99.99992847442627% confidence (Actual: Fresh)
+File: dataset/vegetables/okra/test/fresh/o_f207.png
+
+False Prediction: Rotten with 53.821372985839844% confidence (Actual: Fresh)
+File: dataset/vegetables/okra/test/fresh/o_f222.png
+
+False Prediction: Rotten with 63.56160044670105% confidence (Actual: Fresh)
+File: dataset/vegetables/okra/test/fresh/o_f223.png
+
+False Prediction: Rotten with 99.21907782554626% confidence (Actual: Fresh)
+File: dataset/vegetables/okra/test/fresh/o_f231.png
+
+False Prediction: Rotten with 83.18613767623901% confidence (Actual: Fresh)
+File: dataset/vegetables/okra/test/fresh/o_f237.png
+
+False Prediction: Rotten with 97.4515974521637% confidence (Actual: Fresh)
+File: dataset/vegetables/okra/test/fresh/o_f288.png
+
+False Prediction: Rotten with 57.82635807991028% confidence (Actual: Fresh)
+File: dataset/vegetables/okra/test/fresh/o_f308.png
+
+False Prediction: Rotten with 89.63775634765625% confidence (Actual: Fresh)
+File: dataset/vegetables/okra/test/fresh/o_f318.png
+
+False Prediction: Rotten with 98.01095724105835% confidence (Actual: Fresh)
+File: dataset/vegetables/okra/test/fresh/o_f373.png
+
+False Prediction: Rotten with 97.26781845092773% confidence (Actual: Fresh)
+File: dataset/vegetables/okra/test/fresh/o_f580.png
+
+False Prediction: Fresh with 99.96021389961243% confidence (Actual: Rotten)
+File: dataset/vegetables/okra/test/rotten/o_r011.png
+
+False Prediction: Fresh with 91.71109199523926% confidence (Actual: Rotten)
+File: dataset/vegetables/okra/test/rotten/o_r023.png
+
+False Prediction: Fresh with 58.184778690338135% confidence (Actual: Rotten)
+File: dataset/vegetables/okra/test/rotten/o_r040.png
+
+False Prediction: Fresh with 84.68716144561768% confidence (Actual: Rotten)
+File: dataset/vegetables/okra/test/rotten/o_r045.png
+
+False Prediction: Fresh with 93.98977160453796% confidence (Actual: Rotten)
+File: dataset/vegetables/okra/test/rotten/o_r062.png
+
+False Prediction: Fresh with 52.12012529373169% confidence (Actual: Rotten)
+File: dataset/vegetables/okra/test/rotten/o_r066.png
+
+False Prediction: Fresh with 90.43161869049072% confidence (Actual: Rotten)
+File: dataset/vegetables/okra/test/rotten/o_r086.png
+
+False Prediction: Fresh with 65.13957977294922% confidence (Actual: Rotten)
+File: dataset/vegetables/okra/test/rotten/o_r087.png
+
+False Prediction: Fresh with 58.99379849433899% confidence (Actual: Rotten)
+File: dataset/vegetables/okra/test/rotten/o_r088.png
+
+False Prediction: Fresh with 92.68739819526672% confidence (Actual: Rotten)
+File: dataset/vegetables/okra/test/rotten/o_r097.png
+
+False Prediction: Fresh with 99.98362064361572% confidence (Actual: Rotten)
+File: dataset/vegetables/okra/test/rotten/o_r104.png
+
+False Prediction: Fresh with 95.24102807044983% confidence (Actual: Rotten)
+File: dataset/vegetables/okra/test/rotten/o_r147.png
+
+False Prediction: Fresh with 58.184778690338135% confidence (Actual: Rotten)
+File: dataset/vegetables/okra/test/rotten/o_r153.png
+
+False Prediction: Fresh with 50.47515630722046% confidence (Actual: Rotten)
+File: dataset/vegetables/okra/test/rotten/o_r163.png
+
+False Prediction: Fresh with 99.97774958610535% confidence (Actual: Rotten)
+File: dataset/vegetables/okra/test/rotten/o_r173.png
+
+False Prediction: Fresh with 67.49002933502197% confidence (Actual: Rotten)
+File: dataset/vegetables/okra/test/rotten/o_r183.png
+
+False Prediction: Fresh with 94.08118724822998% confidence (Actual: Rotten)
+File: dataset/vegetables/okra/test/rotten/o_r189.png
+
+False Prediction: Fresh with 52.585917711257935% confidence (Actual: Rotten)
+File: dataset/vegetables/okra/test/rotten/o_r213.png
+
+False Prediction: Fresh with 99.99817609786987% confidence (Actual: Rotten)
+File: dataset/vegetables/okra/test/rotten/o_r233.png
+
+False Prediction: Fresh with 87.31582164764404% confidence (Actual: Rotten)
+File: dataset/vegetables/okra/test/rotten/o_r238.png
+
+False Prediction: Fresh with 69.02127265930176% confidence (Actual: Rotten)
+File: dataset/vegetables/okra/test/rotten/o_r239.png
+
+False Prediction: Fresh with 99.98362064361572% confidence (Actual: Rotten)
+File: dataset/vegetables/okra/test/rotten/o_r241.png
+
+False Prediction: Fresh with 91.791170835495% confidence (Actual: Rotten)
+File: dataset/vegetables/okra/test/rotten/o_r250.png
+
+False Prediction: Fresh with 98.93310070037842% confidence (Actual: Rotten)
+File: dataset/vegetables/okra/test/rotten/o_r261.png
+
+False Prediction: Fresh with 67.34415888786316% confidence (Actual: Rotten)
+File: dataset/vegetables/okra/test/rotten/o_r273.png
+
+False Prediction: Fresh with 80.57236671447754% confidence (Actual: Rotten)
+File: dataset/vegetables/okra/test/rotten/o_r290.png
+
+False Prediction: Fresh with 67.49002933502197% confidence (Actual: Rotten)
+File: dataset/vegetables/okra/test/rotten/o_r292.png
+
+False Prediction: Fresh with 93.98977160453796% confidence (Actual: Rotten)
+File: dataset/vegetables/okra/test/rotten/o_r296.png
+
+False Prediction: Fresh with 94.08118724822998% confidence (Actual: Rotten)
+File: dataset/vegetables/okra/test/rotten/o_r298.png
+
+False Prediction: Fresh with 57.0340633392334% confidence (Actual: Rotten)
+File: dataset/vegetables/okra/test/rotten/o_r325.png
+
+False Prediction: Fresh with 99.99998807907104% confidence (Actual: Rotten)
+File: dataset/vegetables/okra/test/rotten/o_r337.png
+
+False Prediction: Fresh with 97.51144051551819% confidence (Actual: Rotten)
+File: dataset/vegetables/okra/test/rotten/o_r338.png
+
+False Prediction: Rotten with 100% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f011.png
+
+False Prediction: Rotten with 74.39597249031067% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f023.png
+
+False Prediction: Rotten with 82.68607258796692% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f030.png
+
+False Prediction: Rotten with 99.99990463256836% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f032.png
+
+False Prediction: Rotten with 97.57142066955566% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f036.png
+
+False Prediction: Rotten with 98.85526895523071% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f052.png
+
+False Prediction: Rotten with 99.99946355819702% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f055.png
+
+False Prediction: Rotten with 99.99728202819824% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f059.png
+
+False Prediction: Rotten with 99.87945556640625% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f075.png
+
+False Prediction: Rotten with 99.99470710754395% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f111.png
+
+False Prediction: Rotten with 99.9956488609314% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f120.png
+
+False Prediction: Rotten with 100% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f121.png
+
+False Prediction: Rotten with 99.81755018234253% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f127.png
+
+False Prediction: Rotten with 99.21993613243103% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f130.png
+
+False Prediction: Rotten with 99.998939037323% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f150.png
+
+False Prediction: Rotten with 99.9988317489624% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f151.png
+
+False Prediction: Rotten with 68.53105425834656% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f180.png
+
+False Prediction: Rotten with 99.99783039093018% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f182.png
+
+False Prediction: Rotten with 99.99982118606567% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f184.png
+
+False Prediction: Rotten with 99.69683289527893% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f199.png
+
+False Prediction: Rotten with 89.40947651863098% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f202.png
+
+False Prediction: Rotten with 98.78296852111816% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f206.png
+
+False Prediction: Rotten with 99.99947547912598% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f210.png
+
+False Prediction: Rotten with 99.95595812797546% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f223.png
+
+False Prediction: Rotten with 99.99698400497437% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f226.png
+
+False Prediction: Rotten with 97.83258438110352% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f229.png
+
+False Prediction: Rotten with 99.93177652359009% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f234.png
+
+False Prediction: Rotten with 88.6877715587616% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f242.png
+
+False Prediction: Rotten with 87.31066584587097% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f244.png
+
+False Prediction: Rotten with 74.01315569877625% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f248.png
+
+False Prediction: Rotten with 100% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f251.png
+
+False Prediction: Rotten with 99.99526739120483% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f255.png
+
+False Prediction: Rotten with 97.85075187683105% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f260.png
+
+False Prediction: Rotten with 99.99998807907104% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f264.png
+
+False Prediction: Rotten with 100% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f273.png
+
+False Prediction: Rotten with 99.9912977218628% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f277.png
+
+False Prediction: Rotten with 99.99942779541016% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f300.png
+
+False Prediction: Rotten with 98.44352602958679% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f305.png
+
+False Prediction: Rotten with 99.89328980445862% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f313.png
+
+False Prediction: Rotten with 99.99984502792358% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f315.png
+
+False Prediction: Rotten with 99.93789196014404% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f326.png
+
+False Prediction: Rotten with 99.97568726539612% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f338.png
+
+False Prediction: Rotten with 99.90713596343994% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f350.png
+
+False Prediction: Rotten with 91.04858040809631% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f351.png
+
+False Prediction: Rotten with 99.8286783695221% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f352.png
+
+False Prediction: Rotten with 99.99998807907104% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f355.png
+
+False Prediction: Rotten with 100% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f356.png
+
+False Prediction: Rotten with 99.99622106552124% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f357.png
+
+False Prediction: Rotten with 94.90326642990112% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f363.png
+
+False Prediction: Rotten with 99.99953508377075% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f381.png
+
+False Prediction: Rotten with 99.99996423721313% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f396.png
+
+False Prediction: Rotten with 99.99979734420776% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f404.png
+
+False Prediction: Rotten with 100% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f414.png
+
+False Prediction: Rotten with 98.60653877258301% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f418.png
+
+False Prediction: Rotten with 99.99996423721313% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f426.png
+
+False Prediction: Rotten with 99.80489015579224% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f432.png
+
+False Prediction: Rotten with 99.94945526123047% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f434.png
+
+False Prediction: Rotten with 99.8553454875946% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f435.png
+
+False Prediction: Rotten with 65.94803929328918% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f456.png
+
+False Prediction: Rotten with 100% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f457.png
+
+False Prediction: Rotten with 100% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f458.png
+
+False Prediction: Rotten with 86.42725944519043% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f465.png
+
+False Prediction: Rotten with 99.96484518051147% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f466.png
+
+False Prediction: Rotten with 50.19921660423279% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f469.png
+
+False Prediction: Rotten with 88.14428448677063% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f471.png
+
+False Prediction: Rotten with 99.99979734420776% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f473.png
+
+False Prediction: Rotten with 99.99560117721558% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f497.png
+
+False Prediction: Rotten with 99.29139614105225% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f505.png
+
+False Prediction: Rotten with 99.47892427444458% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f513.png
+
+False Prediction: Rotten with 87.76000738143921% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f519.png
+
+False Prediction: Rotten with 99.99985694885254% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f522.png
+
+False Prediction: Rotten with 99.95156526565552% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f530.png
+
+False Prediction: Rotten with 99.99896287918091% confidence (Actual: Fresh)
+File: dataset/vegetables/potato/test/fresh/p_f533.png
+
+False Prediction: Fresh with 98.07084202766418% confidence (Actual: Rotten)
+File: dataset/vegetables/potato/test/rotten/p_r050.png
+
+False Prediction: Fresh with 99.99102354049683% confidence (Actual: Rotten)
+File: dataset/vegetables/potato/test/rotten/p_r074.png
+
+False Prediction: Fresh with 99.99823570251465% confidence (Actual: Rotten)
+File: dataset/vegetables/potato/test/rotten/p_r097.png
+
+False Prediction: Fresh with 99.9998688697815% confidence (Actual: Rotten)
+File: dataset/vegetables/potato/test/rotten/p_r100.png
+
+False Prediction: Fresh with 76.24680399894714% confidence (Actual: Rotten)
+File: dataset/vegetables/potato/test/rotten/p_r102.png
+
+False Prediction: Fresh with 99.99996423721313% confidence (Actual: Rotten)
+File: dataset/vegetables/potato/test/rotten/p_r164.png
+
+False Prediction: Fresh with 99.99537467956543% confidence (Actual: Rotten)
+File: dataset/vegetables/potato/test/rotten/p_r182.png
+
+False Prediction: Fresh with 99.89445805549622% confidence (Actual: Rotten)
+File: dataset/vegetables/potato/test/rotten/p_r191.png
+
+False Prediction: Fresh with 57.49431252479553% confidence (Actual: Rotten)
+File: dataset/vegetables/potato/test/rotten/p_r223.png
+
+False Prediction: Fresh with 94.44462060928345% confidence (Actual: Rotten)
+File: dataset/vegetables/potato/test/rotten/p_r357.png
+
+False Prediction: Fresh with 91.80902242660522% confidence (Actual: Rotten)
+File: dataset/vegetables/potato/test/rotten/p_r372.png
+
+False Prediction: Fresh with 95.24800777435303% confidence (Actual: Rotten)
+File: dataset/vegetables/potato/test/rotten/p_r379.png
+
+False Prediction: Fresh with 99.99555349349976% confidence (Actual: Rotten)
+File: dataset/vegetables/potato/test/rotten/p_r388.png
+
+False Prediction: Fresh with 91.93513989448547% confidence (Actual: Rotten)
+File: dataset/vegetables/potato/test/rotten/p_r399.png
+
+False Prediction: Fresh with 55.38274049758911% confidence (Actual: Rotten)
+File: dataset/vegetables/potato/test/rotten/p_r406.png
+
+False Prediction: Fresh with 99.9990463256836% confidence (Actual: Rotten)
+File: dataset/vegetables/potato/test/rotten/p_r437.png
+
+False Prediction: Fresh with 99.98270869255066% confidence (Actual: Rotten)
+File: dataset/vegetables/potato/test/rotten/p_r446.png
+
+False Prediction: Fresh with 99.95922446250916% confidence (Actual: Rotten)
+File: dataset/vegetables/potato/test/rotten/p_r447.png
+
+False Prediction: Fresh with 99.99617338180542% confidence (Actual: Rotten)
+File: dataset/vegetables/potato/test/rotten/p_r448.png
+
+False Prediction: Fresh with 99.99830722808838% confidence (Actual: Rotten)
+File: dataset/vegetables/potato/test/rotten/p_r449.png
+
+False Prediction: Fresh with 99.99927282333374% confidence (Actual: Rotten)
+File: dataset/vegetables/potato/test/rotten/p_r475.png
+
+False Prediction: Fresh with 99.95949864387512% confidence (Actual: Rotten)
+File: dataset/vegetables/potato/test/rotten/p_r496.png
+
+False Prediction: Fresh with 52.843040227890015% confidence (Actual: Rotten)
+File: dataset/vegetables/potato/test/rotten/p_r503.png
+
+False Prediction: Fresh with 97.06329703330994% confidence (Actual: Rotten)
+File: dataset/vegetables/potato/test/rotten/p_r510.png
+
+False Prediction: Fresh with 99.92008805274963% confidence (Actual: Rotten)
+File: dataset/vegetables/potato/test/rotten/p_r551.png
+
+False Prediction: Fresh with 94.48129534721375% confidence (Actual: Rotten)
+File: dataset/vegetables/potato/test/rotten/p_r555.png
+
+False Prediction: Fresh with 99.95315074920654% confidence (Actual: Rotten)
+File: dataset/vegetables/potato/test/rotten/p_r600.png
+
+False Prediction: Fresh with 97.71047234535217% confidence (Actual: Rotten)
+File: dataset/vegetables/potato/test/rotten/p_r602.png
+
+False Prediction: Fresh with 97.80024886131287% confidence (Actual: Rotten)
+File: dataset/vegetables/potato/test/rotten/p_r604.png
+
+False Prediction: Fresh with 99.99946355819702% confidence (Actual: Rotten)
+File: dataset/vegetables/potato/test/rotten/p_r610.png
+
+False Prediction: Fresh with 98.83391857147217% confidence (Actual: Rotten)
+File: dataset/vegetables/potato/test/rotten/p_r634.png
+
+False Prediction: Fresh with 99.99368190765381% confidence (Actual: Rotten)
+File: dataset/vegetables/potato/test/rotten/p_r669.png
+
+False Prediction: Fresh with 99.99977350234985% confidence (Actual: Rotten)
+File: dataset/vegetables/potato/test/rotten/p_r672.png
+
+False Prediction: Fresh with 100% confidence (Actual: Rotten)
+File: dataset/vegetables/potato/test/rotten/p_r736.png
+
+False Prediction: Fresh with 99.48935508728027% confidence (Actual: Rotten)
+File: dataset/vegetables/potato/test/rotten/p_r741.png
+
+False Prediction: Fresh with 92.57089495658875% confidence (Actual: Rotten)
+File: dataset/vegetables/potato/test/rotten/p_r767.png
+
+False Prediction: Rotten with 58.28597545623779% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/DSCN4068.jpg_0_2757.jpg
+
+False Prediction: Rotten with 50.48549771308899% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/DSCN4068.jpg_0_3427.jpg
+
+False Prediction: Rotten with 99.87338185310364% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/DSCN4070.jpg_0_1329.jpg
+
+False Prediction: Rotten with 96.19492292404175% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/DSCN4070.jpg_0_5988.jpg
+
+False Prediction: Rotten with 99.96286630630493% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/DSCN4070.jpg_0_6492.jpg
+
+False Prediction: Rotten with 72.64251708984375% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/DSCN4101.jpg_0_3451.jpg
+
+False Prediction: Rotten with 54.77411150932312% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/DSCN4101.jpg_0_7706.jpg
+
+False Prediction: Rotten with 50.53048133850098% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/DSCN4102.jpg_0_2745.jpg
+
+False Prediction: Rotten with 96.36751413345337% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/DSCN4113.jpg_0_2202.jpg
+
+False Prediction: Rotten with 80.21281957626343% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/DSCN4113.jpg_0_8072.jpg
+
+False Prediction: Rotten with 68.36726665496826% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/DSCN4113.jpg_0_8450.jpg
+
+False Prediction: Rotten with 73.65607619285583% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/DSCN4113.jpg_0_8691.jpg
+
+False Prediction: Rotten with 73.91842007637024% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/DSCN4113.jpg_0_9252.jpg
+
+False Prediction: Rotten with 80.74842095375061% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/DSCN4114.jpg_0_3184.jpg
+
+False Prediction: Rotten with 94.55099701881409% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/DSCN4114.jpg_0_7513.jpg
+
+False Prediction: Rotten with 61.25582456588745% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/DSCN4114.jpg_0_8784.jpg
+
+False Prediction: Rotten with 93.75162720680237% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/DSCN4114.jpg_0_9183.jpg
+
+False Prediction: Rotten with 92.36799478530884% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/DSCN4114.jpg_0_9231.jpg
+
+False Prediction: Rotten with 80.69276809692383% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/DSCN4114.jpg_0_925.jpg
+
+False Prediction: Rotten with 78.78571152687073% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/DSCN4114.jpg_0_9831.jpg
+
+False Prediction: Rotten with 93.2191252708435% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/DSCN4142.jpg_0_3417.jpg
+
+False Prediction: Rotten with 90.82891345024109% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/DSCN4142.jpg_0_3796.jpg
+
+False Prediction: Rotten with 78.61202359199524% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/DSCN4142.jpg_0_501.jpg
+
+False Prediction: Rotten with 95.32356262207031% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/DSCN4142.jpg_0_5582.jpg
+
+False Prediction: Rotten with 92.96081066131592% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/DSCN4142.jpg_0_677.jpg
+
+False Prediction: Rotten with 98.19355010986328% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/DSCN4157.jpg_0_2395.jpg
+
+False Prediction: Rotten with 67.46119260787964% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/DSCN4157.jpg_0_5377.jpg
+
+False Prediction: Rotten with 98.12979698181152% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/DSCN4157.jpg_0_5579.jpg
+
+False Prediction: Rotten with 99.99996423721313% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/DSCN4157.jpg_0_6918.jpg
+
+False Prediction: Rotten with 97.3796010017395% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/DSCN4158.jpg_0_2137.jpg
+
+False Prediction: Rotten with 88.31496834754944% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/DSCN4158.jpg_0_3414.jpg
+
+False Prediction: Rotten with 99.9962568283081% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/DSCN4158.jpg_0_4888.jpg
+
+False Prediction: Rotten with 91.8863594532013% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/DSCN4158.jpg_0_6469.jpg
+
+False Prediction: Rotten with 98.86360168457031% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/DSCN4158.jpg_0_6506.jpg
+
+False Prediction: Rotten with 99.99680519104004% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/DSCN4158.jpg_0_8440.jpg
+
+False Prediction: Rotten with 78.46140265464783% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/DSCN4172.jpg_0_311.jpg
+
+False Prediction: Rotten with 99.01680946350098% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/DSCN4172.jpg_0_3869.jpg
+
+False Prediction: Rotten with 66.66491627693176% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/DSCN4172.jpg_0_8003.jpg
+
+False Prediction: Rotten with 72.8981614112854% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/DSCN4172.jpg_0_8388.jpg
+
+False Prediction: Rotten with 56.624436378479004% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/DSCN4172.jpg_0_8783.jpg
+
+False Prediction: Rotten with 99.99905824661255% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/IMG_20200725_095414.jpg_0_1107.jpg
+
+False Prediction: Rotten with 99.97133612632751% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/IMG_20200725_095414.jpg_0_8606.jpg
+
+False Prediction: Rotten with 99.99963045120239% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/IMG_20200725_095414.jpg_0_8655.jpg
+
+False Prediction: Rotten with 99.23208355903625% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/IMG_20200725_095414.jpg_0_9584.jpg
+
+False Prediction: Rotten with 99.86340403556824% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/IMG_20200725_095418.jpg_0_3105.jpg
+
+False Prediction: Rotten with 99.99074935913086% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/IMG_20200725_095418.jpg_0_3521.jpg
+
+False Prediction: Rotten with 99.29817914962769% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/IMG_20200725_095418.jpg_0_3595.jpg
+
+False Prediction: Rotten with 85.43161749839783% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/IMG_20200725_095418.jpg_0_3789.jpg
+
+False Prediction: Rotten with 98.49324822425842% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/IMG_20200725_095418.jpg_0_6290.jpg
+
+False Prediction: Rotten with 97.32835292816162% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/IMG_20200725_095424.jpg_0_1847.jpg
+
+False Prediction: Rotten with 74.27417039871216% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/IMG_20200725_095424.jpg_0_6534.jpg
+
+False Prediction: Rotten with 98.37703704833984% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/IMG_20200725_095424.jpg_0_6639.jpg
+
+False Prediction: Rotten with 62.737929821014404% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/t_f001.png
+
+False Prediction: Rotten with 91.3248062133789% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/t_f083.png
+
+False Prediction: Rotten with 91.29915833473206% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/t_f128.png
+
+False Prediction: Rotten with 55.59951663017273% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/t_f166.png
+
+False Prediction: Rotten with 94.37602162361145% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/t_f201.png
+
+False Prediction: Rotten with 50.17550587654114% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/t_f224.png
+
+False Prediction: Rotten with 99.859219789505% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/t_f258.png
+
+False Prediction: Rotten with 82.46114253997803% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/t_f313.png
+
+False Prediction: Rotten with 55.59951663017273% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/t_f316.png
+
+False Prediction: Rotten with 99.03573393821716% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/t_f317.png
+
+False Prediction: Rotten with 52.03161835670471% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/t_f353.png
+
+False Prediction: Rotten with 50.17550587654114% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/t_f374.png
+
+False Prediction: Rotten with 56.33881688117981% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/t_f403.png
+
+False Prediction: Rotten with 81.74659013748169% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/t_f410.png
+
+False Prediction: Rotten with 99.59171414375305% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/t_f415.png
+
+False Prediction: Rotten with 97.01448678970337% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/t_f460.png
+
+False Prediction: Rotten with 99.44369792938232% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/t_f462.png
+
+False Prediction: Rotten with 89.1000747680664% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/t_f463.png
+
+False Prediction: Rotten with 89.322429895401% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/t_f478.png
+
+False Prediction: Rotten with 82.807457447052% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/t_f483.png
+
+False Prediction: Rotten with 68.04056763648987% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/t_f500.png
+
+False Prediction: Rotten with 68.93202662467957% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/t_f505.png
+
+False Prediction: Rotten with 83.76118540763855% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/t_f506.png
+
+False Prediction: Rotten with 76.44636631011963% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/t_f539.png
+
+False Prediction: Rotten with 90.08791446685791% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/t_f548.png
+
+False Prediction: Rotten with 69.50749158859253% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/t_f550.png
+
+False Prediction: Rotten with 91.0157561302185% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/t_f565.png
+
+False Prediction: Rotten with 92.85772442817688% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/t_f566.png
+
+False Prediction: Rotten with 50.21703243255615% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/t_f604.png
+
+False Prediction: Rotten with 92.31943488121033% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/t_f606.png
+
+False Prediction: Rotten with 57.936280965805054% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/t_f607.png
+
+False Prediction: Rotten with 72.00337052345276% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/t_f627.png
+
+False Prediction: Rotten with 93.72478127479553% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/t_f630.png
+
+False Prediction: Rotten with 98.96875023841858% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/t_f638.png
+
+False Prediction: Rotten with 67.40184426307678% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/t_f640.png
+
+False Prediction: Rotten with 76.52016282081604% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/t_f645.png
+
+False Prediction: Rotten with 92.27951169013977% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/t_f655.png
+
+False Prediction: Rotten with 89.41877484321594% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/t_f657.png
+
+False Prediction: Rotten with 92.84465312957764% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/t_f666.png
+
+False Prediction: Rotten with 86.44537329673767% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/t_f677.png
+
+False Prediction: Rotten with 99.48282837867737% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/t_f696.png
+
+False Prediction: Rotten with 50.21703243255615% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/t_f697.png
+
+False Prediction: Rotten with 97.28338122367859% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/t_f747.png
+
+False Prediction: Rotten with 84.23911929130554% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/t_f750.png
+
+False Prediction: Rotten with 84.97873544692993% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/t_f770.png
+
+False Prediction: Rotten with 77.75800228118896% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/t_f778.png
+
+False Prediction: Rotten with 92.09061861038208% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/t_f784.png
+
+False Prediction: Rotten with 62.957584857940674% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/t_f791.png
+
+False Prediction: Rotten with 87.89435029029846% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/t_f794.png
+
+False Prediction: Rotten with 58.08738470077515% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/t_f799.png
+
+False Prediction: Rotten with 74.94521141052246% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/t_f803.png
+
+False Prediction: Rotten with 65.44336080551147% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/t_f816.png
+
+False Prediction: Rotten with 79.15958762168884% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/t_f828.png
+
+False Prediction: Rotten with 69.45388317108154% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/t_f831.png
+
+False Prediction: Rotten with 67.02349781990051% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/t_f843.png
+
+False Prediction: Rotten with 97.27312922477722% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/t_f850.png
+
+False Prediction: Rotten with 62.957584857940674% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/t_f853.png
+
+False Prediction: Rotten with 85.21307110786438% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/t_f857.png
+
+False Prediction: Rotten with 98.18722605705261% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/t_f872.png
+
+False Prediction: Rotten with 96.06066346168518% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/tomato1_13.jpg_0_1033.jpg
+
+False Prediction: Rotten with 93.30116510391235% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/tomato1_13.jpg_0_2761.jpg
+
+False Prediction: Rotten with 80.65545558929443% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/tomato1_13.jpg_0_3442.jpg
+
+False Prediction: Rotten with 92.91855096817017% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/tomato1_13.jpg_0_3741.jpg
+
+False Prediction: Rotten with 90.988290309906% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/tomato1_13.jpg_0_8128.jpg
+
+False Prediction: Rotten with 82.93954133987427% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/tomato1_13.jpg_0_9452.jpg
+
+False Prediction: Rotten with 87.02443242073059% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/tomato1_15.jpg_0_20.jpg
+
+False Prediction: Rotten with 59.5700740814209% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/tomato1_15.jpg_0_5621.jpg
+
+False Prediction: Rotten with 55.162566900253296% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/tomato1_15.jpg_0_6678.jpg
+
+False Prediction: Rotten with 94.78177428245544% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/tomato1_15.jpg_0_8004.jpg
+
+False Prediction: Rotten with 86.56233549118042% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/tomato1_15.jpg_0_8240.jpg
+
+False Prediction: Rotten with 79.80361580848694% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/tomato1_19.jpg_0_2740.jpg
+
+False Prediction: Rotten with 54.49820160865784% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/tomato1_19.jpg_0_5900.jpg
+
+False Prediction: Rotten with 60.7485294342041% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/tomato1_19.jpg_0_5904.jpg
+
+False Prediction: Rotten with 70.07291316986084% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/tomato1_19.jpg_0_8110.jpg
+
+False Prediction: Rotten with 89.19321894645691% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/tomato1_26.jpg_0_1168.jpg
+
+False Prediction: Rotten with 99.70211386680603% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/tomato1_26.jpg_0_1309.jpg
+
+False Prediction: Rotten with 96.33235335350037% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/tomato1_26.jpg_0_2623.jpg
+
+False Prediction: Rotten with 94.49796676635742% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/tomato1_26.jpg_0_8010.jpg
+
+False Prediction: Rotten with 63.05360198020935% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/tomato1_26.jpg_0_9618.jpg
+
+False Prediction: Rotten with 92.89578199386597% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/tomato1_26.jpg_0_9755.jpg
+
+False Prediction: Rotten with 98.64582419395447% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/tomato1_30.jpg_0_1044.jpg
+
+False Prediction: Rotten with 91.34118556976318% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/tomato1_30.jpg_0_4128.jpg
+
+False Prediction: Rotten with 78.25413942337036% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/tomato1_30.jpg_0_4462.jpg
+
+False Prediction: Rotten with 94.21203136444092% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/tomato1_30.jpg_0_6740.jpg
+
+False Prediction: Rotten with 99.58611130714417% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/tomato1_30.jpg_0_8827.jpg
+
+False Prediction: Rotten with 78.99277806282043% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/tomato1_30.jpg_0_9218.jpg
+
+False Prediction: Rotten with 97.94334173202515% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/tomato1_38.jpg_0_4942.jpg
+
+False Prediction: Rotten with 99.87952709197998% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/tomato1_38.jpg_0_4957.jpg
+
+False Prediction: Rotten with 83.98375511169434% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/tomato1_38.jpg_0_5736.jpg
+
+False Prediction: Rotten with 83.89135599136353% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/tomato1_38.jpg_0_5802.jpg
+
+False Prediction: Rotten with 97.11125493049622% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/tomato1_38.jpg_0_8266.jpg
+
+False Prediction: Rotten with 99.09418225288391% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/tomato1_44.jpg_0_1371.jpg
+
+False Prediction: Rotten with 98.27316403388977% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/tomato1_44.jpg_0_3982.jpg
+
+False Prediction: Rotten with 87.85279393196106% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/tomato1_44.jpg_0_4237.jpg
+
+False Prediction: Rotten with 99.85094666481018% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/tomato1_44.jpg_0_4948.jpg
+
+False Prediction: Rotten with 99.96886253356934% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/tomato1_44.jpg_0_9021.jpg
+
+False Prediction: Rotten with 65.88450074195862% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/tomato1_44.jpg_0_9048.jpg
+
+False Prediction: Rotten with 99.04324412345886% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/tomato1_45.jpg_0_232.jpg
+
+False Prediction: Rotten with 60.656386613845825% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/tomato1_45.jpg_0_2442.jpg
+
+False Prediction: Rotten with 98.45460653305054% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/tomato1_45.jpg_0_3835.jpg
+
+False Prediction: Rotten with 66.62544012069702% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/tomato1_45.jpg_0_4150.jpg
+
+False Prediction: Rotten with 94.26507949829102% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/tomato1_45.jpg_0_6459.jpg
+
+False Prediction: Rotten with 96.95492386817932% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/tomato1_45.jpg_0_8363.jpg
+
+False Prediction: Rotten with 93.79956722259521% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/tomato1_6.jpg_0_3143.jpg
+
+False Prediction: Rotten with 96.02489471435547% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/tomato1_6.jpg_0_7120.jpg
+
+False Prediction: Rotten with 76.15976333618164% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/tomato1_6.jpg_0_7765.jpg
+
+False Prediction: Rotten with 98.35756421089172% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/tomato1_8.jpg_0_2122.jpg
+
+False Prediction: Rotten with 81.97096586227417% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/tomato1_8.jpg_0_5087.jpg
+
+False Prediction: Rotten with 53.632038831710815% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/tomato1_8.jpg_0_6166.jpg
+
+False Prediction: Rotten with 98.94625544548035% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/tomato1_8.jpg_0_6597.jpg
+
+False Prediction: Rotten with 64.75938558578491% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/tomato1_8.jpg_0_8179.jpg
+
+False Prediction: Rotten with 98.5121488571167% confidence (Actual: Fresh)
+File: dataset/vegetables/tomato/test/fresh/tomato1_8.jpg_0_9182.jpg
+
+False Prediction: Fresh with 75.93181133270264% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/Copy of IMG_20200727_223202.jpg_0_2872.jpg
+
+False Prediction: Fresh with 52.01541185379028% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/Copy of IMG_20200729_164206.jpg_0_3278.jpg
+
+False Prediction: Fresh with 50.03669261932373% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/Copy of IMG_20200729_164206.jpg_0_7887.jpg
+
+False Prediction: Fresh with 92.37260818481445% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/Copy of IMG_20200729_164219.jpg_0_735.jpg
+
+False Prediction: Fresh with 73.68876338005066% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/Copy of IMG_20200730_170232.jpg_0_6180.jpg
+
+False Prediction: Fresh with 59.93647575378418% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/Copy of IMG_20200730_170232.jpg_0_970.jpg
+
+False Prediction: Fresh with 82.00591206550598% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/Copy of IMG_20200730_170235.jpg_0_6762.jpg
+
+False Prediction: Fresh with 99.47721362113953% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/Copy of IMG_20200730_170235.jpg_0_8419.jpg
+
+False Prediction: Fresh with 84.65237617492676% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/Copy of IMG_20200801_191346.jpg_0_2080.jpg
+
+False Prediction: Fresh with 63.80159258842468% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/Copy of IMG_20200801_191346.jpg_0_4912.jpg
+
+False Prediction: Fresh with 95.85469961166382% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/Copy of IMG_20200801_191346.jpg_0_8381.jpg
+
+False Prediction: Fresh with 99.93647933006287% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/Copy of IMG_20200802_134636.jpg_0_9442.jpg
+
+False Prediction: Fresh with 89.719557762146% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/Copy of IMG_20200802_134638.jpg_0_9893.jpg
+
+False Prediction: Fresh with 95.05637288093567% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/DSCN4171.jpg_0_2075.jpg
+
+False Prediction: Fresh with 54.40467596054077% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/DSCN4171.jpg_0_5788.jpg
+
+False Prediction: Fresh with 65.90799689292908% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/DSCN4171.jpg_0_7249.jpg
+
+False Prediction: Fresh with 61.00998520851135% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/DSCN4171.jpg_0_9671.jpg
+
+False Prediction: Fresh with 53.6575973033905% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/DSCN4187.jpg_0_3415.jpg
+
+False Prediction: Fresh with 53.75140309333801% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/DSCN4209.jpg_0_8597.jpg
+
+False Prediction: Fresh with 52.09431052207947% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/DSCN4221.jpg_0_2453.jpg
+
+False Prediction: Fresh with 63.05326819419861% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/DSCN4221.jpg_0_3373.jpg
+
+False Prediction: Fresh with 66.84601306915283% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/DSCN4221.jpg_0_3591.jpg
+
+False Prediction: Fresh with 83.0608069896698% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/DSCN4221.jpg_0_5367.jpg
+
+False Prediction: Fresh with 72.79585599899292% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/DSCN4222.jpg_0_4445.jpg
+
+False Prediction: Fresh with 72.6072907447815% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/DSCN4223.jpg_0_2491.jpg
+
+False Prediction: Fresh with 90.31845927238464% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/DSCN4223.jpg_0_317.jpg
+
+False Prediction: Fresh with 87.63945698738098% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/DSCN4223.jpg_0_5571.jpg
+
+False Prediction: Fresh with 92.62450933456421% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/DSCN4223.jpg_0_9901.jpg
+
+False Prediction: Fresh with 99.55976605415344% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/DSCN4238.jpg_0_2885.jpg
+
+False Prediction: Fresh with 63.736432790756226% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/DSCN4238.jpg_0_3686.jpg
+
+False Prediction: Fresh with 82.21685290336609% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/DSCN4238.jpg_0_4903.jpg
+
+False Prediction: Fresh with 83.20095539093018% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/DSCN4238.jpg_0_4975.jpg
+
+False Prediction: Fresh with 87.55617141723633% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/DSCN4239.jpg_0_1927.jpg
+
+False Prediction: Fresh with 52.507054805755615% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/DSCN4239.jpg_0_6355.jpg
+
+False Prediction: Fresh with 78.55386137962341% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/DSCN4239.jpg_0_857.jpg
+
+False Prediction: Fresh with 70.68995833396912% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/DSCN4239.jpg_0_9036.jpg
+
+False Prediction: Fresh with 76.76969766616821% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/t_r019.png
+
+False Prediction: Fresh with 91.10453724861145% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/t_r034.png
+
+False Prediction: Fresh with 59.226423501968384% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/t_r044.png
+
+False Prediction: Fresh with 95.19857168197632% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/t_r053.png
+
+False Prediction: Fresh with 99.70500469207764% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/t_r075.png
+
+False Prediction: Fresh with 95.89067101478577% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/t_r095.png
+
+False Prediction: Fresh with 50.90136528015137% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/t_r117.png
+
+False Prediction: Fresh with 59.78320240974426% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/t_r127.png
+
+False Prediction: Fresh with 93.2957410812378% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/t_r171.png
+
+False Prediction: Fresh with 76.273512840271% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/t_r195.png
+
+False Prediction: Fresh with 67.52394437789917% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/t_r205.png
+
+False Prediction: Fresh with 52.59683132171631% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/t_r207.png
+
+False Prediction: Fresh with 53.68180274963379% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/t_r211.png
+
+False Prediction: Fresh with 95.03774046897888% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/t_r235.png
+
+False Prediction: Fresh with 55.136698484420776% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/t_r246.png
+
+False Prediction: Fresh with 95.27091383934021% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/t_r252.png
+
+False Prediction: Fresh with 95.44218182563782% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/t_r259.png
+
+False Prediction: Fresh with 95.89421153068542% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/t_r273.png
+
+False Prediction: Fresh with 60.86759567260742% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/t_r280.png
+
+False Prediction: Fresh with 64.58658576011658% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/t_r283.png
+
+False Prediction: Fresh with 54.37224507331848% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/t_r287.png
+
+False Prediction: Fresh with 79.53939437866211% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/t_r299.png
+
+False Prediction: Fresh with 58.37219953536987% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/t_r332.png
+
+False Prediction: Fresh with 86.00223660469055% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/t_r350.png
+
+False Prediction: Fresh with 67.52394437789917% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/t_r356.png
+
+False Prediction: Fresh with 88.06049227714539% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/t_r379.png
+
+False Prediction: Fresh with 89.78383541107178% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/t_r391.png
+
+False Prediction: Fresh with 99.94354844093323% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/t_r434.png
+
+False Prediction: Fresh with 83.14054012298584% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/t_r470.png
+
+False Prediction: Fresh with 59.65885519981384% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/t_r505.png
+
+False Prediction: Fresh with 96.00492715835571% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/t_r513.png
+
+False Prediction: Fresh with 99.66105818748474% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/t_r552.png
+
+False Prediction: Fresh with 83.83362293243408% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/t_r559.png
+
+False Prediction: Fresh with 53.79457473754883% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/t_r565.png
+
+False Prediction: Fresh with 61.80984377861023% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/t_r568.png
+
+False Prediction: Fresh with 96.03207111358643% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/t_r571.png
+
+False Prediction: Fresh with 75.73899030685425% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/t_r576.png
+
+False Prediction: Fresh with 69.9897289276123% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/t_r596.png
+
+False Prediction: Fresh with 65.24368524551392% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/t_r626.png
+
+False Prediction: Fresh with 68.78570318222046% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/t_r668.png
+
+False Prediction: Fresh with 85.23977994918823% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/t_r669.png
+
+False Prediction: Fresh with 95.09727954864502% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/t_r691.png
+
+False Prediction: Fresh with 82.37932920455933% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/t_r699.png
+
+False Prediction: Fresh with 60.13447046279907% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/t_r701.png
+
+False Prediction: Fresh with 76.81795358657837% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/t_r724.png
+
+False Prediction: Fresh with 81.10921382904053% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/t_r737.png
+
+False Prediction: Fresh with 53.503018617630005% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/t_r738.png
+
+False Prediction: Fresh with 72.13155031204224% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/t_r748.png
+
+False Prediction: Fresh with 78.26671600341797% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/t_r764.png
+
+False Prediction: Fresh with 51.26460790634155% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/t_r772.png
+
+False Prediction: Fresh with 97.75975346565247% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/t_r785.png
+
+False Prediction: Fresh with 84.71968173980713% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/t_r790.png
+
+False Prediction: Fresh with 70.63292264938354% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/t_r810.png
+
+False Prediction: Fresh with 68.59857439994812% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/t_r815.png
+
+False Prediction: Fresh with 68.4708833694458% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/t_r816.png
+
+False Prediction: Fresh with 58.49241018295288% confidence (Actual: Rotten)
+File: dataset/vegetables/tomato/test/rotten/t_r818.png
+
+
+~Model Performance~
+Confusion Matrix:
+True Fresh: 1878 (35.63%)
+False Fresh: 598 (11.35%)
+True Rotten: 2277 (43.20%)
+False Rotten: 518 (9.83%)
+
+Test Size: 5271
+Accuracy: 78.83%
+Miss: 21.17%
+
+Precision: 0.76
+Recall: 0.78
+Specificity: 0.79
+F1 Score: 0.77

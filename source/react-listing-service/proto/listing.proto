@@ -1,0 +1,94 @@
+syntax = "proto3";
+
+package listing;
+
+service ListingService {
+    rpc CreateListing (CreateListingDto) returns (ProtoListing) {}
+    rpc FindAllListings (Empty) returns (Listings) {}
+    rpc FindAvailableListingsExcludeUser (UserDto) returns (Listings) {}
+    rpc FindReservedListings (UserDto) returns (Listings) {}
+    rpc FindCollectedListings (UserDto) returns (Listings) {}
+    rpc FindAvailableListings (UserDto) returns (Listings) {}
+    rpc FindOneListing (FindOneListingDto) returns (ProtoListing) {}
+    rpc UpdateListing (UpdateListingDto) returns (ProtoListing) {}
+    rpc RemoveListing (FindOneListingDto) returns (ProtoListing) {}
+}
+
+message UpdateListingDto {
+    int32 ListingID = 1;
+    optional string Name = 2;
+    optional string Datetime = 3;
+    optional string ExpiryDate = 4;
+    optional string Category = 5;
+    optional int32 Status = 6;
+    optional string Description = 7;
+    optional string Image = 8;
+    optional string PickUpAddressFirst = 9;
+    optional string PickUpAddressSecond = 10;
+    optional string PickUpAddressThird = 11;
+    optional string PickUpPostalCode = 12;
+    optional string PickUpStartDate = 13;
+    optional string PickUpEndDate = 14;
+    optional string PickUpStartTime = 15;
+    optional string PickUpEndTime = 16;
+    optional string ContactPhone = 17;
+    optional string ContactEmail = 18;
+}      
+
+message FindOneListingDto {
+    int32 ListingID = 1;
+}
+
+message UserDto {
+    int32 UserID = 1;
+}
+
+message Empty {
+
+};
+
+message Listings {
+    repeated ProtoListing listings = 1;
+}
+
+message CreateListingDto {
+    int32 UserID = 1;
+    string Name = 2;
+    string Datetime = 3;
+    string ExpiryDate = 4;
+    string Category = 5;
+    string Description = 6;
+    string Image = 7;
+    string PickUpAddressFirst = 8;
+    string PickUpAddressSecond = 9;
+    string PickUpAddressThird = 10;
+    string PickUpPostalCode = 11;
+    string PickUpStartDate = 12;
+    string PickUpEndDate = 13;
+    string PickUpStartTime = 14;
+    string PickUpEndTime = 15;
+    string ContactPhone = 16;
+    string ContactEmail = 17;
+}
+
+message ProtoListing {
+    int32 ListingID = 1;
+    int32 UserID = 2;
+    string Name = 3;
+    string Datetime = 4;
+    string ExpiryDate = 5;
+    string Category = 6;
+    int32 Status = 7;
+    string Description = 8;
+    string Image = 9;
+    string PickUpAddressFirst = 10;
+    string PickUpAddressSecond = 11;
+    string PickUpAddressThird = 12;
+    string PickUpPostalCode = 13;
+    string PickUpStartDate = 14;
+    string PickUpEndDate = 15;
+    string PickUpStartTime = 16;
+    string PickUpEndTime = 17;
+    string ContactPhone = 18;
+    string ContactEmail = 19;
+}

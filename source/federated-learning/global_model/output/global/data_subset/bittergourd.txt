@@ -1,0 +1,28 @@
+
+Testing model..
+
+False Prediction: Rotten with 99.99600648880005% confidence (Actual: Fresh)
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/bittergourd/test/fresh/IMG_20200823_131903.jpg_0_866.jpg
+
+False Prediction: Rotten with 99.91986155509949% confidence (Actual: Fresh)
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/bittergourd/test/fresh/IMG_20200823_131904.jpg_0_5999.jpg
+
+False Prediction: Fresh with 99.99451637268066% confidence (Actual: Rotten)
+File: /home/CSC3104-Cloud/federated_learning/global_model/dataset/vegetables/bittergourd/test/rotten/IMG_20200824_182248.jpg_0_2275.jpg
+
+
+~Model Performance~
+Confusion Matrix:
+True Fresh: 64 (46.38%)
+False Fresh: 2 (1.45%)
+True Rotten: 71 (51.45%)
+False Rotten: 1 (0.72%)
+
+Test Size: 138
+Accuracy: 97.83%
+Miss: 2.17%
+
+Precision: 0.97
+Recall: 0.98
+Specificity: 0.97
+F1 Score: 0.98
