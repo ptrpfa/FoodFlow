@@ -45,11 +45,6 @@ To see a walkthrough of the Food-Flow system and our presentation, click [here](
 
 ### Directory Structure
 ```
-docs/ (documentation files)
-    GROUP15.pdf (article report)
-    GROUP15_INSTRUCTIONS.pdf (testing instructions)
-    GROUP15_SLIDES.pdf (presentation slides)
-
 img/ (images for this file)
 
 source/ (contains source code for Food-Flow)
